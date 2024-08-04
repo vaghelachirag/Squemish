@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/SplashScreen">
+
+    <fragment
+        android:id="@+id/SplashScreen"
+        android:name="com.example.mypraticeapplication.view.SplashScreen"
+        android:label="@string/splash_fragment_label"
+        tools:layout="@layout/splashscreen">
+
+        <action
+            android:id="@+id/action_SplashScreen_to_LoginFragment"
+            app:destination="@id/LoginFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/anim_slide_in_from_bottom"
+            app:popExitAnim="@anim/anim_slide_out_to_bottom" />
+
+        <action
+            android:id="@+id/action_SplashScreen_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/LoginFragment"
+        android:name="com.example.mypraticeapplication.view.LoginFragment"
+        android:label="@string/login_fragment_label"
+        tools:layout="@layout/loginscreen"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/anim_slide_in_from_bottom"
+        app:popExitAnim="@anim/anim_slide_out_to_bottom">
+
+        <action
+            android:id="@+id/action_LoginFragment_to_SignUpFragment"
+            app:destination="@id/SignUpFragment" />
+
+        <action
+            android:id="@+id/action_LoginFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SignUpFragment"
+        android:name="com.example.mypraticeapplication.view.SignupFragment"
+        android:label="@string/signup_fragment_label"
+        tools:layout="@layout/signup_fragment">
+
+        <action
+            android:id="@+id/action_SignUpFragment_to_LoginFragment"
+            app:destination="@id/LoginFragment" />
+    </fragment>
+
+
+</navigation>

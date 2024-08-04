@@ -1,0 +1,129 @@
+<resources>
+    <string name="app_name">Squeamish</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_changePassword">Change Password</string>
+    <string name="action_logout">Logout</string>
+
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="splash_fragment_label">Splash Fragment</string>
+    <string name="login_fragment_label">Login Fragment</string>
+    <string name="signup_fragment_label">Signup Fragment</string>
+    <string name="home_fragment_label">Home Fragment</string>
+    <string name="dashboard_fragment_label">Dashboard Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="splash_Txt">Splash</string>
+
+
+    <string name="fa_icon_areachart">&#xf1fe;</string>
+
+
+    <!--Login-->
+    <string name="login_Txt">Login</string>
+    <string name="email">Email Address</string>
+    <string name="password">Password</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="btn_Login">Login</string>
+    <string name="donthaveId">Do not have Account? Signup here</string>
+
+
+    <string name="changePassword_Txt">Change Password</string>
+
+
+    <!--Signup-->
+    <string name="employeecode">Employee Code</string>
+    <string name="remark">Remark</string>
+    <string name="btn_Signup">Register </string>
+
+
+
+    <!--Change Password-->
+    <string name="oldPassword">Old Password</string>
+    <string name="newpassword">New Password</string>
+    <string name="confirmpassword">Confirm Password</string>
+
+
+
+    <!--PreNeighbour-->
+    <string name="neighbour1Name">Neighbour1 Name</string>
+    <string name="neighbour2Name">neighbour2 Name</string>
+    <string name="neighbour1Mobile">Neighbour1 Mobile</string>
+    <string name="neighbour2Mobile">Neighbour2 Mobile</string>
+    <string name="neighbour1Remark">Neighbour1 Remark</string>
+    <string name="neighbour2Remark">Neighbour2 Remark</string>
+    <string name="notRecoginsedReason">Reason</string>
+    <string name="neighbourreconised">Whether Neighbour Recognised to the Applicant with Photo ?</string>
+
+
+    <!--PostNeighbour-->
+    <string name="neighbour3Name">Neighbour3 Name</string>
+    <string name="neighbour4Name">Neighbour4 Name</string>
+    <string name="neighbour3Mobile">Neighbour3 Mobile</string>
+    <string name="neighbour4Mobile">Neighbour4 Mobile</string>
+    <string name="neighbour3Remark">Neighbour3 Remark</string>
+    <string name="neighbour4Remark">Neighbour4 Remark</string>
+
+
+    <string name="alredayhaveId">Already have Account? Login here</string>
+
+
+    <string name="address">Address :  </string>
+    <string name="bank">Bank : </string>
+    <string name="product">Product : </string>
+    <string name="caseId">CaseId : </string>
+    <string name="fitype">Fi Type : </string>
+    <string name="totalVerification">Total Verification :</string>
+
+
+
+
+    <string name="refNo">Ref No/ Agency Control No :  </string>
+    <string name="caseID">Case Id : </string>
+    <string name="bankName">Bank/NBFC Name : </string>
+    <string name="verificationFor">Verification for : </string>
+    <string name="verificationType">Verification Type : </string>
+    <string name="applicant">Applicant/ Father Name :</string>
+    <string name="coapplicant">Co-applicant / Guarantor/ Seller Name :</string>
+    <string name="addressFor">Address :</string>
+    <string name="applicantfathername">Applicant/ Father Name :</string>
+    <string name="productsubproduct">Product/Sub Product :</string>
+    <string name="officeName">Business / Office Name :</string>
+    <string name="prepost">Pre/Post :</string>
+    <string name="loanAmount">Loan Amount :</string>
+    <string name="triggers">Triggers :</string>
+
+
+
+
+    <string name="save">Save</string>
+
+
+    <string-array name="addresses_array">
+        <item>Select Address</item>
+        <item>Item 1</item>
+        <item>Item 2</item>
+        <item>Item 3</item>
+        <item>Item 4</item>
+        <item>Item 5</item>
+    </string-array>
+
+    <string-array name="neighbourrecognised_array">
+        <item>Select Reason</item>
+        <item>Yes</item>
+        <item>No</item>
+        <item>Denied</item>
+        <item>Photo Not Available</item>
+    </string-array>
+
+    <!--Common-->
+    <string name="please_wait">Please wait</string>
+    <string name="dashboard">Dashboard</string>
+
+
+    <!--    No Internet Connection Message -->
+    <string name="nointernetconnection">Local network problem, please check your network</string>
+
+
+</resources>

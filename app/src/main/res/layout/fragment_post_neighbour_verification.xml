@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.mypraticeapplication.viewmodel.verificationDetail.PostNeighbourVerificationViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/bg_border_rounded">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="0dp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:layout_marginBottom="@dimen/_30sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.example.mypraticeapplication.widget.HeaderText
+                    android:id="@+id/txtNeighbourChecOne"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Neighbour Check-3"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textSize="@dimen/_12sdp">
+
+                </com.example.mypraticeapplication.widget.HeaderText>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inpNeighbour1Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/txtNeighbourChecOne"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:hintTextColor="@color/main_bg"
+                    android:background="@drawable/bg_border_rounded"
+                    tools:ignore="MissingClass,MissingConstraints">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_Neighbour1Name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/neighbour3Name"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:text="@={viewModel.neighbour3Name}"
+                        android:textColor="@color/black2" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inpNeighbour1Mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:hintTextColor="@color/main_bg"
+                    android:background="@drawable/bg_border_rounded"
+                    app:layout_constraintTop_toBottomOf="@+id/inpNeighbour1Name"
+                    tools:ignore="MissingClass,MissingConstraints">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_Neighbour1Mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/neighbour3Mobile"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:text="@={viewModel.neighbour3Mobile}"
+                        android:textColor="@color/black2" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inpNeighbour1Remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:hintTextColor="@color/main_bg"
+                    android:background="@drawable/bg_border_rounded"
+                    app:layout_constraintTop_toBottomOf="@+id/inpNeighbour1Mobile"
+                    tools:ignore="MissingClass,MissingConstraints">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_Neighbour1Remark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/neighbour3Remark"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:text="@={viewModel.neighbour3Remark}"
+                        android:textColor="@color/black2" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.example.mypraticeapplication.widget.HeaderText
+                    android:id="@+id/txtNeighbourChecTwo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Neighbour Check-4"
+                    app:layout_constraintTop_toBottomOf="@+id/inpNeighbour1Remark"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:textSize="@dimen/_12sdp">
+
+                </com.example.mypraticeapplication.widget.HeaderText>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inpNeighbour2Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:hintTextColor="@color/main_bg"
+                    android:background="@drawable/bg_border_rounded"
+                    app:layout_constraintTop_toBottomOf="@+id/txtNeighbourChecTwo"
+                    tools:ignore="MissingClass,MissingConstraints">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_Neighbour2Name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/neighbour4Name"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:text="@={viewModel.neighbour4Name}"
+                        android:textColor="@color/black2" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inpNeighbour2Mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:hintTextColor="@color/main_bg"
+                    android:background="@drawable/bg_border_rounded"
+                    app:layout_constraintTop_toBottomOf="@+id/inpNeighbour2Name"
+                    tools:ignore="MissingClass,MissingConstraints">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_Neighbour2Mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/neighbour4Mobile"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:text="@={viewModel.neighbour4Mobile}"
+                        android:textColor="@color/black2" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inpNeighbour2Remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:hintTextColor="@color/main_bg"
+                    android:background="@drawable/bg_border_rounded"
+                    app:layout_constraintTop_toBottomOf="@+id/inpNeighbour2Mobile"
+                    tools:ignore="MissingClass,MissingConstraints">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_Neighbour2Remark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/neighbour4Remark"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:text="@={viewModel.neighbour4Remark}"
+                        android:textColor="@color/black2" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.example.mypraticeapplication.widget.HeaderText
+                    android:id="@+id/txt_NeibourRecognised"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:text="@string/neighbourreconised"
+                    app:layout_constraintTop_toBottomOf="@+id/inpNeighbour2Remark"></com.example.mypraticeapplication.widget.HeaderText>
+
+
+                <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
+                    android:id="@+id/spnNeighbourReconised"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_60sdp"
+                    android:background="@drawable/bg_spinner"
+                    android:entries="@array/neighbourrecognised_array"
+                    app:setOnItemSelectedListener="@{viewModel.clicksListener}"
+                    android:imeOptions="actionNext"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_NeibourRecognised"
+                    tools:ignore="MissingConstraints" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inpReason"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:hintTextColor="@color/main_bg"
+                    android:background="@drawable/bg_border_rounded"
+                    app:layout_constraintTop_toBottomOf="@+id/spnNeighbourReconised"
+                    tools:ignore="MissingClass,MissingConstraints">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_Reason"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/notRecoginsedReason"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:text="@={viewModel.reason}"
+                        android:textColor="@color/black2" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSave"
+                    style="@style/MaterialButtonStyle"
+                    android:layout_marginLeft="@dimen/_50sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_50sdp"
+                    android:layout_marginBottom="@dimen/_30sdp"
+                    android:onClick="@{(view) -> viewModel.onSaveClicked()}"
+                    android:text="Save"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/inpReason" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

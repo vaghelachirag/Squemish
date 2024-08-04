@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_grpah_pickford"
+    app:startDestination="@+id/dashboardFragment">
+
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.example.mypraticeapplication.view.menu.DashboardFragment"
+        android:label="@string/dashboard_fragment_label"
+        tools:layout="@layout/dashboard_fragment">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.example.mypraticeapplication.view.HomeFragment"
+        android:label="@string/home_fragment_label"
+        tools:layout="@layout/home_fragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.example.mypraticeapplication.view.menu.SettingFragment"
+        android:label="@string/action_settings"
+        tools:layout="@layout/setting_fragment">
+        <action
+            android:id="@+id/action_settingFragment_self"
+            app:destination="@id/settingFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentbasicinformation"
+        android:name="com.example.mypraticeapplication.view.detail.FragmentBasicInformation"
+        android:label="@string/action_settings"
+        tools:layout="@layout/fragment_basic_information">
+
+        <action
+            android:id="@+id/action_fragmentbasicinformation_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
+
+</navigation>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/dashboardFragment"
+            android:icon="@drawable/ic_home"
+            android:iconTint="@color/main_bg"
+            android:title="@string/dashboard" />
+
+        <item
+            android:id="@+id/settingFragment"
+            android:icon="@drawable/ic_setting"
+            android:iconTint="@color/main_bg"
+            android:title="@string/action_settings" />
+
+
+        <item
+            android:id="@+id/changePassword"
+            android:iconTint="@color/main_bg"
+            android:icon="@drawable/ic_change_password"
+            android:title="@string/action_changePassword" />
+
+
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_logout"
+            android:iconTint="@color/main_bg"
+            android:title="@string/action_logout" />
+
+    </group>
+    <group
+        android:id="@+id/nav_footer">
+
+        <item
+            android:id="@+id/nav_log_version"
+            app:actionLayout="@layout/menu_footer"
+            android:title="" />
+    </group>
+</menu>
