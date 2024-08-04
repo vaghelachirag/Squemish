@@ -5,6 +5,12 @@
     <string name="action_logout">Logout</string>
 
 
+    <string name="app_font_bold">roboto_bold.ttf</string>
+    <string name="app_font_medium">roboto_medium.ttf</string>
+    <string name="app_font_regular">roboto_regular.ttf</string>
+    <string name="app_font_thin">roboto_thin.ttf</string>
+    <string name="app_font_light">roboto_light.ttf</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="splash_fragment_label">Splash Fragment</string>
     <string name="login_fragment_label">Login Fragment</string>

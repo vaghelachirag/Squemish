@@ -11,7 +11,22 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowDisablePreview">true</item>
     </style>
-    
+
+    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintTextAppearance">@style/HintText</item>
+        <!--        <item name="android:paddingBottom">@dimen/_3sdp</item>-->
+        <item name="android:textSize">14sp</item>
+        <item name="hintTextColor">@color/black</item>
+        <item name="boxStrokeColor">@color/black</item>
+    </style>
+
+    <style name="HintText" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">10sp</item>
+
+    </style>
+
+
+
     <style name="ThemeOverlay.AppTheme.TextInputEditText.Outlined" parent="">
         <item name="colorControlActivated">@color/main_bg</item></style>
 
