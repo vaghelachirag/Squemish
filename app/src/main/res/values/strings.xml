@@ -54,7 +54,7 @@
 
     <!--PreNeighbour-->
     <string name="neighbour1Name">Neighbour1 Name</string>
-    <string name="neighbour2Name">neighbour2 Name</string>
+    <string name="neighbour2Name">Neighbour2 Name</string>
     <string name="neighbour1Mobile">Neighbour1 Mobile</string>
     <string name="neighbour2Mobile">Neighbour2 Mobile</string>
     <string name="neighbour1Remark">Neighbour1 Remark</string>

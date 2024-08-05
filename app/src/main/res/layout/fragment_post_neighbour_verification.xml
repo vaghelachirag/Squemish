@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.mypraticeapplication.viewmodel.verificationDetail.PostNeighbourVerificationViewModel" />
+            type="com.example.mypraticeapplication.viewmodel.verificationDetail.PostNeighbourVerificationViewModel"  />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -23,7 +23,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
                 android:layout_width="0dp"
-                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_16sdp"
@@ -48,66 +48,73 @@
                     android:id="@+id/inpNeighbour1Name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/TextInputLayout"
                     app:layout_constraintTop_toBottomOf="@+id/txtNeighbourChecOne"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     app:hintTextColor="@color/main_bg"
-                    android:background="@drawable/bg_border_rounded"
+                    app:passwordToggleEnabled="false"
                     tools:ignore="MissingClass,MissingConstraints">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.example.mypraticeapplication.widget.TypefaceEditText
                         android:id="@+id/edt_Neighbour1Name"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/edit_text_size"
                         android:hint="@string/neighbour3Name"
                         android:imeOptions="actionNext"
                         android:inputType="text"
                         android:text="@={viewModel.neighbour3Name}"
-                        android:textColor="@color/black2" />
+                        android:textColor="@color/gray_323232"
+                        android:textColorHint="@color/gray_323232"
+                        android:textSize="@dimen/verificationDetailTextSize"
+                        app:custom_font="@string/app_font_regular" />
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/inpNeighbour1Mobile"
+                    style="@style/TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
+                    android:layout_marginTop="5dp"
                     app:hintTextColor="@color/main_bg"
-                    android:background="@drawable/bg_border_rounded"
                     app:layout_constraintTop_toBottomOf="@+id/inpNeighbour1Name"
                     tools:ignore="MissingClass,MissingConstraints">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.example.mypraticeapplication.widget.TypefaceEditText
                         android:id="@+id/edt_Neighbour1Mobile"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/edit_text_size"
                         android:hint="@string/neighbour3Mobile"
                         android:imeOptions="actionNext"
                         android:inputType="number"
                         android:text="@={viewModel.neighbour3Mobile}"
-                        android:textColor="@color/black2" />
+                        android:textColor="@color/gray_323232"
+                        android:textColorHint="@color/gray_323232"
+                        android:textSize="@dimen/verificationDetailTextSize"
+                        app:custom_font="@string/app_font_regular" />
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/inpNeighbour1Remark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
-                    app:hintTextColor="@color/main_bg"
-                    android:background="@drawable/bg_border_rounded"
+                    style="@style/TextInputLayout"
                     app:layout_constraintTop_toBottomOf="@+id/inpNeighbour1Mobile"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:hintTextColor="@color/main_bg"
+                    app:passwordToggleEnabled="false"
                     tools:ignore="MissingClass,MissingConstraints">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.example.mypraticeapplication.widget.TypefaceEditText
                         android:id="@+id/edt_Neighbour1Remark"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/neighbour3Remark"
+                        android:layout_height="@dimen/edit_text_size"
                         android:imeOptions="actionNext"
                         android:inputType="text"
+                        android:hint="@string/neighbour3Remark"
+                        android:textColor="@color/gray_323232"
+                        android:textColorHint="@color/gray_323232"
+                        android:textSize="@dimen/verificationDetailTextSize"
                         android:text="@={viewModel.neighbour3Remark}"
-                        android:textColor="@color/black2" />
+                        app:custom_font="@string/app_font_regular" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.example.mypraticeapplication.widget.HeaderText
@@ -117,7 +124,7 @@
                     android:text="Neighbour Check-4"
                     app:layout_constraintTop_toBottomOf="@+id/inpNeighbour1Remark"
                     android:textColor="@color/black"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:textSize="@dimen/_12sdp">
 
                 </com.example.mypraticeapplication.widget.HeaderText>
@@ -126,90 +133,103 @@
                     android:id="@+id/inpNeighbour2Name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
+                    style="@style/TextInputLayout"
+                    android:layout_marginTop="@dimen/_5sdp"
                     app:hintTextColor="@color/main_bg"
-                    android:background="@drawable/bg_border_rounded"
+                    app:passwordToggleEnabled="false"
                     app:layout_constraintTop_toBottomOf="@+id/txtNeighbourChecTwo"
                     tools:ignore="MissingClass,MissingConstraints">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.example.mypraticeapplication.widget.TypefaceEditText
                         android:id="@+id/edt_Neighbour2Name"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/neighbour4Name"
+                        android:layout_height="@dimen/edit_text_size"
                         android:imeOptions="actionNext"
+                        android:hint="@string/neighbour4Name"
                         android:inputType="text"
                         android:text="@={viewModel.neighbour4Name}"
-                        android:textColor="@color/black2" />
+                        android:textColor="@color/gray_323232"
+                        android:textColorHint="@color/gray_323232"
+                        android:textSize="@dimen/verificationDetailTextSize"
+                        app:custom_font="@string/app_font_regular" />
                 </com.google.android.material.textfield.TextInputLayout>
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/inpNeighbour2Mobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
+                    style="@style/TextInputLayout"
+                    android:layout_marginTop="@dimen/_5sdp"
                     app:hintTextColor="@color/main_bg"
-                    android:background="@drawable/bg_border_rounded"
+                    app:passwordToggleEnabled="false"
                     app:layout_constraintTop_toBottomOf="@+id/inpNeighbour2Name"
                     tools:ignore="MissingClass,MissingConstraints">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.example.mypraticeapplication.widget.TypefaceEditText
                         android:id="@+id/edt_Neighbour2Mobile"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/edit_text_size"
                         android:hint="@string/neighbour4Mobile"
                         android:imeOptions="actionNext"
-                        android:inputType="number"
+                        android:inputType="text"
                         android:text="@={viewModel.neighbour4Mobile}"
-                        android:textColor="@color/black2" />
+                        android:textColor="@color/gray_323232"
+                        android:textColorHint="@color/gray_323232"
+                        android:textSize="@dimen/verificationDetailTextSize"
+                        app:custom_font="@string/app_font_regular" />
                 </com.google.android.material.textfield.TextInputLayout>
+
 
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/inpNeighbour2Remark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
+                    style="@style/TextInputLayout"
+                    android:layout_marginTop="@dimen/_5sdp"
                     app:hintTextColor="@color/main_bg"
-                    android:background="@drawable/bg_border_rounded"
+                    app:passwordToggleEnabled="false"
                     app:layout_constraintTop_toBottomOf="@+id/inpNeighbour2Mobile"
                     tools:ignore="MissingClass,MissingConstraints">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.example.mypraticeapplication.widget.TypefaceEditText
                         android:id="@+id/edt_Neighbour2Remark"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/neighbour4Remark"
+                        android:layout_height="@dimen/edit_text_size"
                         android:imeOptions="actionDone"
                         android:inputType="text"
+                        android:hint="@string/neighbour4Remark"
                         android:text="@={viewModel.neighbour4Remark}"
-                        android:textColor="@color/black2" />
+                        android:textColor="@color/gray_323232"
+                        android:textColorHint="@color/gray_323232"
+                        android:textSize="@dimen/verificationDetailTextSize"
+                        app:custom_font="@string/app_font_regular" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.example.mypraticeapplication.widget.HeaderText
                     android:id="@+id/txt_NeibourRecognised"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:text="@string/neighbourreconised"
+                    android:textSize="@dimen/_12sdp"
                     app:layout_constraintTop_toBottomOf="@+id/inpNeighbour2Remark"></com.example.mypraticeapplication.widget.HeaderText>
 
 
                 <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
                     android:id="@+id/spnNeighbourReconised"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_60sdp"
+                    android:layout_height="@dimen/edit_text_size"
                     android:background="@drawable/bg_spinner"
+                    app:custom_font="@string/app_font_regular"
                     android:entries="@array/neighbourrecognised_array"
                     app:setOnItemSelectedListener="@{viewModel.clicksListener}"
                     android:imeOptions="actionNext"
+                    android:textSize="@dimen/verificationDetailTextSize"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="@dimen/_5sdp"
                     app:layout_constraintTop_toBottomOf="@+id/txt_NeibourRecognised"
                     tools:ignore="MissingConstraints" />
 
@@ -218,22 +238,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
                     app:hintTextColor="@color/main_bg"
-                    android:background="@drawable/bg_border_rounded"
                     app:layout_constraintTop_toBottomOf="@+id/spnNeighbourReconised"
                     tools:ignore="MissingClass,MissingConstraints">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.example.mypraticeapplication.widget.TypefaceEditText
                         android:id="@+id/edt_Reason"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/edit_text_size"
                         android:hint="@string/notRecoginsedReason"
                         android:imeOptions="actionDone"
                         android:inputType="text"
                         android:text="@={viewModel.reason}"
-                        android:textColor="@color/black2" />
+                        android:textColor="@color/gray_323232"
+                        android:textColorHint="@color/gray_323232"
+                        android:textSize="@dimen/verificationDetailTextSize"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
 
