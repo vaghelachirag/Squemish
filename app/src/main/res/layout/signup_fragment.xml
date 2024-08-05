@@ -13,6 +13,21 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:backgroundTint="@color/white"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_180sdp"
+                android:foreground="@drawable/image_overlay"
+                android:background="@drawable/login_bg">
+
+            </ImageView>
+        </LinearLayout>
         <ImageView
             android:id="@+id/ivLogo"
             android:layout_width="250sp"
@@ -62,38 +77,37 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inpEmail"
-                android:layout_width="0dp"
+                style="@style/TextInputLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:hintTextColor="@color/main_bg"
+                app:passwordToggleEnabled="false"
                 app:layout_constraintBottom_toTopOf="@id/inpPwd"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:hintTextColor="@color/main_bg"
-                android:background="@drawable/bg_border_rounded"
                 app:layout_constraintTop_toBottomOf="@+id/tvSignupLabelContinue">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.example.mypraticeapplication.widget.TypefaceEditText
                     android:id="@+id/edt_EmployeeCode"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/edit_text_size"
                     android:inputType="textEmailAddress"
                     android:hint="@string/employeecode"
-                    android:textColor="@color/black2"
+                    android:textColor="@color/gray_323232"
+                    android:textColorHint="@color/gray_323232"
+                    android:textSize="12sp"
                     android:text="@={viewModel.employeeCode}"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inpPwd"
-                android:layout_width="0dp"
+                style="@style/TextInputLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8sdp"
-                app:boxStrokeWidth="0dp"
-                android:textColor="@color/black2"
-                app:boxStrokeWidthFocused="0dp"
                 app:hintTextColor="@color/main_bg"
-                android:background="@drawable/bg_border_rounded"
+                app:passwordToggleEnabled="false"
                 app:layout_constraintBottom_toTopOf="@id/chkRememberPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -102,10 +116,13 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_Remark"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/edit_text_size"
                     android:inputType="text"
                     android:hint="@string/remark"
-                    android:text="@={viewModel.remark}" />
+                    android:text="@={viewModel.remark}"
+                    android:textColor="@color/gray_323232"
+                    android:textColorHint="@color/gray_323232"
+                    android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.checkbox.MaterialCheckBox
@@ -129,7 +146,7 @@
                 android:onClick="@{(view) -> viewModel.redirectToLogin()}"
                 android:text="@string/alredayhaveId"
                 android:textColor="@color/black2"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@id/btnLogin"
                 app:layout_constraintStart_toStartOf="@id/btnLogin"
                 app:layout_constraintTop_toBottomOf="@+id/btnLogin" />

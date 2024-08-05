@@ -14,23 +14,20 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:backgroundTint="@color/white">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
-                android:tint="@color/white"
-                app:layout_constraintRight_toRightOf="parent"
-                android:src="@drawable/icon_eclipce_second">
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_180sdp"
+                android:foreground="@drawable/image_overlay"
+                android:background="@drawable/login_bg">
 
             </ImageView>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/ivLogo"
@@ -50,7 +47,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_32sdp"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_50sdp"
             android:layout_marginEnd="@dimen/_16sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -81,81 +78,75 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvSignupLabel" />
 
-
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayout"
                 android:id="@+id/inpEmail"
+                style="@style/TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
+                android:layout_marginTop="@dimen/_8sdp"
                 app:hintTextColor="@color/main_bg"
+                app:passwordToggleEnabled="false"
                 app:layout_constraintBottom_toTopOf="@id/inpPwd"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvSignupLabelContinue">
+                app:layout_constraintTop_toBottomOf="@+id/tvSignupLabelContinue"
+                tools:ignore="MissingConstraints">
 
                 <com.example.mypraticeapplication.widget.TypefaceEditText
                     android:id="@+id/edt_EmailAddress"
                     android:layout_width="match_parent"
-                    android:layout_height="45sp"
+                    android:layout_height="@dimen/edit_text_size"
+                    android:background="@null"
                     android:hint="@string/employeecode"
-                    android:background="@null"
-                    android:textSize="12sp"
-                    android:inputType="textEmailAddress"
                     android:text="@={viewModel.email}"
-                    android:textColor="@color/black2" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inpPwd"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:textColor="@color/black2"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                app:layout_constraintBottom_toTopOf="@id/chkRememberPassword"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:hintTextColor="@color/main_bg"
-                android:background="@drawable/bg_border_rounded"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inpEmail">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/password"
-                    android:inputType="textPassword"
-                    android:text="@={viewModel.password}" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:hint="@string/password"
-                app:passwordToggleEnabled="true"
-                tools:ignore="MissingConstraints">
-
-                <com.example.mypraticeapplication.widget.TypefaceEditText
-                    android:id="@+id/et_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:background="@null"
                     android:gravity="center_vertical"
-                    android:imeOptions="actionDone"
-                    android:inputType="textPassword"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
                     android:maxLength="50"
                     android:singleLine="true"
                     android:textColor="@color/gray_323232"
                     android:textColorHint="@color/gray_323232"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/verificationDetailTextSize"
+                    app:custom_font="@string/app_font_regular"
+                    tools:ignore="SpUsage" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpPwd"
+                style="@style/TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:hintTextColor="@color/main_bg"
+                app:layout_constraintBottom_toTopOf="@id/chkRememberPassword"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:passwordToggleEnabled="true"
+                app:layout_constraintTop_toBottomOf="@+id/inpEmail"
+                tools:ignore="MissingConstraints">
+
+                <com.example.mypraticeapplication.widget.TypefaceEditText
+                    android:id="@+id/edtPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_text_size"
+                    android:background="@null"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:gravity="center_vertical"
+                    android:imeOptions="actionDone"
+                    android:maxLength="50"
+                    android:singleLine="true"
+                    android:text="@={viewModel.password}"
+                    android:textColor="@color/gray_323232"
+                    android:textColorHint="@color/gray_323232"
+                    app:custom_font="@string/app_font_regular"
+                    android:textSize="12sp"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/chkRememberPassword"
@@ -169,14 +160,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/inpPwd" />
 
-            <com.example.mypraticeapplication.widget.HeaderText
+            <com.example.mypraticeapplication.widget.SmallText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_3sdp"
                 android:gravity="center_vertical"
                 android:text="Remember password"
                 android:textColor="@color/black2"
-                android:textSize="8sp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/chkRememberPassword"
                 app:layout_constraintStart_toEndOf="@+id/chkRememberPassword"
                 app:layout_constraintTop_toTopOf="@+id/chkRememberPassword"
@@ -191,7 +182,7 @@
                 android:onClick="@{(view) -> viewModel.redirectToSignup()}"
                 android:text="Don't have Account? Signup"
                 android:textColor="@color/black2"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@id/btnLogin"
                 app:layout_constraintStart_toStartOf="@id/btnLogin"
                 app:layout_constraintTop_toBottomOf="@+id/btnLogin" />

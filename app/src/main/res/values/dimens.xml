@@ -4,6 +4,10 @@
 
     <dimen name="verificationDetailTextSize">12.00dp</dimen>
 
+    <dimen name="edit_text_size">48.00dp</dimen>
+
+
+
 
     <dimen name="_100sdp">100.00dp</dimen>
     <dimen name="_101sdp">101.00dp</dimen>
