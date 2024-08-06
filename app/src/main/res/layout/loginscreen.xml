@@ -104,9 +104,9 @@
                     android:inputType="textEmailAddress"
                     android:maxLength="50"
                     android:singleLine="true"
-                    android:textColor="@color/gray_323232"
+                    android:textColor="@color/black"
                     android:textColorHint="@color/gray_323232"
-                    android:textSize="@dimen/verificationDetailTextSize"
+                    android:textSize="@dimen/loginTextSize"
                     app:custom_font="@string/app_font_regular"
                     tools:ignore="SpUsage" />
 
@@ -120,6 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8sdp"
                 app:hintTextColor="@color/main_bg"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toTopOf="@id/chkRememberPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -139,10 +140,10 @@
                     android:maxLength="50"
                     android:singleLine="true"
                     android:text="@={viewModel.password}"
-                    android:textColor="@color/gray_323232"
+                    android:textColor="@color/black"
                     android:textColorHint="@color/gray_323232"
                     app:custom_font="@string/app_font_regular"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/loginTextSize"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>

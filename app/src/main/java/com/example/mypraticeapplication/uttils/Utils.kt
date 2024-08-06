@@ -5,12 +5,20 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.text.Html
+import android.view.Gravity
 import android.widget.Toast
+
 
 class Utils {
 
     fun showToast(context: Context,message: String){
-        var toast = Toast.makeText(context,message,Toast.LENGTH_SHORT)
+        val toast = Toast.makeText(
+            context,
+            Html.fromHtml("<font color='#e3f2fd' ><b>$message</b></font>"),
+            Toast.LENGTH_LONG
+        )
+        toast.setGravity(Gravity.CENTER, 0, 0)
         toast.show()
     }
 

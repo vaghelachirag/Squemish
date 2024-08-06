@@ -74,10 +74,8 @@ class BasicInformationViewModel(private val context: Context) : BaseViewModel(){
 
     private fun getAcceptRejectList() {
         CoroutineScope(Dispatchers.IO).launch {
-            if (masterDataDao!!.getDataByKeyName(AppConstants.AcceptReason).isNullOrEmpty()){
-                acceptReasonList   =  masterDataDao!!.getDataByKeyName(AppConstants.AcceptReason)
-                rejectReasonList   =  masterDataDao!!.getDataByKeyName(AppConstants.RejectReason)
-            }
+            acceptReasonList   =  masterDataDao!!.getDataByKeyName(AppConstants.AcceptReason)
+            rejectReasonList   =  masterDataDao!!.getDataByKeyName(AppConstants.RejectReason)
         }
     }
 
@@ -105,7 +103,6 @@ class BasicInformationViewModel(private val context: Context) : BaseViewModel(){
                         acceptRejectFIDialog.dismiss()
                         getAcceptRejectRequestResponse(false,selectedReason)
                     }
-                    Log.e("Reason",selectedReason.toString())
                 }
 
             })
