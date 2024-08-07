@@ -236,6 +236,7 @@
                     app:setOnItemSelectedListener="@{viewModel.clicksListener}"
                     android:imeOptions="actionNext"
                     android:textSize="@dimen/verificationDetailTextSize"
+                    android:selectedItemPosition="@{viewModel.selectedItemPosition}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="@dimen/_5sdp"

@@ -24,6 +24,7 @@ import com.example.mypraticeapplication.MainActivity
 import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.databinding.ActivityDashboardBinding
 import com.example.mypraticeapplication.uttils.Session
+import com.example.mypraticeapplication.uttils.Utils
 import com.example.mypraticeapplication.view.SplashScreen
 import com.example.mypraticeapplication.view.base.BaseActivity
 import com.google.android.material.navigation.NavigationView
@@ -118,7 +119,7 @@ class DashboardActivity : BaseActivity() {
                     binding.toolbarDashboard.setNavigationIcon(null);
                 }
                 R.id.logout -> {
-                 showLogoutAlertDialoug()
+                 Utils().showAlertDialog(this,resources.getString(R.string.logoutAlert))
                 }
             }
             true

@@ -57,6 +57,17 @@ class FragmentPostNeighbourVerification  : BaseFragment(), FragmentLifecycleInte
     }
 
     private fun setView() {
+        postNeighbourVerificationViewModel.isNeighbourReconised.observeForever {
+            if (it){
+                binding.inpReason.visibility = View.GONE
+                binding.edtReason.setText("")
+            }
+            else{
+                binding.inpReason.visibility = View.VISIBLE
+            }
+        }
+
+
         if(ActivityDetail.selectedData!!.getStatus() != null){
             if(ActivityDetail.selectedData!!.getStatus() == AppConstants.statusPending){
                 binding.constraintLayout.forEach { child -> child.setAllEnabled(false) }

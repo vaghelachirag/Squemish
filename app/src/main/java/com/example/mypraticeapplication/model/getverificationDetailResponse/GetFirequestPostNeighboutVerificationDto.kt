@@ -37,7 +37,7 @@ class GetFirequestPostNeighboutVerificationDto {
 
     @SerializedName("isNeighbourRecognised")
     @Expose
-    private var isNeighbourRecognised: Any? = null
+    private var isNeighbourRecognised: String? = ""
 
     @SerializedName("reason")
     @Expose
@@ -99,11 +99,11 @@ class GetFirequestPostNeighboutVerificationDto {
         this.neighbour4Remark = neighbour4Remark
     }
 
-    fun getIsNeighbourRecognised(): Any? {
+    fun getIsNeighbourRecognised(): String? {
         return isNeighbourRecognised
     }
 
-    fun setIsNeighbourRecognised(isNeighbourRecognised: Any?) {
+    fun setIsNeighbourRecognised(isNeighbourRecognised: String?) {
         this.isNeighbourRecognised = isNeighbourRecognised
     }
 

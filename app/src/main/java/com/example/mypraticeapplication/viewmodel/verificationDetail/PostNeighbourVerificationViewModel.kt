@@ -38,11 +38,15 @@ class PostNeighbourVerificationViewModel(
     private var postNeighbourMutableLiveData: MutableLiveData<GetFirequestPostNeighboutVerificationDto> = MutableLiveData()
 
     var isNeighbourReconised = MutableLiveData<Boolean>()
-    var selectedReasonPosition =  MutableLiveData<Int>()
-
+    var isNeighbourReconisedText = MutableLiveData<String>()
+    var selectedReasonPosition = MutableLiveData<Int>()
+    var selectedItemPosition: Int = 0
 
     fun init(context: Context?) {
 
+        isNeighbourReconised.value = false
+        isNeighbourReconisedText.value = ""
+        selectedReasonPosition.value = 0
 
         if (ActivityDetail.selectedData != null){
             neighbour3Name.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFirequestPostNeighboutVerificationDto()!!.getNeighbour3Name().toString()))
@@ -54,11 +58,26 @@ class PostNeighbourVerificationViewModel(
             reason.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFirequestPostNeighboutVerificationDto()!!.getReason().toString()))
 
 
-            if (ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!.getIsNeighbourRecognised().toString() == "false"){
+            if (ActivityDetail.selectedData!!.getFirequestPostNeighboutVerificationDto()!!.getIsNeighbourRecognised().toString() == "false"){
                 isNeighbourReconised.value = false
             }else{
                 isNeighbourReconised.value = true
-            } }
+            }
+        }
+
+        isNeighbourReconised.value =
+            ActivityDetail.selectedData!!.getFirequestPostNeighboutVerificationDto()!!
+                .getIsNeighbourRecognised().toString() != "false"
+
+        setSelectedNeighbourReconised(ActivityDetail.selectedData!!.getFirequestPostNeighboutVerificationDto()!!.getIsNeighbourRecognised().toString())
+    }
+
+    private fun setSelectedNeighbourReconised(isText: String) {
+        val pos =
+            context.resources.getStringArray(R.array.neighbourrecognised_array).indexOf(isText)
+        if (pos >= 0) {
+            selectedItemPosition = pos
+        }
     }
 
 
@@ -69,11 +88,12 @@ class PostNeighbourVerificationViewModel(
 
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
             selectedReasonPosition.value = position
-            Log.e("Selected", "Selected$position")
-            if (position == 2 || position == 3){
+            val neighourReconisedText = context.resources.getStringArray(R.array.neighbourrecognised_array)
+            isNeighbourReconisedText.value = neighourReconisedText[position]
+            Log.e("Selected",isNeighbourReconisedText.value.toString())
+            if (position == 2 || position == 3) {
                 isNeighbourReconised.value = false
-            }
-            else{
+            } else {
                 isNeighbourReconised.value = true
             }
         }
@@ -104,7 +124,7 @@ class PostNeighbourVerificationViewModel(
             model.setNeighbour3Remark(neighbour3Remark.get().toString())
             model.setNeighbour4Remark(neighbour4Remark.get().toString())
             model.setReason(reason.get().toString())
-            model.setIsNeighbourRecognised(isNeighbourReconised.value)
+            model.setIsNeighbourRecognised(isNeighbourReconisedText.value)
             postNeighbourMutableLiveData.value = model
             savePostNeighbourData(model)
         }
@@ -120,7 +140,7 @@ class PostNeighbourVerificationViewModel(
         params["neighbour4Mobile"] = model.getNeighbour4Mobile().toString()
         params["neighbour3Remark"] = model.getNeighbour3Remark().toString()
         params["neighbour4Remark"] = model.getNeighbour4Remark().toString()
-        params["isNeighbourRecognised"] = isNeighbourReconised.value.toString()
+        params["isNeighbourRecognised"] = isNeighbourReconisedText.value.toString()
         params["reason"] = reason.get().toString()
 
 

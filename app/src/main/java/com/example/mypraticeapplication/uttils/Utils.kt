@@ -1,6 +1,7 @@
 package com.example.mypraticeapplication.uttils
 
 import android.R
+import android.app.Dialog
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
@@ -8,10 +9,13 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.text.Html
 import android.view.Gravity
+import android.view.Window
 import android.widget.FrameLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -26,6 +30,31 @@ class Utils {
         toast.setGravity(Gravity.CENTER, 0, 0)
         toast.show()
     }
+
+
+    public fun showAlertDialog(context: Context,strTitle: String) {
+        val dialog = Dialog(context)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window!!.attributes.windowAnimations = com.example.mypraticeapplication.R.style.DialogTheme;
+        dialog.setCancelable(false)
+        dialog.setContentView(com.example.mypraticeapplication.R.layout.custom_alert_dialoug)
+
+        var txtHeader  : TextView = dialog.findViewById(com.example.mypraticeapplication.R.id.tvMessage)
+        txtHeader.text = strTitle
+
+        // Button
+        var buttonOk : MaterialButton = dialog.findViewById(com.example.mypraticeapplication.R.id.btnOk)
+        var buttonCancel : MaterialButton = dialog.findViewById(com.example.mypraticeapplication.R.id.btnCancel)
+
+        buttonOk.setOnClickListener {
+            dialog.dismiss()
+        }
+        buttonCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
+
 
     fun  showSnackBar(context: Context, message: String, constraintLayout: ConstraintLayout){
         val snackbar = Snackbar.make(constraintLayout, message, Snackbar.LENGTH_LONG)

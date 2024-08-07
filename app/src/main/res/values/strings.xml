@@ -62,6 +62,8 @@
     <string name="notRecoginsedReason">Reason</string>
     <string name="neighbourreconised">Whether Neighbour Recognised to the Applicant with Photo ?</string>
 
+    <string name="logoutAlert">Are you sure want to Logout?</string>
+
 
     <!--PostNeighbour-->
     <string name="neighbour3Name">Neighbour3 Name</string>

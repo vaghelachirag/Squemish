@@ -49,7 +49,8 @@
                         android:text="Neighbour Check-1"
                         android:textColor="@color/black"
                         android:layout_marginTop="@dimen/corner_radius"
-                        android:textSize="@dimen/_12sdp">
+                        android:textSize="@dimen/_12sdp"
+                        tools:ignore="MissingConstraints">
 
                     </com.example.mypraticeapplication.widget.HeaderText>
 
@@ -235,6 +236,7 @@
                         android:entries="@array/neighbourrecognised_array"
                         app:setOnItemSelectedListener="@{viewModel.clicksListener}"
                         android:imeOptions="actionNext"
+                        android:selectedItemPosition="@{viewModel.selectedItemPosition}"
                         android:textSize="@dimen/verificationDetailTextSize"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
