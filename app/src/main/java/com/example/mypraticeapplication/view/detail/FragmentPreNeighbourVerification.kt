@@ -21,7 +21,7 @@ class FragmentPreNeighbourVerification : BaseFragment(), FragmentLifecycleInterf
 
     // This property is only valid between onCreateView and
     private val binding get() = _binding!!
-    private val preNeighbourVerificationViewModel by lazy { PreNeighbourVerificationViewModel(context as Activity) }
+    private val preNeighbourVerificationViewModel by lazy { PreNeighbourVerificationViewModel(context as Activity,binding) }
 
     var data : String = ""
 

@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.example.mypraticeapplication.R
+import com.example.mypraticeapplication.databinding.FragmentPreNeighbourVerificationBinding
 import com.example.mypraticeapplication.model.base.BaseViewModel
 import com.example.mypraticeapplication.model.getPreNeighbourData.GetPreNeighbourResponse
 import com.example.mypraticeapplication.model.getverificationDetailResponse.GetFiRequestPreNeighboutVerificationDto
@@ -20,7 +21,10 @@ import com.example.mypraticeapplication.view.detail.ActivityDetail
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class PreNeighbourVerificationViewModel(private val context: Context) : BaseViewModel() {
+class PreNeighbourVerificationViewModel(
+    private val context: Context,
+    val binding: FragmentPreNeighbourVerificationBinding
+) : BaseViewModel() {
 
     // Login Params
     var neighbour1Name : ObservableField<String> = ObservableField()
@@ -59,17 +63,17 @@ class PreNeighbourVerificationViewModel(private val context: Context) : BaseView
     // On Saved Clicked
     fun onSaveClicked() {
         if (selectedReasonPosition.value  == 0){
-            Utils().showToast(context,"Please Select Reason")
+            Utils().showSnackBar(context,"Please Select Reason",binding.constraintLayout)
         }
         else if (neighbour1Mobile.get().toString() == ""){
-            Utils().showToast(context,"Please Enter Neighbour1 Mobile Number")
+            Utils().showSnackBar(context,"Please Enter Neighbour1 Mobile Number",binding.constraintLayout)
         } else if (neighbour1Mobile.get().toString().length < 10){
-            Utils().showToast(context,"Please Enter Valid Neighbour1 Mobile Number")
+            Utils().showSnackBar(context,"Please Enter Valid Neighbour1 Mobile Number",binding.constraintLayout)
         }
         else if (neighbour2Mobile.get().toString() == ""){
-            Utils().showToast(context,"Please Enter Neighbour2 Mobile Number")
+            Utils().showSnackBar(context,"Please Enter Neighbour2 Mobile Number",binding.constraintLayout)
         } else if (neighbour2Mobile.get().toString().length < 10){
-            Utils().showToast(context,"Please Enter Valid Neighbour2 Mobile Number")
+            Utils().showSnackBar(context,"Please Enter Valid Neighbour2 Mobile Number",binding.constraintLayout)
         }
         else {
             val model = GetFiRequestPreNeighboutVerificationDto()
@@ -120,15 +124,15 @@ class PreNeighbourVerificationViewModel(private val context: Context) : BaseView
                         Log.e("Status",t.getStatusCode().toString())
                         isLoading.postValue(false)
                         if(t.getStatusCode() == 200){
-                            Utils().showToast(context,t.getMessage().toString())
+                            Utils().showSnackBar(context,t.getMessage().toString(),binding.constraintLayout)
                         }else{
-                            Utils().showToast(context,t.getMessage().toString())
+                            Utils().showSnackBar(context,t.getMessage().toString(),binding.constraintLayout)
                         }
                         Log.e("StatusCode",t.getStatus().toString())
                     }
                 })
         }else{
-            Utils().showToast(context,context.getString(R.string.nointernetconnection).toString())
+            Utils().showSnackBar(context,context.getString(R.string.nointernetconnection).toString(),binding.constraintLayout)
         }
     }
 
