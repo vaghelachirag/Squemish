@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.navigation.fragment.findNavController
 import com.example.mypraticeapplication.R
+import com.example.mypraticeapplication.databinding.SignupFragmentBinding
 import com.example.mypraticeapplication.model.registerDevice.GetDeviceRegistrationResponse
 import com.example.mypraticeapplication.model.base.BaseViewModel
 import com.example.mypraticeapplication.network.CallbackObserver
@@ -19,7 +20,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 
-class SignupViewModel(private val context: Context, val signupFragment: SignupFragment) : BaseViewModel(){
+class SignupViewModel(
+    private val context: Context,
+    val signupFragment: SignupFragment,
+    val binding: SignupFragmentBinding
+) : BaseViewModel(){
 
     var employeeCode : ObservableField<String> = ObservableField()
     var remark : ObservableField<String> = ObservableField()
@@ -33,7 +38,8 @@ class SignupViewModel(private val context: Context, val signupFragment: SignupFr
       //  signupFragment.findNavController().navigate(R.id.action_SignUpFragment_to_LoginFragment)
 
         if (employeeCode.get() == null){
-            Utils().showToast(context,"Please Enter Employee Code")
+           // Utils().showToast(context,"Please Enter Employee Code")
+            Utils().showSnackBar(context,"Please Enter Employee Code",binding.constraintLayout)
         }
         else{
             callSignupApi()
@@ -74,16 +80,19 @@ class SignupViewModel(private val context: Context, val signupFragment: SignupFr
                             isLoading.postValue(false)
                             if(t.getStatusCode() == 200){
                                 signupFragment.findNavController().navigate(R.id.action_SignUpFragment_to_LoginFragment)
-                                Utils().showToast(context,t.getMessage().toString())
+                               // Utils().showToast(context,t.getMessage().toString())
+                                Utils().showSnackBar(context,t.getMessage().toString(),binding.constraintLayout)
                             }else{
-                                Utils().showToast(context,t.getMessage().toString())
+                                Utils().showSnackBar(context,t.getMessage().toString(),binding.constraintLayout)
+                               // Utils().showToast(context,t.getMessage().toString())
                             }
                             Log.e("StatusCode",t.getStatus().toString())
                         }
 
                     })
             }else{
-                Utils().showToast(context,context.getString(R.string.nointernetconnection).toString())
+              //  Utils().showToast(context,context.getString(R.string.nointernetconnection).toString())
+                Utils().showSnackBar(context,context.getString(R.string.nointernetconnection).toString(),binding.constraintLayout)
             }
         }
 }

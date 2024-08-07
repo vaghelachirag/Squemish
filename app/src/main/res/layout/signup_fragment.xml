@@ -42,6 +42,7 @@
             tools:targetApi="lollipop" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_32sdp"
@@ -95,9 +96,10 @@
                     android:layout_height="@dimen/edit_text_size"
                     android:inputType="textEmailAddress"
                     android:hint="@string/employeecode"
-                    android:textColor="@color/gray_323232"
+                    android:textColor="@color/black"
                     android:textColorHint="@color/gray_323232"
                     android:textSize="@dimen/loginTextSize"
+                    app:custom_font="@string/app_font_regular"
                     android:text="@={viewModel.employeeCode}"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,9 +123,10 @@
                     android:inputType="text"
                     android:hint="@string/remark"
                     android:text="@={viewModel.remark}"
-                    android:textColor="@color/gray_323232"
+                    android:textColor="@color/black"
                     android:textColorHint="@color/gray_323232"
-                    android:textSize="@dimen/loginTextSize" />
+                    app:custom_font="@string/app_font_regular"
+                    android:textSize="@dimen/loginTextSize"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.checkbox.MaterialCheckBox

@@ -13,7 +13,7 @@ import com.example.mypraticeapplication.uttils.AppConstants
 import com.example.mypraticeapplication.uttils.Utility.Companion.setAllEnabled
 import com.example.mypraticeapplication.view.base.BaseFragment
 import com.example.mypraticeapplication.viewmodel.verificationDetail.PostNeighbourVerificationViewModel
-import com.example.mypraticeapplication.viewmodel.verificationDetail.PreNeighbourVerificationViewModel
+
 
 class FragmentPostNeighbourVerification  : BaseFragment(), FragmentLifecycleInterface {
 
@@ -23,7 +23,7 @@ class FragmentPostNeighbourVerification  : BaseFragment(), FragmentLifecycleInte
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private val postNeighbourVerificationViewModel by lazy { PostNeighbourVerificationViewModel(context as Activity) }
+    private val postNeighbourVerificationViewModel by lazy { PostNeighbourVerificationViewModel(context as Activity,binding) }
 
     var data : String = ""
 

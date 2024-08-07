@@ -1,5 +1,6 @@
 package com.example.mypraticeapplication.uttils
 
+import android.R
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
@@ -7,7 +8,11 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.text.Html
 import android.view.Gravity
+import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
 
 
 class Utils {
@@ -20,6 +25,12 @@ class Utils {
         )
         toast.setGravity(Gravity.CENTER, 0, 0)
         toast.show()
+    }
+
+    fun  showSnackBar(context: Context, message: String, constraintLayout: ConstraintLayout){
+        val snackbar = Snackbar.make(constraintLayout, message, Snackbar.LENGTH_LONG)
+        snackbar.setBackgroundTint(ContextCompat.getColor(context, R.color.black))
+        snackbar.show()
     }
 
     /**

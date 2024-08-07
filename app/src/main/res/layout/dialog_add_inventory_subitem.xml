@@ -8,7 +8,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_20sdp"
         app:cardCornerRadius="0dp"
-        android:background="@color/main_bg"
         app:cardUseCompatPadding="false">
 
         <RelativeLayout
@@ -73,7 +72,6 @@
                 android:visibility="visible"
                 tools:visibility="visible"
                 android:layout_below="@+id/ll_Item"
-                android:background="@drawable/bg_add_inventory_sub_item"
                 android:weightSum="1">
 
 
@@ -118,12 +116,10 @@
                     android:text="Save"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:textStyle="bold"
-                    style="@style/MaterialButtonStyle"
                     android:textSize="@dimen/_10sdp"
                     app:cornerRadius="@dimen/_8sdp"
                     android:layout_marginLeft="@dimen/_50sdp"
                     android:layout_marginRight="@dimen/_50sdp"
-
                     tools:ignore="SpUsage" />
 
 

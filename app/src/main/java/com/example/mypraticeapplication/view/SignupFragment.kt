@@ -1,12 +1,10 @@
 package com.example.mypraticeapplication.view
 
 import android.content.Context
-import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -29,7 +27,7 @@ class SignupFragment : BaseFragment(){
     private val binding get() = _binding!!
 
     // ViewModel
-    private val signupViewModel by lazy { SignupViewModel(activity as Context,this@SignupFragment) }
+    private val signupViewModel by lazy { SignupViewModel(activity as Context,this@SignupFragment,binding) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

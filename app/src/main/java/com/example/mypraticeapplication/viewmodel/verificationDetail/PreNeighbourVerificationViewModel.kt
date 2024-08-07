@@ -1,5 +1,6 @@
 package com.example.mypraticeapplication.viewmodel.verificationDetail
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.view.View
@@ -36,6 +37,7 @@ class PreNeighbourVerificationViewModel(private val context: Context) : BaseView
     var isNeighbourReconised = MutableLiveData<Boolean>()
     var selectedReasonPosition =  MutableLiveData<Int>()
 
+    @SuppressLint("SuspiciousIndentation")
     fun init(context: Context?) {
       isNeighbourReconised.value = false
       selectedReasonPosition.value = 0

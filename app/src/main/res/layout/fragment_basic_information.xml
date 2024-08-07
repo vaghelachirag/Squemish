@@ -12,7 +12,9 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:fadingEdge="none">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view"
@@ -619,7 +621,7 @@
                         android:background="@drawable/bg_border_fill_rounded"
                         android:layout_gravity="center_vertical"
                         android:gravity="center"
-                        android:backgroundTint="@color/main_bg"
+                        android:backgroundTint="@color/seaweed"
                         android:drawableTint="@color/white"
                         android:layout_marginRight="@dimen/_10sdp"
                         android:layout_marginLeft="@dimen/_10sdp"

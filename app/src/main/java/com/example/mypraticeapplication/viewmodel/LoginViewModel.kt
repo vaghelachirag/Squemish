@@ -4,16 +4,15 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.provider.Settings
 import android.text.TextUtils
 import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.example.mypraticeapplication.R
 import androidx.navigation.fragment.findNavController
+import com.example.mypraticeapplication.databinding.LoginscreenBinding
 import com.example.mypraticeapplication.view.LoginFragment
 import com.example.mypraticeapplication.model.LoginModel
-import com.example.mypraticeapplication.model.base.BaseModel
 import com.example.mypraticeapplication.model.base.BaseViewModel
 import com.example.mypraticeapplication.model.login.GetLoginResponseModel
 import com.example.mypraticeapplication.network.CallbackObserver
@@ -22,11 +21,14 @@ import com.example.mypraticeapplication.uttils.Session
 import com.example.mypraticeapplication.uttils.Utility
 import com.example.mypraticeapplication.uttils.Utils
 import com.example.mypraticeapplication.view.menu.DashboardActivity
-import com.google.android.material.snackbar.Snackbar
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class LoginViewModel(private val context: Context, private val  loginFragment: LoginFragment) : BaseViewModel(){
+class LoginViewModel(
+    private val context: Context,
+    private val loginFragment: LoginFragment,
+    private val binding: LoginscreenBinding
+) : BaseViewModel(){
 
     // Login Params
      var email : ObservableField<String> = ObservableField()
@@ -43,10 +45,12 @@ class LoginViewModel(private val context: Context, private val  loginFragment: L
         signInMutableLiveData.value = model
 
         if (model.email == null){
-             Utils().showToast(context,"Please Enter Email Address")
+            // Utils().showToast(context,"Please Enter Email Address")
+             Utils().showSnackBar(context,"Please Enter Employee Code",binding.constraintLayout)
         }
         else if (model.password == null ){
-            Utils().showToast(context,"Please Enter Your Password")
+            //Utils().showToast(context,"Please Enter Your Password")
+            Utils().showSnackBar(context,"Please Enter Your Password",binding.constraintLayout)
         }
         else{
             callLoginAPI()
@@ -89,7 +93,8 @@ class LoginViewModel(private val context: Context, private val  loginFragment: L
                             session.user = t.getData()
                             redirectToHome()
                         }else{
-                            Utils().showToast(context,t.getMessage().toString())
+                          //  Utils().showToast(context,t.getMessage().toString())
+                            Utils().showSnackBar(context,t.getMessage().toString(),binding.constraintLayout)
                         }
                         Log.e("StatusCode",t.getStatus().toString())
                     }
