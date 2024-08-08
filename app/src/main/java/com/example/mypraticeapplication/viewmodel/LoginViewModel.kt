@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.provider.Settings
 import android.text.TextUtils
 import android.util.Log
 import androidx.databinding.ObservableField
@@ -61,11 +62,15 @@ class LoginViewModel(
     private fun callLoginAPI() {
 
 
+        val deviceId = Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
+        val manufacturer = Build.MANUFACTURER
+        val androidModel = Build.MODEL
+
         val params = HashMap<String,Any>()
         params["EmployeeCode"] = email.get().toString()
         params["Password"] = password.get().toString()
         params["AppId"] = "BCF97D6D0DB4C5E83107TR11"
-
+        params["DeviceId"] = deviceId
 
         if (Utility.isNetworkConnected(context)){
             isLoading.postValue(true)
@@ -91,6 +96,8 @@ class LoginViewModel(
                             var session = Session(context)
                             session.isLoggedIn = true
                             session.user = t.getData()
+                            t.getData()!!.getProfilePicture()?.let { session.storeUserProfileImageKey(it) }
+                            t.getData()!!.getName()?.let { session.storeUserNameKey(it) }
                             redirectToHome()
                         }else{
                           //  Utils().showToast(context,t.getMessage().toString())

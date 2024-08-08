@@ -42,8 +42,6 @@ class DashboardFragment: BaseFragment() {
             binding.totalVerificationCount.text = dashboardViewModel.totalVerification.value.toString()
         }
 
-      //  findNavController().navigate(R.id.action_DashboardFragment_to_FragmentDetail)
-
         return binding.root
     }
 

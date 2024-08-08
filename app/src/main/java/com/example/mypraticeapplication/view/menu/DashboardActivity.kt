@@ -1,5 +1,6 @@
 package com.example.mypraticeapplication.view.menu
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
@@ -23,32 +24,35 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.mypraticeapplication.MainActivity
 import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.databinding.ActivityDashboardBinding
+import com.example.mypraticeapplication.interfaces.OnItemSelected
 import com.example.mypraticeapplication.model.getMenuListResponse.GetMenuListData
 import com.example.mypraticeapplication.model.getMenuListResponse.GetMenuListResponse
 import com.example.mypraticeapplication.network.CallbackObserver
 import com.example.mypraticeapplication.network.Networking
+import com.example.mypraticeapplication.uttils.AppConstants
 import com.example.mypraticeapplication.uttils.Session
 import com.example.mypraticeapplication.uttils.Utility
 import com.example.mypraticeapplication.uttils.Utils
-import com.example.mypraticeapplication.view.SplashScreen
 import com.example.mypraticeapplication.view.adapter.MenuItemAdapter
 import com.example.mypraticeapplication.view.base.BaseActivity
-import com.google.android.material.navigation.NavigationView
+import com.example.mypraticeapplication.view.dialougs.AcceptRejectFIDialog
+import com.example.mypraticeapplication.view.dialougs.ChangePasswordDialoug
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 
+@Suppress("DEPRECATION")
 class DashboardActivity : BaseActivity() {
     private lateinit var binding: ActivityDashboardBinding
-    lateinit var navController: NavController
+    private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
-    public var activityDashboard : DashboardActivity? = null
+    private var activityDashboard : DashboardActivity? = null
 
-
+    // Session
     var session: Session? = null;
 
     val isLoading = MutableLiveData<Boolean>()
-    public var menuList: ArrayList<GetMenuListData> = ArrayList()
+    var menuList: ArrayList<GetMenuListData> = ArrayList()
 
     @SuppressLint("DiscouragedPrivateApi", "SimpleDateFormat", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,11 +80,8 @@ class DashboardActivity : BaseActivity() {
 
         appBarConfiguration = AppBarConfiguration.Builder(
             R.id.dashboardFragment,
-            //            R.id.surveyDetailsFragment,
             R.id.settingFragment,
             R.id.dashboardFragment,
-            //            R.id.termsAndConditionFragment,
-            //            R.id.privacyPolicyFragment
         ).setDrawerLayout(binding.drawer).build()
 
 
@@ -92,15 +93,13 @@ class DashboardActivity : BaseActivity() {
         setupNavControl()
         setDrawerAction()
         setupToolbarWithMenu(getString(R.string.dashboard),binding)
+        getMenuListResponse()
     }
 
     private fun getSessionData() {
-        val navigationView = findViewById<View>(com.example.mypraticeapplication.R.id.navigationView) as NavigationView
-        val headerView = navigationView.getHeaderView(0)
-        val navUsername = headerView.findViewById<View>(com.example.mypraticeapplication.R.id.txt_UserName) as TextView
-
-        val profileImage = headerView.findViewById<View>(com.example.mypraticeapplication.R.id.navHeaderLogo) as AppCompatImageView
-
+        val viewMenu = findViewById<View>(R.id.layoutMenu)
+        val userName = viewMenu.findViewById<View>(R.id.txt_UserName) as TextView
+        val profileImage = viewMenu.findViewById<View>(R.id.navHeaderLogo) as AppCompatImageView
         val options: RequestOptions = RequestOptions()
             .centerCrop()
             .placeholder(R.mipmap.ic_launcher_round)
@@ -108,7 +107,7 @@ class DashboardActivity : BaseActivity() {
             .error(R.mipmap.ic_launcher_round)
 
         Glide.with(this).load(session!!.getUserProfileImageKey()).apply(options).into(profileImage)
-        navUsername.text = session!!.getUserNameKey()
+        userName.text = session!!.getUserNameKey()
     }
 
     private fun setDrawerAction() {
@@ -130,7 +129,7 @@ class DashboardActivity : BaseActivity() {
                     binding.toolbarDashboard.setNavigationIcon(null);
                 }
                 R.id.logout -> {
-                 Utils().showAlertDialog(this,resources.getString(R.string.logoutAlert))
+                    Utils().showAlertDialog(this,resources.getString(R.string.logoutAlert))
                 }
             }
             true
@@ -145,7 +144,7 @@ class DashboardActivity : BaseActivity() {
         }
     }
 
-    private fun showLogoutAlertDialoug() {
+    private fun showLogoutAlertDialog() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Are You Sure Want To Logout?")
 
@@ -163,10 +162,6 @@ class DashboardActivity : BaseActivity() {
 
     private fun setupNavControl() {
         binding.navigationView.setupWithNavController(navController) //Setup Drawer navigation with navController
-    }
-
-    public fun RedirectToDashboard(){
-
     }
 
     private fun getMenuListResponse() {
@@ -193,13 +188,12 @@ class DashboardActivity : BaseActivity() {
                         if(t.getStatusCode() == 200){
                             if(t.getData() != null){
                                 menuList  =  t.getData()!!
-                                Log.e("MenuSize",t.getData()!!.size.toString())
+                                menuList.sortBy { it.getOrderNo() }
                                 setMenuAdapter()
                             }
                         }else{
                             Utils().showToast(this@DashboardActivity ,t.getMessage().toString())
                         }
-                        Log.e("StatusCode",t.getStatus().toString())
                     }
                 })
         }else{
@@ -210,9 +204,13 @@ class DashboardActivity : BaseActivity() {
     @SuppressLint("NotifyDataSetChanged")
     public fun setMenuAdapter() {
         binding.rvMenu.layoutManager = LinearLayoutManager(this)
-        binding.rvMenu.adapter = MenuItemAdapter(this, menuList, viewModel)
+        binding.rvMenu.adapter = MenuItemAdapter(this, menuList,object : OnItemSelected<GetMenuListData>{
 
-        Log.e("MenuSize",menuList.size.toString())
+            override fun onItemSelected(t: GetMenuListData?, position: Int) {
+                clickMenuEvent(t)
+            }
+
+        })
 
         binding.rvMenu.addItemDecoration(
             DividerItemDecoration(
@@ -220,5 +218,51 @@ class DashboardActivity : BaseActivity() {
                 (binding.rvMenu.layoutManager as LinearLayoutManager).orientation
             )
         )
+    }
+
+    private fun clickMenuEvent(menuData: GetMenuListData?) {
+        if (binding.drawer.isDrawerOpen(GravityCompat.START)) {
+            binding.drawer.closeDrawer(GravityCompat.START)
+        }
+        if (menuData!!.getIsWebView() == true){
+
+            val bundle = Bundle()
+            bundle.putString("webURL", menuData.getMenuId().toString())
+
+            navController.navigate(R.id.webViewFragment,bundle)
+            binding.toolbarDashboard.setTitle(menuData.getName())
+            supportActionBar?.setDisplayShowHomeEnabled(false);
+            binding.toolbarDashboard.setNavigationIcon(null);
+        }else{
+
+            if (menuData.getMenuId() == AppConstants.home){
+                navController.navigate(R.id.dashboardFragment)
+                binding.toolbarDashboard.setTitle(R.string.dashboard)
+                supportActionBar?.setDisplayShowHomeEnabled(false);
+                binding.toolbarDashboard.setNavigationIcon(null);
+            }
+            if (menuData.getMenuId() == AppConstants.changePassword){
+                navController.navigate(R.id.changePasswordFragment)
+                binding.toolbarDashboard.setTitle(R.string.changePassword_Txt)
+                binding.toolbarDashboard.setNavigationIcon(null);
+                //showChangePasswordDialoug()
+            }
+            if (menuData.getMenuId() == AppConstants.logout){
+                Utils().showAlertDialog(this,resources.getString(R.string.logoutAlert))
+            }
+        }
+    }
+
+    private fun showChangePasswordDialoug() {
+        ChangePasswordDialoug(this)
+            .setListener(object : ChangePasswordDialoug.OkButtonListener {
+                override fun onOkPressed(
+                    acceptRejectFIDialog: ChangePasswordDialoug
+                ) {
+
+                }
+
+            })
+            .show()
     }
 }

@@ -71,31 +71,34 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:background="@color/white"
-            android:fitsSystemWindows="true"
-            app:menu="@menu/menu_nav_view_verification" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:fitsSystemWindows="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <include layout="@layout/menu_header"/>
-            </LinearLayout>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvMenu"
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:clipToPadding="false"
-                android:fadeScrollbars="false"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/layout_menu_item" />
-        </LinearLayout>
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/layoutMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible">
+                    <include layout="@layout/menu_header"/>
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:clipToPadding="false"
+                    android:fadeScrollbars="false"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/layout_menu_item" />
+            </LinearLayout>
+
+        </com.google.android.material.navigation.NavigationView>
 
     </androidx.drawerlayout.widget.DrawerLayout>
 

@@ -17,6 +17,9 @@
     <string name="signup_fragment_label">Signup Fragment</string>
     <string name="home_fragment_label">Home Fragment</string>
     <string name="dashboard_fragment_label">Dashboard Fragment</string>
+    <string name="webView_fragment_label">Dashboard Fragment</string>
+
+
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 

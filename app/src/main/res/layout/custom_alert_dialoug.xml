@@ -55,6 +55,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_16sdp"
                         android:text="Cancel"
+                        app:backgroundTint="@null"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:textAllCaps="false"
                         android:textSize="@dimen/_12sdp"

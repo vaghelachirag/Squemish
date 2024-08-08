@@ -117,7 +117,7 @@ class DashboardViewModel(val context: Context, val dashboardFragment: DashboardF
                         if(t.getStatusCode() == 200){
                             if(t.getData() != null){
                                 CoroutineScope(Dispatchers.IO).launch {
-                                    getUserProfileData()
+                                    //getUserProfileData()
                                     masterDataDao!!.insertAll(t.getData())
                                 }
                             }

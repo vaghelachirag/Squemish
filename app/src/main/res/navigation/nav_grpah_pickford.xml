@@ -14,6 +14,15 @@
 
     </fragment>
 
+
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.example.mypraticeapplication.view.menu.WebViewFragment"
+        android:label="@string/webView_fragment_label"
+        tools:layout="@layout/fragment_load_web_url">
+
+    </fragment>
+
     <fragment
         android:id="@+id/HomeFragment"
         android:name="com.example.mypraticeapplication.view.HomeFragment"
@@ -29,6 +38,16 @@
         <action
             android:id="@+id/action_settingFragment_self"
             app:destination="@id/settingFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.mypraticeapplication.view.menu.ChangePasswordFragment"
+        android:label="@string/action_changePassword"
+        tools:layout="@layout/change_password_fragment">
+        <action
+            android:id="@+id/action_changePasswordFragment_self"
+            app:destination="@id/changePasswordFragment" />
     </fragment>
 
     <fragment

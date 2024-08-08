@@ -33,6 +33,7 @@
         android:id="@+id/iv_Logo"
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_10sdp"
         android:src="@mipmap/ic_launcher"
         android:tint="@color/gray_323232"
         tools:ignore="MissingConstraints">
@@ -46,12 +47,13 @@
             android:text="Menu Name"
             android:textSize="@dimen/_12sdp"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
             android:textColor="@color/gray_323232"
             app:layout_constraintRight_toRightOf="@+id/iv_Logo"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpUsage">
 
         </com.example.mypraticeapplication.widget.HeaderText>
     </LinearLayout>

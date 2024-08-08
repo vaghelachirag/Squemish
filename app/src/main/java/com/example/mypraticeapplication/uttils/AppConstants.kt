@@ -34,5 +34,11 @@ object AppConstants {
     var AcceptReason = "AcceptReason"
     var RejectReason = "RejectReason"
 
+
+    // Menu Order
+    var home = 1
+    var changePassword = 15
+    var logout = 17
+
 }
 

@@ -3,6 +3,7 @@ package com.example.mypraticeapplication.uttils
 import android.R
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
@@ -15,11 +16,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import com.example.mypraticeapplication.MainActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 
 
 class Utils {
+
+    var session: Session? = null;
 
     fun showToast(context: Context,message: String){
         val toast = Toast.makeText(
@@ -33,6 +37,10 @@ class Utils {
 
 
     public fun showAlertDialog(context: Context,strTitle: String) {
+
+        session = Session(context);
+
+
         val dialog = Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.window!!.attributes.windowAnimations = com.example.mypraticeapplication.R.style.DialogTheme;
@@ -48,6 +56,9 @@ class Utils {
 
         buttonOk.setOnClickListener {
             dialog.dismiss()
+            session!!.clearSession()
+            val intent = Intent(context, MainActivity::class.java)
+            context.startActivity(intent)
         }
         buttonCancel.setOnClickListener {
             dialog.dismiss()

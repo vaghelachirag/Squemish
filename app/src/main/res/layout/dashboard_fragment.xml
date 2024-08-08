@@ -27,11 +27,13 @@
         </com.example.mypraticeapplication.widget.SmallText>
 
         <LinearLayout
+            android:id="@+id/ll_TotalVerification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/_15sdp"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginRight="@dimen/_20sdp">
+
             <com.example.mypraticeapplication.widget.HeaderText
                 android:id="@+id/totalVerificationCount"
                 android:layout_width="wrap_content"
@@ -48,15 +50,13 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvDashboard"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_height="0dp"
             android:clipToPadding="false"
             android:fadeScrollbars="false"
             android:paddingTop="6dp"
             android:paddingBottom="6dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="@+id/totalVerification"
-            app:layout_constraintTop_toBottomOf="@+id/totalVerification"
+            app:layout_constraintTop_toBottomOf="@+id/ll_TotalVerification"
             tools:listitem="@layout/item_dashboard" />
 
 

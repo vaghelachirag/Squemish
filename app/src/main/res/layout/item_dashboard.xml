@@ -29,7 +29,7 @@
         app:cardCornerRadius="10dp"
         android:layout_marginRight="10sp"
         android:layout_marginLeft="10sp"
-        android:layout_marginTop="12sp"
+        android:layout_marginTop="@dimen/_10sdp"
         app:cardBackgroundColor="@color/white"
         card_view:cardUseCompatPadding="true">
 
