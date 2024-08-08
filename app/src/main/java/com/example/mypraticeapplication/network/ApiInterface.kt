@@ -1,6 +1,7 @@
 package com.example.mypraticeapplication.network
 
 import com.example.mypraticeapplication.model.getAcceptRejectResponse.GetAcceptRejectResponse
+import com.example.mypraticeapplication.model.getMenuListResponse.GetMenuListResponse
 import com.example.mypraticeapplication.model.getPreNeighbourData.GetPreNeighbourData
 import com.example.mypraticeapplication.model.getPreNeighbourData.GetPreNeighbourResponse
 import com.example.mypraticeapplication.model.getUserProfileData.GetUserProfileResponse
@@ -52,4 +53,7 @@ interface ApiInterface {
     @GET("api/user/GetProfileRecord")
     fun getUserProfileData(): Observable<GetUserProfileResponse>
 
+
+    @GET("api/MobileAppMenu/GetRecords")
+    fun getMenuListResponse(): Observable<GetMenuListResponse>
 }

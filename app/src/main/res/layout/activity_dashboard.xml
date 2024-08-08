@@ -72,8 +72,30 @@
             android:layout_gravity="start"
             android:background="@color/white"
             android:fitsSystemWindows="true"
-            app:headerLayout="@layout/menu_header"
             app:menu="@menu/menu_nav_view_verification" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <include layout="@layout/menu_header"/>
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMenu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:clipToPadding="false"
+                android:fadeScrollbars="false"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/layout_menu_item" />
+        </LinearLayout>
 
     </androidx.drawerlayout.widget.DrawerLayout>
 

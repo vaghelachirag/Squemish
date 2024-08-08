@@ -28,6 +28,7 @@
                     android:text="Group List"
                     android:layout_weight="1"
                     android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -54,12 +55,11 @@
                     android:id="@+id/txt_NoData"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/headerView"
                     android:gravity="center"
                     android:textSize="@dimen/_10sdp"
                     android:visibility="gone"
                     android:layout_marginTop="@dimen/_16sdp"
-                    android:text="No Data Found!"></TextView>
+                    android:text="No Data Found!" />
 
             </LinearLayout>
 
@@ -109,18 +109,17 @@
                 android:layout_below="@+id/addNewItemView"
                 android:orientation="horizontal">
 
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnSave"
+                    style="@style/MaterialButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Save"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_10sdp"
-                    app:cornerRadius="@dimen/_8sdp"
-                    android:layout_marginLeft="@dimen/_50sdp"
-                    android:layout_marginRight="@dimen/_50sdp"
-                    tools:ignore="SpUsage" />
+                    android:layout_marginLeft="@dimen/_80sdp"
+                    android:layout_marginRight="@dimen/_80sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    app:backgroundTint="@null" />
 
 
             </LinearLayout>
