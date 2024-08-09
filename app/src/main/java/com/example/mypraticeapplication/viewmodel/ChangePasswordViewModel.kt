@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.example.mypraticeapplication.R
+import com.example.mypraticeapplication.databinding.ActivityDashboardBinding
 import com.example.mypraticeapplication.databinding.ChangePasswordFragmentBinding
 import com.example.mypraticeapplication.model.base.BaseViewModel
 import com.example.mypraticeapplication.model.changepassword.ChangePasswordModel
@@ -18,7 +19,7 @@ import com.example.mypraticeapplication.uttils.Utils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class ChangePasswordViewModel(val context: Context, val binding: ChangePasswordFragmentBinding) : BaseViewModel() {
+class ChangePasswordViewModel(val context: Context, val binding: ActivityDashboardBinding) : BaseViewModel() {
 
 
     // Session Manager
@@ -31,6 +32,8 @@ class ChangePasswordViewModel(val context: Context, val binding: ChangePasswordF
 
 
     private var changePasswordMutableLiveData: MutableLiveData<ChangePasswordModel> = MutableLiveData()
+
+    var isChangePasswordSuccess  = MutableLiveData<Boolean>()
 
     fun init(context: Context) {
 

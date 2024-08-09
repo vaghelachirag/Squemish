@@ -242,10 +242,11 @@ class DashboardActivity : BaseActivity() {
                 binding.toolbarDashboard.setNavigationIcon(null);
             }
             if (menuData.getMenuId() == AppConstants.changePassword){
-                navController.navigate(R.id.changePasswordFragment)
+              /*  navController.navigate(R.id.changePasswordFragment)
                 binding.toolbarDashboard.setTitle(R.string.changePassword_Txt)
-                binding.toolbarDashboard.setNavigationIcon(null);
+                binding.toolbarDashboard.setNavigationIcon(null);*/
                 //showChangePasswordDialoug()
+                Utils().showChangePasswordDialog(this,binding)
             }
             if (menuData.getMenuId() == AppConstants.logout){
                 Utils().showAlertDialog(this,resources.getString(R.string.logoutAlert))

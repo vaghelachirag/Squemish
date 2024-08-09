@@ -7,6 +7,7 @@ import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
@@ -20,7 +21,7 @@ class AcceptRejectFIDialog(
     var mContext: Context,
     val acceptReasonList: List<String>,
     val isAcceptReject: Boolean
-) : Dialog(mContext, R.style.ThemeDialog) {
+) : Dialog(mContext, R.style.DialogTheme) {
 
     private lateinit var binding: DialogAddInventorySubitemBinding
     private var listener: OkButtonListener? = null
@@ -42,6 +43,15 @@ class AcceptRejectFIDialog(
         else{
             binding.txtHeader.text = "Select Reject Reason"
         }
+
+        val lp = WindowManager.LayoutParams()
+        lp.copyFrom(window!!.attributes)
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+        lp.gravity = Gravity.CENTER
+
+        window!!.setAttributes(lp)
+
 
         acceptRejectListSpinnerAdapter =
             ArrayAdapter<String?>(context, android.R.layout.simple_spinner_item, acceptReasonList)
