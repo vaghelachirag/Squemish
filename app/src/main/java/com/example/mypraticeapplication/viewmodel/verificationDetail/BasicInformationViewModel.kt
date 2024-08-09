@@ -74,8 +74,8 @@ class BasicInformationViewModel(private val context: Context) : BaseViewModel(){
 
     private fun getAcceptRejectList() {
         CoroutineScope(Dispatchers.IO).launch {
-            acceptReasonList   =  masterDataDao!!.getDataByKeyName(AppConstants.AcceptReason)
-            rejectReasonList   =  masterDataDao!!.getDataByKeyName(AppConstants.RejectReason)
+            acceptReasonList   =  masterDataDao!!.getDataByKeyName(AppConstants.acceptReason)
+            rejectReasonList   =  masterDataDao!!.getDataByKeyName(AppConstants.rejectReason)
         }
     }
 

@@ -31,8 +31,24 @@ object AppConstants {
     var statusPending  = "ASSIGNED"
 
     // Database Key Name
-    var AcceptReason = "AcceptReason"
-    var RejectReason = "RejectReason"
+    var acceptReason = "AcceptReason"
+    var rejectReason = "RejectReason"
+    var relationType = "RelationType"
+    var houseOwnershipType	 = "HouseOwnershipType"
+    var houseOrPremiseLocalityType	 = "HouseOrPremiseLocalityType"
+    var accommodationType = "AccommodationType"
+    var profileType = "ProfileType"
+    var designationType = "DesignationType"
+    var constitutionType = "ConstitutionType"
+    var stockSightedType = "StockSightedType"
+    var officeSetupType = "OfficeSetupType"
+    var businessOwnershipType = "BusinessOwnershipType"
+    var officeLocalityType = "OfficeLocalityType"
+    var premiseType = "PremiseType"
+    var meetingArea = "MeetingArea"
+    var vendorOfficeOwnershipType = "VendorOfficeOwnershipType"
+    var officeInfrastructure = "OfficeInfrastructure"
+    var propertyType = "PropertyType"
 
 
     // Menu Order
