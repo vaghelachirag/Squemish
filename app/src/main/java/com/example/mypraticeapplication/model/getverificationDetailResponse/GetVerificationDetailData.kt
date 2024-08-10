@@ -409,7 +409,7 @@ class GetVerificationDetailData {
 
     @SerializedName("documents")
     @Expose
-    private var documents: List<GetVerificationDocument>? = null
+    private var documents: ArrayList<GetVerificationDocument>? = null
 
     @SerializedName("firequestReviewSubmissionDto")
     @Expose
@@ -1259,11 +1259,11 @@ class GetVerificationDetailData {
         this.firequestPostNeighboutVerificationDto = firequestPostNeighboutVerificationDto
     }
 
-    fun getDocuments(): List<GetVerificationDocument>? {
+    fun getDocuments(): ArrayList<GetVerificationDocument>? {
         return documents
     }
 
-    fun setDocuments(documents: List<GetVerificationDocument>?) {
+    fun setDocuments(documents: ArrayList<GetVerificationDocument>?) {
         this.documents = documents
     }
 

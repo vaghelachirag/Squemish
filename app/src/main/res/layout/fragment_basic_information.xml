@@ -604,13 +604,27 @@
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvDocument"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:fadeScrollbars="false"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_document" />
+
+
                 <LinearLayout
                     android:id="@+id/ll_AcceptReject"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_20sdp"
-                    android:visibility="gone"
+                    android:visibility="visible"
+                    app:layout_constraintTop_toBottomOf="@+id/rvDocument"
                     android:weightSum="2">
 
                     <com.example.mypraticeapplication.widget.HeaderText
@@ -646,6 +660,7 @@
 
                     </com.example.mypraticeapplication.widget.HeaderText>
                 </LinearLayout>
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

@@ -13,7 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardBackgroundColor="@color/gray_616161">
+        app:cardBackgroundColor="@color/gray_616161"
+        android:layout_marginBottom="@dimen/_30sdp">
 
 
         <com.example.mypraticeapplication.widget.SmallText
@@ -54,7 +55,9 @@
             android:clipToPadding="false"
             android:fadeScrollbars="false"
             android:paddingTop="6dp"
-            android:paddingBottom="6dp"
+            android:paddingBottom="56dp"
+            android:overScrollMode="never"
+            android:layout_marginBottom="@dimen/_50sdp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@+id/ll_TotalVerification"
             tools:listitem="@layout/item_dashboard" />

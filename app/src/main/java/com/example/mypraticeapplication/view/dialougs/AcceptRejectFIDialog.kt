@@ -3,25 +3,17 @@ package com.example.mypraticeapplication.view.dialougs
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.databinding.DialogAddInventorySubitemBinding
 
-class AcceptRejectFIDialog(
-    var mContext: Context,
-    val acceptReasonList: List<String>,
-    val isAcceptReject: Boolean
-) : Dialog(mContext, R.style.DialogTheme) {
+class AcceptRejectFIDialog(var mContext: Context, val acceptReasonList: List<String>, val isAcceptReject: Boolean) : Dialog(mContext, R.style.DialogTheme) {
 
     private lateinit var binding: DialogAddInventorySubitemBinding
     private var listener: OkButtonListener? = null

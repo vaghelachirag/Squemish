@@ -55,6 +55,8 @@ class SplashScreen : Fragment()  {
         return binding.root
     }
 
+
+
     private fun setDelay() {
         Handler(Looper.getMainLooper()).postDelayed({
             if (!session!!.isLoggedIn) {

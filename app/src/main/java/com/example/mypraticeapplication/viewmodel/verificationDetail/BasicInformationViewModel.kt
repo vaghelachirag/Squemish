@@ -4,9 +4,13 @@ import android.app.Activity
 import android.content.Context
 import android.util.Log
 import androidx.databinding.ObservableField
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mypraticeapplication.R
+import com.example.mypraticeapplication.databinding.FragmentBasicInformationBinding
+import com.example.mypraticeapplication.interfaces.OnItemSelected
 import com.example.mypraticeapplication.model.base.BaseViewModel
 import com.example.mypraticeapplication.model.getAcceptRejectResponse.GetAcceptRejectResponse
+import com.example.mypraticeapplication.model.getverificationDetailResponse.GetVerificationDocument
 import com.example.mypraticeapplication.network.CallbackObserver
 import com.example.mypraticeapplication.network.Networking
 import com.example.mypraticeapplication.room.InitDb
@@ -14,6 +18,7 @@ import com.example.mypraticeapplication.room.dao.MasterDataDao
 import com.example.mypraticeapplication.uttils.AppConstants
 import com.example.mypraticeapplication.uttils.Utility
 import com.example.mypraticeapplication.uttils.Utils
+import com.example.mypraticeapplication.view.adapter.DocumentAdapter
 import com.example.mypraticeapplication.view.detail.ActivityDetail
 import com.example.mypraticeapplication.view.detail.FragmentBasicInformation
 import com.example.mypraticeapplication.view.dialougs.AcceptRejectFIDialog
@@ -24,7 +29,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class BasicInformationViewModel(private val context: Context) : BaseViewModel(){
+class BasicInformationViewModel(
+    private val context: Context,
+    val binding: FragmentBasicInformationBinding
+) : BaseViewModel(){
 
     // Login Params
     var refNo : ObservableField<String> = ObservableField()
@@ -47,6 +55,8 @@ class BasicInformationViewModel(private val context: Context) : BaseViewModel(){
     var acceptReasonList: MutableList<String>? = null
     var rejectReasonList: MutableList<String>? = null
 
+    private var verificationDocumentAdapter: DocumentAdapter? = null
+
 
     fun init(context: Context) {
 
@@ -65,6 +75,12 @@ class BasicInformationViewModel(private val context: Context) : BaseViewModel(){
             prepost.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getPrePost().toString()))
             loanAmount.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getLoanAmount().toString()))
             triggers.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getTriggerRemarks().toString()))
+
+            if (ActivityDetail.selectedData !=null){
+                if (ActivityDetail.selectedData!!.getDocuments() != null){
+                    setVerificationDocumentAdapter()
+                }
+            }
         }
 
         // Room Database
@@ -148,5 +164,29 @@ class BasicInformationViewModel(private val context: Context) : BaseViewModel(){
        }else{
            Utils().showToast(context,context.getString(R.string.nointernetconnection).toString())
        }
+    }
+
+    private fun setVerificationDocumentAdapter() {
+        if (ActivityDetail.selectedData!!.getDocuments() != null) {
+            var documentList = ActivityDetail.selectedData!!.getDocuments()
+            verificationDocumentAdapter = DocumentAdapter(
+                context,
+                documentList!!,
+                this,
+                object : OnItemSelected<GetVerificationDocument> {
+                    override fun onItemSelected(t: GetVerificationDocument?, position: Int) {
+                        Log.e("OnItem", "OnItem$position")
+
+                    }
+                })
+            binding.rvDocument.setLayoutManager(
+                LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+            )
+            binding.rvDocument.setAdapter(verificationDocumentAdapter)
+        }
     }
 }

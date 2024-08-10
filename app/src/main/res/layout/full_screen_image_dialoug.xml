@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+
+            <com.example.mypraticeapplication.uttils.ZoomageView
+                android:id="@+id/iv_Document"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_500sdp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_pdf"
+                tools:ignore="MissingConstraints">
+
+            </com.example.mypraticeapplication.uttils.ZoomageView>
+
+            <ImageView
+                android:id="@+id/iv_Close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|right"
+                android:clickable="true"
+                android:backgroundTint="@color/mango_pickford"
+                android:src="@drawable/ic_close"
+                app:tint="@color/mango_pickford" />
+
+        </FrameLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

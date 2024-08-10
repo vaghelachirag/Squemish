@@ -7,16 +7,21 @@ import android.view.View
 import android.widget.AdapterView
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.databinding.FragmentPreNeighbourVerificationBinding
+import com.example.mypraticeapplication.interfaces.OnItemSelected
 import com.example.mypraticeapplication.model.base.BaseViewModel
 import com.example.mypraticeapplication.model.getPreNeighbourData.GetPreNeighbourResponse
 import com.example.mypraticeapplication.model.getverificationDetailResponse.GetFiRequestPreNeighboutVerificationDto
+import com.example.mypraticeapplication.model.pendingRequest.GetPendingRequestData
 import com.example.mypraticeapplication.network.CallbackObserver
 import com.example.mypraticeapplication.network.Networking
 import com.example.mypraticeapplication.uttils.AppConstants
 import com.example.mypraticeapplication.uttils.Utility
 import com.example.mypraticeapplication.uttils.Utils
+import com.example.mypraticeapplication.view.adapter.DashboardAdapter
+import com.example.mypraticeapplication.view.adapter.DocumentAdapter
 import com.example.mypraticeapplication.view.detail.ActivityDetail
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -44,6 +49,9 @@ class PreNeighbourVerificationViewModel(
     var isNeighbourReconisedText = MutableLiveData<String>()
     var selectedReasonPosition = MutableLiveData<Int>()
     var selectedItemPosition: Int = 0
+
+
+
 
     @SuppressLint("SuspiciousIndentation")
     fun init(context: Context?) {
@@ -235,4 +243,6 @@ class PreNeighbourVerificationViewModel(
                 }
             }
         }
+
+
     }

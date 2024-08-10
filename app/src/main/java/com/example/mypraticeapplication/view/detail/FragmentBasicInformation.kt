@@ -12,7 +12,6 @@ import com.example.mypraticeapplication.interfaces.FragmentLifecycleInterface
 import com.example.mypraticeapplication.model.getverificationDetailResponse.GetVerificationDetailData
 import com.example.mypraticeapplication.uttils.AppConstants
 import com.example.mypraticeapplication.view.base.BaseFragment
-import com.example.mypraticeapplication.view.dialougs.AcceptRejectFIDialog
 import com.example.mypraticeapplication.view.menu.DashboardActivity
 import com.example.mypraticeapplication.viewmodel.verificationDetail.BasicInformationViewModel
 
@@ -23,7 +22,7 @@ class FragmentBasicInformation  : BaseFragment(), FragmentLifecycleInterface {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private val basicInformationModel by lazy { BasicInformationViewModel(activity as Context) }
+    private val basicInformationModel by lazy { BasicInformationViewModel(activity as Context,binding) }
 
     var data : String = ""
 
