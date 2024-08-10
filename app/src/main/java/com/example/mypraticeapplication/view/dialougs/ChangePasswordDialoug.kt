@@ -27,6 +27,8 @@ class ChangePasswordDialoug(var mContext: Context,) : Dialog(mContext, R.style.T
         binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.change_password_fragment, null, false)
 
 
+        window!!.setBackgroundDrawableResource(R.color.dialoug_main_bg);
+
         binding.btnSave.setOnClickListener {
             if (listener != null) {
                 listener?.onOkPressed(

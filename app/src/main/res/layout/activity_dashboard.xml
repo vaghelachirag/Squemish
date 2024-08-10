@@ -29,7 +29,6 @@
                         android:layout_height="?android:attr/actionBarSize"
                         android:background="@color/main_bg"
                         app:navigationIcon="@drawable/ic_nav_menup"
-                        app:title="DashBoard"
                         app:titleTextAppearance="@style/Toolbar.TitleText"
                         app:titleTextColor="@color/white">
 

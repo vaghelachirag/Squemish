@@ -49,5 +49,7 @@
 
     <color name="main_bg">#ef7f1a</color>
 
+    <color name="dialoug_main_bg">#80000000</color>
+
 
 </resources>

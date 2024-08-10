@@ -86,11 +86,13 @@ class Utils {
 
         val lp = WindowManager.LayoutParams()
         lp.copyFrom(dialog.window!!.attributes)
-        lp.width = WindowManager.LayoutParams.WRAP_CONTENT
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT
         lp.gravity = Gravity.CENTER
 
         dialog.window!!.setAttributes(lp)
+
+        dialog.window!!.setBackgroundDrawableResource(R.color.dialoug_main_bg);
 
 
         changePasswordViewModel.isChangePasswordSuccess.observeForever {

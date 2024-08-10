@@ -1,6 +1,5 @@
 package com.example.mypraticeapplication.view.menu
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
@@ -35,7 +34,6 @@ import com.example.mypraticeapplication.uttils.Utility
 import com.example.mypraticeapplication.uttils.Utils
 import com.example.mypraticeapplication.view.adapter.MenuItemAdapter
 import com.example.mypraticeapplication.view.base.BaseActivity
-import com.example.mypraticeapplication.view.dialougs.AcceptRejectFIDialog
 import com.example.mypraticeapplication.view.dialougs.ChangePasswordDialoug
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -69,11 +67,13 @@ class DashboardActivity : BaseActivity() {
             supportActionBar!!.setDisplayShowTitleEnabled(false)
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
             supportActionBar!!.setDisplayShowHomeEnabled(true)
-            supportActionBar!!.title = getString(com.example.mypraticeapplication.R.string.dashboard)
+            supportActionBar!!.title ="Test"
         }
 
         getSessionData()
 
+
+        supportActionBar!!.title = "Test"
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_nav_menup)
 
         navController = findNavController(R.id.navHostFragmentPickford)
@@ -119,14 +119,17 @@ class DashboardActivity : BaseActivity() {
             when (menuItem.itemId) {
                 R.id.dashboardFragment -> {
                     navController.navigate(R.id.dashboardFragment)
-                    binding.toolbarDashboard.setTitle(R.string.dashboard)
+                    binding.toolbarDashboard.setTitle("Test")
+                    supportActionBar!!.title = "test"
                     supportActionBar?.setDisplayShowHomeEnabled(false);
                     binding.toolbarDashboard.setNavigationIcon(null);
+
                 }
                 R.id.settingFragment -> {
                     navController.navigate(R.id.settingFragment)
                     binding.toolbarDashboard.setTitle(R.string.action_settings)
                     binding.toolbarDashboard.setNavigationIcon(null);
+
                 }
                 R.id.logout -> {
                     Utils().showAlertDialog(this,resources.getString(R.string.logoutAlert))
@@ -229,15 +232,15 @@ class DashboardActivity : BaseActivity() {
             val bundle = Bundle()
             bundle.putString("webURL", menuData.getMenuId().toString())
 
-            navController.navigate(R.id.webViewFragment,bundle)
             binding.toolbarDashboard.setTitle(menuData.getName())
+            navController.navigate(R.id.webViewFragment,bundle)
             supportActionBar?.setDisplayShowHomeEnabled(false);
             binding.toolbarDashboard.setNavigationIcon(null);
         }else{
 
             if (menuData.getMenuId() == AppConstants.home){
                 navController.navigate(R.id.dashboardFragment)
-                binding.toolbarDashboard.setTitle(R.string.dashboard)
+                binding.toolbarDashboard.setTitle("Test")
                 supportActionBar?.setDisplayShowHomeEnabled(false);
                 binding.toolbarDashboard.setNavigationIcon(null);
             }

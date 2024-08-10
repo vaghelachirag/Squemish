@@ -3,6 +3,7 @@ package com.example.mypraticeapplication.view.dialougs
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -38,9 +39,13 @@ class AcceptRejectFIDialog(var mContext: Context, val acceptReasonList: List<Str
 
         val lp = WindowManager.LayoutParams()
         lp.copyFrom(window!!.attributes)
-        lp.width = WindowManager.LayoutParams.WRAP_CONTENT
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT
         lp.gravity = Gravity.CENTER
+
+
+        window!!.setBackgroundDrawableResource(R.color.dialoug_main_bg);
+
 
         window!!.setAttributes(lp)
 

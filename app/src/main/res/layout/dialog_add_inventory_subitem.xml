@@ -4,99 +4,106 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/dialoug_main_bg">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/_5sdp">
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_20sdp">
 
-                <androidx.cardview.widget.CardView
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:elevation="@dimen/_10sdp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="@dimen/corner_radius"
-                    card_view:cardUseCompatPadding="true"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="4dp"
-                    tools:layout_editor_absoluteY="0dp">
+                    android:layout_marginTop="@dimen/_5sdp">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:layout_marginBottom="@dimen/_30sdp"
-                        android:paddingLeft="@dimen/_10sdp">
+                        android:layout_height="wrap_content"
+                        android:elevation="@dimen/_10sdp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/corner_radius"
+                        card_view:cardUseCompatPadding="true"
+                        tools:ignore="MissingConstraints"
+                        tools:layout_editor_absoluteX="4dp"
+                        tools:layout_editor_absoluteY="0dp">
 
-                        <com.example.mypraticeapplication.widget.HeaderText
-                            android:id="@+id/txt_Header"
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Select Master Data"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_14sdp"
-                            android:paddingTop="@dimen/_10sdp"
-                            tools:ignore="MissingConstraints"></com.example.mypraticeapplication.widget.HeaderText>
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/_8sdp"
+                            android:layout_marginBottom="@dimen/_30sdp"
+                            android:paddingLeft="@dimen/_10sdp">
 
-                        <androidx.appcompat.widget.AppCompatSpinner
-                            android:id="@+id/spnAcceptReject"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/edit_text_size"
-                            android:background="@drawable/bg_spinner"
-                            android:entries="@array/addresses_array"
-                            android:layout_marginTop="@dimen/_30sdp"
-                            android:imeOptions="actionNext"
-                            android:layout_marginLeft="@dimen/_15sdp"
-                            android:layout_marginRight="@dimen/_15sdp"
-                            android:theme="@style/spinnerTheme"
-                            android:drawableRight="@drawable/ic_arrow_drop_down_48"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_Header"
-                            android:textSize="@dimen/_12sdp"
-                            tools:ignore="MissingConstraints" />
+                            <com.example.mypraticeapplication.widget.HeaderText
+                                android:id="@+id/txt_Header"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Select Master Data"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14sdp"
+                                android:paddingTop="@dimen/_10sdp"
+                                tools:ignore="MissingConstraints"></com.example.mypraticeapplication.widget.HeaderText>
 
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnSave"
-                            style="@style/MaterialButtonStyle"
-                            android:layout_marginLeft="@dimen/_50sdp"
-                            android:layout_marginTop="@dimen/_30sdp"
-                            android:layout_marginRight="@dimen/_50sdp"
-                            android:layout_marginBottom="@dimen/_20sdp"
-                            android:visibility="visible"
-                            android:text="Submit"
-                            app:backgroundTint="@null"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/spnAcceptReject" />
+                            <androidx.appcompat.widget.AppCompatSpinner
+                                android:id="@+id/spnAcceptReject"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/edit_text_size"
+                                android:background="@drawable/bg_spinner"
+                                android:entries="@array/addresses_array"
+                                android:layout_marginTop="@dimen/_30sdp"
+                                android:imeOptions="actionNext"
+                                android:layout_marginLeft="@dimen/_15sdp"
+                                android:layout_marginRight="@dimen/_15sdp"
+                                android:theme="@style/spinnerTheme"
+                                android:drawableRight="@drawable/ic_arrow_drop_down_48"
+                                app:layout_constraintTop_toBottomOf="@+id/txt_Header"
+                                android:textSize="@dimen/_12sdp"
+                                tools:ignore="MissingConstraints" />
 
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnSave"
+                                style="@style/MaterialButtonStyle"
+                                android:layout_marginLeft="@dimen/_50sdp"
+                                android:layout_marginTop="@dimen/_30sdp"
+                                android:layout_marginRight="@dimen/_50sdp"
+                                android:layout_marginBottom="@dimen/_20sdp"
+                                android:visibility="visible"
+                                android:text="Submit"
+                                app:backgroundTint="@null"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/spnAcceptReject" />
 
-                </androidx.cardview.widget.CardView>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
-                android:id="@+id/iv_Close"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|right"
-                android:clickable="true"
-                android:backgroundTint="@color/mango_pickford"
-                android:src="@drawable/ic_close"
-                app:tint="@color/mango_pickford" />
+                <ImageView
+                    android:id="@+id/iv_Close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|right"
+                    android:clickable="true"
+                    android:backgroundTint="@color/mango_pickford"
+                    android:src="@drawable/ic_close"
+                    app:tint="@color/mango_pickford" />
 
-        </FrameLayout>
+            </FrameLayout>
+        </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
