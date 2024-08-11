@@ -58,7 +58,11 @@
     <string name="applicant_ApplicantBackgroundCheck_label">Applicant Background Check</string>
     <string name="applicant_Isapplicanthaveanymajormedicalhistory_label">Is applicant have any major medical history?</string>
     <string name="applicant_Isapplicanthaveanypoliticalconnection_label">Is applicant have any political connection ?</string>
+    <string name="applicant_BankName_label">Bank Name</string>
+    <string name="applicant_LoanAmount_label">Loan Amount</string>
+    <string name="applicant_RunningSince_label">Running Since (Years)</string>
     <string name="applicant_Isanyotherloanrunning_label">Is any other loan running ?</string>
+
     <string name="applicant_IsInvolvedinNegativeProfile_label">Is Involved in Negative Profile ?</string>
     <string name="applicant_IsAreaNegative_label">Is Area Negative ?</string>
     <string name="applicant_IsCastCommunityDominatedArea_label">Is Cast / Community Dominated Area ?</string>

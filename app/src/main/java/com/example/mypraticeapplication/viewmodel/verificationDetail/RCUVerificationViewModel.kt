@@ -37,7 +37,7 @@ class RCUVerificationViewModel(
     var isHouseOpen = MutableLiveData<Boolean>()
     var isNameboardseenattheHouse = MutableLiveData<Boolean>()
     var isNameboardmismatched = MutableLiveData<Boolean>()
-
+    var isMajorMedicalHistory = MutableLiveData<Boolean>()
 
 
     var selectedHouseLocalityPosition = MutableLiveData<Int>()
@@ -47,7 +47,7 @@ class RCUVerificationViewModel(
     var selectedAccommodationTypeItemPosition: Int = 0
 
 
-    var houseLocalityList : List<String>? = null
+    var houseLocalityList: List<String>? = null
     var accommodationList: List<String>? = null
 
     private var houseLocalitySpinnerAdapter: ArrayAdapter<String?>? = null
@@ -58,7 +58,7 @@ class RCUVerificationViewModel(
     private var masterDataDao: MasterDataDao? = null
 
     fun init(context: Context?) {
-        isAddressConfirmed.value =  true
+        isAddressConfirmed.value = true
         // Room Database
         masterDataDao = InitDb.appDatabase.getMasterData()
         getDataFromMasterData()
@@ -66,18 +66,27 @@ class RCUVerificationViewModel(
 
     private fun getDataFromMasterData() {
         CoroutineScope(Dispatchers.IO).launch {
-            houseLocalityList   =  masterDataDao!!.getDataByKeyName(AppConstants.houseOrPremiseLocalityType)
-            accommodationList   =  masterDataDao!!.getDataByKeyName(AppConstants.accommodationType)
+            houseLocalityList =
+                masterDataDao!!.getDataByKeyName(AppConstants.houseOrPremiseLocalityType)
+            accommodationList = masterDataDao!!.getDataByKeyName(AppConstants.accommodationType)
 
             houseLocalitySpinnerAdapter =
-                ArrayAdapter<String?>(context, android.R.layout.simple_spinner_item, houseLocalityList!!)
+                ArrayAdapter<String?>(
+                    context,
+                    android.R.layout.simple_spinner_item,
+                    houseLocalityList!!
+                )
             houseLocalitySpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
 
             binding.spnHouseLocality.adapter = houseLocalitySpinnerAdapter
 
 
             accommodationTypeSpinnerAdapter =
-                ArrayAdapter<String?>(context, android.R.layout.simple_spinner_item, accommodationList!!)
+                ArrayAdapter<String?>(
+                    context,
+                    android.R.layout.simple_spinner_item,
+                    accommodationList!!
+                )
             accommodationTypeSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
 
             binding.spnAccommodationType.adapter = accommodationTypeSpinnerAdapter
@@ -85,58 +94,76 @@ class RCUVerificationViewModel(
     }
 
     val onAddressConfirmed = RadioGroup.OnCheckedChangeListener { _, checkedId ->
-        if (checkedId == R.id.radio_AddressConfirmedYes){
+        if (checkedId == R.id.radio_AddressConfirmedYes) {
             isAddressConfirmed.value = true
         }
-        if (checkedId == R.id.radio_AddressConfirmedNo){
+        if (checkedId == R.id.radio_AddressConfirmedNo) {
             isAddressConfirmed.value = false
         }
-        if (checkedId == R.id.rb_AddressBelongYes){
+        if (checkedId == R.id.rb_AddressBelongYes) {
             isAddressBelong.value = true
         }
-        if (checkedId == R.id.rb_AddressBelongNo){
+        if (checkedId == R.id.rb_AddressBelongNo) {
             isAddressBelong.value = false
         }
 
-        if (checkedId == R.id.rb_IsNameboardseenattheHouseYes){
+        if (checkedId == R.id.rb_IsNameboardseenattheHouseYes) {
             isNameboardseenattheHouse.value = true
         }
 
-        if (checkedId == R.id.rb_IsNameboardseenattheHouseNo){
+        if (checkedId == R.id.rb_IsNameboardseenattheHouseNo) {
             isNameboardseenattheHouse.value = false
         }
 
-        if (checkedId == R.id.rb_applicant_IsNameboardseenattheHouse_labelYes){
+        if (checkedId == R.id.rb_applicant_IsNameboardseenattheHouse_labelYes) {
             isNameboardmismatched.value = true
         }
 
-        if (checkedId == R.id.rb_applicant_IsNameboardseenattheHouse_labeleNo){
+        if (checkedId == R.id.rb_applicant_IsNameboardseenattheHouse_labeleNo) {
             isNameboardmismatched.value = false
         }
+        if (checkedId == R.id.rb_IsapplicanthaveanymajormedicalhistoryYes) {
+            isMajorMedicalHistory.value = true
+        }
+
+        if (checkedId == R.id.rb_IsapplicanthaveanymajormedicalhistoryNo) {
+            isMajorMedicalHistory.value = false
+        }
+
     }
 
+        //  For Click Listener Sequence
+        val clicksHouseLocalityListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
 
-
-    //  For Click Listener Sequence
-    val clicksHouseLocalityListener = object : AdapterView.OnItemSelectedListener {
-        override fun onNothingSelected(parent: AdapterView<*>?) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                selectedHouseLocalityPosition.value = position
+                val neighourReconisedText =
+                    context.resources.getStringArray(R.array.neighbourrecognised_array)
+            }
         }
 
-        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            selectedHouseLocalityPosition.value = position
-            val neighourReconisedText = context.resources.getStringArray(R.array.neighbourrecognised_array)
+
+        //  For Click Listener Sequence
+        val clicksAccommodationTypeListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                selectedAccommodationTypePosition.value = position
+                val neighourReconisedText =
+                    context.resources.getStringArray(R.array.neighbourrecognised_array)
+            }
         }
     }
-
-
-    //  For Click Listener Sequence
-    val clicksAccommodationTypeListener = object : AdapterView.OnItemSelectedListener {
-        override fun onNothingSelected(parent: AdapterView<*>?) {
-        }
-
-        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            selectedAccommodationTypePosition.value = position
-            val neighourReconisedText = context.resources.getStringArray(R.array.neighbourrecognised_array)
-        }
-    }
-}

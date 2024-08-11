@@ -76,6 +76,17 @@ class ActivityTest: BaseActivity()  {
             }
         }
 
+        // NameBoard Confirmed
+        rcuVerificationViewModel.isMajorMedicalHistory.observeForever {
+            Log.e("Confirmed",it.toString())
+            if (it == true){
+                binding.inpMedicalHistoryRemark.visibility = View.VISIBLE
+            }
+            else{
+                binding.inpMedicalHistoryRemark.visibility = View.GONE
+            }
+        }
+
     }
 
 }
