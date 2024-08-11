@@ -217,15 +217,16 @@
                             app:custom_font="@string/app_font_regular" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+
                     <com.example.mypraticeapplication.widget.HeaderText
                         android:id="@+id/txt_NeibourRecognised"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginTop="28dp"
                         android:text="@string/neighbourreconised"
                         android:textSize="@dimen/_12sdp"
-                        app:layout_constraintTop_toBottomOf="@+id/inpNeighbour2Remark"></com.example.mypraticeapplication.widget.HeaderText>
-
+                        app:layout_constraintTop_toBottomOf="@+id/inpNeighbour2Remark"
+                        tools:layout_editor_absoluteX="0dp"></com.example.mypraticeapplication.widget.HeaderText>
 
                     <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
                         android:id="@+id/spnNeighbourReconised"

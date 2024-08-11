@@ -78,6 +78,14 @@
         <item name="android:windowExitAnimation">@anim/slide_down</item>
     </style>
 
+    <style name="RadioButton" parent="AppTheme">
+        <item name="colorControlActivated">@color/main_bg</item>
+        <item name="colorControlNormal">@color/gray_616161</item>
+        <item name="height">@dimen/_20sdp</item>
+        <item name="textSize">@dimen/_12sdp</item>
+        <item name="font">@font/roboto_regular</item>
+    </style>
+
 
     <style name="CustomDialougButtonStyle" parent="Widget.AppCompat.Button.Colored">
         <item name="android:layout_width">0dp</item>

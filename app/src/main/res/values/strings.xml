@@ -54,6 +54,7 @@
     <string name="applicant_AccommodationType_label">Accommodation Type *</string>
     <string name="applicant_HouseSize_label">House Size</string>
     <string name="applicant_IsNameboardseenattheHouse_label">Is Nameboard seen at the House ? *</string>
+    <string name="applicant_IsNameboardmismatched_label">Is Nameboard mismatched ? *</string>
     <string name="applicant_ApplicantBackgroundCheck_label">Applicant Background Check</string>
     <string name="applicant_Isapplicanthaveanymajormedicalhistory_label">Is applicant have any major medical history?</string>
     <string name="applicant_Isapplicanthaveanypoliticalconnection_label">Is applicant have any political connection ?</string>
@@ -69,6 +70,7 @@
     <string name="applicant_MobileNo_label">Mobile No.</string>
     <string name="applicant_relation_label">Relation</string>
     <string name="applicant_VerificationRemark_label">Verification Remark</string>
+    <string name="applicant_PersonalInformation_label">Personal Information</string>
 
     <string name="radio_Yes">Yes</string>
     <string name="radio_No">No</string>

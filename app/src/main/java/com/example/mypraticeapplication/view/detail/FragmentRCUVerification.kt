@@ -1,5 +1,6 @@
 package com.example.mypraticeapplication.view.detail
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,10 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
 
     // This property is only valid between onCreateView and
     private val binding get() = _binding!!
-    private val postNeighbourVerificationViewModel by lazy { RCUVerificationViewModel() }
+    private val postNeighbourVerificationViewModel by lazy { RCUVerificationViewModel(
+        context as Activity,
+        binding
+    ) }
 
     var data : String = ""
 

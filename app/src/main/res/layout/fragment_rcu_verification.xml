@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.mypraticeapplication.viewmodel.verificationDetail.PostNeighbourVerificationViewModel"  />
+            type="com.example.mypraticeapplication.viewmodel.verificationDetail.RCUVerificationViewModel"  />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -54,16 +54,25 @@
                     android:id="@+id/rb_applicant_address_confirmed_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onCheckedChanged="@{viewModel.onAddressConfirmed}"
                     android:orientation="horizontal">
                     <RadioButton android:id="@+id/radio_AddressConfirmedYes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:theme="@style/RadioButton"
                         android:text="@string/radio_Yes"/>
                     <RadioButton android:id="@+id/radio_AddressConfirmedNo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:theme="@style/RadioButton"
                         android:text="@string/radio_No"/>
                 </RadioGroup>
+
+                <LinearLayout
+                    android:id="@+id/ll_AddressConfirmed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -89,6 +98,7 @@
                             android:hint="@string/applicant_Latitude_label"
                             android:imeOptions="actionNext"
                             android:inputType="text"
+                            android:text="@={viewModel.edt_Applicant_Latitude_label}"
                             android:textColor="@color/gray_323232"
                             android:textColorHint="@color/gray_323232"
                             android:textSize="@dimen/verificationDetailTextSize"
@@ -115,6 +125,7 @@
                             android:hint="@string/applicant_Longitude_label"
                             android:imeOptions="actionNext"
                             android:inputType="text"
+                            android:text="@={viewModel.edt_Applicant_Longitude_label}"
                             android:textColor="@color/gray_323232"
                             android:textColorHint="@color/gray_323232"
                             android:textSize="@dimen/verificationDetailTextSize"
@@ -145,6 +156,7 @@
                             android:hint="@string/applicant_OtherObservations_label"
                             android:imeOptions="actionNext"
                             android:inputType="text"
+                            android:text="@={viewModel.edt_applicant_OtherObservations_label}"
                             android:textColor="@color/gray_323232"
                             android:textColorHint="@color/gray_323232"
                             android:textSize="@dimen/verificationDetailTextSize"
@@ -154,6 +166,7 @@
 
                 </LinearLayout>
 
+                </LinearLayout>
                 <com.example.mypraticeapplication.widget.SmallText
                     android:id="@+id/applicant_applicant_address_belongs_label"
                     android:layout_width="match_parent"
@@ -168,14 +181,17 @@
                     android:id="@+id/rb_applicant_address_belong_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onCheckedChanged="@{viewModel.onAddressConfirmed}"
                     android:orientation="horizontal">
-                    <RadioButton android:id="@+id/radio_pirates"
+                    <RadioButton android:id="@+id/rb_AddressBelongYes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:theme="@style/RadioButton"
                         android:text="@string/radio_Yes"/>
-                    <RadioButton android:id="@+id/radio_ninjas"
+                    <RadioButton android:id="@+id/rb_AddressBelongNo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:theme="@style/RadioButton"
                         android:text="@string/radio_No"/>
                 </RadioGroup>
 
@@ -197,7 +213,7 @@
                         android:hint="@string/remark"
                         android:imeOptions="actionNext"
                         android:inputType="text"
-                        android:text="@={viewModel.neighbour3Name}"
+                        android:text="@={viewModel.edt_Remark}"
                         android:textColor="@color/gray_323232"
                         android:textColorHint="@color/gray_323232"
                         android:textSize="@dimen/verificationDetailTextSize"
@@ -222,17 +238,174 @@
                     <RadioButton android:id="@+id/radio_DurningVisitYes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:theme="@style/RadioButton"
                         android:text="@string/radio_Yes"/>
                     <RadioButton android:id="@+id/radio_DurningVisitNo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:theme="@style/RadioButton"
                         android:text="@string/radio_No"/>
                 </RadioGroup>
 
+                <com.example.mypraticeapplication.widget.HeaderText
+                    android:id="@+id/applicant_PersonalInformation_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/applicant_PersonalInformation_label"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textSize="@dimen/_12sdp">
+                </com.example.mypraticeapplication.widget.HeaderText>
+
+                <LinearLayout
+                    android:id="@+id/ll_PersonalInforamtionTwo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <com.example.mypraticeapplication.widget.SmallText
+                        android:id="@+id/applicant_HouseLocality_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/applicant_HouseLocality_label"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:textSize="@dimen/_12sdp">
+                    </com.example.mypraticeapplication.widget.SmallText>
+
+                    <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
+                        android:id="@+id/spnHouseLocality"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edit_text_size"
+                        android:background="@drawable/bg_spinner"
+                        app:custom_font="@string/app_font_regular"
+                        android:entries="@array/neighbourrecognised_array"
+                        app:setOnItemSelectedListener="@{viewModel.clicksHouseLocalityListener}"
+                        android:imeOptions="actionNext"
+                        android:selectedItemPosition="@{viewModel.selectedHouseLocalityItemPosition}"
+                        android:textSize="@dimen/verificationDetailTextSize"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_NeibourRecognised"
+                        tools:ignore="MissingConstraints" />
+
+
+                    <com.example.mypraticeapplication.widget.SmallText
+                        android:id="@+id/applicant_AccommodationType_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/applicant_AccommodationType_label"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:textSize="@dimen/_12sdp">
+                    </com.example.mypraticeapplication.widget.SmallText>
+
+                    <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
+                        android:id="@+id/spnAccommodationType"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edit_text_size"
+                        android:background="@drawable/bg_spinner"
+                        app:custom_font="@string/app_font_regular"
+                        android:entries="@array/neighbourrecognised_array"
+                        app:setOnItemSelectedListener="@{viewModel.clicksAccommodationTypeListener}"
+                        android:imeOptions="actionNext"
+                        android:selectedItemPosition="@{viewModel.selectedHouseLocalityItemPosition}"
+                        android:textSize="@dimen/verificationDetailTextSize"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_NeibourRecognised"
+                        tools:ignore="MissingConstraints" />
+                    <com.example.mypraticeapplication.widget.SmallText
+                        android:id="@+id/applicant_IsNameboardseenattheHouse_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/applicant_IsNameboardseenattheHouse_label"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:textSize="@dimen/_12sdp">
+                    </com.example.mypraticeapplication.widget.SmallText>
+                    <RadioGroup
+                        android:id="@+id/rb_applicant_IsNameboardseenattheHouse_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onCheckedChanged="@{viewModel.onAddressConfirmed}"
+                        android:orientation="horizontal">
+                        <RadioButton android:id="@+id/rb_IsNameboardseenattheHouseYes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/RadioButton"
+                            android:text="@string/radio_Yes"/>
+                        <RadioButton android:id="@+id/rb_IsNameboardseenattheHouseNo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/RadioButton"
+                            android:text="@string/radio_No"/>
+                    </RadioGroup>
+
+                    <LinearLayout
+                        android:id="@+id/ll_NameboardMismatched"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <com.example.mypraticeapplication.widget.SmallText
+                            android:id="@+id/applicant_IsNameboardmismatched_label"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/applicant_IsNameboardmismatched_label"
+                            android:textColor="@color/black"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:textSize="@dimen/_12sdp">
+                        </com.example.mypraticeapplication.widget.SmallText>
+                        <RadioGroup
+                            android:id="@+id/rb_IsNameboardseenattheHouse_label"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:onCheckedChanged="@{viewModel.onAddressConfirmed}"
+                            android:orientation="horizontal">
+                            <RadioButton android:id="@+id/rb_applicant_IsNameboardseenattheHouse_labelYes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:theme="@style/RadioButton"
+                                android:text="@string/radio_Yes"/>
+                            <RadioButton android:id="@+id/rb_applicant_IsNameboardseenattheHouse_labeleNo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:theme="@style/RadioButton"
+                                android:text="@string/radio_No"/>
+                        </RadioGroup>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/inpApplicant_Reason_label"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/TextInputLayout"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            app:hintTextColor="@color/main_bg"
+                            app:passwordToggleEnabled="false"
+                            android:layout_weight="1"
+                            tools:ignore="MissingClass,MissingConstraints">
+
+                            <com.example.mypraticeapplication.widget.TypefaceEditText
+                                android:id="@+id/edt_Applicant_Reason_label"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/edit_text_size"
+                                android:hint="@string/applicant_relation_label"
+                                android:imeOptions="actionNext"
+                                android:inputType="text"
+                                android:text="@={viewModel.edt_Reason}"
+                                android:textColor="@color/gray_323232"
+                                android:textColorHint="@color/gray_323232"
+                                android:textSize="@dimen/verificationDetailTextSize"
+                                app:custom_font="@string/app_font_regular" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
-
     </androidx.core.widget.NestedScrollView>
 
 </layout>

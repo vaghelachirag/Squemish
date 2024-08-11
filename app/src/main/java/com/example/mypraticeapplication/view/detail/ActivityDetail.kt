@@ -18,7 +18,6 @@ class ActivityDetail  : BaseActivity()  {
 
     private val detailViewModel by lazy { DetailViewModel(this) }
 
-    var obj_ActivityDetail : ActivityDetail = this
 
     @SuppressLint("DiscouragedPrivateApi", "SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
