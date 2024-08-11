@@ -53,6 +53,8 @@ class Utils {
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.custom_alert_dialoug)
 
+        dialog.window!!.setBackgroundDrawableResource(R.color.dialoug_main_bg);
+
         var txtHeader  : TextView = dialog.findViewById(R.id.tvMessage)
         txtHeader.text = strTitle
 

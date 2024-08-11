@@ -29,6 +29,51 @@
     <string name="fa_icon_areachart">&#xf1fe;</string>
 
 
+    <!-- RCU Verification!-->
+    <string name="applicant_address_label">Applicant Address Detail</string>
+    <string name="applicant_address_confirmed_label">Address Confirm as given *</string>
+    <string name="applicant_address_belongs_label">Is this address belongs to applicant ? *</string>
+    <string name="applicant_address_VisitHouse_label">During Visit House is Open ? *</string>
+    <string name="applicant_PersonMet_label">Name of the Person Met *</string>
+    <string name="applicant_Relation_Applicant_label">Relation with Applicant *</string>
+    <string name="applicant_MobileNoOfPersonMet_label">Mobile No of Person Met</string>
+    <string name="applicant_Age_label">Age</string>
+    <string name="applicant_MaritalStatus_label">Marital Status *</string>
+    <string name="applicant_DetailsOfTotalFamilyMembers_label">Details of Total Family Members</string>
+    <string name="applicant_Relation_label">Relation</string>
+    <string name="applicant_MemberCount_label">Member Count</string>
+    <string name="applicant_EarningCount_label">Earning Count</string>
+    <string name="applicant_TotalFamilyMembers_label">Total Family members *</string>
+    <string name="applicant_TotalEarningMember_label">Total Earning Member *</string>
+    <string name="applicant_HouseOwnership_label">House Ownership *</string>
+    <string name="applicant_StayingAtCurrentAddress_label">Staying at current address (In Years) *</string>
+    <string name="applicant_ElectricityBill_label">Name in Electricity Bill</string>
+    <string name="applicant_KNo_label">K No</string>
+    <string name="applicant_UnitConsumedLastMonth_label">Unit Consumed last Month</string>
+    <string name="applicant_HouseLocality_label">House Locality *</string>
+    <string name="applicant_AccommodationType_label">Accommodation Type *</string>
+    <string name="applicant_HouseSize_label">House Size</string>
+    <string name="applicant_IsNameboardseenattheHouse_label">Is Nameboard seen at the House ? *</string>
+    <string name="applicant_ApplicantBackgroundCheck_label">Applicant Background Check</string>
+    <string name="applicant_Isapplicanthaveanymajormedicalhistory_label">Is applicant have any major medical history?</string>
+    <string name="applicant_Isapplicanthaveanypoliticalconnection_label">Is applicant have any political connection ?</string>
+    <string name="applicant_Isanyotherloanrunning_label">Is any other loan running ?</string>
+    <string name="applicant_IsInvolvedinNegativeProfile_label">Is Involved in Negative Profile ?</string>
+    <string name="applicant_IsAreaNegative_label">Is Area Negative ?</string>
+    <string name="applicant_IsCastCommunityDominatedArea_label">Is Cast / Community Dominated Area ?</string>
+    <string name="applicant_Latitude_label">Latitude</string>
+    <string name="applicant_Longitude_label">Longitude</string>
+    <string name="applicant_OtherObservations_label">Other Observations</string>
+    <string name="applicant_Co_ApplicantDetails_label">Co-Applicant Details</string>
+    <string name="applicant_RCUOwner_label">RCU Owner</string>
+    <string name="applicant_MobileNo_label">Mobile No.</string>
+    <string name="applicant_relation_label">Relation</string>
+    <string name="applicant_VerificationRemark_label">Verification Remark</string>
+
+    <string name="radio_Yes">Yes</string>
+    <string name="radio_No">No</string>
+
+
     <!--Login-->
     <string name="login_Txt">Login</string>
     <string name="email">Email Address</string>
