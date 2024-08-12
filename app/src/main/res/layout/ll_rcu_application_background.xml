@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="applicationbackground"
+            type="com.example.mypraticeapplication.viewmodel.verificationDetail.RCUVerificationViewModel"  />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.example.mypraticeapplication.widget.HeaderText
+            android:id="@+id/applicant_ApplicantBackgroundCheck_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/applicant_ApplicantBackgroundCheck_label"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp">
+        </com.example.mypraticeapplication.widget.HeaderText>
+
+        <com.example.mypraticeapplication.widget.SmallText
+            android:id="@+id/applicant_Isapplicanthaveanymajormedicalhistory_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/applicant_Isapplicanthaveanymajormedicalhistory_label"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp">
+        </com.example.mypraticeapplication.widget.SmallText>
+
+        <RadioGroup
+            android:id="@+id/rb_applicant_Isapplicanthaveanymajormedicalhistory_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onCheckedChanged="@{applicationbackground.onAddressConfirmed}"
+            android:orientation="horizontal">
+            <RadioButton android:id="@+id/rb_IsapplicanthaveanymajormedicalhistoryYes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/RadioButton"
+                android:text="@string/radio_Yes"/>
+            <RadioButton android:id="@+id/rb_IsapplicanthaveanymajormedicalhistoryNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/RadioButton"
+                android:text="@string/radio_No"/>
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inpMedicalHistoryRemark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextInputLayout"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:hintTextColor="@color/main_bg"
+            app:passwordToggleEnabled="false"
+            tools:ignore="MissingClass,MissingConstraints">
+
+            <com.example.mypraticeapplication.widget.TypefaceEditText
+                android:id="@+id/edt_MedicalHistoryRemark"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_size"
+                android:hint="@string/remark"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:text="@={applicationbackground.edt_Remark}"
+                android:textColor="@color/gray_323232"
+                android:textColorHint="@color/gray_323232"
+                android:textSize="@dimen/verificationDetailTextSize"
+                app:custom_font="@string/app_font_regular" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.example.mypraticeapplication.widget.SmallText
+            android:id="@+id/applicant_Isapplicanthaveanypoliticalconnection_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/applicant_Isapplicanthaveanypoliticalconnection_label"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp">
+        </com.example.mypraticeapplication.widget.SmallText>
+
+        <RadioGroup
+            android:id="@+id/rb_applicant_Isapplicanthaveanypoliticalconnection_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onCheckedChanged="@{applicationbackground.onAddressConfirmed}"
+            android:orientation="horizontal">
+            <RadioButton android:id="@+id/rb_IsapplicanthaveanypoliticalconnectionYes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/RadioButton"
+                android:text="@string/radio_Yes"/>
+            <RadioButton android:id="@+id/rb_IsapplicanthaveanypoliticalconnectionNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/RadioButton"
+                android:text="@string/radio_No"/>
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inpIsapplicanthaveanypoliticalconnectionRemark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextInputLayout"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:hintTextColor="@color/main_bg"
+            app:passwordToggleEnabled="false"
+            tools:ignore="MissingClass,MissingConstraints">
+
+            <com.example.mypraticeapplication.widget.TypefaceEditText
+                android:id="@+id/edt_IsapplicanthaveanypoliticalconnectionRemark"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_size"
+                android:hint="@string/remark"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:text="@={applicationbackground.edt_Remark}"
+                android:textColor="@color/gray_323232"
+                android:textColorHint="@color/gray_323232"
+                android:textSize="@dimen/verificationDetailTextSize"
+                app:custom_font="@string/app_font_regular" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.example.mypraticeapplication.widget.SmallText
+            android:id="@+id/applicant_Isanyotherloanrunning_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/applicant_Isanyotherloanrunning_label"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp">
+        </com.example.mypraticeapplication.widget.SmallText>
+
+        <RadioGroup
+            android:id="@+id/rb_applicant_Isanyotherloanrunning_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onCheckedChanged="@{applicationbackground.onAddressConfirmed}"
+            android:orientation="horizontal">
+            <RadioButton android:id="@+id/rb_applicant_Isanyotherloanrunning_label_Yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/RadioButton"
+                android:text="@string/radio_Yes"/>
+            <RadioButton android:id="@+id/rb_rb_applicant_Isanyotherloanrunning_label_No"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/RadioButton"
+                android:text="@string/radio_No"/>
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/ll_OtherLoan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpapplicant_BankName_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextInputLayout"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:hintTextColor="@color/main_bg"
+                app:passwordToggleEnabled="false"
+                tools:ignore="MissingClass,MissingConstraints">
+
+                <com.example.mypraticeapplication.widget.TypefaceEditText
+                    android:id="@+id/edt_applicant_BankName_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_text_size"
+                    android:hint="@string/bankName"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:text="@={applicationbackground.edt_Remark}"
+                    android:textColor="@color/gray_323232"
+                    android:textColorHint="@color/gray_323232"
+                    android:textSize="@dimen/verificationDetailTextSize"
+                    app:custom_font="@string/app_font_regular" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inp_applicant_LoanAmount_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextInputLayout"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:hintTextColor="@color/main_bg"
+                app:passwordToggleEnabled="false"
+                android:layout_marginLeft="@dimen/_10sdp"
+                tools:ignore="MissingClass,MissingConstraints">
+
+                <com.example.mypraticeapplication.widget.TypefaceEditText
+                    android:id="@+id/edt_applicant_LoanAmount_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_text_size"
+                    android:hint="@string/loanAmount"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:text="@={applicationbackground.edt_Remark}"
+                    android:textColor="@color/gray_323232"
+                    android:textColorHint="@color/gray_323232"
+                    android:textSize="@dimen/verificationDetailTextSize"
+                    app:custom_font="@string/app_font_regular" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/in_applicant_RunningSince_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextInputLayout"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:hintTextColor="@color/main_bg"
+                android:layout_marginLeft="@dimen/_10sdp"
+                app:passwordToggleEnabled="false"
+                tools:ignore="MissingClass,MissingConstraints">
+
+                <com.example.mypraticeapplication.widget.TypefaceEditText
+                    android:id="@+id/edt_applicant_RunningSince_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_text_size"
+                    android:hint="@string/applicant_RunningSince_label"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:text="@={applicationbackground.edt_Remark}"
+                    android:textColor="@color/gray_323232"
+                    android:textColorHint="@color/gray_323232"
+                    android:textSize="@dimen/verificationDetailTextSize"
+                    app:custom_font="@string/app_font_regular" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+
+        <com.example.mypraticeapplication.widget.SmallText
+            android:id="@+id/applicant_IsInvolvedinNegativeProfile_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/applicant_IsInvolvedinNegativeProfile_label"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp">
+        </com.example.mypraticeapplication.widget.SmallText>
+
+        <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
+            android:id="@+id/spnapplicant_IsInvolvedinNegativeProfile_label"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_size"
+            android:background="@drawable/bg_spinner"
+            app:custom_font="@string/app_font_regular"
+            android:entries="@array/neighbourrecognised_array"
+            app:setOnItemSelectedListener="@{applicationbackground.clicksHouseLocalityListener}"
+            android:imeOptions="actionNext"
+            android:selectedItemPosition="@{applicationbackground.selectedHouseLocalityItemPosition}"
+            android:textSize="@dimen/verificationDetailTextSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:layout_constraintTop_toBottomOf="@+id/txt_NeibourRecognised"
+            tools:ignore="MissingConstraints" />
+
+        <com.example.mypraticeapplication.widget.SmallText
+            android:id="@+id/applicant_IsAreaNegative_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/applicant_IsAreaNegative_label"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp">
+        </com.example.mypraticeapplication.widget.SmallText>
+
+        <RadioGroup
+            android:id="@+id/rb_applicant_IsAreaNegative_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onCheckedChanged="@{applicationbackground.onAddressConfirmed}"
+            android:orientation="horizontal">
+            <RadioButton android:id="@+id/rb_applicant_IsAreaNegative_label_Yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/RadioButton"
+                android:text="@string/radio_Yes"/>
+            <RadioButton android:id="@+id/rb_applicant_IsAreaNegative_label_No"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/RadioButton"
+                android:text="@string/radio_No"/>
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inpapplicant_IsAreaNegative_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextInputLayout"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:hintTextColor="@color/main_bg"
+            app:passwordToggleEnabled="false"
+            tools:ignore="MissingClass,MissingConstraints">
+
+            <com.example.mypraticeapplication.widget.TypefaceEditText
+                android:id="@+id/edt_applicant_IsAreaNegative_label"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_size"
+                android:hint="@string/remark"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:text="@={applicationbackground.edt_Remark}"
+                android:textColor="@color/gray_323232"
+                android:textColorHint="@color/gray_323232"
+                android:textSize="@dimen/verificationDetailTextSize"
+                app:custom_font="@string/app_font_regular" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.example.mypraticeapplication.widget.SmallText
+            android:id="@+id/applicant_IsCastCommunityDominatedArea_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/applicant_IsCastCommunityDominatedArea_label"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp"
+            tools:ignore="SpUsage">
+        </com.example.mypraticeapplication.widget.SmallText>
+
+        <RadioGroup
+            android:id="@+id/rb_applicant_IsCastCommunityDominatedArea_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onCheckedChanged="@{applicationbackground.onAddressConfirmed}"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_applicant_IsCastCommunityDominatedArea_Yes"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="@string/radio_Yes"
+                android:theme="@style/RadioButton" />
+            <RadioButton
+                android:id="@+id/rb_applicant_IsCastCommunityDominatedArea_No"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/RadioButton"
+                android:text="@string/radio_No"/>
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/ll_IsCastCommunityDominatedArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpapplicant_IsCastCommunityDominatedArea_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextInputLayout"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:hintTextColor="@color/main_bg"
+                app:passwordToggleEnabled="false"
+                tools:ignore="MissingClass,MissingConstraints">
+
+                <com.example.mypraticeapplication.widget.TypefaceEditText
+                    android:id="@+id/edt_applicant_IsCastCommunityDominatedArea_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_text_size"
+                    android:hint="@string/remark"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:text="@={applicationbackground.edt_Remark}"
+                    android:textColor="@color/gray_323232"
+                    android:textColorHint="@color/gray_323232"
+                    android:textSize="@dimen/verificationDetailTextSize"
+                    app:custom_font="@string/app_font_regular" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inpApplicant_ApplicationBackground_Latitude_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/TextInputLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/txtNeighbourChecOne"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:hintTextColor="@color/main_bg"
+                    app:passwordToggleEnabled="false"
+                    android:layout_weight="1"
+                    tools:ignore="MissingClass,MissingConstraints">
+
+                    <com.example.mypraticeapplication.widget.TypefaceEditText
+                        android:id="@+id/edt_Applicant_ApplicationBackground_Latitude_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edit_text_size"
+                        android:hint="@string/applicant_Latitude_label"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:text="@={applicationbackground.edt_Applicant_Latitude_label}"
+                        android:textColor="@color/gray_323232"
+                        android:textColorHint="@color/gray_323232"
+                        android:textSize="@dimen/verificationDetailTextSize"
+                        app:custom_font="@string/app_font_regular" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inpApplicant_ApplicationBackground_Longitude_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/TextInputLayout"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/txtNeighbourChecOne"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:hintTextColor="@color/main_bg"
+                    app:passwordToggleEnabled="false"
+                    android:layout_weight="1"
+                    tools:ignore="MissingClass,MissingConstraints">
+
+                    <com.example.mypraticeapplication.widget.TypefaceEditText
+                        android:id="@+id/edt_Applicant_ApplicationBackground_Longitude_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edit_text_size"
+                        android:hint="@string/applicant_Longitude_label"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:text="@={applicationbackground.edt_Applicant_Longitude_label}"
+                        android:textColor="@color/gray_323232"
+                        android:textColorHint="@color/gray_323232"
+                        android:textSize="@dimen/verificationDetailTextSize"
+                        app:custom_font="@string/app_font_regular"
+                        tools:ignore="SpUsage" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inapplicant_ApplicationBackground_OtherObservations_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TextInputLayout"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:hintTextColor="@color/main_bg"
+                    app:passwordToggleEnabled="false"
+                    android:layout_weight="1"
+                    tools:ignore="MissingClass,MissingConstraints">
+
+                    <com.example.mypraticeapplication.widget.TypefaceEditText
+                        android:id="@+id/edt_applicant_ApplicationBackground_OtherObservations_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_80sdp"
+                        android:hint="@string/applicant_OtherObservations_label"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:text="@={applicationbackground.edt_applicant_OtherObservations_label}"
+                        android:textColor="@color/gray_323232"
+                        android:textColorHint="@color/gray_323232"
+                        android:textSize="@dimen/verificationDetailTextSize"
+                        app:custom_font="@string/app_font_regular"
+                        tools:ignore="SpUsage" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

@@ -1,17 +1,22 @@
 package com.example.mypraticeapplication.view
+import android.R
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.transition.Visibility
 import com.example.mypraticeapplication.databinding.FragmentRcuVerificationBinding
 import com.example.mypraticeapplication.view.base.BaseActivity
 import com.example.mypraticeapplication.viewmodel.verificationDetail.RCUVerificationViewModel
 
+
+@Suppress("CAST_NEVER_SUCCEEDS")
 class ActivityTest: BaseActivity()  {
 
     private lateinit var binding: FragmentRcuVerificationBinding
 
     private val rcuVerificationViewModel by lazy { RCUVerificationViewModel(this,binding) }
+
 
     @SuppressLint("DiscouragedPrivateApi", "SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,13 +37,7 @@ class ActivityTest: BaseActivity()  {
 
         // Address Confirmed
         rcuVerificationViewModel.isAddressConfirmed.observeForever {
-            Log.e("Confirmed",it.toString())
-            if (it == true){
-                binding.llAddressConfirmed.visibility = View.GONE
-            }
-            else{
-                binding.llAddressConfirmed.visibility = View.VISIBLE
-            }
+            setVisibility(it)
         }
 
 
@@ -46,10 +45,10 @@ class ActivityTest: BaseActivity()  {
         rcuVerificationViewModel.isAddressBelong.observeForever {
             Log.e("Confirmed",it.toString())
             if (it == true){
-                binding.inpRemark.visibility = View.GONE
+                binding.llAddressDetail.inpRemark.visibility = View.GONE
             }
             else{
-                binding.inpRemark.visibility = View.VISIBLE
+                binding.llAddressDetail.inpRemark.visibility = View.VISIBLE
             }
         }
 
@@ -58,46 +57,97 @@ class ActivityTest: BaseActivity()  {
         rcuVerificationViewModel.isNameboardseenattheHouse.observeForever {
             Log.e("Confirmed",it.toString())
             if (it == true){
-                binding.llNameboardMismatched.visibility = View.VISIBLE
+                binding.llPersonalInformation.llNameboardMismatched.visibility = View.VISIBLE
             }
             else{
-                binding.llNameboardMismatched.visibility = View.GONE
+                binding.llPersonalInformation.llNameboardMismatched.visibility = View.GONE
             }
         }
 
-        // NameBoard Mistmatched
+        // Name Board Mismatched
         rcuVerificationViewModel.isNameboardmismatched.observeForever {
             Log.e("Confirmed",it.toString())
             if (it == true){
-                binding.inpApplicantReasonLabel.visibility = View.VISIBLE
+                binding.llPersonalInformation.inpApplicantReasonLabel.visibility = View.VISIBLE
             }
             else{
-                binding.inpApplicantReasonLabel.visibility = View.GONE
+                binding.llPersonalInformation.inpApplicantReasonLabel.visibility = View.GONE
             }
         }
 
-        // NameBoard Confirmed
+        // Major Medical History
         rcuVerificationViewModel.isMajorMedicalHistory.observeForever {
             Log.e("Confirmed",it.toString())
             if (it == true){
-                binding.inpMedicalHistoryRemark.visibility = View.VISIBLE
+                binding.llApplicationBackground.inpMedicalHistoryRemark.visibility = View.VISIBLE
             }
             else{
-                binding.inpMedicalHistoryRemark.visibility = View.GONE
+                binding.llApplicationBackground.inpMedicalHistoryRemark.visibility = View.GONE
             }
         }
 
 
-        // NameBoard Confirmed
+        // Political Connection
         rcuVerificationViewModel.isAnyPoliticalIssue.observeForever {
             Log.e("Confirmed",it.toString())
             if (it == true){
-                binding.inpIsapplicanthaveanypoliticalconnectionRemark.visibility = View.VISIBLE
+                binding.llApplicationBackground.inpIsapplicanthaveanypoliticalconnectionRemark.visibility = View.VISIBLE
             }
             else{
-                binding.inpIsapplicanthaveanypoliticalconnectionRemark.visibility = View.GONE
+                binding.llApplicationBackground.inpIsapplicanthaveanypoliticalconnectionRemark.visibility = View.GONE
             }
         }
+
+
+        // Political Connection
+        rcuVerificationViewModel.isAnyLoanRunning.observeForever {
+            Log.e("Confirmed",it.toString())
+            if (it == true){
+                binding.llApplicationBackground.llOtherLoan.visibility = View.VISIBLE
+            }
+            else{
+                binding.llApplicationBackground.llOtherLoan.visibility = View.GONE
+            }
+        }
+
+        // Political Connection
+        rcuVerificationViewModel.isAreaNegative.observeForever {
+            Log.e("Confirmed",it.toString())
+            if (it == true){
+                binding.llApplicationBackground.inpapplicantIsAreaNegativeLabel.visibility = View.VISIBLE
+            }
+            else{
+                binding.llApplicationBackground.inpapplicantIsAreaNegativeLabel.visibility = View.GONE
+            }
+        }
+
+        // Political Connection
+        rcuVerificationViewModel.isCastCommunityDominatedArea.observeForever {
+            Log.e("Confirmed",it.toString())
+            if (it == true){
+                binding.llApplicationBackground.inpapplicantIsCastCommunityDominatedAreaLabel.visibility = View.VISIBLE
+            }
+            else{
+                binding.llApplicationBackground.inpapplicantIsCastCommunityDominatedAreaLabel.visibility = View.GONE
+            }
+        }
+
+    }
+
+    private fun setVisibility(visibility: Boolean) {
+        if (visibility){
+            binding.llAddressDetail.llAddressConfirmed.visibility =   View.GONE
+            binding.llPersonalInformation.root.visibility = View.VISIBLE
+            binding.llApplicationBackground.root.visibility = View.VISIBLE
+            binding.llAddressDetail.llAddressNotConfirmed.visibility = View.VISIBLE
+        }
+        else{
+            binding.llAddressDetail.llAddressConfirmed.visibility =   View.VISIBLE
+            binding.llPersonalInformation.root.visibility = View.GONE
+            binding.llApplicationBackground.root.visibility = View.GONE
+            binding.llAddressDetail.llAddressNotConfirmed.visibility = View.GONE
+        }
+
 
     }
 

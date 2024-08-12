@@ -1,6 +1,7 @@
 package com.example.mypraticeapplication.viewmodel.verificationDetail
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -8,7 +9,6 @@ import android.widget.RadioGroup
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.example.mypraticeapplication.R
-import com.example.mypraticeapplication.databinding.FragmentRcuVerificationBinding
 import com.example.mypraticeapplication.model.base.BaseViewModel
 import com.example.mypraticeapplication.room.InitDb
 import com.example.mypraticeapplication.room.dao.MasterDataDao
@@ -17,10 +17,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class RCUVerificationViewModel(
-    private val context: Context,
-    private  val binding: FragmentRcuVerificationBinding
-) : BaseViewModel() {
+class RCUVerificationViewModel(private val context: Context, private  val binding: com.example.mypraticeapplication.databinding.FragmentRcuVerificationBinding) : BaseViewModel() {
 
 
     // Login Params
@@ -29,7 +26,8 @@ class RCUVerificationViewModel(
     var edt_applicant_OtherObservations_label: ObservableField<String> = ObservableField()
     var edt_Remark: ObservableField<String> = ObservableField()
     var edt_Reason: ObservableField<String> = ObservableField()
-
+    var edt_PersonMet: ObservableField<String> = ObservableField()
+    var edt_PersonMetMobileNumber: ObservableField<String> = ObservableField()
 
     // All Variable
     var isAddressConfirmed = MutableLiveData<Boolean>()
@@ -39,6 +37,9 @@ class RCUVerificationViewModel(
     var isNameboardmismatched = MutableLiveData<Boolean>()
     var isMajorMedicalHistory = MutableLiveData<Boolean>()
     var isAnyPoliticalIssue = MutableLiveData<Boolean>()
+    var isAnyLoanRunning = MutableLiveData<Boolean>()
+    var isAreaNegative = MutableLiveData<Boolean>()
+    var isCastCommunityDominatedArea = MutableLiveData<Boolean>()
 
     var selectedHouseLocalityPosition = MutableLiveData<Int>()
     var selectedHouseLocalityItemPosition: Int = 0
@@ -49,9 +50,11 @@ class RCUVerificationViewModel(
 
     var houseLocalityList: List<String>? = null
     var accommodationList: List<String>? = null
+    var negativeProfileList: List<String>? = null
 
     private var houseLocalitySpinnerAdapter: ArrayAdapter<String?>? = null
     private var accommodationTypeSpinnerAdapter: ArrayAdapter<String?>? = null
+    private var negativeProfileSpinnerAdapter: ArrayAdapter<String?>? = null
 
 
     // Room Database
@@ -69,6 +72,7 @@ class RCUVerificationViewModel(
             houseLocalityList =
                 masterDataDao!!.getDataByKeyName(AppConstants.houseOrPremiseLocalityType)
             accommodationList = masterDataDao!!.getDataByKeyName(AppConstants.accommodationType)
+            negativeProfileList = masterDataDao!!.getDataByKeyName(AppConstants.profileType)
 
             houseLocalitySpinnerAdapter =
                 ArrayAdapter<String?>(
@@ -78,7 +82,7 @@ class RCUVerificationViewModel(
                 )
             houseLocalitySpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
 
-            binding.spnHouseLocality.adapter = houseLocalitySpinnerAdapter
+            binding.llPersonalInformation.spnHouseLocality.adapter = houseLocalitySpinnerAdapter
 
 
             accommodationTypeSpinnerAdapter =
@@ -89,7 +93,17 @@ class RCUVerificationViewModel(
                 )
             accommodationTypeSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
 
-            binding.spnAccommodationType.adapter = accommodationTypeSpinnerAdapter
+            binding.llPersonalInformation.spnAccommodationType.adapter = accommodationTypeSpinnerAdapter
+
+            negativeProfileSpinnerAdapter =
+                ArrayAdapter<String?>(
+                    context,
+                    android.R.layout.simple_spinner_item,
+                    negativeProfileList!!
+                )
+            negativeProfileSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
+
+            binding.llApplicationBackground.spnapplicantIsInvolvedinNegativeProfileLabel.adapter = negativeProfileSpinnerAdapter
         }
     }
 
@@ -138,40 +152,65 @@ class RCUVerificationViewModel(
             isAnyPoliticalIssue.value = false
         }
 
-    }
+        if (checkedId == R.id.rb_applicant_Isanyotherloanrunning_label_Yes) {
+            isAnyLoanRunning.value = true
+        }
 
-        //  For Click Listener Sequence
-        val clicksHouseLocalityListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
+        if (checkedId == R.id.rb_rb_applicant_Isanyotherloanrunning_label_No) {
+            isAnyLoanRunning.value = false
+        }
 
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                selectedHouseLocalityPosition.value = position
-                val neighourReconisedText =
-                    context.resources.getStringArray(R.array.neighbourrecognised_array)
-            }
+        if (checkedId == R.id.rb_applicant_IsAreaNegative_label_Yes) {
+            isAreaNegative.value = true
+        }
+
+        if (checkedId == R.id.rb_applicant_IsAreaNegative_label_No) {
+            isAreaNegative.value = false
+        }
+
+        if (checkedId == R.id.rb_applicant_IsCastCommunityDominatedArea_Yes) {
+            isCastCommunityDominatedArea.value = true
+        }
+
+        if (checkedId == R.id.rb_applicant_IsCastCommunityDominatedArea_No) {
+            isCastCommunityDominatedArea.value = false
         }
 
 
-        //  For Click Listener Sequence
-        val clicksAccommodationTypeListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
+    }
 
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                selectedAccommodationTypePosition.value = position
-                val neighourReconisedText =
-                    context.resources.getStringArray(R.array.neighbourrecognised_array)
-            }
+    //  For Click Listener Sequence
+    val clicksHouseLocalityListener = object : AdapterView.OnItemSelectedListener {
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+        }
+
+        override fun onItemSelected(
+            parent: AdapterView<*>?,
+            view: View?,
+            position: Int,
+            id: Long
+        ) {
+            selectedHouseLocalityPosition.value = position
+            val neighourReconisedText =
+                context.resources.getStringArray(R.array.neighbourrecognised_array)
         }
     }
+
+
+    //  For Click Listener Sequence
+    val clicksAccommodationTypeListener = object : AdapterView.OnItemSelectedListener {
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+        }
+
+        override fun onItemSelected(
+            parent: AdapterView<*>?,
+            view: View?,
+            position: Int,
+            id: Long
+        ) {
+            selectedAccommodationTypePosition.value = position
+            val neighourReconisedText =
+                context.resources.getStringArray(R.array.neighbourrecognised_array)
+        }
+    }
+}

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="addressconfirmed"
+            type="com.example.mypraticeapplication.viewmodel.verificationDetail.RCUVerificationViewModel"  />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.example.mypraticeapplication.widget.HeaderText
+            android:id="@+id/applicant_address_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/applicant_address_label"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp">
+        </com.example.mypraticeapplication.widget.HeaderText>
+
+        <com.example.mypraticeapplication.widget.SmallText
+            android:id="@+id/applicant_address_confirmed_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/applicant_address_confirmed_label"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp">
+        </com.example.mypraticeapplication.widget.SmallText>
+
+        <RadioGroup
+            android:id="@+id/rb_applicant_address_confirmed_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onCheckedChanged="@{addressconfirmed.onAddressConfirmed}"
+            android:orientation="horizontal">
+            <RadioButton android:id="@+id/radio_AddressConfirmedYes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/RadioButton"
+                android:text="@string/radio_Yes"/>
+            <RadioButton android:id="@+id/radio_AddressConfirmedNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/RadioButton"
+                android:text="@string/radio_No"/>
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/ll_AddressConfirmed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inpApplicant_Latitude_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/TextInputLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/txtNeighbourChecOne"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:hintTextColor="@color/main_bg"
+                    app:passwordToggleEnabled="false"
+                    android:layout_weight="1"
+                    tools:ignore="MissingClass,MissingConstraints">
+
+                    <com.example.mypraticeapplication.widget.TypefaceEditText
+                        android:id="@+id/edt_Applicant_Latitude_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edit_text_size"
+                        android:hint="@string/applicant_Latitude_label"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:text="@={addressconfirmed.edt_Applicant_Latitude_label}"
+                        android:textColor="@color/gray_323232"
+                        android:textColorHint="@color/gray_323232"
+                        android:textSize="@dimen/verificationDetailTextSize"
+                        app:custom_font="@string/app_font_regular" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inpApplicant_Longitude_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/TextInputLayout"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/txtNeighbourChecOne"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:hintTextColor="@color/main_bg"
+                    app:passwordToggleEnabled="false"
+                    android:layout_weight="1"
+                    tools:ignore="MissingClass,MissingConstraints">
+
+                    <com.example.mypraticeapplication.widget.TypefaceEditText
+                        android:id="@+id/edt_Applicant_Longitude_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edit_text_size"
+                        android:hint="@string/applicant_Longitude_label"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:text="@={addressconfirmed.edt_Applicant_Longitude_label}"
+                        android:textColor="@color/gray_323232"
+                        android:textColorHint="@color/gray_323232"
+                        android:textSize="@dimen/verificationDetailTextSize"
+                        app:custom_font="@string/app_font_regular"
+                        tools:ignore="SpUsage" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inapplicant_OtherObservations_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TextInputLayout"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:hintTextColor="@color/main_bg"
+                    app:passwordToggleEnabled="false"
+                    android:layout_weight="1"
+                    tools:ignore="MissingClass,MissingConstraints">
+
+                    <com.example.mypraticeapplication.widget.TypefaceEditText
+                        android:id="@+id/edt_applicant_OtherObservations_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_80sdp"
+                        android:hint="@string/applicant_OtherObservations_label"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:text="@={addressconfirmed.edt_applicant_OtherObservations_label}"
+                        android:textColor="@color/gray_323232"
+                        android:textColorHint="@color/gray_323232"
+                        android:textSize="@dimen/verificationDetailTextSize"
+                        app:custom_font="@string/app_font_regular"
+                        tools:ignore="SpUsage" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_AddressNotConfirmed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.example.mypraticeapplication.widget.SmallText
+                android:id="@+id/applicant_applicant_address_belongs_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/applicant_address_belongs_label"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp">
+            </com.example.mypraticeapplication.widget.SmallText>
+
+            <RadioGroup
+                android:id="@+id/rb_applicant_address_belong_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onCheckedChanged="@{addressconfirmed.onAddressConfirmed}"
+                android:orientation="horizontal">
+                <RadioButton android:id="@+id/rb_AddressBelongYes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/RadioButton"
+                    android:text="@string/radio_Yes"/>
+                <RadioButton android:id="@+id/rb_AddressBelongNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/RadioButton"
+                    android:text="@string/radio_No"/>
+            </RadioGroup>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpRemark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextInputLayout"
+                app:layout_constraintTop_toBottomOf="@+id/txtNeighbourChecOne"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:hintTextColor="@color/main_bg"
+                app:passwordToggleEnabled="false"
+                tools:ignore="MissingClass,MissingConstraints">
+
+                <com.example.mypraticeapplication.widget.TypefaceEditText
+                    android:id="@+id/edt_Remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_text_size"
+                    android:hint="@string/remark"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:text="@={addressconfirmed.edt_Remark}"
+                    android:textColor="@color/gray_323232"
+                    android:textColorHint="@color/gray_323232"
+                    android:textSize="@dimen/verificationDetailTextSize"
+                    app:custom_font="@string/app_font_regular" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.example.mypraticeapplication.widget.SmallText
+                android:id="@+id/applicant_address_VisitHouse_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="@string/applicant_address_VisitHouse_label"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
+            <RadioGroup
+                android:id="@+id/rb_applicant_address_VisitHouse_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton android:id="@+id/radio_DurningVisitYes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/RadioButton"
+                    android:text="@string/radio_Yes"/>
+                <RadioButton android:id="@+id/radio_DurningVisitNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/RadioButton"
+                    android:text="@string/radio_No"/>
+            </RadioGroup>
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>
