@@ -65,7 +65,7 @@ class ActivityTest: BaseActivity()  {
             }
         }
 
-        // NameBoard Confirmed
+        // NameBoard Mistmatched
         rcuVerificationViewModel.isNameboardmismatched.observeForever {
             Log.e("Confirmed",it.toString())
             if (it == true){
@@ -84,6 +84,18 @@ class ActivityTest: BaseActivity()  {
             }
             else{
                 binding.inpMedicalHistoryRemark.visibility = View.GONE
+            }
+        }
+
+
+        // NameBoard Confirmed
+        rcuVerificationViewModel.isAnyPoliticalIssue.observeForever {
+            Log.e("Confirmed",it.toString())
+            if (it == true){
+                binding.inpIsapplicanthaveanypoliticalconnectionRemark.visibility = View.VISIBLE
+            }
+            else{
+                binding.inpIsapplicanthaveanypoliticalconnectionRemark.visibility = View.GONE
             }
         }
 

@@ -38,7 +38,7 @@ class RCUVerificationViewModel(
     var isNameboardseenattheHouse = MutableLiveData<Boolean>()
     var isNameboardmismatched = MutableLiveData<Boolean>()
     var isMajorMedicalHistory = MutableLiveData<Boolean>()
-
+    var isAnyPoliticalIssue = MutableLiveData<Boolean>()
 
     var selectedHouseLocalityPosition = MutableLiveData<Int>()
     var selectedHouseLocalityItemPosition: Int = 0
@@ -128,6 +128,14 @@ class RCUVerificationViewModel(
 
         if (checkedId == R.id.rb_IsapplicanthaveanymajormedicalhistoryNo) {
             isMajorMedicalHistory.value = false
+        }
+
+        if (checkedId == R.id.rb_IsapplicanthaveanypoliticalconnectionYes) {
+            isAnyPoliticalIssue.value = true
+        }
+
+        if (checkedId == R.id.rb_IsapplicanthaveanypoliticalconnectionNo) {
+            isAnyPoliticalIssue.value = false
         }
 
     }
