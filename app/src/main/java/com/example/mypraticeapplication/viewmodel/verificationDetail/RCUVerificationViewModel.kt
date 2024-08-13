@@ -64,12 +64,14 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     private var negativeProfileList: List<String>? = null
     private var relationWithApplicantList: List<String>? = null
     private var materialStatusApplicantList: List<String>? = null
+    private var houseOwnershipList: List<String>? = null
 
     private var houseLocalitySpinnerAdapter: ArrayAdapter<String?>? = null
     private var accommodationTypeSpinnerAdapter: ArrayAdapter<String?>? = null
     private var negativeProfileSpinnerAdapter: ArrayAdapter<String?>? = null
     private var relationWithApplicantSpinnerAdapter: ArrayAdapter<String?>? = null
     private var materialStatusApplicantSpinnerAdapter: ArrayAdapter<String?>? = null
+    private var houseOwnershipApplicantSpinnerAdapter: ArrayAdapter<String?>? = null
 
     // Room Database
     private var masterDataDao: MasterDataDao? = null
@@ -101,6 +103,8 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             negativeProfileList = masterDataDao!!.getDataByKeyName(AppConstants.profileType)
             relationWithApplicantList = masterDataDao!!.getDataByKeyName(AppConstants.relationType)
             materialStatusApplicantList = masterDataDao!!.getDataByKeyName(AppConstants.relationType)
+            houseOwnershipList = masterDataDao!!.getDataByKeyName(AppConstants.houseOwnershipType)
+
 
             houseLocalitySpinnerAdapter =
                 ArrayAdapter<String?>(
@@ -143,6 +147,17 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             relationWithApplicantSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
 
             binding.llPersonalInformationOne.spnapplicantRelationApplicant.adapter = relationWithApplicantSpinnerAdapter
+
+            houseOwnershipApplicantSpinnerAdapter =
+                ArrayAdapter<String?>(
+                    context,
+                    android.R.layout.simple_spinner_item,
+                    houseOwnershipList!!
+                )
+            houseOwnershipApplicantSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
+
+            binding.llPersonalInformationOne.spnapplicantHouseOwnershipLabel.adapter = houseOwnershipApplicantSpinnerAdapter
+
 
             addFamilyMemberData()
         }

@@ -64,7 +64,7 @@
                 android:layout_height="@dimen/edit_text_size"
                 android:layout_weight="1"
                 android:background="@drawable/bg_spinner"
-                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:entries="@array/neighbourrecognised_array"
                 app:setOnItemSelectedListener="@{personinformation1.clicksHouseLocalityListener}"
@@ -142,7 +142,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_3sdp"
-                android:entries="@array/neighbourrecognised_array"
+                android:entries="@array/material_status"
                 app:setOnItemSelectedListener="@{personinformation1.clicksHouseLocalityListener}"
                 android:imeOptions="actionNext"
                 android:selectedItemPosition="@{personinformation1.selectedHouseLocalityItemPosition}"
@@ -177,9 +177,248 @@
                 android:layout_marginStart="@dimen/_8sdp"
                 android:layout_marginEnd="@dimen/_8sdp"
                 android:paddingBottom="@dimen/_16sdp"
-                tools:itemCount="5"
+                tools:itemCount="1"
                 tools:listitem="@layout/item_add_familymember" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inapplicant_TotalFamilyMembers_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/TextInputLayout"
+                android:textIsSelectable="true"
+                android:inputType="none"
+                app:hintTextColor="@color/main_bg"
+                app:passwordToggleEnabled="false"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/_5sdp"
+                tools:ignore="MissingClass,MissingConstraints">
+
+                <com.example.mypraticeapplication.widget.TypefaceEditText
+                    android:id="@+id/edt_applicant_TotalFamilyMembers_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_text_size"
+                    android:hint="@string/applicant_TotalFamilyMembers_label"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:text="@={personinformation1.edt_Applicant_Latitude_label}"
+                    android:textColor="@color/gray_323232"
+                    android:textColorHint="@color/gray_323232"
+                    android:textSize="@dimen/verificationDetailTextSize"
+                    app:custom_font="@string/app_font_regular" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inapplicant_TotalEarningMember_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/TextInputLayout"
+                android:textIsSelectable="true"
+                android:inputType="none"
+                app:hintTextColor="@color/main_bg"
+                app:passwordToggleEnabled="false"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/_5sdp"
+                tools:ignore="MissingClass,MissingConstraints">
+
+                <com.example.mypraticeapplication.widget.TypefaceEditText
+                    android:id="@+id/edt_applicant_TotalEarningMember_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_text_size"
+                    android:hint="@string/applicant_TotalEarningMember_label"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:text="@={personinformation1.edt_Applicant_Latitude_label}"
+                    android:textColor="@color/gray_323232"
+                    android:textColorHint="@color/gray_323232"
+                    android:textSize="@dimen/verificationDetailTextSize"
+                    app:custom_font="@string/app_font_regular" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <com.example.mypraticeapplication.widget.SmallText
+            android:id="@+id/applicant_HouseLocality_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/applicant_HouseOwnership_label"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp">
+        </com.example.mypraticeapplication.widget.SmallText>
+
+        <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
+            android:id="@+id/spnapplicant_HouseOwnership_label"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_size"
+            android:background="@drawable/bg_spinner"
+            app:custom_font="@string/app_font_regular"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:entries="@array/neighbourrecognised_array"
+            app:setOnItemSelectedListener="@{personinformation1.clicksHouseLocalityListener}"
+            android:imeOptions="actionNext"
+            android:selectedItemPosition="@{personinformation1.selectedHouseLocalityItemPosition}"
+            android:textSize="@dimen/verificationDetailTextSize"
+            tools:ignore="MissingConstraints" />
+
+        <com.example.mypraticeapplication.widget.SmallText
+            android:id="@+id/applicant_StayingAtCurrentAddress_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/applicant_StayingAtCurrentAddress_label"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp">
+        </com.example.mypraticeapplication.widget.SmallText>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inapplicant_StayingAtCurrentAddress_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/TextInputLayout"
+                android:textIsSelectable="true"
+                android:inputType="none"
+                app:hintTextColor="@color/main_bg"
+                app:passwordToggleEnabled="false"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/_5sdp"
+                tools:ignore="MissingClass,MissingConstraints">
+
+                <com.example.mypraticeapplication.widget.TypefaceEditText
+                    android:id="@+id/edt_applicant_StayingAtCurrentAddress_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_text_size"
+                    android:hint="@string/applicant_StayingAtCurrentAddress_label"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:text="@={personinformation1.edt_Applicant_Latitude_label}"
+                    android:textColor="@color/gray_323232"
+                    android:textColorHint="@color/gray_323232"
+                    android:textSize="@dimen/verificationDetailTextSize"
+                    app:custom_font="@string/app_font_regular" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
+                android:id="@+id/spncurrentaddress"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/edit_text_size"
+                android:layout_weight="1"
+                android:background="@drawable/bg_spinner"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:entries="@array/house_locality_array"
+                app:setOnItemSelectedListener="@{personinformation1.clicksHouseLocalityListener}"
+                android:imeOptions="actionNext"
+                android:selectedItemPosition="@{personinformation1.selectedHouseLocalityItemPosition}"
+                android:textSize="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints"
+                app:custom_font="@string/app_font_regular"/>
+
+        </LinearLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inpapplicant_ElectricityBill_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextInputLayout"
+            android:textIsSelectable="true"
+            android:inputType="none"
+            app:hintTextColor="@color/main_bg"
+            app:passwordToggleEnabled="false"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/_5sdp"
+            tools:ignore="MissingClass,MissingConstraints">
+
+            <com.example.mypraticeapplication.widget.TypefaceEditText
+                android:id="@+id/edt_applicant_ElectricityBill_label"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_size"
+                android:hint="@string/applicant_ElectricityBill_label"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:text="@={personinformation1.edt_Applicant_Latitude_label}"
+                android:textColor="@color/gray_323232"
+                android:textColorHint="@color/gray_323232"
+                android:textSize="@dimen/verificationDetailTextSize"
+                app:custom_font="@string/app_font_regular" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            app:layout_constraintTop_toBottomOf="@+id/spnRelation"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpapplicant_KNo_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/TextInputLayout"
+                app:hintTextColor="@color/main_bg"
+                app:passwordToggleEnabled="false"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/_5sdp"
+                tools:ignore="MissingClass,MissingConstraints">
+
+                <com.example.mypraticeapplication.widget.TypefaceEditText
+                    android:id="@+id/edt_applicant_KNo_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_text_size"
+                    android:hint="@string/applicant_KNo_label"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:textColor="@color/gray_323232"
+                    android:textColorHint="@color/gray_323232"
+                    android:textSize="@dimen/verificationDetailTextSize"
+                    app:custom_font="@string/app_font_regular" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpapplicant_UnitConsumedLastMonth_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/TextInputLayout"
+                app:hintTextColor="@color/main_bg"
+                app:passwordToggleEnabled="false"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                tools:ignore="MissingClass,MissingConstraints">
+
+                <com.example.mypraticeapplication.widget.TypefaceEditText
+                    android:id="@+id/edt_applicant_UnitConsumedLastMonth_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_text_size"
+                    android:hint="@string/applicant_UnitConsumedLastMonth_label"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:textColor="@color/gray_323232"
+                    android:textColorHint="@color/gray_323232"
+                    android:textSize="@dimen/verificationDetailTextSize"
+                    app:custom_font="@string/app_font_regular" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+
     </LinearLayout>
 </layout>

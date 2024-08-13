@@ -185,6 +185,21 @@
         <item>Photo Not Available</item>
     </string-array>
 
+
+    <string-array name="house_locality_array">
+        <item>Select</item>
+        <item>Years</item>
+        <item>Months</item>
+    </string-array>
+
+    <string-array name="material_status">
+        <item>Select</item>
+        <item>Married</item>
+        <item>UnMarried</item>
+        <item>Divorce</item>
+    </string-array>
+
+
     <!--Common-->
     <string name="please_wait">Please wait</string>
     <string name="dashboard">Dashboard</string>
