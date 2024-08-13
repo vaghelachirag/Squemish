@@ -41,23 +41,23 @@
                 android:textSize="@dimen/_12sdp">
             </com.example.mypraticeapplication.widget.SmallText>
 
+
             <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
                 android:id="@+id/spnHouseLocality"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edit_text_size"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/bg_spinner"
-                app:custom_font="@string/app_font_regular"
                 android:entries="@array/neighbourrecognised_array"
-                app:setOnItemSelectedListener="@{personalInforamtion.clicksHouseLocalityListener}"
                 android:imeOptions="actionNext"
                 android:selectedItemPosition="@{personalInforamtion.selectedHouseLocalityItemPosition}"
                 android:textSize="@dimen/verificationDetailTextSize"
+                app:custom_font="@string/app_font_regular"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="@dimen/_5sdp"
                 app:layout_constraintTop_toBottomOf="@+id/txt_NeibourRecognised"
+                app:setOnItemSelectedListener="@{personalInforamtion.clicksHouseLocalityListener}"
                 tools:ignore="MissingConstraints" />
-
 
             <com.example.mypraticeapplication.widget.SmallText
                 android:id="@+id/applicant_AccommodationType_label"
