@@ -1,5 +1,6 @@
 package com.example.mypraticeapplication.viewmodel.verificationDetail
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.view.View
@@ -11,11 +12,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.model.base.BaseViewModel
+import com.example.mypraticeapplication.model.getmasterData.GetMasterApiResponse
 import com.example.mypraticeapplication.model.getverificationDetailResponse.AddFamilyMemberModel
+import com.example.mypraticeapplication.network.CallbackObserver
+import com.example.mypraticeapplication.network.Networking
 import com.example.mypraticeapplication.room.InitDb
 import com.example.mypraticeapplication.room.dao.MasterDataDao
 import com.example.mypraticeapplication.uttils.AppConstants
+import com.example.mypraticeapplication.uttils.Utility
+import com.example.mypraticeapplication.uttils.Utils
 import com.example.mypraticeapplication.view.adapter.AddFamilyMemberAdapter
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -51,14 +59,17 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     var selectedAccommodationTypeItemPosition: Int = 0
 
 
-    var houseLocalityList: List<String>? = null
-    var accommodationList: List<String>? = null
-    var negativeProfileList: List<String>? = null
+    private var houseLocalityList: List<String>? = null
+    private var accommodationList: List<String>? = null
+    private var negativeProfileList: List<String>? = null
+    private var relationWithApplicantList: List<String>? = null
+    private var materialStatusApplicantList: List<String>? = null
 
     private var houseLocalitySpinnerAdapter: ArrayAdapter<String?>? = null
     private var accommodationTypeSpinnerAdapter: ArrayAdapter<String?>? = null
     private var negativeProfileSpinnerAdapter: ArrayAdapter<String?>? = null
-
+    private var relationWithApplicantSpinnerAdapter: ArrayAdapter<String?>? = null
+    private var materialStatusApplicantSpinnerAdapter: ArrayAdapter<String?>? = null
 
     // Room Database
     private var masterDataDao: MasterDataDao? = null
@@ -70,9 +81,9 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     fun init(context: Context?) {
         isAddressConfirmed.value = true
         // Room Database
+        getMasterDataApi()
         masterDataDao = InitDb.appDatabase.getMasterData()
         getDataFromMasterData()
-        addFamilyMemberData()
     }
 
 
@@ -88,6 +99,8 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
                 masterDataDao!!.getDataByKeyName(AppConstants.houseOrPremiseLocalityType)
             accommodationList = masterDataDao!!.getDataByKeyName(AppConstants.accommodationType)
             negativeProfileList = masterDataDao!!.getDataByKeyName(AppConstants.profileType)
+            relationWithApplicantList = masterDataDao!!.getDataByKeyName(AppConstants.relationType)
+            materialStatusApplicantList = masterDataDao!!.getDataByKeyName(AppConstants.relationType)
 
             houseLocalitySpinnerAdapter =
                 ArrayAdapter<String?>(
@@ -119,6 +132,19 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             negativeProfileSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
 
             binding.llApplicationBackground.spnapplicantIsInvolvedinNegativeProfileLabel.adapter = negativeProfileSpinnerAdapter
+
+
+            relationWithApplicantSpinnerAdapter =
+                ArrayAdapter<String?>(
+                    context,
+                    android.R.layout.simple_spinner_item,
+                    relationWithApplicantList!!
+                )
+            relationWithApplicantSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
+
+            binding.llPersonalInformationOne.spnapplicantRelationApplicant.adapter = relationWithApplicantSpinnerAdapter
+
+            addFamilyMemberData()
         }
     }
 
@@ -230,8 +256,9 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     }
 
     private fun setCustomLayoutAddAdapter() {
-        addFamilyMemberAdapter =  AddFamilyMemberAdapter(context,addFamilyMemberList,object : AddFamilyMemberAdapter.OnItemClickListener{
+        addFamilyMemberAdapter =  AddFamilyMemberAdapter(context,addFamilyMemberList,relationWithApplicantList,object : AddFamilyMemberAdapter.OnItemClickListener{
 
+            @SuppressLint("NotifyDataSetChanged")
             override fun onItemClick(position: Int) {
                 Log.e("Position",position.toString())
                 addFamilyMemberAdapter?.addDay()
@@ -253,5 +280,45 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             LinearLayoutManager(context)
         )
         binding.llPersonalInformationOne.addFamilyMemberRecyclerView.setAdapter(addFamilyMemberAdapter)
+    }
+
+    // Get Master Data Api
+    private fun getMasterDataApi() {
+        if (Utility.isNetworkConnected(context)){
+            isLoading.postValue(true)
+            Networking.with(context)
+                .getServices()
+                .getMasterApiData()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : CallbackObserver<GetMasterApiResponse>() {
+                    override fun onSuccess(response: GetMasterApiResponse) {
+                        isLoading.postValue(false)
+                    }
+
+                    override fun onFailed(code: Int, message: String) {
+                        isLoading.postValue(false)
+                    }
+
+                    override fun onNext(t: GetMasterApiResponse) {
+                        Log.e("Status",t.getStatusCode().toString())
+                        isLoading.postValue(false)
+                        if(t.getStatusCode() == 200){
+                            if(t.getData() != null){
+                                CoroutineScope(Dispatchers.IO).launch {
+                                    //getUserProfileData()
+                                    masterDataDao!!.insertAll(t.getData())
+                                }
+                            }
+                        }else{
+                            Utils().showToast(context,t.getMessage().toString())
+                        }
+                        Log.e("StatusCode",t.getStatus().toString())
+                    }
+
+                })
+        }else{
+            Utils().showToast(context,context.getString(R.string.nointernetconnection).toString())
+        }
     }
 }

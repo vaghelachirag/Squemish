@@ -59,7 +59,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
-                android:id="@+id/spnHouseLocality"
+                android:id="@+id/spnapplicant_Relation_Applicant"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/edit_text_size"
                 android:layout_weight="1"

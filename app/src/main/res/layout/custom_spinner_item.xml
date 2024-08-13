@@ -9,4 +9,5 @@
     android:padding="@dimen/_4sdp"
     android:singleLine="true"
     android:textAlignment="inherit"
-    android:textSize="12sp" />
+    android:textSize="@dimen/_12sdp"
+    android:fontFamily="@font/roboto_regular"/>
