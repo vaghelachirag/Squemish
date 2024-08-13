@@ -31,11 +31,11 @@
 
     <!-- RCU Verification!-->
     <string name="applicant_address_label">Applicant Address Detail</string>
-    <string name="applicant_address_confirmed_label">Address Confirm as given *</string>
-    <string name="applicant_address_belongs_label">Is this address belongs to applicant ? *</string>
-    <string name="applicant_address_VisitHouse_label">During Visit House is Open ? *</string>
-    <string name="applicant_PersonMet_label">Name of the Person Met *</string>
-    <string name="applicant_Relation_Applicant_label">Relation with Applicant *</string>
+    <string name="applicant_address_confirmed_label">Address Confirm as given <font color='#ff0000' ><b>*</b></font></string>
+    <string name="applicant_address_belongs_label">Is this address belongs to applicant ? <font color='#ff0000' ><b>*</b></font></string>
+    <string name="applicant_address_VisitHouse_label">During Visit House is Open ? <font color='#ff0000' ><b>*</b></font></string>
+    <string name="applicant_PersonMet_label">Name of the Person Met <font color='#ff0000' ><b>*</b></font></string>
+    <string name="applicant_Relation_Applicant_label">Relation with Applicant <font color='#ff0000' ><b>*</b></font></string>
     <string name="applicant_MobileNoOfPersonMet_label">Mobile No of Person Met</string>
     <string name="applicant_Age_label">Age</string>
     <string name="applicant_MaritalStatus_label">Marital Status *</string>
@@ -43,17 +43,17 @@
     <string name="applicant_Relation_label">Relation</string>
     <string name="applicant_MemberCount_label">Member Count</string>
     <string name="applicant_EarningCount_label">Earning Count</string>
-    <string name="applicant_TotalFamilyMembers_label">Total Family members *</string>
-    <string name="applicant_TotalEarningMember_label">Total Earning Member *</string>
-    <string name="applicant_HouseOwnership_label">House Ownership *</string>
-    <string name="applicant_StayingAtCurrentAddress_label">Staying at current address (In Years) *</string>
+    <string name="applicant_TotalFamilyMembers_label">Total Family members <font color='#ff0000' ><b>*</b></font></string>
+    <string name="applicant_TotalEarningMember_label">Total Earning Member <font color='#ff0000' ><b>*</b></font></string>
+    <string name="applicant_HouseOwnership_label">House Ownership <font color='#ff0000' ><b>*</b></font></string>
+    <string name="applicant_StayingAtCurrentAddress_label">Staying at current address (In Years) <font color='#ff0000' ><b>*</b></font></string>
     <string name="applicant_ElectricityBill_label">Name in Electricity Bill</string>
     <string name="applicant_KNo_label">K No</string>
     <string name="applicant_UnitConsumedLastMonth_label">Unit Consumed last Month</string>
-    <string name="applicant_HouseLocality_label">House Locality *</string>
-    <string name="applicant_AccommodationType_label">Accommodation Type *</string>
+    <string name="applicant_HouseLocality_label">House Locality <font color='#ff0000' ><b>*</b></font></string>
+    <string name="applicant_AccommodationType_label">Accommodation Type <font color='#ff0000' ><b>*</b></font></string>
     <string name="applicant_HouseSize_label">House Size</string>
-    <string name="applicant_IsNameboardseenattheHouse_label">Is Nameboard seen at the House ? *</string>
+    <string name="applicant_IsNameboardseenattheHouse_label">Is Nameboard seen at the House ? <font color='#ff0000' ><b>*</b></font></string>
     <string name="applicant_IsNameboardmismatched_label">Is Nameboard mismatched ? *</string>
     <string name="applicant_ApplicantBackgroundCheck_label">Applicant Background Check</string>
     <string name="applicant_Isapplicanthaveanymajormedicalhistory_label">Is applicant have any major medical history?</string>
@@ -158,8 +158,14 @@
 
 
 
-
     <string name="save">Save</string>
+
+
+    <string name="click_to_upload">Click to Upload</string>
+    <string name="upload">Upload</string>
+
+    <string name="option_gallery">Gallery</string>
+    <string name="option_camera">Camera</string>
 
 
     <string-array name="addresses_array">
@@ -187,5 +193,5 @@
     <!--    No Internet Connection Message -->
     <string name="nointernetconnection">Local network problem, please check your network</string>
 
-
+2
 </resources>

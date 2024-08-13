@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="personinformation1"
+            type="com.example.mypraticeapplication.viewmodel.verificationDetail.RCUVerificationViewModel"  />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.example.mypraticeapplication.widget.HeaderText
+            android:id="@+id/applicant_PersonalInformation_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/applicant_PersonalInformation_label"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp">
+        </com.example.mypraticeapplication.widget.HeaderText>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpapplicant_PersonMet"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/TextInputLayout"
+                android:textIsSelectable="true"
+                android:inputType="none"
+                app:hintTextColor="@color/main_bg"
+                app:passwordToggleEnabled="false"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/_5sdp"
+                tools:ignore="MissingClass,MissingConstraints">
+
+                <com.example.mypraticeapplication.widget.TypefaceEditText
+                    android:id="@+id/edt_PersonMet"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_text_size"
+                    android:hint="@string/applicant_PersonMet_label"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:text="@={personinformation1.edt_Applicant_Latitude_label}"
+                    android:textColor="@color/gray_323232"
+                    android:textColorHint="@color/gray_323232"
+                    android:textSize="@dimen/verificationDetailTextSize"
+                    app:custom_font="@string/app_font_regular" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
+                android:id="@+id/spnHouseLocality"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/edit_text_size"
+                android:layout_weight="1"
+                android:background="@drawable/bg_spinner"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:entries="@array/neighbourrecognised_array"
+                app:setOnItemSelectedListener="@{personinformation1.clicksHouseLocalityListener}"
+                android:imeOptions="actionNext"
+                android:selectedItemPosition="@{personinformation1.selectedHouseLocalityItemPosition}"
+                android:textSize="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints"
+                app:custom_font="@string/app_font_regular"/>
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inpapplicant_Person_MobileNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextInputLayout"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:hintTextColor="@color/main_bg"
+            app:passwordToggleEnabled="false"
+            android:layout_weight="1"
+            tools:ignore="MissingClass,MissingConstraints">
+
+            <com.example.mypraticeapplication.widget.TypefaceEditText
+                android:id="@+id/edt_Person_MobileNumber"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_size"
+                android:hint="@string/applicant_MobileNoOfPersonMet_label"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:text="@={personinformation1.edt_PersonMetMobileNumber}"
+                android:textColor="@color/gray_323232"
+                android:textColorHint="@color/gray_323232"
+                android:textSize="@dimen/verificationDetailTextSize"
+                app:custom_font="@string/app_font_regular" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpapplicant_Age"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/TextInputLayout"
+                app:hintTextColor="@color/main_bg"
+                app:passwordToggleEnabled="false"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/_5sdp"
+                tools:ignore="MissingClass,MissingConstraints">
+
+                <com.example.mypraticeapplication.widget.TypefaceEditText
+                    android:id="@+id/edt_Age"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_text_size"
+                    android:hint="@string/applicant_Age_label"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:text="@={personinformation1.edt_PersonMetMobileNumber}"
+                    android:textColor="@color/gray_323232"
+                    android:textColorHint="@color/gray_323232"
+                    android:textSize="@dimen/verificationDetailTextSize"
+                    app:custom_font="@string/app_font_regular" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
+                android:id="@+id/spnapplicant_MaterialStatus"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/edit_text_size"
+                android:background="@drawable/bg_spinner"
+                app:custom_font="@string/app_font_regular"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:entries="@array/neighbourrecognised_array"
+                app:setOnItemSelectedListener="@{personinformation1.clicksHouseLocalityListener}"
+                android:imeOptions="actionNext"
+                android:selectedItemPosition="@{personinformation1.selectedHouseLocalityItemPosition}"
+                android:textSize="@dimen/verificationDetailTextSize"
+                tools:ignore="MissingConstraints" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_light_grey"
+            android:layout_margin="@dimen/_5sdp"
+            android:orientation="vertical">
+
+            <com.example.mypraticeapplication.widget.SmallText
+                android:id="@+id/applicant_address_confirmed_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/applicant_DetailsOfTotalFamilyMembers_label"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@+id/layoutCamera"
+                android:textSize="@dimen/_12sdp">
+            </com.example.mypraticeapplication.widget.SmallText>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/addFamilyMemberRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_16sdp"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_add_familymember" />
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>

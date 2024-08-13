@@ -8,11 +8,14 @@ import android.widget.ArrayAdapter
 import android.widget.RadioGroup
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.model.base.BaseViewModel
+import com.example.mypraticeapplication.model.getverificationDetailResponse.AddFamilyMemberModel
 import com.example.mypraticeapplication.room.InitDb
 import com.example.mypraticeapplication.room.dao.MasterDataDao
 import com.example.mypraticeapplication.uttils.AppConstants
+import com.example.mypraticeapplication.view.adapter.AddFamilyMemberAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -60,11 +63,23 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     // Room Database
     private var masterDataDao: MasterDataDao? = null
 
+
+    var addFamilyMemberList: ArrayList<AddFamilyMemberModel> = ArrayList()
+    private var addFamilyMemberAdapter: AddFamilyMemberAdapter? = null
+
     fun init(context: Context?) {
         isAddressConfirmed.value = true
         // Room Database
         masterDataDao = InitDb.appDatabase.getMasterData()
         getDataFromMasterData()
+        addFamilyMemberData()
+    }
+
+
+    private fun addFamilyMemberData() {
+        addFamilyMemberList  = ArrayList()
+        addFamilyMemberList.add(AddFamilyMemberModel(10,"1"))
+        setCustomLayoutAddAdapter()
     }
 
     private fun getDataFromMasterData() {
@@ -212,5 +227,31 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             val neighourReconisedText =
                 context.resources.getStringArray(R.array.neighbourrecognised_array)
         }
+    }
+
+    private fun setCustomLayoutAddAdapter() {
+        addFamilyMemberAdapter =  AddFamilyMemberAdapter(context,addFamilyMemberList,object : AddFamilyMemberAdapter.OnItemClickListener{
+
+            override fun onItemClick(position: Int) {
+                Log.e("Position",position.toString())
+                addFamilyMemberAdapter?.addDay()
+                addFamilyMemberAdapter?.notifyDataSetChanged()
+            }
+
+            override fun onRemoveClick(position: Int) {
+                if (addFamilyMemberList.size == 1) {
+                    addFamilyMemberAdapter?.changeValue(true)
+                } else {
+                    addFamilyMemberAdapter?.changeValue(false)
+                }
+                addFamilyMemberAdapter?.removeDay(position)
+            }
+
+        })
+
+        binding.llPersonalInformationOne.addFamilyMemberRecyclerView.setLayoutManager(
+            LinearLayoutManager(context)
+        )
+        binding.llPersonalInformationOne.addFamilyMemberRecyclerView.setAdapter(addFamilyMemberAdapter)
     }
 }

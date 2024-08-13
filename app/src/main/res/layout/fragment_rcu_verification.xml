@@ -48,10 +48,10 @@
                     android:layout_height="wrap_content">
 
                     <include
-                        android:id="@+id/ll_personal_informationTwo"
-                        layout="@layout/ll_rcu_personal_inforamation_two"
+                        android:id="@+id/ll_personal_informationOne"
+                        layout="@layout/ll_rcu_personal_information_one"
                         android:visibility="visible"
-                        bind:personalInforamtionTwo="@{viewModel}"/>
+                        bind:personinformation1="@{viewModel}"/>
 
                     <include
                         android:id="@+id/ll_personal_information"
