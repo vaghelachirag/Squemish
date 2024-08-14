@@ -132,6 +132,19 @@ class ActivityTest: BaseActivity()  {
             }
         }
 
+        // Political Connection
+        rcuVerificationViewModel.isHouseOpen.observeForever {
+            Log.e("Confirmed",it.toString())
+            if (it == true){
+                binding.llPersonalInformation.llPersonalInformationOne.root.visibility = View.VISIBLE
+                binding.llPersonalInformation.llHouseSize.visibility = View.VISIBLE
+            }
+            else{
+                binding.llPersonalInformation.llPersonalInformationOne.root.visibility = View.GONE
+                binding.llPersonalInformation.llHouseSize.visibility = View.GONE
+            }
+        }
+
     }
 
     private fun setVisibility(visibility: Boolean) {
