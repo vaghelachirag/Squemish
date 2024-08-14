@@ -80,7 +80,7 @@ class AddFamilyMemberAdapter(
     fun addDay() {
         list.add(
             AddFamilyMemberModel(
-                10,
+                "10",
                 "50",
             )
         )

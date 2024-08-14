@@ -91,7 +91,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
 
     private fun addFamilyMemberData() {
         addFamilyMemberList  = ArrayList()
-        addFamilyMemberList.add(AddFamilyMemberModel(10,"1"))
+        addFamilyMemberList.add(AddFamilyMemberModel("10","1"))
         setCustomLayoutAddAdapter()
     }
 
@@ -146,7 +146,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
                 )
             relationWithApplicantSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
 
-            binding.llPersonalInformationOne.spnapplicantRelationApplicant.adapter = relationWithApplicantSpinnerAdapter
+            binding.llPersonalInformation.llPersonalInformationOne.spnapplicantRelationApplicant.adapter = relationWithApplicantSpinnerAdapter
 
             houseOwnershipApplicantSpinnerAdapter =
                 ArrayAdapter<String?>(
@@ -156,7 +156,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
                 )
             houseOwnershipApplicantSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
 
-            binding.llPersonalInformationOne.spnapplicantHouseOwnershipLabel.adapter = houseOwnershipApplicantSpinnerAdapter
+            binding.llPersonalInformation.llPersonalInformationOne.spnapplicantHouseOwnershipLabel.adapter = houseOwnershipApplicantSpinnerAdapter
 
 
             addFamilyMemberData()
@@ -232,6 +232,22 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             isCastCommunityDominatedArea.value = false
         }
 
+        if (checkedId == R.id.rb_applicant_IsCastCommunityDominatedArea_Yes) {
+            isCastCommunityDominatedArea.value = true
+        }
+
+        if (checkedId == R.id.rb_applicant_IsCastCommunityDominatedArea_No) {
+            isCastCommunityDominatedArea.value = false
+        }
+
+
+        if (checkedId == R.id.radio_DurningVisitYes) {
+            isHouseOpen.value = true
+        }
+
+        if (checkedId == R.id.radio_DurningVisitNo) {
+            isHouseOpen.value = false
+        }
 
     }
 
@@ -291,10 +307,10 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
 
         })
 
-        binding.llPersonalInformationOne.addFamilyMemberRecyclerView.setLayoutManager(
+        binding.llPersonalInformation.llPersonalInformationOne.addFamilyMemberRecyclerView.setLayoutManager(
             LinearLayoutManager(context)
         )
-        binding.llPersonalInformationOne.addFamilyMemberRecyclerView.setAdapter(addFamilyMemberAdapter)
+        binding.llPersonalInformation.llPersonalInformationOne.addFamilyMemberRecyclerView.setAdapter(addFamilyMemberAdapter)
     }
 
     // Get Master Data Api

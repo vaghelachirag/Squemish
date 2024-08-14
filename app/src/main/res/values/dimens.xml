@@ -2,7 +2,7 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="loginTextSize">14.00sp</dimen>
-    <dimen name="verificationDetailTextSize">@dimen/_12sdp</dimen>
+    <dimen name="verificationDetailTextSize">@dimen/_14sdp</dimen>
     <dimen name="edit_text_size">48.00sp</dimen>
     <dimen name="corner_radius">5.00sp</dimen>
 

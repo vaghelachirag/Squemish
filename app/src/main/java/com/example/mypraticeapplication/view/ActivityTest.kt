@@ -27,10 +27,7 @@ class ActivityTest: BaseActivity()  {
         binding.viewModel = rcuVerificationViewModel
         binding.lifecycleOwner = this
         rcuVerificationViewModel.init(this)
-
         setObserver()
-
-
     }
 
     private fun setObserver() {
@@ -45,10 +42,10 @@ class ActivityTest: BaseActivity()  {
         rcuVerificationViewModel.isAddressBelong.observeForever {
             Log.e("Confirmed",it.toString())
             if (it == true){
-                binding.llAddressDetail.inpRemark.visibility = View.GONE
+                binding.llAddressDetail.inpAddressBelongRemark.visibility = View.GONE
             }
             else{
-                binding.llAddressDetail.inpRemark.visibility = View.VISIBLE
+                binding.llAddressDetail.inpAddressBelongRemark.visibility = View.VISIBLE
             }
         }
 
@@ -129,6 +126,19 @@ class ActivityTest: BaseActivity()  {
             }
             else{
                 binding.llApplicationBackground.inpapplicantIsCastCommunityDominatedAreaLabel.visibility = View.GONE
+            }
+        }
+
+        // Political Connection
+        rcuVerificationViewModel.isHouseOpen.observeForever {
+            Log.e("Confirmed",it.toString())
+            if (it == true){
+                binding.llPersonalInformation.llPersonalInformationOne.root.visibility = View.VISIBLE
+                binding.llPersonalInformation.llHouseSize.visibility = View.VISIBLE
+            }
+            else{
+                binding.llPersonalInformation.llPersonalInformationOne.root.visibility = View.GONE
+                binding.llPersonalInformation.llHouseSize.visibility = View.GONE
             }
         }
 

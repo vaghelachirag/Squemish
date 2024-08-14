@@ -200,6 +200,14 @@
     </string-array>
 
 
+
+    <string-array name="house_size">
+        <item>Select</item>
+        <item>Sq Fts</item>
+        <item>Sq Yards</item>
+    </string-array>
+
+
     <!--Common-->
     <string name="please_wait">Please wait</string>
     <string name="dashboard">Dashboard</string>

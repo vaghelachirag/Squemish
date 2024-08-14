@@ -186,7 +186,7 @@
             </RadioGroup>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inpRemark"
+                android:id="@+id/inpAddressBelongRemark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/TextInputLayout"
@@ -197,7 +197,7 @@
                 tools:ignore="MissingClass,MissingConstraints">
 
                 <com.example.mypraticeapplication.widget.TypefaceEditText
-                    android:id="@+id/edt_Remark"
+                    android:id="@+id/edtpAddressBelongRemark"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/edit_text_size"
                     android:hint="@string/remark"
@@ -223,6 +223,7 @@
                 android:id="@+id/rb_applicant_address_VisitHouse_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onCheckedChanged="@{addressconfirmed.onAddressConfirmed}"
                 android:orientation="horizontal">
                 <RadioButton android:id="@+id/radio_DurningVisitYes"
                     android:layout_width="wrap_content"
