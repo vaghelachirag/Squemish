@@ -49,7 +49,6 @@ class ActivityTest: BaseActivity()  {
             }
         }
 
-
         // NameBoard Confirmed
         rcuVerificationViewModel.isNameboardseenattheHouse.observeForever {
             Log.e("Confirmed",it.toString())

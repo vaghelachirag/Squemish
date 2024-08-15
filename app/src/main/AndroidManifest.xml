@@ -18,7 +18,7 @@
         android:theme="@style/Theme.MyPraticeApplication"
         tools:targetApi="31">
         <activity
-            android:name=".view.ActivityTest"
+            android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.MyPraticeApplication">
             <intent-filter>
@@ -30,7 +30,7 @@
 
         <activity
             android:name=".view.menu.DashboardActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:windowSoftInputMode="adjustPan"
             android:theme="@style/Theme.MyPraticeApplication"
             android:exported="true">
@@ -42,7 +42,7 @@
         <activity
             android:name=".view.detail.ActivityDetail"
             android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />

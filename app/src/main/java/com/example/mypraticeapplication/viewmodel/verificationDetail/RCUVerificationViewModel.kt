@@ -88,7 +88,9 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         getDataFromMasterData()
     }
 
+    fun onSaveClicked(){
 
+    }
     private fun addFamilyMemberData() {
         addFamilyMemberList  = ArrayList()
         addFamilyMemberList.add(AddFamilyMemberModel("10","1"))

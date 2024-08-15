@@ -30,7 +30,6 @@
                 app:hintTextColor="@color/main_bg"
                 app:passwordToggleEnabled="false"
                 android:layout_weight="1"
-                android:layout_marginTop="@dimen/_5sdp"
                 tools:ignore="MissingClass,MissingConstraints">
 
                 <com.example.mypraticeapplication.widget.TypefaceEditText
@@ -54,14 +53,11 @@
                 android:layout_weight="1"
                 android:background="@drawable/bg_spinner"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_3sdp"
                 android:entries="@array/neighbourrecognised_array"
                 app:setOnItemSelectedListener="@{personinformation1.clicksHouseLocalityListener}"
                 android:imeOptions="actionNext"
                 android:selectedItemPosition="@{personinformation1.selectedHouseLocalityItemPosition}"
                 android:textSize="@dimen/_10sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints"
                 app:custom_font="@string/app_font_regular"/>
 

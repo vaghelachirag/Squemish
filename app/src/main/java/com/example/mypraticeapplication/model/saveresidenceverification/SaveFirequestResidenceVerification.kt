@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName
 
 
 class SaveFirequestResidenceVerification {
+
     @SerializedName("firequestId")
     @Expose
     private var firequestId: Int? = null
