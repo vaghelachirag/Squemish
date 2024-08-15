@@ -14,6 +14,7 @@ import com.example.mypraticeapplication.model.getverificationDetailResponse.GetV
 import com.example.mypraticeapplication.model.registerDevice.GetDeviceRegistrationResponse
 import com.example.mypraticeapplication.model.login.GetLoginResponseModel
 import com.example.mypraticeapplication.model.pendingRequest.GetPendingRequestResponse
+import com.example.mypraticeapplication.model.saveresidenceverification.SaveVerificationDataDetail
 import io.reactivex.Observable
 import okhttp3.RequestBody
 import retrofit2.http.Body
@@ -64,4 +65,7 @@ interface ApiInterface {
 
     @GET("api/MobileAppMenu/GetWebViewUrl")
     fun getMenuURLResponse(@Query("menuId") menuId: String): Observable<GetMenuURLResponse>
+
+    @GET("api/FiRequest/SaveVerification")
+    fun getSaveFiResidenceResponse(@Body requestBody: RequestBody): Observable<SaveVerificationDataDetail>
 }
