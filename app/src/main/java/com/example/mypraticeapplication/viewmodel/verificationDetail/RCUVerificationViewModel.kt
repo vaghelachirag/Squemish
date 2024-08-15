@@ -14,6 +14,8 @@ import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.model.base.BaseViewModel
 import com.example.mypraticeapplication.model.getmasterData.GetMasterApiResponse
 import com.example.mypraticeapplication.model.getverificationDetailResponse.AddFamilyMemberModel
+import com.example.mypraticeapplication.model.saveresidenceverification.SaveFirequestResidenceVerification
+import com.example.mypraticeapplication.model.saveresidenceverification.SaveVerificationDataDetail
 import com.example.mypraticeapplication.network.CallbackObserver
 import com.example.mypraticeapplication.network.Networking
 import com.example.mypraticeapplication.room.InitDb
@@ -22,23 +24,47 @@ import com.example.mypraticeapplication.uttils.AppConstants
 import com.example.mypraticeapplication.uttils.Utility
 import com.example.mypraticeapplication.uttils.Utils
 import com.example.mypraticeapplication.view.adapter.AddFamilyMemberAdapter
+import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+
 class RCUVerificationViewModel(private val context: Context, private  val binding: com.example.mypraticeapplication.databinding.FragmentRcuVerificationBinding) : BaseViewModel() {
 
 
-    // Login Params
-    var edt_Applicant_Latitude_label: ObservableField<String> = ObservableField()
-    var edt_Applicant_Longitude_label: ObservableField<String> = ObservableField()
-    var edt_applicant_OtherObservations_label: ObservableField<String> = ObservableField()
-    var edt_Remark: ObservableField<String> = ObservableField()
+    // Address Detail Params
+    var edtLatitude: ObservableField<String> = ObservableField()
+    var edtLongitude: ObservableField<String> = ObservableField()
+    var edtOtherObservations: ObservableField<String> = ObservableField()
+    var edtAddressBelongRemark: ObservableField<String> = ObservableField()
+
+
     var edt_Reason: ObservableField<String> = ObservableField()
-    var edt_PersonMet: ObservableField<String> = ObservableField()
-    var edt_PersonMetMobileNumber: ObservableField<String> = ObservableField()
+
+    // Personal Information One
+    var edPersonMet: ObservableField<String> = ObservableField()
+    var edPersonMobileNumber: ObservableField<String> = ObservableField()
+    var edAge: ObservableField<String> = ObservableField()
+    var edtTotalFamilyMembers: ObservableField<String> = ObservableField()
+    var edtTotalEarningMember: ObservableField<String> = ObservableField()
+    var edtStayingAddress: ObservableField<String> = ObservableField()
+    var edtKNo: ObservableField<String> = ObservableField()
+    var edtElectricityBillName: ObservableField<String> = ObservableField()
+    var edtUnitConsumedLastMonth: ObservableField<String> = ObservableField()
+
+
+    // Application Background
+    var edtMedicalHistoryRemark: ObservableField<String> = ObservableField()
+    var edtPoliticalConnectionRemark: ObservableField<String> = ObservableField()
+    var edtBankName: ObservableField<String> = ObservableField()
+    var edtLoanAmount: ObservableField<String> = ObservableField()
+    var edtRunningSince: ObservableField<String> = ObservableField()
+    var edtIsAreaNegativeRemark : ObservableField<String> = ObservableField()
+    var edtIsCastCommunityDominatedArea: ObservableField<String> = ObservableField()
+    var edtOtherObservationsRemark: ObservableField<String> = ObservableField()
 
     // All Variable
     var isAddressConfirmed = MutableLiveData<Boolean>()
@@ -52,11 +78,32 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     var isAreaNegative = MutableLiveData<Boolean>()
     var isCastCommunityDominatedArea = MutableLiveData<Boolean>()
 
+    // All Spinner Position
     var selectedHouseLocalityPosition = MutableLiveData<Int>()
     var selectedHouseLocalityItemPosition: Int = 0
 
     var selectedAccommodationTypePosition = MutableLiveData<Int>()
     var selectedAccommodationTypeItemPosition: Int = 0
+
+    var selectedRelationWithApplicantPosition = MutableLiveData<Int>()
+    var selectedRelationWithApplicantItemPosition: Int = 0
+
+    var selectedMaritalStatusPosition = MutableLiveData<Int>()
+    var selectedMaritalStatusItemPosition: Int = 0
+
+    var selectedHouseOwnershipPosition = MutableLiveData<Int>()
+    var selectedHouseOwnershipItemPosition: Int = 0
+
+    var selectedYearsPosition = MutableLiveData<Int>()
+    var selectedYearsItemPosition: Int = 0
+
+
+    var selectedHouseSizePosition = MutableLiveData<Int>()
+    var selectedHouseSizeItemPosition: Int = 0
+
+    var selectedInvolvedNegativeProfilePosition = MutableLiveData<Int>()
+    var selectedInvolvedNegativeProfileItemPosition: Int = 0
+
 
 
     private var houseLocalityList: List<String>? = null
@@ -72,6 +119,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     private var relationWithApplicantSpinnerAdapter: ArrayAdapter<String?>? = null
     private var materialStatusApplicantSpinnerAdapter: ArrayAdapter<String?>? = null
     private var houseOwnershipApplicantSpinnerAdapter: ArrayAdapter<String?>? = null
+
 
     // Room Database
     private var masterDataDao: MasterDataDao? = null
@@ -89,6 +137,28 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     }
 
     fun onSaveClicked(){
+     Log.e("OnSave","OnSave")
+        val saveVerificationDataDetail: SaveVerificationDataDetail = SaveVerificationDataDetail()
+        saveVerificationDataDetail.setFirequestId(AppConstants.verificationId)
+        saveVerificationDataDetail.setVerificationType("RV")
+        val saveFiRequestResidenceVerification: SaveFirequestResidenceVerification = SaveFirequestResidenceVerification()
+        saveFiRequestResidenceVerification.setFirequestId(AppConstants.verificationId)
+        saveVerificationDataDetail.setFirequestResidenceVerification(saveFiRequestResidenceVerification)
+        saveFiRequestResidenceVerification.setVisitDate("2024-08-14T22:32:20.503")
+        saveFiRequestResidenceVerification.setAddressConfirmed(isAddressConfirmed.value)
+        saveFiRequestResidenceVerification.setIsAddressBelongsApplicant(isAddressBelong.value)
+        saveFiRequestResidenceVerification.setIsHouseOpen(isHouseOpen.value)
+        saveFiRequestResidenceVerification.setPersonMet(edPersonMet.get().toString())
+        saveFiRequestResidenceVerification.setPersonMetRelation(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantRelationApplicant.selectedItem.toString())
+        saveFiRequestResidenceVerification.setPersonMobileNo(edPersonMobileNumber.get().toString())
+      //  saveFiRequestResidenceVerification.setStayingTime(edtStayingAddress.get().toString())
+        saveFiRequestResidenceVerification.setElectricityBillOwnerName(edtElectricityBillName.get().toString())
+        saveFiRequestResidenceVerification.setHouseOwnerShip(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantHouseOwnershipLabel.selectedItem.toString())
+
+
+        val gson = Gson()
+        val json = gson.toJson(saveVerificationDataDetail)
+        Log.e("Json",json)
 
     }
     private fun addFamilyMemberData() {
@@ -159,7 +229,6 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             houseOwnershipApplicantSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
 
             binding.llPersonalInformation.llPersonalInformationOne.spnapplicantHouseOwnershipLabel.adapter = houseOwnershipApplicantSpinnerAdapter
-
 
             addFamilyMemberData()
         }
@@ -258,33 +327,82 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         override fun onNothingSelected(parent: AdapterView<*>?) {
         }
 
-        override fun onItemSelected(
-            parent: AdapterView<*>?,
-            view: View?,
-            position: Int,
-            id: Long
-        ) {
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
             selectedHouseLocalityPosition.value = position
-            val neighourReconisedText =
-                context.resources.getStringArray(R.array.neighbourrecognised_array)
         }
     }
-
 
     //  For Click Listener Sequence
     val clicksAccommodationTypeListener = object : AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(parent: AdapterView<*>?) {
         }
 
-        override fun onItemSelected(
-            parent: AdapterView<*>?,
-            view: View?,
-            position: Int,
-            id: Long
-        ) {
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
             selectedAccommodationTypePosition.value = position
-            val neighourReconisedText =
-                context.resources.getStringArray(R.array.neighbourrecognised_array)
+        }
+    }
+
+
+    //  For Click Listener Relation With Applicant
+    val clicksRelationWithApplicantListener = object : AdapterView.OnItemSelectedListener {
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+        }
+
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            selectedRelationWithApplicantPosition.value = position
+
+        }
+    }
+
+    //  For Click Listener Sequence
+    val clicksMaterialStatusTypeListener = object : AdapterView.OnItemSelectedListener {
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+        }
+
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            selectedMaritalStatusPosition.value = position
+        }
+    }
+
+
+    //  For Click Listener House Ownership Type
+    val clicksHouseOwnerShipTypeListener = object : AdapterView.OnItemSelectedListener {
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+        }
+
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            selectedHouseOwnershipPosition.value = position
+        }
+    }
+
+    //  For Click Listener Sequence
+    val clicksYearsListener = object : AdapterView.OnItemSelectedListener {
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+        }
+
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            selectedYearsPosition.value = position
+        }
+    }
+
+
+    //  For Click Listener Sequence
+    val clicksHouseSizeListener = object : AdapterView.OnItemSelectedListener {
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+        }
+
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            selectedHouseSizePosition.value = position
+        }
+    }
+
+    //  For Click Listener Sequence
+    val clicksInvolvedNegativeProfileListener = object : AdapterView.OnItemSelectedListener {
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+        }
+
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            selectedInvolvedNegativeProfilePosition.value = position
         }
     }
 

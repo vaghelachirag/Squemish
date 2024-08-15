@@ -129,7 +129,7 @@
                         android:hint="@string/applicant_HouseSize_label"
                         android:imeOptions="actionNext"
                         android:inputType="text"
-                        android:text="@={personalInforamtion.edt_Applicant_Latitude_label}"
+                        android:text="@={personalInforamtion.edtLatitude}"
                         android:textColor="@color/gray_323232"
                         android:textColorHint="@color/gray_323232"
                         android:textSize="@dimen/verificationDetailTextSize"
@@ -145,13 +145,13 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_3sdp"
                     android:entries="@array/house_size"
-                    app:setOnItemSelectedListener="@{personalInforamtion.clicksHouseLocalityListener}"
+                    app:setOnItemSelectedListener="@{personalInforamtion.clicksHouseSizeListener}"
                     android:imeOptions="actionNext"
-                    android:selectedItemPosition="@{personalInforamtion.selectedHouseLocalityItemPosition}"
+                    android:selectedItemPosition="@{personalInforamtion.selectedHouseSizePosition}"
                     android:textSize="@dimen/_10sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:ignore="MissingConstraints"
+                    tools:ignore="MissingConstraints,SpUsage"
                     app:custom_font="@string/app_font_regular"/>
 
             </LinearLayout>
