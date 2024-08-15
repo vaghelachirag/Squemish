@@ -6,6 +6,7 @@ import com.example.mypraticeapplication.model.getMenuListResponse.GetMenuListRes
 import com.example.mypraticeapplication.model.getMenuWebUrlResponse.GetMenuURLResponse
 import com.example.mypraticeapplication.model.getPreNeighbourData.GetPreNeighbourData
 import com.example.mypraticeapplication.model.getPreNeighbourData.GetPreNeighbourResponse
+import com.example.mypraticeapplication.model.getSaveResidenceVerificationResponse.GetSaveResidenceVerificationResponse
 import com.example.mypraticeapplication.model.getUserProfileData.GetUserProfileResponse
 import com.example.mypraticeapplication.model.getmasterData.GetMasterApiResponse
 import com.example.mypraticeapplication.model.getverificationDetailResponse.GetFiRequestPreNeighboutVerificationDto
@@ -66,6 +67,6 @@ interface ApiInterface {
     @GET("api/MobileAppMenu/GetWebViewUrl")
     fun getMenuURLResponse(@Query("menuId") menuId: String): Observable<GetMenuURLResponse>
 
-    @GET("api/FiRequest/SaveVerification")
-    fun getSaveFiResidenceResponse(@Body requestBody: RequestBody): Observable<SaveVerificationDataDetail>
+    @POST("api/FiRequest/SaveVerification")
+    fun getSaveFiResidenceResponse(@Body requestBody: SaveVerificationDataDetail): Observable<GetSaveResidenceVerificationResponse>
 }

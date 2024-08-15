@@ -73,6 +73,14 @@ class Utility {
            return currentDate;
         }
 
+        fun getParseInteger(str: String?): Int {
+            var int = 0
+            if (str!!.isNotEmpty() && !!str.equals(null)) {
+                int = Integer.parseInt(str)
+            }
+            return  int;
+        }
+
         fun changeBaseURL(int_URL: Int) {
             // Staging URL
             baseURL =  if (int_URL == 0) {

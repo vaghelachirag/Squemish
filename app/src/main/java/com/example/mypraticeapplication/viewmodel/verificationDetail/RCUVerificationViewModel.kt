@@ -12,6 +12,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.model.base.BaseViewModel
+import com.example.mypraticeapplication.model.getAcceptRejectResponse.GetAcceptRejectResponse
+import com.example.mypraticeapplication.model.getSaveResidenceVerificationResponse.GetSaveResidenceVerificationResponse
 import com.example.mypraticeapplication.model.getmasterData.GetMasterApiResponse
 import com.example.mypraticeapplication.model.getverificationDetailResponse.AddFamilyMemberModel
 import com.example.mypraticeapplication.model.saveresidenceverification.SaveFirequestResidenceVerification
@@ -24,6 +26,7 @@ import com.example.mypraticeapplication.uttils.AppConstants
 import com.example.mypraticeapplication.uttils.Utility
 import com.example.mypraticeapplication.uttils.Utils
 import com.example.mypraticeapplication.view.adapter.AddFamilyMemberAdapter
+import com.example.mypraticeapplication.view.detail.FragmentBasicInformation
 import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -54,6 +57,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     var edtKNo: ObservableField<String> = ObservableField()
     var edtElectricityBillName: ObservableField<String> = ObservableField()
     var edtUnitConsumedLastMonth: ObservableField<String> = ObservableField()
+    var edtHouseSize: ObservableField<String> = ObservableField()
 
 
     // Application Background
@@ -139,10 +143,10 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     fun onSaveClicked(){
      Log.e("OnSave","OnSave")
         val saveVerificationDataDetail: SaveVerificationDataDetail = SaveVerificationDataDetail()
-        saveVerificationDataDetail.setFirequestId(AppConstants.verificationId)
+        saveVerificationDataDetail.setFirequestId(18)
         saveVerificationDataDetail.setVerificationType("RV")
         val saveFiRequestResidenceVerification: SaveFirequestResidenceVerification = SaveFirequestResidenceVerification()
-        saveFiRequestResidenceVerification.setFirequestId(AppConstants.verificationId)
+        saveFiRequestResidenceVerification.setFirequestId(18)
         saveVerificationDataDetail.setFirequestResidenceVerification(saveFiRequestResidenceVerification)
         saveFiRequestResidenceVerification.setVisitDate("2024-08-14T22:32:20.503")
         saveFiRequestResidenceVerification.setAddressConfirmed(isAddressConfirmed.value)
@@ -154,11 +158,72 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
       //  saveFiRequestResidenceVerification.setStayingTime(edtStayingAddress.get().toString())
         saveFiRequestResidenceVerification.setElectricityBillOwnerName(edtElectricityBillName.get().toString())
         saveFiRequestResidenceVerification.setHouseOwnerShip(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantHouseOwnershipLabel.selectedItem.toString())
+        saveFiRequestResidenceVerification.setHouseLocality(binding.llPersonalInformation.spnHouseLocality.selectedItem.toString())
+        saveFiRequestResidenceVerification.setIsMedicalHistory(isMajorMedicalHistory.value)
+        saveFiRequestResidenceVerification.setMedicalHistoryRemarks(edtMedicalHistoryRemark.get().toString())
+        saveFiRequestResidenceVerification.setIsPoliticalConnection(isAnyPoliticalIssue.value)
+        saveFiRequestResidenceVerification.setPoliticalRemarks(edtPoliticalConnectionRemark.get().toString())
+        saveFiRequestResidenceVerification.setIsAddressBelongsApplicant(isAddressBelong.value)
+        saveFiRequestResidenceVerification.setAddressBelongsApplicantRemark(edtAddressBelongRemark.get().toString())
+        saveFiRequestResidenceVerification.setPersonMetAge(Utility.getParseInteger(edAge.get().toString()))
+        saveFiRequestResidenceVerification.setTotalFamilymembers(Utility.getParseInteger(edtTotalEarningMember.get().toString()))
+        saveFiRequestResidenceVerification.setTotalEarningMembers(Utility.getParseInteger(edtTotalEarningMember.get().toString()))
+        saveFiRequestResidenceVerification.setKno(edtKNo.get().toString())
+        saveFiRequestResidenceVerification.setLastMonthUnits(Utility.getParseInteger(edtUnitConsumedLastMonth.get().toString()))
+        saveFiRequestResidenceVerification.setAccommodationType(binding.llPersonalInformation.spnAccommodationType.selectedItem.toString())
+        saveFiRequestResidenceVerification.setHouseSize(Utility.getParseInteger(edtHouseSize.get().toString()))
+        saveFiRequestResidenceVerification.setHouseSizeUnit(binding.llPersonalInformation.spnapplicantHouseSizeLabel.selectedItem.toString())
+        saveFiRequestResidenceVerification.setIsAnyOtherLoan(isAnyLoanRunning.value)
+        saveFiRequestResidenceVerification.setBankName(edtBankName.get().toString())
+        saveFiRequestResidenceVerification.setLoanAmount(Utility.getParseInteger(edtLoanAmount.get().toString()))
+        saveFiRequestResidenceVerification.setRunningSince(Utility.getParseInteger(edtRunningSince.get().toString()))
+        saveFiRequestResidenceVerification.setIsAreaNegative(isAreaNegative.value)
+        saveFiRequestResidenceVerification.setOtherObservations(edtPoliticalConnectionRemark.get().toString())
+        saveFiRequestResidenceVerification.setIsCastCommunity(isCastCommunityDominatedArea.value)
+        saveFiRequestResidenceVerification.setIsCastCommunityRemark(edtIsCastCommunityDominatedArea.get().toString())
+        saveFiRequestResidenceVerification.setLatitude(edtLatitude.get().toString())
+        saveFiRequestResidenceVerification.setLongitude(edtLongitude.get().toString())
+        saveFiRequestResidenceVerification.setIsNameboardSeen(isAddressConfirmed.value)
+        saveFiRequestResidenceVerification.setIsNameboardMismatch(isNameboardmismatched.value)
+        saveFiRequestResidenceVerification.setNameboardMismatchReason(edt_Reason.get().toString())
+        saveFiRequestResidenceVerification.setStayingTimeUnit(binding.llPersonalInformation.llPersonalInformationOne.spncurrentaddress.selectedItem.toString())
 
 
         val gson = Gson()
         val json = gson.toJson(saveVerificationDataDetail)
         Log.e("Json",json)
+
+
+        if (Utility.isNetworkConnected(context)){
+            isLoading.postValue(true)
+            Networking.with(context)
+                .getServices()
+                .getSaveFiResidenceResponse(saveVerificationDataDetail)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : CallbackObserver<GetSaveResidenceVerificationResponse>() {
+                    override fun onSuccess(response: GetSaveResidenceVerificationResponse) {
+                        isLoading.postValue(false)
+                    }
+
+                    override fun onFailed(code: Int, message: String) {
+                        isLoading.postValue(false)
+                    }
+
+                    override fun onNext(t: GetSaveResidenceVerificationResponse) {
+                        Log.e("Status",t.getStatusCode().toString())
+                        isLoading.postValue(false)
+                        if(t.getStatusCode() == 200){
+                            Utils().showToast(context,t.getMessage().toString())
+                        }else{
+                            Utils().showToast(context,t.getMessage().toString())
+                        }
+                        Log.e("StatusCode",t.getStatus().toString())
+                    }
+                })
+        }else{
+            Utils().showToast(context,context.getString(R.string.nointernetconnection).toString())
+        }
 
     }
     private fun addFamilyMemberData() {

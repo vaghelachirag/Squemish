@@ -129,7 +129,7 @@
                         android:hint="@string/applicant_HouseSize_label"
                         android:imeOptions="actionNext"
                         android:inputType="text"
-                        android:text="@={personalInforamtion.edtLatitude}"
+                        android:text="@={personalInforamtion.edtHouseSize}"
                         android:textColor="@color/gray_323232"
                         android:textColorHint="@color/gray_323232"
                         android:textSize="@dimen/verificationDetailTextSize"
