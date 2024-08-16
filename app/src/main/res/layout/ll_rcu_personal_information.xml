@@ -45,7 +45,8 @@
                 android:text="@string/applicant_HouseLocality_label"
                 android:textColor="@color/black"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:textSize="@dimen/_12sdp">
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="SpUsage">
             </com.example.mypraticeapplication.widget.SmallText>
 
 
@@ -130,7 +131,7 @@
                         android:imeOptions="actionNext"
                         android:inputType="numberDecimal"
                         android:text="@={personalInforamtion.edtHouseSize}"
-                        android:textColor="@color/gray_323232"
+                        android:textColor="@color/black"
                         android:textColorHint="@color/gray_323232"
                         android:textSize="@dimen/verificationDetailTextSize"
                         app:custom_font="@string/app_font_regular" />
@@ -233,7 +234,7 @@
                         android:imeOptions="actionNext"
                         android:inputType="text"
                         android:text="@={personalInforamtion.edt_Reason}"
-                        android:textColor="@color/gray_323232"
+                        android:textColor="@color/black"
                         android:textColorHint="@color/gray_323232"
                         android:textSize="@dimen/verificationDetailTextSize"
                         app:custom_font="@string/app_font_regular" />

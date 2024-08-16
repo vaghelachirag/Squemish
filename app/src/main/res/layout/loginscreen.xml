@@ -157,7 +157,7 @@
                 android:button="@null"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
-                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_5sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/inpPwd" />
 
@@ -187,8 +187,6 @@
                 app:layout_constraintEnd_toEndOf="@id/btnLogin"
                 app:layout_constraintStart_toStartOf="@id/btnLogin"
                 app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
-
-
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogin"

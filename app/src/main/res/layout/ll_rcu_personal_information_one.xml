@@ -82,7 +82,7 @@
                 android:imeOptions="actionNext"
                 android:inputType="text"
                 android:text="@={personinformation1.edPersonMobileNumber}"
-                android:textColor="@color/gray_323232"
+                android:textColor="@color/black"
                 android:textColorHint="@color/gray_323232"
                 android:textSize="@dimen/verificationDetailTextSize"
                 app:custom_font="@string/app_font_regular" />
@@ -112,7 +112,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="number"
                     android:text="@={personinformation1.edAge}"
-                    android:textColor="@color/gray_323232"
+                    android:textColor="@color/black"
                     android:textColorHint="@color/gray_323232"
                     android:textSize="@dimen/verificationDetailTextSize"
                     app:custom_font="@string/app_font_regular" />
@@ -125,7 +125,7 @@
                 android:background="@drawable/bg_spinner"
                 app:custom_font="@string/app_font_regular"
                 android:layout_weight="1"
-                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:entries="@array/material_status"
                 app:setOnItemSelectedListener="@{personinformation1.clicksMaterialStatusTypeListener}"
@@ -151,7 +151,8 @@
                 android:textColor="@color/black"
                 android:layout_marginTop="@dimen/_10sdp"
                 app:layout_constraintTop_toBottomOf="@+id/layoutCamera"
-                android:textSize="@dimen/_12sdp">
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="SpUsage">
             </com.example.mypraticeapplication.widget.SmallText>
 
 
@@ -193,8 +194,10 @@
                     android:hint="@string/applicant_TotalFamilyMembers_label"
                     android:imeOptions="actionNext"
                     android:inputType="text"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:text="@={personinformation1.edtTotalFamilyMembers}"
-                    android:textColor="@color/gray_323232"
+                    android:textColor="@color/black"
                     android:textColorHint="@color/gray_323232"
                     android:textSize="@dimen/verificationDetailTextSize"
                     app:custom_font="@string/app_font_regular" />
@@ -220,9 +223,11 @@
                     android:hint="@string/applicant_TotalEarningMember_label"
                     android:imeOptions="actionNext"
                     android:inputType="text"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:text="@={personinformation1.edtTotalEarningMember}"
-                    android:textColor="@color/gray_323232"
+                    android:textColor="@color/black"
                     android:textColorHint="@color/gray_323232"
                     android:textSize="@dimen/verificationDetailTextSize"
                     app:custom_font="@string/app_font_regular" />
@@ -289,7 +294,7 @@
                         android:imeOptions="actionNext"
                         android:inputType="text"
                         android:text="@={personinformation1.edtPermanentAddress}"
-                        android:textColor="@color/gray_323232"
+                        android:textColor="@color/black"
                         android:textColorHint="@color/gray_323232"
                         android:textSize="@dimen/verificationDetailTextSize"
                         app:custom_font="@string/app_font_regular" />
@@ -392,7 +397,8 @@
             android:text="@string/applicant_StayingAtCurrentAddress_label"
             android:textColor="@color/black"
             android:layout_marginTop="@dimen/_10sdp"
-            android:textSize="@dimen/_12sdp">
+            android:textSize="@dimen/_12sdp"
+            tools:ignore="SpUsage">
         </com.example.mypraticeapplication.widget.SmallText>
 
         <LinearLayout
@@ -419,9 +425,9 @@
                     android:layout_height="@dimen/edit_text_size"
                     android:hint="@string/applicant_StayingAtCurrentAddress_label"
                     android:imeOptions="actionNext"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:text="@={personinformation1.edtStayingAddress}"
-                    android:textColor="@color/gray_323232"
+                    android:textColor="@color/black"
                     android:textColorHint="@color/gray_323232"
                     android:textSize="@dimen/verificationDetailTextSize"
                     app:custom_font="@string/app_font_regular" />
@@ -469,7 +475,7 @@
                 android:imeOptions="actionNext"
                 android:inputType="text"
                 android:text="@={personinformation1.edtElectricityBillName}"
-                android:textColor="@color/gray_323232"
+                android:textColor="@color/black"
                 android:textColorHint="@color/gray_323232"
                 android:textSize="@dimen/verificationDetailTextSize"
                 app:custom_font="@string/app_font_regular" />
@@ -501,7 +507,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:text="@={personinformation1.edtKNo}"
-                    android:textColor="@color/gray_323232"
+                    android:textColor="@color/black"
                     android:textColorHint="@color/gray_323232"
                     android:textSize="@dimen/verificationDetailTextSize"
                     app:custom_font="@string/app_font_regular" />
@@ -527,14 +533,11 @@
                     android:imeOptions="actionNext"
                     android:text="@={personinformation1.edtUnitConsumedLastMonth}"
                     android:inputType="number"
-                    android:textColor="@color/gray_323232"
+                    android:textColor="@color/black"
                     android:textColorHint="@color/gray_323232"
                     android:textSize="@dimen/verificationDetailTextSize"
                     app:custom_font="@string/app_font_regular" />
             </com.google.android.material.textfield.TextInputLayout>
-
         </LinearLayout>
-
-
     </LinearLayout>
 </layout>
