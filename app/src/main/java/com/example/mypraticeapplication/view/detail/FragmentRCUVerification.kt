@@ -37,6 +37,7 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
         binding.viewModel = rcuVerificationViewModel
         binding.lifecycleOwner = this
 //        basicInformationModel.init(context, FragmentDetail.selectedData!!)
+        rcuVerificationViewModel.init(context)
         setObserver()
         return binding.root
     }

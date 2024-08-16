@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -18,47 +19,30 @@ import com.example.mypraticeapplication.model.saveresidenceverification.SaveResi
 import com.example.mypraticeapplication.uttils.Utility
 import com.example.mypraticeapplication.viewmodel.verificationDetail.RCUVerificationViewModel
 
-
-class AddFamilyMemberAdapter(
-    val context: Context,
-    private val list: ArrayList<SaveResidanceApplicantFamilyDetail>,
-    private val relationWithApplicantList: List<String>?,
-    private val viewModel: RCUVerificationViewModel,
-    private var listener: OnItemClickListener
-) :  RecyclerView.Adapter<AddFamilyMemberViewHolder>() {
+class AddFamilyMemberAdapter(val context: Context, private val list: ArrayList<SaveResidanceApplicantFamilyDetail>, private val relationWithApplicantList: List<String>?, private val viewModel: RCUVerificationViewModel, private var listener: OnItemClickListener) :  RecyclerView.Adapter<AddFamilyMemberViewHolder>() {
 
     var isAtFirstPos: Boolean = false
     private var relationWithApplicantSpinnerAdapter: ArrayAdapter<String?>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddFamilyMemberViewHolder {
-
         val layoutInflater = LayoutInflater.from(parent.context)
         val binder = DataBindingUtil.inflate<ItemAddFamilymemberBinding>(layoutInflater, R.layout.item_add_familymember, parent, false)
         return AddFamilyMemberViewHolder(binder)
-
     }
 
     interface OnItemClickListener {
 
         fun onItemClick(position: Int, )
 
-        fun onRemoveClick(
-            position: Int,
-        )
+        fun onRemoveClick(position: Int, )
     }
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: AddFamilyMemberViewHolder, @SuppressLint("RecyclerView") position: Int) {
         holder.bind(list[position])
 
-
         if (relationWithApplicantList!!.isNotEmpty()){
-            relationWithApplicantSpinnerAdapter =
-                ArrayAdapter<String?>(
-                    context,
-                    android.R.layout.simple_spinner_item,
-                    relationWithApplicantList
-                )
+            relationWithApplicantSpinnerAdapter = ArrayAdapter<String?>(context, android.R.layout.simple_spinner_item, relationWithApplicantList)
             relationWithApplicantSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
             holder.binding.spnRelation.adapter = relationWithApplicantSpinnerAdapter
         }
@@ -107,6 +91,7 @@ class AddFamilyMemberAdapter(
             holder.binding.btnAddDay.visibility = View.VISIBLE
         else
             holder.binding.btnAddDay.visibility = View.GONE
+
 
     }
 

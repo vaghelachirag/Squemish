@@ -158,7 +158,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     fun init(context: Context?) {
         isAddressConfirmed.value = true
         // Room Database
-        getMasterDataApi()
+     //   getMasterDataApi()
         masterDataDao = InitDb.appDatabase.getMasterData()
         getDataFromMasterData()
         getLocation()
@@ -184,10 +184,10 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     fun onSaveClicked(){
      Log.e("OnSave","OnSave")
         val saveVerificationDataDetail: SaveVerificationDataDetail = SaveVerificationDataDetail()
-        saveVerificationDataDetail.setFirequestId(18)
+        saveVerificationDataDetail.setFirequestId(AppConstants.verificationId)
         saveVerificationDataDetail.setVerificationType("RV")
         val saveFiRequestResidenceVerification: SaveFirequestResidenceVerification = SaveFirequestResidenceVerification()
-        saveFiRequestResidenceVerification.setFirequestId(18)
+        saveFiRequestResidenceVerification.setFirequestId(AppConstants.verificationId)
         saveVerificationDataDetail.setFirequestResidenceVerification(saveFiRequestResidenceVerification)
       //  saveFiRequestResidenceVerification.setVisitDate("2024-08-14T22:32:20.503")
         saveFiRequestResidenceVerification.setAddressConfirmed(isAddressConfirmed.value)
@@ -236,10 +236,8 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         saveFiRequestResidenceVerification.setHouseOwnerName(edtLandlordName.get().toString())
         saveFiRequestResidenceVerification.setHouseOwnerMobileNo(edtLandlordMobileNo.get().toString())
 
-
         saveFiRequestResidenceVerification.setTotalFamilymembers(Utility.getParseInteger(edtTotalFamilyMembers.get().toString()))
         saveFiRequestResidenceVerification.setTotalEarningMembers(Utility.getParseInteger(edtTotalEarningMember.get().toString()))
-
 
         saveFiRequestResidenceVerification.setApplicantFamilyDetails(addFamilyMemberList)
 

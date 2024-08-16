@@ -20,7 +20,7 @@
         android:theme="@style/Theme.MyPraticeApplication"
         tools:targetApi="31">
         <activity
-            android:name=".view.ActivityTest"
+            android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.MyPraticeApplication">
             <intent-filter>
