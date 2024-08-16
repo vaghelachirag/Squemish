@@ -1,9 +1,11 @@
 package com.example.mypraticeapplication.view
 import android.R
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.transition.Visibility
 import com.example.mypraticeapplication.databinding.FragmentRcuVerificationBinding
 import com.example.mypraticeapplication.view.base.BaseActivity
@@ -17,6 +19,7 @@ class ActivityTest: BaseActivity()  {
 
     private val rcuVerificationViewModel by lazy { RCUVerificationViewModel(this,binding) }
 
+    private val locationPermissionCode = 2
 
     @SuppressLint("DiscouragedPrivateApi", "SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -141,6 +144,17 @@ class ActivityTest: BaseActivity()  {
             }
         }
 
+        // Political Connection
+        rcuVerificationViewModel.isHouseRented.observeForever {
+            Log.e("Confirmed",it.toString())
+            if (it == true){
+                binding.llPersonalInformation.llPersonalInformationOne.llRent.visibility = View.VISIBLE
+            }
+            else{
+                binding.llPersonalInformation.llPersonalInformationOne.llRent.visibility = View.GONE
+            }
+        }
+
     }
 
     private fun setVisibility(visibility: Boolean) {
@@ -158,6 +172,18 @@ class ActivityTest: BaseActivity()  {
         }
 
 
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == locationPermissionCode) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
 }

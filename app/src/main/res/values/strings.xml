@@ -46,6 +46,14 @@
     <string name="applicant_TotalFamilyMembers_label">Total Family members <font color='#ff0000' ><b>*</b></font></string>
     <string name="applicant_TotalEarningMember_label">Total Earning Member <font color='#ff0000' ><b>*</b></font></string>
     <string name="applicant_HouseOwnership_label">House Ownership <font color='#ff0000' ><b>*</b></font></string>
+
+    <!--Rent-->
+    <string name="applicant_PermanentAddress_label">Permanent Address</string>
+    <string name="applicant_MonthlyRentAmount_label">Monthly Rent Amount</string>
+    <string name="applicant_LandlordName_label">Landlord Name</string>
+    <string name="applicant_LandlordMobileNo_label">Landlord Mobile No</string>
+
+
     <string name="applicant_StayingAtCurrentAddress_label">Staying at current address (In Years) <font color='#ff0000' ><b>*</b></font></string>
     <string name="applicant_ElectricityBill_label">Name in Electricity Bill</string>
     <string name="applicant_KNo_label">K No</string>

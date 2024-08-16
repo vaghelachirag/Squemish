@@ -256,6 +256,135 @@
             android:textSize="@dimen/verificationDetailTextSize"
             tools:ignore="MissingConstraints" />
 
+        <LinearLayout
+            android:id="@+id/ll_Rent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                app:layout_constraintTop_toBottomOf="@+id/spnRelation"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inpapplicant_PermanentAddress_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/TextInputLayout"
+                    app:hintTextColor="@color/main_bg"
+                    app:passwordToggleEnabled="false"
+                    android:layout_weight="1"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    tools:ignore="MissingClass,MissingConstraints">
+
+                    <com.example.mypraticeapplication.widget.TypefaceEditText
+                        android:id="@+id/edt_applicant_PermanentAddress_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edit_text_size"
+                        android:hint="@string/applicant_PermanentAddress_label"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:text="@={personinformation1.edtPermanentAddress}"
+                        android:textColor="@color/gray_323232"
+                        android:textColorHint="@color/gray_323232"
+                        android:textSize="@dimen/verificationDetailTextSize"
+                        app:custom_font="@string/app_font_regular" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inpapplicant_MonthlyRentAmount_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/TextInputLayout"
+                    app:hintTextColor="@color/main_bg"
+                    app:passwordToggleEnabled="false"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    tools:ignore="MissingClass,MissingConstraints">
+
+                    <com.example.mypraticeapplication.widget.TypefaceEditText
+                        android:id="@+id/edt_applicant_MonthlyRentAmount_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edit_text_size"
+                        android:hint="@string/applicant_MonthlyRentAmount_label"
+                        android:imeOptions="actionNext"
+                        android:text="@={personinformation1.edtMonthlyRentAmount}"
+                        android:inputType="number"
+                        android:textColor="@color/gray_323232"
+                        android:textColorHint="@color/gray_323232"
+                        android:textSize="@dimen/verificationDetailTextSize"
+                        app:custom_font="@string/app_font_regular" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                app:layout_constraintTop_toBottomOf="@+id/spnRelation"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inapplicant_LandlordName_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/TextInputLayout"
+                    app:hintTextColor="@color/main_bg"
+                    app:passwordToggleEnabled="false"
+                    android:layout_weight="1"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    tools:ignore="MissingClass,MissingConstraints">
+
+                    <com.example.mypraticeapplication.widget.TypefaceEditText
+                        android:id="@+id/edt_applicant_LandlordName_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edit_text_size"
+                        android:hint="@string/applicant_LandlordName_label"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:text="@={personinformation1.edtLandlordName}"
+                        android:textColor="@color/gray_323232"
+                        android:textColorHint="@color/gray_323232"
+                        android:textSize="@dimen/verificationDetailTextSize"
+                        app:custom_font="@string/app_font_regular" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inpapplicant_LandlordMobileNo_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/TextInputLayout"
+                    app:hintTextColor="@color/main_bg"
+                    app:passwordToggleEnabled="false"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    tools:ignore="MissingClass,MissingConstraints">
+
+                    <com.example.mypraticeapplication.widget.TypefaceEditText
+                        android:id="@+id/edt_applicant_LandlordMobileNo_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edit_text_size"
+                        android:hint="@string/applicant_LandlordMobileNo_label"
+                        android:imeOptions="actionNext"
+                        android:text="@={personinformation1.edtLandlordMobileNo}"
+                        android:inputType="number"
+                        android:textColor="@color/gray_323232"
+                        android:textColorHint="@color/gray_323232"
+                        android:textSize="@dimen/verificationDetailTextSize"
+                        app:custom_font="@string/app_font_regular" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
         <com.example.mypraticeapplication.widget.SmallText
             android:id="@+id/applicant_StayingAtCurrentAddress_label"
             android:layout_width="match_parent"
@@ -397,7 +526,7 @@
                     android:hint="@string/applicant_UnitConsumedLastMonth_label"
                     android:imeOptions="actionNext"
                     android:text="@={personinformation1.edtUnitConsumedLastMonth}"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:textColor="@color/gray_323232"
                     android:textColorHint="@color/gray_323232"
                     android:textSize="@dimen/verificationDetailTextSize"

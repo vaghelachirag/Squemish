@@ -1,12 +1,21 @@
 package com.example.mypraticeapplication.viewmodel.verificationDetail
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.RadioGroup
+import android.widget.TextView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,7 +44,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class RCUVerificationViewModel(private val context: Context, private  val binding: com.example.mypraticeapplication.databinding.FragmentRcuVerificationBinding) : BaseViewModel() {
+class RCUVerificationViewModel(private val context: Context, private  val binding: com.example.mypraticeapplication.databinding.FragmentRcuVerificationBinding) : BaseViewModel(),
+    LocationListener {
 
 
     // Address Detail Params
@@ -59,6 +69,12 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     var edtUnitConsumedLastMonth: ObservableField<String> = ObservableField()
     var edtHouseSize: ObservableField<String> = ObservableField()
 
+  /*  Rent Variable*/
+    var edtPermanentAddress: ObservableField<String> = ObservableField()
+    var edtMonthlyRentAmount: ObservableField<String> = ObservableField()
+    var edtLandlordName: ObservableField<String> = ObservableField()
+    var edtLandlordMobileNo: ObservableField<String> = ObservableField()
+
 
     // Application Background
     var edtMedicalHistoryRemark: ObservableField<String> = ObservableField()
@@ -81,6 +97,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     var isAnyLoanRunning = MutableLiveData<Boolean>()
     var isAreaNegative = MutableLiveData<Boolean>()
     var isCastCommunityDominatedArea = MutableLiveData<Boolean>()
+    var isHouseRented = MutableLiveData<Boolean>()
 
     // All Spinner Position
     var selectedHouseLocalityPosition = MutableLiveData<Int>()
@@ -132,12 +149,35 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     var addFamilyMemberList: ArrayList<AddFamilyMemberModel> = ArrayList()
     private var addFamilyMemberAdapter: AddFamilyMemberAdapter? = null
 
+
+    // Location
+    private lateinit var locationManager: LocationManager
+    private val locationPermissionCode = 2
+
     fun init(context: Context?) {
         isAddressConfirmed.value = true
         // Room Database
         getMasterDataApi()
         masterDataDao = InitDb.appDatabase.getMasterData()
         getDataFromMasterData()
+        getLocation()
+    }
+
+    private fun getLocation() {
+        locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if ((ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(context as Activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionCode)
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
+    }
+
+    override fun onLocationChanged(location: Location) {
+        Log.e("Location","Latitude: " + location.latitude + " , Longitude: " + location.longitude)
+        edtLatitude.set(location.latitude.toString())
+        edtLongitude.set(location.longitude.toString())
+
+        edtLatitude.set(location.latitude.toString())
+        edtLongitude.set(location.longitude.toString())
     }
 
     fun onSaveClicked(){
@@ -148,7 +188,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         val saveFiRequestResidenceVerification: SaveFirequestResidenceVerification = SaveFirequestResidenceVerification()
         saveFiRequestResidenceVerification.setFirequestId(18)
         saveVerificationDataDetail.setFirequestResidenceVerification(saveFiRequestResidenceVerification)
-        saveFiRequestResidenceVerification.setVisitDate("2024-08-14T22:32:20.503")
+      //  saveFiRequestResidenceVerification.setVisitDate("2024-08-14T22:32:20.503")
         saveFiRequestResidenceVerification.setAddressConfirmed(isAddressConfirmed.value)
         saveFiRequestResidenceVerification.setIsAddressBelongsApplicant(isAddressBelong.value)
         saveFiRequestResidenceVerification.setIsHouseOpen(isHouseOpen.value)
@@ -188,6 +228,12 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         saveFiRequestResidenceVerification.setIsNameboardMismatch(isNameboardmismatched.value)
         saveFiRequestResidenceVerification.setNameboardMismatchReason(edt_Reason.get().toString())
         saveFiRequestResidenceVerification.setStayingTimeUnit(binding.llPersonalInformation.llPersonalInformationOne.spncurrentaddress.selectedItem.toString())
+
+
+        saveFiRequestResidenceVerification.setPermanentAddress(edtPermanentAddress.get().toString())
+        saveFiRequestResidenceVerification.setRent(edtMonthlyRentAmount.get().toString())
+        saveFiRequestResidenceVerification.setHouseOwnerName(edtLandlordName.get().toString())
+        saveFiRequestResidenceVerification.setHouseOwnerMobileNo(edtLandlordMobileNo.get().toString())
 
 
         Log.e("PersonAge",edAge.get().toString() + " "+Utility.getParseInteger(edAge.get().toString() ))
@@ -273,7 +319,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
                 )
             negativeProfileSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
 
-            binding.llApplicationBackground.spnapplicantIsInvolvedinNegativeProfileLabel.adapter = negativeProfileSpinnerAdapter
+        //    binding.llApplicationBackground.spnapplicantIsInvolvedinNegativeProfileLabel.adapter = negativeProfileSpinnerAdapter
 
 
             relationWithApplicantSpinnerAdapter =
@@ -434,10 +480,13 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     //  For Click Listener House Ownership Type
     val clicksHouseOwnerShipTypeListener = object : AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(parent: AdapterView<*>?) {
+            isHouseRented.value = false
         }
 
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
             selectedHouseOwnershipPosition.value = position
+            isHouseRented.value = position == 5
+            Log.e("OwnerShipType",position.toString())
         }
     }
 
