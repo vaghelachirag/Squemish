@@ -12,7 +12,7 @@
 
         <variable
             name="itemData"
-            type="com.example.mypraticeapplication.model.getverificationDetailResponse.AddFamilyMemberModel" />
+            type="com.example.mypraticeapplication.model.saveresidenceverification.SaveResidanceApplicantFamilyDetail" />
 
         <variable
             name="holder"

@@ -22,11 +22,11 @@ class SaveResidanceApplicantFamilyDetail {
 
     @SerializedName("memberCount")
     @Expose
-    private var memberCount: Int? = null
+    internal var memberCount: Int? = null
 
     @SerializedName("earningMemberCount")
     @Expose
-    private var earningMemberCount: Int? = null
+    internal var earningMemberCount: Int? = null
 
     fun getRecordId(): Int? {
         return recordId

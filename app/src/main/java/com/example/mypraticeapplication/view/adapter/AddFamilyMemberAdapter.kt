@@ -2,6 +2,8 @@ package com.example.mypraticeapplication.view.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,12 +14,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.databinding.ItemAddFamilymemberBinding
 import com.example.mypraticeapplication.model.getverificationDetailResponse.AddFamilyMemberModel
+import com.example.mypraticeapplication.model.saveresidenceverification.SaveResidanceApplicantFamilyDetail
+import com.example.mypraticeapplication.uttils.Utility
+import com.example.mypraticeapplication.viewmodel.verificationDetail.RCUVerificationViewModel
 
 
 class AddFamilyMemberAdapter(
     val context: Context,
-    private val list: ArrayList<AddFamilyMemberModel>,
+    private val list: ArrayList<SaveResidanceApplicantFamilyDetail>,
     private val relationWithApplicantList: List<String>?,
+    private val viewModel: RCUVerificationViewModel,
     private var listener: OnItemClickListener
 ) :  RecyclerView.Adapter<AddFamilyMemberViewHolder>() {
 
@@ -54,19 +60,46 @@ class AddFamilyMemberAdapter(
                     relationWithApplicantList
                 )
             relationWithApplicantSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
-
             holder.binding.spnRelation.adapter = relationWithApplicantSpinnerAdapter
         }
 
 
+        holder.binding.edtMemberCount.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                list[position].memberCount =  Utility.getParseInteger(holder.binding.edtMemberCount.text.toString())
+                viewModel.setTotalMemberMember()
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+        })
+
+        holder.binding.edtEaringMemberCount.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                list[position].earningMemberCount =  Utility.getParseInteger(holder.binding.edtEaringMemberCount.text.toString())
+                viewModel.setTotalMemberMember()
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+        })
+
 
         holder.binding.btnAddDay.setOnClickListener {
             listener.onItemClick(position)
+            viewModel.setTotalMemberMember()
         }
 
         holder.binding.btnRemoveDay.setOnClickListener {
             if (position > 0){
                 listener.onRemoveClick(position)
+                viewModel.setTotalMemberMember()
             }
         }
 
@@ -78,12 +111,14 @@ class AddFamilyMemberAdapter(
     }
 
     fun addDay() {
-        list.add(
-            AddFamilyMemberModel(
-                "10",
-                "50",
-            )
-        )
+        val saveResidenceApplicantFamilyDetail  =  SaveResidanceApplicantFamilyDetail()
+        saveResidenceApplicantFamilyDetail.setRecordId(0)
+        saveResidenceApplicantFamilyDetail.setFirequestId(18)
+        saveResidenceApplicantFamilyDetail.setMemberCount(1)
+        saveResidenceApplicantFamilyDetail.setEarningMemberCount(1)
+        saveResidenceApplicantFamilyDetail.setRelation("Select")
+
+        list.add(saveResidenceApplicantFamilyDetail)
     }
 
     fun removeDay(position: Int, ) {

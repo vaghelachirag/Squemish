@@ -26,6 +26,7 @@ import com.example.mypraticeapplication.model.getSaveResidenceVerificationRespon
 import com.example.mypraticeapplication.model.getmasterData.GetMasterApiResponse
 import com.example.mypraticeapplication.model.getverificationDetailResponse.AddFamilyMemberModel
 import com.example.mypraticeapplication.model.saveresidenceverification.SaveFirequestResidenceVerification
+import com.example.mypraticeapplication.model.saveresidenceverification.SaveResidanceApplicantFamilyDetail
 import com.example.mypraticeapplication.model.saveresidenceverification.SaveVerificationDataDetail
 import com.example.mypraticeapplication.network.CallbackObserver
 import com.example.mypraticeapplication.network.Networking
@@ -146,7 +147,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     private var masterDataDao: MasterDataDao? = null
 
 
-    var addFamilyMemberList: ArrayList<AddFamilyMemberModel> = ArrayList()
+    var addFamilyMemberList: ArrayList<SaveResidanceApplicantFamilyDetail> = ArrayList()
     private var addFamilyMemberAdapter: AddFamilyMemberAdapter? = null
 
 
@@ -236,6 +237,12 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         saveFiRequestResidenceVerification.setHouseOwnerMobileNo(edtLandlordMobileNo.get().toString())
 
 
+        saveFiRequestResidenceVerification.setTotalFamilymembers(Utility.getParseInteger(edtTotalFamilyMembers.get().toString()))
+        saveFiRequestResidenceVerification.setTotalEarningMembers(Utility.getParseInteger(edtTotalEarningMember.get().toString()))
+
+
+        saveFiRequestResidenceVerification.setApplicantFamilyDetails(addFamilyMemberList)
+
         Log.e("PersonAge",edAge.get().toString() + " "+Utility.getParseInteger(edAge.get().toString() ))
         val gson = Gson()
         val json = gson.toJson(saveVerificationDataDetail)
@@ -275,7 +282,14 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     }
     private fun addFamilyMemberData() {
         addFamilyMemberList  = ArrayList()
-        addFamilyMemberList.add(AddFamilyMemberModel("10","1"))
+        val saveResidenceApplicantFamilyDetail  =  SaveResidanceApplicantFamilyDetail()
+        saveResidenceApplicantFamilyDetail.setRecordId(0)
+        saveResidenceApplicantFamilyDetail.setFirequestId(18)
+        saveResidenceApplicantFamilyDetail.setMemberCount(1)
+        saveResidenceApplicantFamilyDetail.setEarningMemberCount(1)
+        saveResidenceApplicantFamilyDetail.setRelation("Select")
+
+        addFamilyMemberList.add(saveResidenceApplicantFamilyDetail)
         setCustomLayoutAddAdapter()
     }
 
@@ -521,12 +535,23 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         }
     }
 
+    public fun setTotalMemberMember(){
+        var totalMember : Int = 0
+        var totalEarningMember : Int = 0
+        addFamilyMemberList.forEach {
+            totalMember += it.getMemberCount()!!
+            totalEarningMember += it.getEarningMemberCount()!!
+            Log.e("TotalMember",it.getMemberCount().toString())
+        }
+        edtTotalFamilyMembers.set(totalMember.toString())
+        edtTotalEarningMember.set(totalEarningMember.toString())
+    }
+
     private fun setCustomLayoutAddAdapter() {
-        addFamilyMemberAdapter =  AddFamilyMemberAdapter(context,addFamilyMemberList,relationWithApplicantList,object : AddFamilyMemberAdapter.OnItemClickListener{
+        addFamilyMemberAdapter =  AddFamilyMemberAdapter(context,addFamilyMemberList,relationWithApplicantList,this,object : AddFamilyMemberAdapter.OnItemClickListener{
 
             @SuppressLint("NotifyDataSetChanged")
             override fun onItemClick(position: Int) {
-                Log.e("Position",position.toString())
                 addFamilyMemberAdapter?.addDay()
                 addFamilyMemberAdapter?.notifyDataSetChanged()
             }
@@ -539,12 +564,9 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
                 }
                 addFamilyMemberAdapter?.removeDay(position)
             }
-
         })
 
-        binding.llPersonalInformation.llPersonalInformationOne.addFamilyMemberRecyclerView.setLayoutManager(
-            LinearLayoutManager(context)
-        )
+        binding.llPersonalInformation.llPersonalInformationOne.addFamilyMemberRecyclerView.setLayoutManager(LinearLayoutManager(context))
         binding.llPersonalInformation.llPersonalInformationOne.addFamilyMemberRecyclerView.setAdapter(addFamilyMemberAdapter)
     }
 
