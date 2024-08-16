@@ -376,7 +376,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:text="@={applicationbackground.edtIsCastCommunityDominatedArea}"
-                    android:textColor="@color/gray_323232"
+                    android:textColor="@color/black"
                     android:textColorHint="@color/gray_323232"
                     android:textSize="@dimen/verificationDetailTextSize"
                     app:custom_font="@string/app_font_regular" />

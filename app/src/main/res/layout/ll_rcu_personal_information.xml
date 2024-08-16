@@ -224,7 +224,7 @@
                     app:hintTextColor="@color/main_bg"
                     app:passwordToggleEnabled="false"
                     android:layout_weight="1"
-                    tools:ignore="MissingClass,MissingConstraints">
+                    tools:ignore="InefficientWeight,MissingClass,MissingConstraints">
 
                     <com.example.mypraticeapplication.widget.TypefaceEditText
                         android:id="@+id/edt_Applicant_Reason_label"
