@@ -49,15 +49,15 @@ class SaveFirequestResidenceVerification {
 
     @SerializedName("rent")
     @Expose
-    private var rent: Any? = null
+    private var rent: Int? = null
 
     @SerializedName("houseOwnerName")
     @Expose
-    private var houseOwnerName: Any? = null
+    private var houseOwnerName: String? = null
 
     @SerializedName("houseOwnerMobileNo")
     @Expose
-    private var houseOwnerMobileNo: Any? = null
+    private var houseOwnerMobileNo: String? = null
 
     @SerializedName("houseLocality")
     @Expose
@@ -279,27 +279,27 @@ class SaveFirequestResidenceVerification {
         this.houseOwnerShip = houseOwnerShip
     }
 
-    fun getRent(): Any? {
+    fun getRent(): Int? {
         return rent
     }
 
-    fun setRent(rent: Any?) {
+    fun setRent(rent: Int?) {
         this.rent = rent
     }
 
-    fun getHouseOwnerName(): Any? {
+    fun getHouseOwnerName(): String? {
         return houseOwnerName
     }
 
-    fun setHouseOwnerName(houseOwnerName: Any?) {
+    fun setHouseOwnerName(houseOwnerName: String?) {
         this.houseOwnerName = houseOwnerName
     }
 
-    fun getHouseOwnerMobileNo(): Any? {
+    fun getHouseOwnerMobileNo(): String? {
         return houseOwnerMobileNo
     }
 
-    fun setHouseOwnerMobileNo(houseOwnerMobileNo: Any?) {
+    fun setHouseOwnerMobileNo(houseOwnerMobileNo: String?) {
         this.houseOwnerMobileNo = houseOwnerMobileNo
     }
 

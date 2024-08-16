@@ -16,6 +16,7 @@ import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.databinding.ItemAddFamilymemberBinding
 import com.example.mypraticeapplication.model.getverificationDetailResponse.AddFamilyMemberModel
 import com.example.mypraticeapplication.model.saveresidenceverification.SaveResidanceApplicantFamilyDetail
+import com.example.mypraticeapplication.uttils.AppConstants
 import com.example.mypraticeapplication.uttils.Utility
 import com.example.mypraticeapplication.viewmodel.verificationDetail.RCUVerificationViewModel
 
@@ -98,7 +99,7 @@ class AddFamilyMemberAdapter(val context: Context, private val list: ArrayList<S
     fun addDay() {
         val saveResidenceApplicantFamilyDetail  =  SaveResidanceApplicantFamilyDetail()
         saveResidenceApplicantFamilyDetail.setRecordId(0)
-        saveResidenceApplicantFamilyDetail.setFirequestId(18)
+        saveResidenceApplicantFamilyDetail.setFirequestId(AppConstants.verificationId)
         saveResidenceApplicantFamilyDetail.setMemberCount(1)
         saveResidenceApplicantFamilyDetail.setEarningMemberCount(1)
         saveResidenceApplicantFamilyDetail.setRelation("Select")

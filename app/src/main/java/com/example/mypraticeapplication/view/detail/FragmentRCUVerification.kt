@@ -1,11 +1,13 @@
 package com.example.mypraticeapplication.view.detail
 
 import android.app.Activity
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.mypraticeapplication.databinding.FragmentRcuVerificationBinding
 import com.example.mypraticeapplication.interfaces.FragmentLifecycleInterface
 import com.example.mypraticeapplication.model.getverificationDetailResponse.GetVerificationDetailData
@@ -19,6 +21,8 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
     private val binding get() = _binding!!
     var data : String = ""
     private val rcuVerificationViewModel by lazy { RCUVerificationViewModel( context as Activity,binding) }
+
+    private val locationPermissionCode = 2
 
 
     companion object {
@@ -39,6 +43,13 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
 //        basicInformationModel.init(context, FragmentDetail.selectedData!!)
         rcuVerificationViewModel.init(context)
         setObserver()
+
+
+        rcuVerificationViewModel.isLoading.observe(requireActivity()) { isLoading ->
+            if (isLoading && isAdded) showProgressbar()
+            else if (!isLoading && isAdded) hideProgressbar()
+        }
+
         return binding.root
     }
 
@@ -65,7 +76,6 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
                 binding.llAddressDetail.inpAddressBelongRemark.visibility = View.VISIBLE
             }
         }
-
 
         // NameBoard Confirmed
         rcuVerificationViewModel.isNameboardseenattheHouse.observeForever {
@@ -99,6 +109,7 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
                 binding.llApplicationBackground.inpMedicalHistoryRemark.visibility = View.GONE
             }
         }
+
 
         // Political Connection
         rcuVerificationViewModel.isAnyPoliticalIssue.observeForever {
@@ -158,7 +169,18 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
             }
         }
 
+        // Political Connection
+        rcuVerificationViewModel.isHouseRented.observeForever {
+            Log.e("Confirmed",it.toString())
+            if (it == true){
+                binding.llPersonalInformation.llPersonalInformationOne.llRent.visibility = View.VISIBLE
+            }
+            else{
+                binding.llPersonalInformation.llPersonalInformationOne.llRent.visibility = View.GONE
+            }
+        }
     }
+
 
     private fun setVisibility(visibility: Boolean) {
         if (visibility){
@@ -175,6 +197,19 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
         }
 
 
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == locationPermissionCode) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+               // Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
+            }
+            else {
+              //  Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onDestroyView() {

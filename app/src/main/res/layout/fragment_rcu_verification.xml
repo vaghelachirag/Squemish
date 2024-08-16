@@ -25,60 +25,69 @@
             app:cardBackgroundColor="@color/white"
             card_view:cardUseCompatPadding="true">
 
-            <LinearLayout
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                android:layout_margin="@dimen/_8sdp"
-                android:orientation="vertical">
-
-             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <include
-                        android:id="@+id/ll_address_detail"
-                        layout="@layout/ll_rcu_address_detail"
-                        bind:addressconfirmed="@{viewModel}"/>
-
-                </LinearLayout>
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:layout_margin="@dimen/_8sdp"
+                    android:orientation="vertical">
 
-                    <include
-                        android:id="@+id/ll_personal_information"
-                        layout="@layout/ll_rcu_personal_information"
-                        android:visibility="visible"
-                        bind:personalInforamtion="@{viewModel}"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <include
+                            android:id="@+id/ll_address_detail"
+                            layout="@layout/ll_rcu_address_detail"
+                            bind:addressconfirmed="@{viewModel}"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <include
+                            android:id="@+id/ll_personal_information"
+                            layout="@layout/ll_rcu_personal_information"
+                            android:visibility="visible"
+                            bind:personalInforamtion="@{viewModel}"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <include
+                            android:id="@+id/ll_application_background"
+                            layout="@layout/ll_rcu_application_background"
+                            bind:applicationbackground="@{viewModel}"/>
+
+                    </LinearLayout>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSave"
+                        android:layout_width="match_parent"
+                        style="@style/MaterialButtonStyle"
+                        android:onClick="@{(view) -> viewModel.onSaveClicked()}"
+                        android:text="Save"
+                        app:backgroundTint="@null"
+                        android:layout_marginLeft="@dimen/_50sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_50sdp"
+                        android:layout_marginBottom="@dimen/_30sdp"/>
+
 
                 </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <include
-                        android:id="@+id/ll_application_background"
-                        layout="@layout/ll_rcu_application_background"
-                        bind:applicationbackground="@{viewModel}"/>
-
-                </LinearLayout>
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSave"
-                    android:layout_width="match_parent"
-                    style="@style/MaterialButtonStyle"
-                    android:onClick="@{(view) -> viewModel.onSaveClicked()}"
-                    android:text="Save"
-                    app:backgroundTint="@null"
-                    android:layout_marginLeft="@dimen/_50sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_marginRight="@dimen/_50sdp"
-                    android:layout_marginBottom="@dimen/_30sdp"/>
-
-
-            </LinearLayout>
 
         </androidx.cardview.widget.CardView>
     </androidx.core.widget.NestedScrollView>

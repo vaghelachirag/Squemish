@@ -20,6 +20,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mypraticeapplication.R
+import com.example.mypraticeapplication.databinding.FragmentRcuVerificationBinding
 import com.example.mypraticeapplication.model.base.BaseViewModel
 import com.example.mypraticeapplication.model.getAcceptRejectResponse.GetAcceptRejectResponse
 import com.example.mypraticeapplication.model.getSaveResidenceVerificationResponse.GetSaveResidenceVerificationResponse
@@ -45,7 +46,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class RCUVerificationViewModel(private val context: Context, private  val binding: com.example.mypraticeapplication.databinding.FragmentRcuVerificationBinding) : BaseViewModel(),
+class RCUVerificationViewModel(private val context: Context, private  val binding: FragmentRcuVerificationBinding) : BaseViewModel(),
     LocationListener {
 
 
@@ -193,51 +194,52 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         saveFiRequestResidenceVerification.setAddressConfirmed(isAddressConfirmed.value)
         saveFiRequestResidenceVerification.setIsAddressBelongsApplicant(isAddressBelong.value)
         saveFiRequestResidenceVerification.setIsHouseOpen(isHouseOpen.value)
-        saveFiRequestResidenceVerification.setPersonMet(edPersonMet.get().toString())
+        saveFiRequestResidenceVerification.setPersonMet(edPersonMet.get())
         saveFiRequestResidenceVerification.setPersonMetRelation(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantRelationApplicant.selectedItem.toString())
-        saveFiRequestResidenceVerification.setPersonMobileNo(edPersonMobileNumber.get().toString())
-      //  saveFiRequestResidenceVerification.setStayingTime(edtStayingAddress.get().toString())
-        saveFiRequestResidenceVerification.setElectricityBillOwnerName(edtElectricityBillName.get().toString())
+        saveFiRequestResidenceVerification.setPersonMobileNo(edPersonMobileNumber.get())
+        saveFiRequestResidenceVerification.setStayingTime(Utility.getParseInteger(edtStayingAddress.get().toString()))
+        saveFiRequestResidenceVerification.setElectricityBillOwnerName(edtElectricityBillName.get())
         saveFiRequestResidenceVerification.setHouseOwnerShip(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantHouseOwnershipLabel.selectedItem.toString())
         saveFiRequestResidenceVerification.setHouseLocality(binding.llPersonalInformation.spnHouseLocality.selectedItem.toString())
         saveFiRequestResidenceVerification.setIsMedicalHistory(isMajorMedicalHistory.value)
-        saveFiRequestResidenceVerification.setMedicalHistoryRemarks(edtMedicalHistoryRemark.get().toString())
+        saveFiRequestResidenceVerification.setMedicalHistoryRemarks(edtMedicalHistoryRemark.get())
         saveFiRequestResidenceVerification.setIsPoliticalConnection(isAnyPoliticalIssue.value)
-        saveFiRequestResidenceVerification.setPoliticalRemarks(edtPoliticalConnectionRemark.get().toString())
+        saveFiRequestResidenceVerification.setPoliticalRemarks(edtPoliticalConnectionRemark.get())
         saveFiRequestResidenceVerification.setIsAddressBelongsApplicant(isAddressBelong.value)
-        saveFiRequestResidenceVerification.setAddressBelongsApplicantRemark(edtAddressBelongRemark.get().toString())
-        saveFiRequestResidenceVerification.setPersonMetAge(Utility.getParseInteger(edAge.get().toString()))
+        saveFiRequestResidenceVerification.setAddressBelongsApplicantRemark(edtAddressBelongRemark.get())
+        saveFiRequestResidenceVerification.setPersonMetAge(Utility.getParseInteger(edAge.get()))
         saveFiRequestResidenceVerification.setPersonMetMeritalStatus(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantMaterialStatus.selectedItem.toString())
-        saveFiRequestResidenceVerification.setTotalFamilymembers(Utility.getParseInteger(edtTotalEarningMember.get().toString()))
-        saveFiRequestResidenceVerification.setTotalEarningMembers(Utility.getParseInteger(edtTotalEarningMember.get().toString()))
-        saveFiRequestResidenceVerification.setKno(edtKNo.get().toString())
-        saveFiRequestResidenceVerification.setLastMonthUnits(Utility.getParseInteger(edtUnitConsumedLastMonth.get().toString()))
+        saveFiRequestResidenceVerification.setTotalFamilymembers(Utility.getParseInteger(edtTotalEarningMember.get()))
+        saveFiRequestResidenceVerification.setTotalEarningMembers(Utility.getParseInteger(edtTotalEarningMember.get()))
+        saveFiRequestResidenceVerification.setKno(edtKNo.get())
+        saveFiRequestResidenceVerification.setLastMonthUnits(Utility.getParseInteger(edtUnitConsumedLastMonth.get()))
         saveFiRequestResidenceVerification.setAccommodationType(binding.llPersonalInformation.spnAccommodationType.selectedItem.toString())
-        saveFiRequestResidenceVerification.setHouseSize(Utility.getParseInteger(edtHouseSize.get().toString()))
+        saveFiRequestResidenceVerification.setHouseSize(Utility.getParseInteger(edtHouseSize.get()))
         saveFiRequestResidenceVerification.setHouseSizeUnit(binding.llPersonalInformation.spnapplicantHouseSizeLabel.selectedItem.toString())
         saveFiRequestResidenceVerification.setIsAnyOtherLoan(isAnyLoanRunning.value)
-        saveFiRequestResidenceVerification.setBankName(edtBankName.get().toString())
-        saveFiRequestResidenceVerification.setLoanAmount(Utility.getParseInteger(edtLoanAmount.get().toString()))
-        saveFiRequestResidenceVerification.setRunningSince(Utility.getParseInteger(edtRunningSince.get().toString()))
+        saveFiRequestResidenceVerification.setBankName(edtBankName.get())
+        saveFiRequestResidenceVerification.setLoanAmount(Utility.getParseInteger(edtLoanAmount.get()))
+        saveFiRequestResidenceVerification.setRunningSince(Utility.getParseInteger(edtRunningSince.get()))
         saveFiRequestResidenceVerification.setIsAreaNegative(isAreaNegative.value)
-        saveFiRequestResidenceVerification.setOtherObservations(edtPoliticalConnectionRemark.get().toString())
+        saveFiRequestResidenceVerification.setIsNegativeProfile(binding.llApplicationBackground.spnapplicantIsInvolvedinNegativeProfileLabel.selectedItem.toString())
+        saveFiRequestResidenceVerification.setOtherObservations(edtOtherObservationsRemark.get())
         saveFiRequestResidenceVerification.setIsCastCommunity(isCastCommunityDominatedArea.value)
-        saveFiRequestResidenceVerification.setIsCastCommunityRemark(edtIsCastCommunityDominatedArea.get().toString())
-        saveFiRequestResidenceVerification.setLatitude(edtLatitude.get().toString())
-        saveFiRequestResidenceVerification.setLongitude(edtLongitude.get().toString())
+        saveFiRequestResidenceVerification.setIsCastCommunityRemark(edtIsCastCommunityDominatedArea.get())
+        saveFiRequestResidenceVerification.setLatitude(edtLatitude.get())
+        saveFiRequestResidenceVerification.setLongitude(edtLongitude.get())
         saveFiRequestResidenceVerification.setIsNameboardSeen(isAddressConfirmed.value)
         saveFiRequestResidenceVerification.setIsNameboardMismatch(isNameboardmismatched.value)
-        saveFiRequestResidenceVerification.setNameboardMismatchReason(edt_Reason.get().toString())
+        saveFiRequestResidenceVerification.setNameboardMismatchReason(edt_Reason.get())
         saveFiRequestResidenceVerification.setStayingTimeUnit(binding.llPersonalInformation.llPersonalInformationOne.spncurrentaddress.selectedItem.toString())
+        saveFiRequestResidenceVerification.setIsAreaNegativeRemark(edtIsAreaNegativeRemark.get())
 
+        saveFiRequestResidenceVerification.setPermanentAddress(edtPermanentAddress.get())
+        saveFiRequestResidenceVerification.setRent(Utility.getParseInteger(edtMonthlyRentAmount.get()))
+        saveFiRequestResidenceVerification.setHouseOwnerName(edtLandlordName.get())
+        saveFiRequestResidenceVerification.setHouseOwnerMobileNo(edtLandlordMobileNo.get())
 
-        saveFiRequestResidenceVerification.setPermanentAddress(edtPermanentAddress.get().toString())
-        saveFiRequestResidenceVerification.setRent(edtMonthlyRentAmount.get().toString())
-        saveFiRequestResidenceVerification.setHouseOwnerName(edtLandlordName.get().toString())
-        saveFiRequestResidenceVerification.setHouseOwnerMobileNo(edtLandlordMobileNo.get().toString())
-
-        saveFiRequestResidenceVerification.setTotalFamilymembers(Utility.getParseInteger(edtTotalFamilyMembers.get().toString()))
-        saveFiRequestResidenceVerification.setTotalEarningMembers(Utility.getParseInteger(edtTotalEarningMember.get().toString()))
+        saveFiRequestResidenceVerification.setTotalFamilymembers(Utility.getParseInteger(edtTotalFamilyMembers.get()))
+        saveFiRequestResidenceVerification.setTotalEarningMembers(Utility.getParseInteger(edtTotalEarningMember.get()))
 
         saveFiRequestResidenceVerification.setApplicantFamilyDetails(addFamilyMemberList)
 
@@ -266,15 +268,18 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
                         Log.e("Status",t.getStatusCode().toString())
                         isLoading.postValue(false)
                         if(t.getStatusCode() == 200){
-                            Utils().showToast(context,t.getMessage().toString())
+                         //   Utils().showToast(context,t.getMessage().toString())
+                            Utils().showSnackBar(context,t.getMessage().toString(),binding.constraintLayout)
                         }else{
-                            Utils().showToast(context,t.getMessage().toString())
+                            Utils().showSnackBar(context,t.getMessage().toString(),binding.constraintLayout)
+                           // Utils().showToast(context,t.getMessage().toString())
                         }
                         Log.e("StatusCode",t.getStatus().toString())
                     }
                 })
         }else{
-            Utils().showToast(context,context.getString(R.string.nointernetconnection).toString())
+           // Utils().showToast(context,context.getString(R.string.nointernetconnection).toString())
+            Utils().showSnackBar(context,context.getString(R.string.nointernetconnection).toString(),binding.constraintLayout)
         }
 
     }
@@ -282,7 +287,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         addFamilyMemberList  = ArrayList()
         val saveResidenceApplicantFamilyDetail  =  SaveResidanceApplicantFamilyDetail()
         saveResidenceApplicantFamilyDetail.setRecordId(0)
-        saveResidenceApplicantFamilyDetail.setFirequestId(18)
+        saveResidenceApplicantFamilyDetail.setFirequestId(AppConstants.verificationId)
         saveResidenceApplicantFamilyDetail.setMemberCount(1)
         saveResidenceApplicantFamilyDetail.setEarningMemberCount(1)
         saveResidenceApplicantFamilyDetail.setRelation("Select")
@@ -331,7 +336,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
                 )
             negativeProfileSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
 
-        //    binding.llApplicationBackground.spnapplicantIsInvolvedinNegativeProfileLabel.adapter = negativeProfileSpinnerAdapter
+            binding.llApplicationBackground.spnapplicantIsInvolvedinNegativeProfileLabel.adapter = negativeProfileSpinnerAdapter
 
 
             relationWithApplicantSpinnerAdapter =
@@ -597,14 +602,16 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
                                 }
                             }
                         }else{
-                            Utils().showToast(context,t.getMessage().toString())
+                            //Utils().showToast(context,t.getMessage().toString())
+                            Utils().showSnackBar(context,t.getMessage().toString(),binding.constraintLayout)
                         }
                         Log.e("StatusCode",t.getStatus().toString())
                     }
 
                 })
         }else{
-            Utils().showToast(context,context.getString(R.string.nointernetconnection).toString())
+            Utils().showSnackBar(context,context.getString(R.string.nointernetconnection).toString(),binding.constraintLayout)
+         //   Utils().showToast(context,context.getString(R.string.nointernetconnection).toString())
         }
     }
 }
