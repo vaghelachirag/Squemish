@@ -75,7 +75,10 @@ class Utility {
 
         fun getParseInteger(str: String?): Int {
             var int = 0
-            if (str!!.isNotEmpty() && !!str.equals(null)) {
+
+            if (str.isNullOrBlank() || str.isEmpty() || str.isEmpty() || str.toIntOrNull() == null) {
+                int = 0
+            } else {
                 int = Integer.parseInt(str)
             }
             return  int;

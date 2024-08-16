@@ -166,6 +166,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         saveFiRequestResidenceVerification.setIsAddressBelongsApplicant(isAddressBelong.value)
         saveFiRequestResidenceVerification.setAddressBelongsApplicantRemark(edtAddressBelongRemark.get().toString())
         saveFiRequestResidenceVerification.setPersonMetAge(Utility.getParseInteger(edAge.get().toString()))
+        saveFiRequestResidenceVerification.setPersonMetMeritalStatus(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantMaterialStatus.selectedItem.toString())
         saveFiRequestResidenceVerification.setTotalFamilymembers(Utility.getParseInteger(edtTotalEarningMember.get().toString()))
         saveFiRequestResidenceVerification.setTotalEarningMembers(Utility.getParseInteger(edtTotalEarningMember.get().toString()))
         saveFiRequestResidenceVerification.setKno(edtKNo.get().toString())
@@ -189,10 +190,10 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         saveFiRequestResidenceVerification.setStayingTimeUnit(binding.llPersonalInformation.llPersonalInformationOne.spncurrentaddress.selectedItem.toString())
 
 
+        Log.e("PersonAge",edAge.get().toString() + " "+Utility.getParseInteger(edAge.get().toString() ))
         val gson = Gson()
         val json = gson.toJson(saveVerificationDataDetail)
         Log.e("Json",json)
-
 
         if (Utility.isNetworkConnected(context)){
             isLoading.postValue(true)

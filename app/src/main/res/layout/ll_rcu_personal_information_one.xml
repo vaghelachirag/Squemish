@@ -110,7 +110,7 @@
                     android:layout_height="@dimen/edit_text_size"
                     android:hint="@string/applicant_Age_label"
                     android:imeOptions="actionNext"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:text="@={personinformation1.edAge}"
                     android:textColor="@color/gray_323232"
                     android:textColorHint="@color/gray_323232"
