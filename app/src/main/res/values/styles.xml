@@ -12,6 +12,16 @@
         <item name="android:windowDisablePreview">true</item>
     </style>
 
+
+
+    <style name="imageLogoStyle">
+        <item name="android:layout_width">@dimen/_10sdp</item>
+        <item name="android:layout_height">@dimen/_10sdp</item>
+        <item name="android:layout_marginTop">@dimen/_4sdp</item>
+        <item name="android:layout_marginEnd">@dimen/_6sdp</item>
+        <item name="android:layout_marginBottom">@dimen/_4sdp</item>
+    </style>
+
     <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="hintTextAppearance">@style/HintText</item>
         <!--        <item name="android:paddingBottom">@dimen/_3sdp</item>-->

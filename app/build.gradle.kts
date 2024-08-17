@@ -75,4 +75,6 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.11.0")
     implementation ("com.github.bumptech.glide:annotations:4.11.0")
 
+    implementation ("com.karumi:dexter:6.0.2")
+
 }

@@ -6,25 +6,27 @@ import com.example.mypraticeapplication.model.finalSubmission.SaveFinalSubmissio
 import com.example.mypraticeapplication.model.getAcceptRejectResponse.GetAcceptRejectResponse
 import com.example.mypraticeapplication.model.getMenuListResponse.GetMenuListResponse
 import com.example.mypraticeapplication.model.getMenuWebUrlResponse.GetMenuURLResponse
-import com.example.mypraticeapplication.model.getPreNeighbourData.GetPreNeighbourData
 import com.example.mypraticeapplication.model.getPreNeighbourData.GetPreNeighbourResponse
 import com.example.mypraticeapplication.model.getSaveResidenceVerificationResponse.GetSaveResidenceVerificationResponse
 import com.example.mypraticeapplication.model.getUserProfileData.GetUserProfileResponse
 import com.example.mypraticeapplication.model.getmasterData.GetMasterApiResponse
-import com.example.mypraticeapplication.model.getverificationDetailResponse.GetFiRequestPreNeighboutVerificationDto
-import com.example.mypraticeapplication.model.getverificationDetailResponse.GetFirequestPostNeighboutVerificationDto
 import com.example.mypraticeapplication.model.getverificationDetailResponse.GetVerificationDetailResponse
-import com.example.mypraticeapplication.model.registerDevice.GetDeviceRegistrationResponse
 import com.example.mypraticeapplication.model.login.GetLoginResponseModel
 import com.example.mypraticeapplication.model.pendingRequest.GetPendingRequestResponse
+import com.example.mypraticeapplication.model.registerDevice.GetDeviceRegistrationResponse
 import com.example.mypraticeapplication.model.saveresidenceverification.SaveVerificationDataDetail
 import io.reactivex.Observable
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Query
+
 
 interface ApiInterface {
 
@@ -76,5 +78,9 @@ interface ApiInterface {
     @POST("api/FiRequest/SaveFirequestFinalSubmission")
     fun getSaveFinalSubmissionResponse(@Body requestBody: SaveFinalSubmissionData): Observable<GetFinalSubmissionApiResponse>
 
+
+
+    @POST("api/FiRequest/SaveMobileAppFIDocument")
+    fun saveSurveyPictureBase(@Body body: RequestBody): Observable<GetFinalSubmissionApiResponse?>?
 
 }
