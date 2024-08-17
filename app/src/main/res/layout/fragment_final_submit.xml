@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -9,39 +10,134 @@
             type="com.example.mypraticeapplication.viewmodel.verificationDetail.FinalSubmitViewModel" />
     </data>
 
-    <RelativeLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".view.surveyDetails.FragmentEnquiry">
+        android:background="@color/light_Gray">
 
-        <androidx.core.widget.NestedScrollView
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@id/btnSave">
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/corner_radius"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:cardBackgroundColor="@color/white"
+            card_view:cardUseCompatPadding="true">
 
-
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/_4sdp"
-                android:orientation="vertical"
-                tools:context=".view.surveyDetails.FragmentEnquiry">
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_marginBottom="@dimen/_30sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
 
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+                    <com.example.mypraticeapplication.widget.HeaderText
+                        android:id="@+id/txtStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/status"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="@dimen/corner_radius"
+                        android:textSize="@dimen/_12sdp"
+                        tools:ignore="MissingConstraints">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnSave"
-            style="@style/RoundedYellowButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="10sp"
-            android:text="@string/save"
-            android:visibility="visible"
-            tools:visibility="visible" />
+                    </com.example.mypraticeapplication.widget.HeaderText>
 
-    </RelativeLayout>
+
+
+                    <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
+                        android:id="@+id/spFinalSubmission"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edit_text_size"
+                        android:background="@drawable/bg_spinner"
+                        app:custom_font="@string/app_font_regular"
+                        android:entries="@array/neighbourrecognised_array"
+                        app:setOnItemSelectedListener="@{viewModel.clicksListener}"
+                        android:imeOptions="actionNext"
+                        android:selectedItemPosition="@{viewModel.selectedItemPosition}"
+                        android:textSize="@dimen/verificationDetailTextSize"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtStatus"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        tools:ignore="MissingConstraints" />
+
+
+
+                    <com.example.mypraticeapplication.widget.HeaderText
+                        android:id="@+id/txtRemark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/remark"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="@dimen/corner_radius"
+                        android:textSize="@dimen/_12sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/spFinalSubmission"
+                        tools:ignore="MissingConstraints">
+
+                    </com.example.mypraticeapplication.widget.HeaderText>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inpRemark"
+                        style="@style/TextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_120sdp"
+                        android:layout_marginTop="8dp"
+                        app:hintTextColor="@color/main_bg"
+                        app:layout_constraintTop_toBottomOf="@+id/txtRemark"
+                        tools:ignore="MissingClass,MissingConstraints">
+
+
+                        <com.example.mypraticeapplication.widget.TypefaceEditText
+                            android:id="@+id/edt_Remark"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_120sdp"
+                            android:hint="@string/remark"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
+                            android:text="@={viewModel.edtRemark}"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/gray_323232"
+                            android:textSize="@dimen/verificationDetailTextSize"
+                            app:custom_font="@string/app_font_regular" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSave"
+                        style="@style/MaterialButtonStyle"
+                        android:layout_marginLeft="@dimen/_50sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_50sdp"
+                        android:layout_marginBottom="@dimen/_30sdp"
+                        android:onClick="@{(view) -> viewModel.onSaveClicked()}"
+                        android:text="Save"
+                        app:backgroundTint="@null"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/inpRemark" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.core.widget.NestedScrollView>
+
 </layout>

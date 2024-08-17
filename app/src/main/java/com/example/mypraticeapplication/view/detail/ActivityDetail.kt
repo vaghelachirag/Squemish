@@ -92,6 +92,7 @@ class ActivityDetail  : BaseActivity()  {
         viewPagerAdapter.addFragment(FragmentBasicInformation.newInstance(selectedData), "Basic Information")
         viewPagerAdapter.addFragment(FragmentPreNeighbourVerification.newInstance(selectedData), "Pre-Neighbour Verification")
         viewPagerAdapter.addFragment(FragmentRCUVerification.newInstance(selectedData), "RCU Verification")
+        viewPagerAdapter.addFragment(FragmentPhotograph.newInstance(selectedData), "Photograph")
         viewPagerAdapter.addFragment(FragmentPostNeighbourVerification.newInstance(selectedData), "Post-Neighbour Verification")
         viewPagerAdapter.addFragment(FragmentFinalSubmit.newInstance(selectedData), "Final Submit")
 

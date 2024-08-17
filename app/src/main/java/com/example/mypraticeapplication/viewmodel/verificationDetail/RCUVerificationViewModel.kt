@@ -35,8 +35,10 @@ import com.example.mypraticeapplication.room.InitDb
 import com.example.mypraticeapplication.room.dao.MasterDataDao
 import com.example.mypraticeapplication.uttils.AppConstants
 import com.example.mypraticeapplication.uttils.Utility
+import com.example.mypraticeapplication.uttils.Utility.Companion.setAllEnabled
 import com.example.mypraticeapplication.uttils.Utils
 import com.example.mypraticeapplication.view.adapter.AddFamilyMemberAdapter
+import com.example.mypraticeapplication.view.detail.ActivityDetail
 import com.example.mypraticeapplication.view.detail.FragmentBasicInformation
 import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -163,6 +165,12 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         masterDataDao = InitDb.appDatabase.getMasterData()
         getDataFromMasterData()
         getLocation()
+        setSelectedData()
+    }
+
+    private fun setSelectedData() {
+        isAddressConfirmed.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getAddressConfirmed()
+        binding.llAddressDetail.rbApplicantAddressConfirmedLabel.setAllEnabled(true)
     }
 
     private fun getLocation() {

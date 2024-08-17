@@ -1,5 +1,6 @@
 package com.example.mypraticeapplication.model.getverificationDetailResponse
 
+import com.example.mypraticeapplication.model.saveresidenceverification.SaveFirequestResidenceVerification
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -349,7 +350,7 @@ class GetVerificationDetailData {
 
     @SerializedName("firequestResidenceVerification")
     @Expose
-    private var firequestResidenceVerification: Any? = null
+    private var firequestResidenceVerification: SaveFirequestResidenceVerification? = null
 
     @SerializedName("fiRequestResiBusinessVerification")
     @Expose
@@ -1135,15 +1136,15 @@ class GetVerificationDetailData {
         return firequestBusinessVerification
     }
 
-    fun setFiRequestBusinessVerification(fiRequestBusinessVerification: GetFiRequestBusinessVerification?) {
+    fun setFiRequestBusinessVerification(fiRequestBusinessVerification: SaveFirequestResidenceVerification?) {
         this.firequestBusinessVerification = firequestBusinessVerification
     }
 
-    fun getFiRequestResidenceVerification(): Any? {
+    fun getFiRequestResidenceVerification(): SaveFirequestResidenceVerification? {
         return firequestResidenceVerification
     }
 
-    fun setFiRequestResidenceVerification(fiRequestResidenceVerification: Any?) {
+    fun setFiRequestResidenceVerification(fiRequestResidenceVerification: SaveFirequestResidenceVerification?) {
         this.firequestResidenceVerification = firequestResidenceVerification
     }
 

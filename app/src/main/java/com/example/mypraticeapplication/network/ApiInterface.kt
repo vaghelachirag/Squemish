@@ -1,6 +1,8 @@
 package com.example.mypraticeapplication.network
 
 import com.example.mypraticeapplication.model.changepassword.GetChangePasswordResponse
+import com.example.mypraticeapplication.model.finalSubmission.GetFinalSubmissionApiResponse
+import com.example.mypraticeapplication.model.finalSubmission.SaveFinalSubmissionData
 import com.example.mypraticeapplication.model.getAcceptRejectResponse.GetAcceptRejectResponse
 import com.example.mypraticeapplication.model.getMenuListResponse.GetMenuListResponse
 import com.example.mypraticeapplication.model.getMenuWebUrlResponse.GetMenuURLResponse
@@ -69,4 +71,10 @@ interface ApiInterface {
 
     @POST("api/FiRequest/SaveVerification")
     fun getSaveFiResidenceResponse(@Body requestBody: SaveVerificationDataDetail): Observable<GetSaveResidenceVerificationResponse>
+
+
+    @POST("api/FiRequest/SaveFirequestFinalSubmission")
+    fun getSaveFinalSubmissionResponse(@Body requestBody: SaveFinalSubmissionData): Observable<GetFinalSubmissionApiResponse>
+
+
 }

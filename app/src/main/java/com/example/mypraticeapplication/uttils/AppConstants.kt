@@ -49,6 +49,7 @@ object AppConstants {
     var vendorOfficeOwnershipType = "VendorOfficeOwnershipType"
     var officeInfrastructure = "OfficeInfrastructure"
     var propertyType = "PropertyType"
+    var finalSubmission = "FinalSubmissionReason"
 
 
     // Menu Order

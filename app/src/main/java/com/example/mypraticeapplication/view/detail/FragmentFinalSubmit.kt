@@ -16,7 +16,7 @@ class FragmentFinalSubmit  : BaseFragment(), FragmentLifecycleInterface {
 
     // This property is only valid between onCreateView and
     private val binding get() = _binding!!
-    private val finalSubmitViewModel by lazy { FinalSubmitViewModel() }
+    private val finalSubmitViewModel by lazy { context?.let { FinalSubmitViewModel(it,binding) } }
 
     var data : String = ""
 
@@ -38,12 +38,17 @@ class FragmentFinalSubmit  : BaseFragment(), FragmentLifecycleInterface {
         _binding = FragmentFinalSubmitBinding.inflate(inflater, container, false)
         binding.viewModel = finalSubmitViewModel
         binding.lifecycleOwner = this
-//        basicInformationModel.init(context, FragmentDetail.selectedData!!)
+        finalSubmitViewModel!!.init(context)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        finalSubmitViewModel!!.isLoading.observe(requireActivity()) { isLoading ->
+            if (isLoading && isAdded) showProgressbar()
+            else if (!isLoading && isAdded) hideProgressbar()
+        }
     }
 
 
