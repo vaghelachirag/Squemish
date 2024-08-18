@@ -197,7 +197,7 @@ class SaveFirequestResidenceVerification {
 
     @SerializedName("applicantFamilyDetails")
     @Expose
-    private var applicantFamilyDetails: List<SaveResidanceApplicantFamilyDetail>? = null
+    private var applicantFamilyDetails: ArrayList<SaveResidanceApplicantFamilyDetail>? = null
 
     fun getFirequestId(): Int? {
         return firequestId
@@ -575,11 +575,11 @@ class SaveFirequestResidenceVerification {
         this.stayingTimeUnit = stayingTimeUnit
     }
 
-    fun getApplicantFamilyDetails(): List<SaveResidanceApplicantFamilyDetail>? {
+    fun getApplicantFamilyDetails(): ArrayList<SaveResidanceApplicantFamilyDetail>? {
         return applicantFamilyDetails
     }
 
-    fun setApplicantFamilyDetails(applicantFamilyDetails: List<SaveResidanceApplicantFamilyDetail>?) {
+    fun setApplicantFamilyDetails(applicantFamilyDetails: ArrayList<SaveResidanceApplicantFamilyDetail>?) {
         this.applicantFamilyDetails = applicantFamilyDetails
     }
 

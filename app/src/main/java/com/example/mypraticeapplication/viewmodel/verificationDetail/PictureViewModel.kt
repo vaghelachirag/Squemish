@@ -145,7 +145,6 @@ class PictureViewModel(private val context: Context, private val  binding: Fragm
                     })
             }
         }
-
     }
 
 

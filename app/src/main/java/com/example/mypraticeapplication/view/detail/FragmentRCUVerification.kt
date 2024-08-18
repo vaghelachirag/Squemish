@@ -70,20 +70,23 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
         rcuVerificationViewModel.isAddressBelong.observeForever {
             Log.e("Confirmed",it.toString())
             if (it == true){
+                binding.llAddressDetail.rbAddressBelongYes.isChecked = true
                 binding.llAddressDetail.inpAddressBelongRemark.visibility = View.GONE
             }
             else{
+                binding.llAddressDetail.rbAddressBelongNo.isChecked = true
                 binding.llAddressDetail.inpAddressBelongRemark.visibility = View.VISIBLE
             }
         }
 
         // NameBoard Confirmed
         rcuVerificationViewModel.isNameboardseenattheHouse.observeForever {
-            Log.e("Confirmed",it.toString())
             if (it == true){
+                binding.llPersonalInformation.rbIsNameboardseenattheHouseYes.isChecked = true
                 binding.llPersonalInformation.llNameboardMismatched.visibility = View.VISIBLE
             }
             else{
+                binding.llPersonalInformation.rbIsNameboardseenattheHouseNo.isChecked = true
                 binding.llPersonalInformation.llNameboardMismatched.visibility = View.GONE
             }
         }
@@ -92,9 +95,11 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
         rcuVerificationViewModel.isNameboardmismatched.observeForever {
             Log.e("Confirmed",it.toString())
             if (it == true){
+                binding.llPersonalInformation.rbApplicantIsNameboardseenattheHouseLabelYes.isChecked = true
                 binding.llPersonalInformation.inpApplicantReasonLabel.visibility = View.VISIBLE
             }
             else{
+                binding.llPersonalInformation.rbApplicantIsNameboardseenattheHouseLabeleNo.isChecked = true
                 binding.llPersonalInformation.inpApplicantReasonLabel.visibility = View.GONE
             }
         }
@@ -103,9 +108,11 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
         rcuVerificationViewModel.isMajorMedicalHistory.observeForever {
             Log.e("Confirmed",it.toString())
             if (it == true){
+                binding.llApplicationBackground.rbIsapplicanthaveanymajormedicalhistoryYes.isChecked = true
                 binding.llApplicationBackground.inpMedicalHistoryRemark.visibility = View.VISIBLE
             }
             else{
+                binding.llApplicationBackground.rbIsapplicanthaveanymajormedicalhistoryNo.isChecked = true
                 binding.llApplicationBackground.inpMedicalHistoryRemark.visibility = View.GONE
             }
         }
@@ -115,9 +122,11 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
         rcuVerificationViewModel.isAnyPoliticalIssue.observeForever {
             Log.e("Confirmed",it.toString())
             if (it == true){
+                binding.llApplicationBackground.rbIsapplicanthaveanypoliticalconnectionYes.isChecked = true
                 binding.llApplicationBackground.inpIsapplicanthaveanypoliticalconnectionRemark.visibility = View.VISIBLE
             }
             else{
+                binding.llApplicationBackground.rbIsapplicanthaveanypoliticalconnectionNo.isChecked = true
                 binding.llApplicationBackground.inpIsapplicanthaveanypoliticalconnectionRemark.visibility = View.GONE
             }
         }
@@ -127,9 +136,11 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
         rcuVerificationViewModel.isAnyLoanRunning.observeForever {
             Log.e("Confirmed",it.toString())
             if (it == true){
+                binding.llApplicationBackground.rbApplicantIsanyotherloanrunningLabelYes.isChecked = true
                 binding.llApplicationBackground.llOtherLoan.visibility = View.VISIBLE
             }
             else{
+                binding.llApplicationBackground.rbRbApplicantIsanyotherloanrunningLabelNo.isChecked = true
                 binding.llApplicationBackground.llOtherLoan.visibility = View.GONE
             }
         }
@@ -138,9 +149,11 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
         rcuVerificationViewModel.isAreaNegative.observeForever {
             Log.e("Confirmed",it.toString())
             if (it == true){
+                binding.llApplicationBackground.rbApplicantIsAreaNegativeLabelYes.isChecked = true
                 binding.llApplicationBackground.inpapplicantIsAreaNegativeLabel.visibility = View.VISIBLE
             }
             else{
+                binding.llApplicationBackground.rbApplicantIsAreaNegativeLabelNo.isChecked = true
                 binding.llApplicationBackground.inpapplicantIsAreaNegativeLabel.visibility = View.GONE
             }
         }
@@ -149,9 +162,11 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
         rcuVerificationViewModel.isCastCommunityDominatedArea.observeForever {
             Log.e("Confirmed",it.toString())
             if (it == true){
+                binding.llApplicationBackground.rbApplicantIsCastCommunityDominatedAreaYes.isChecked = true
                 binding.llApplicationBackground.inpapplicantIsCastCommunityDominatedAreaLabel.visibility = View.VISIBLE
             }
             else{
+                binding.llApplicationBackground.rbApplicantIsCastCommunityDominatedAreaNo.isChecked = true
                 binding.llApplicationBackground.inpapplicantIsCastCommunityDominatedAreaLabel.visibility = View.GONE
             }
         }
@@ -160,10 +175,12 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
         rcuVerificationViewModel.isHouseOpen.observeForever {
             Log.e("Confirmed",it.toString())
             if (it == true){
+                binding.llAddressDetail.radioDurningVisitYes.isChecked = true
                 binding.llPersonalInformation.llPersonalInformationOne.root.visibility = View.VISIBLE
                 binding.llPersonalInformation.llHouseSize.visibility = View.VISIBLE
             }
             else{
+                binding.llAddressDetail.radioDurningVisitNo.isChecked = true
                 binding.llPersonalInformation.llPersonalInformationOne.root.visibility = View.GONE
                 binding.llPersonalInformation.llHouseSize.visibility = View.GONE
             }
@@ -184,12 +201,14 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
 
     private fun setVisibility(visibility: Boolean) {
         if (visibility){
+            binding.llAddressDetail.radioAddressConfirmedYes.isChecked = true
             binding.llAddressDetail.llAddressConfirmed.visibility =   View.GONE
             binding.llPersonalInformation.root.visibility = View.VISIBLE
             binding.llApplicationBackground.root.visibility = View.VISIBLE
             binding.llAddressDetail.llAddressNotConfirmed.visibility = View.VISIBLE
         }
         else{
+            binding.llAddressDetail.radioAddressConfirmedNo.isChecked = true
             binding.llAddressDetail.llAddressConfirmed.visibility =   View.VISIBLE
             binding.llPersonalInformation.root.visibility = View.GONE
             binding.llApplicationBackground.root.visibility = View.GONE

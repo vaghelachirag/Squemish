@@ -13,7 +13,6 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.RadioGroup
-import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.ObservableField
@@ -22,10 +21,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.databinding.FragmentRcuVerificationBinding
 import com.example.mypraticeapplication.model.base.BaseViewModel
-import com.example.mypraticeapplication.model.getAcceptRejectResponse.GetAcceptRejectResponse
 import com.example.mypraticeapplication.model.getSaveResidenceVerificationResponse.GetSaveResidenceVerificationResponse
 import com.example.mypraticeapplication.model.getmasterData.GetMasterApiResponse
-import com.example.mypraticeapplication.model.getverificationDetailResponse.AddFamilyMemberModel
 import com.example.mypraticeapplication.model.saveresidenceverification.SaveFirequestResidenceVerification
 import com.example.mypraticeapplication.model.saveresidenceverification.SaveResidanceApplicantFamilyDetail
 import com.example.mypraticeapplication.model.saveresidenceverification.SaveVerificationDataDetail
@@ -35,11 +32,9 @@ import com.example.mypraticeapplication.room.InitDb
 import com.example.mypraticeapplication.room.dao.MasterDataDao
 import com.example.mypraticeapplication.uttils.AppConstants
 import com.example.mypraticeapplication.uttils.Utility
-import com.example.mypraticeapplication.uttils.Utility.Companion.setAllEnabled
 import com.example.mypraticeapplication.uttils.Utils
 import com.example.mypraticeapplication.view.adapter.AddFamilyMemberAdapter
 import com.example.mypraticeapplication.view.detail.ActivityDetail
-import com.example.mypraticeapplication.view.detail.FragmentBasicInformation
 import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -168,9 +163,58 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         setSelectedData()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setSelectedData() {
         isAddressConfirmed.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getAddressConfirmed()
-        binding.llAddressDetail.rbApplicantAddressConfirmedLabel.setAllEnabled(true)
+        isAddressBelong.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsAddressBelongsApplicant()
+        isHouseOpen.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsHouseOpen()
+        isNameboardseenattheHouse.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsNameboardSeen()
+        isNameboardmismatched.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsNameboardMismatch()
+        isMajorMedicalHistory.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsMedicalHistory()
+        isAnyPoliticalIssue.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsPoliticalConnection()
+        isAnyLoanRunning.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsAnyOtherLoan()
+        isAreaNegative.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsAreaNegative()
+        isCastCommunityDominatedArea.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsCastCommunity()
+
+
+        edtLatitude.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getLatitude().toString()))
+        edtLongitude.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getLongitude().toString()))
+        edtOtherObservations.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getOtherObservations().toString()))
+        edtAddressBelongRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getAddressBelongsApplicantRemark().toString()))
+        edPersonMet.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMet().toString()))
+        edPersonMobileNumber.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMobileNo().toString()))
+        edtMedicalHistoryRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getMedicalHistoryRemarks().toString()))
+        edtPoliticalConnectionRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPoliticalRemarks().toString()))
+        edtBankName.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getBankName().toString()))
+        edtLoanAmount.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getLoanAmount().toString()))
+        edtRunningSince.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getRunningSince().toString()))
+        edtIsAreaNegativeRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getNegativeProfileRemark().toString()))
+        edtIsCastCommunityDominatedArea.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsCastCommunityRemark().toString()))
+        edtOtherObservationsRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getOtherObservations().toString()))
+        edAge.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMetAge().toString()))
+        edtTotalEarningMember.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getTotalEarningMembers().toString()))
+        edtTotalFamilyMembers.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getTotalFamilymembers().toString()))
+        edtStayingAddress.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getStayingTime().toString()))
+        edtElectricityBillName.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getElectricityBillOwnerName().toString()))
+        edtKNo.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getKno().toString()))
+        edtUnitConsumedLastMonth.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getLastMonthUnits().toString()))
+        edtHouseSize.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseSize().toString()))
+        edtMedicalHistoryRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getMedicalHistoryRemarks().toString()))
+        edtPoliticalConnectionRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPoliticalRemarks().toString()))
+        edtBankName.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getBankName().toString()))
+
+        if(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getApplicantFamilyDetails() != null){
+            addFamilyMemberList =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getApplicantFamilyDetails()!!
+            setCustomLayoutAddAdapter()
+        }else{
+            addFamilyMemberData()
+        }
+
+        selectedRelationWithApplicantPosition.value = getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMetRelation().toString()),relationWithApplicantList)
+        selectedMaritalStatusPosition.value = getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMetMeritalStatus().toString()),materialStatusApplicantList)
+        selectedHouseOwnershipPosition.value = getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseLocality().toString()),houseLocalityList)
+
+       // Log.e("Selected", ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMet().toString())
     }
 
     private fun getLocation() {
@@ -306,8 +350,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
 
     private fun getDataFromMasterData() {
         CoroutineScope(Dispatchers.IO).launch {
-            houseLocalityList =
-                masterDataDao!!.getDataByKeyName(AppConstants.houseOrPremiseLocalityType)
+            houseLocalityList = masterDataDao!!.getDataByKeyName(AppConstants.houseOrPremiseLocalityType)
             accommodationList = masterDataDao!!.getDataByKeyName(AppConstants.accommodationType)
             negativeProfileList = masterDataDao!!.getDataByKeyName(AppConstants.profileType)
             relationWithApplicantList = masterDataDao!!.getDataByKeyName(AppConstants.relationType)
@@ -316,11 +359,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
 
 
             houseLocalitySpinnerAdapter =
-                ArrayAdapter<String?>(
-                    context,
-                    android.R.layout.simple_spinner_item,
-                    houseLocalityList!!
-                )
+                ArrayAdapter<String?>(context, android.R.layout.simple_spinner_item, houseLocalityList!!)
             houseLocalitySpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
 
             binding.llPersonalInformation.spnHouseLocality.adapter = houseLocalitySpinnerAdapter
@@ -364,10 +403,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
                     houseOwnershipList!!
                 )
             houseOwnershipApplicantSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
-
             binding.llPersonalInformation.llPersonalInformationOne.spnapplicantHouseOwnershipLabel.adapter = houseOwnershipApplicantSpinnerAdapter
-
-            addFamilyMemberData()
         }
     }
 
@@ -447,7 +483,6 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         if (checkedId == R.id.rb_applicant_IsCastCommunityDominatedArea_No) {
             isCastCommunityDominatedArea.value = false
         }
-
 
         if (checkedId == R.id.radio_DurningVisitYes) {
             isHouseOpen.value = true
@@ -621,5 +656,11 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             Utils().showSnackBar(context,context.getString(R.string.nointernetconnection).toString(),binding.constraintLayout)
          //   Utils().showToast(context,context.getString(R.string.nointernetconnection).toString())
         }
+
+    }
+
+    private fun getPositionFromArraylist(selectedData: String, list: List<String>?): Int {
+        Log.e("Position", list!!.indexOf(selectedData).toString())
+        return  list.indexOf(selectedData)
     }
 }
