@@ -4,6 +4,7 @@ import com.example.mypraticeapplication.model.changepassword.GetChangePasswordRe
 import com.example.mypraticeapplication.model.finalSubmission.GetFinalSubmissionApiResponse
 import com.example.mypraticeapplication.model.finalSubmission.SaveFinalSubmissionData
 import com.example.mypraticeapplication.model.getAcceptRejectResponse.GetAcceptRejectResponse
+import com.example.mypraticeapplication.model.getFiResidencePicture.GetFiResidencePictureResponse
 import com.example.mypraticeapplication.model.getMenuListResponse.GetMenuListResponse
 import com.example.mypraticeapplication.model.getMenuWebUrlResponse.GetMenuURLResponse
 import com.example.mypraticeapplication.model.getPreNeighbourData.GetPreNeighbourResponse
@@ -11,6 +12,7 @@ import com.example.mypraticeapplication.model.getSaveResidenceVerificationRespon
 import com.example.mypraticeapplication.model.getUserProfileData.GetUserProfileResponse
 import com.example.mypraticeapplication.model.getmasterData.GetMasterApiResponse
 import com.example.mypraticeapplication.model.getverificationDetailResponse.GetVerificationDetailResponse
+import com.example.mypraticeapplication.model.getverificationDetailResponse.GetVerificationDocument
 import com.example.mypraticeapplication.model.login.GetLoginResponseModel
 import com.example.mypraticeapplication.model.pendingRequest.GetPendingRequestResponse
 import com.example.mypraticeapplication.model.registerDevice.GetDeviceRegistrationResponse
@@ -79,8 +81,14 @@ interface ApiInterface {
     fun getSaveFinalSubmissionResponse(@Body requestBody: SaveFinalSubmissionData): Observable<GetFinalSubmissionApiResponse>
 
 
-
     @POST("api/FiRequest/SaveMobileAppFIDocument")
     fun saveSurveyPictureBase(@Body body: RequestBody): Observable<GetFinalSubmissionApiResponse?>?
 
+
+    @POST("api/FiRequest/RemoveMobileAppFIDocument")
+    fun deleteFiRequestPicture(@Body body: RequestBody): Observable<GetFinalSubmissionApiResponse?>?
+
+
+    @GET("api/FiRequest/GetFIDocuments")
+    fun getFiRequestPicture(@Query("FIRequestId") fiRequestId: String): Observable<GetFiResidencePictureResponse>
 }
