@@ -58,7 +58,7 @@ class BasicInformationViewModel(
     private var verificationDocumentAdapter: DocumentAdapter? = null
 
 
-    fun init(context: Context) {
+    fun init() {
 
         if (ActivityDetail.selectedData != null){
             refNo.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getRefNo().toString()))
@@ -168,7 +168,7 @@ class BasicInformationViewModel(
 
     private fun setVerificationDocumentAdapter() {
         if (ActivityDetail.selectedData!!.getDocuments() != null) {
-            var documentList = ActivityDetail.selectedData!!.getDocuments()
+            val documentList = ActivityDetail.selectedData!!.getDocuments()
             verificationDocumentAdapter = DocumentAdapter(
                 context,
                 documentList!!,
@@ -176,7 +176,6 @@ class BasicInformationViewModel(
                 object : OnItemSelected<GetVerificationDocument> {
                     override fun onItemSelected(t: GetVerificationDocument?, position: Int) {
                         Log.e("OnItem", "OnItem$position")
-
                     }
                 })
             binding.rvDocument.setLayoutManager(

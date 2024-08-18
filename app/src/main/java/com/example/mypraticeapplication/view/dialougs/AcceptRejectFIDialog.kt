@@ -14,14 +14,13 @@ import androidx.databinding.DataBindingUtil
 import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.databinding.DialogAddInventorySubitemBinding
 
-class AcceptRejectFIDialog(var mContext: Context, val acceptReasonList: List<String>, val isAcceptReject: Boolean) : Dialog(mContext, R.style.DialogTheme) {
+class AcceptRejectFIDialog(private var mContext: Context, private val acceptReasonList: List<String>, val isAcceptReject: Boolean) : Dialog(mContext, R.style.DialogTheme) {
 
     private lateinit var binding: DialogAddInventorySubitemBinding
     private var listener: OkButtonListener? = null
 
     private var acceptRejectListSpinnerAdapter: ArrayAdapter<String?>? = null
 
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
@@ -31,10 +30,10 @@ class AcceptRejectFIDialog(var mContext: Context, val acceptReasonList: List<Str
         binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_add_inventory_subitem, null, false)
 
         if(isAcceptReject){
-            binding.txtHeader.text = "Select Accept Reason"
+            "Select Accept Reason".also { binding.txtHeader.text = it }
         }
         else{
-            binding.txtHeader.text = "Select Reject Reason"
+            "Select Reject Reason".also { binding.txtHeader.text = it }
         }
 
         val lp = WindowManager.LayoutParams()

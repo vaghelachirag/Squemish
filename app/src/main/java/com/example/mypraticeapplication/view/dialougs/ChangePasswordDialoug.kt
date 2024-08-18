@@ -6,12 +6,11 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.WindowManager
-import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.databinding.ChangePasswordFragmentBinding
 
-class ChangePasswordDialoug(var mContext: Context,) : Dialog(mContext, R.style.ThemeDialog)  {
+class ChangePasswordDialoug(private var mContext: Context,) : Dialog(mContext, R.style.ThemeDialog)  {
 
     private lateinit var binding: ChangePasswordFragmentBinding
     private var listener: OkButtonListener? = null

@@ -20,17 +20,6 @@ class GetFinalSubmissionApiResponse {
     @Expose
     private var message: String? = null
 
-    @SerializedName("returnUrl")
-    @Expose
-    private var returnUrl: Any? = null
-
-    @SerializedName("data")
-    @Expose
-    private var data: Int? = null
-
-    @SerializedName("textData")
-    @Expose
-    private var textData: Any? = null
 
     fun getStatusCode(): Int? {
         return statusCode
@@ -54,29 +43,5 @@ class GetFinalSubmissionApiResponse {
 
     fun setMessage(message: String?) {
         this.message = message
-    }
-
-    fun getReturnUrl(): Any? {
-        return returnUrl
-    }
-
-    fun setReturnUrl(returnUrl: Any?) {
-        this.returnUrl = returnUrl
-    }
-
-    fun getData(): Int? {
-        return data
-    }
-
-    fun setData(data: Int?) {
-        this.data = data
-    }
-
-    fun getTextData(): Any? {
-        return textData
-    }
-
-    fun setTextData(textData: Any?) {
-        this.textData = textData
     }
 }

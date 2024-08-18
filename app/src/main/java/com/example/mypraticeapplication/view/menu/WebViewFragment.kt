@@ -49,7 +49,12 @@ class WebViewFragment: BaseFragment() {
 
                 showProgressbar()
                 binding.webView.setWebViewClient(object : WebViewClient() {
-                    @Suppress("deprecation")
+                    @Deprecated("Deprecated in Java", ReplaceWith(
+                        "Toast.makeText(activity, description, Toast.LENGTH_SHORT).show()",
+                        "android.widget.Toast",
+                        "android.widget.Toast"
+                    )
+                    )
                     override fun onReceivedError(
                         view: WebView,
                         errorCode: Int,
@@ -59,7 +64,6 @@ class WebViewFragment: BaseFragment() {
                         Toast.makeText(activity, description, Toast.LENGTH_SHORT).show()
                     }
 
-                    @TargetApi(Build.VERSION_CODES.M)
                     override fun onReceivedError(
                         view: WebView,
                         req: WebResourceRequest,

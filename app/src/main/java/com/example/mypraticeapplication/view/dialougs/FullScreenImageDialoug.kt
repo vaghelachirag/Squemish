@@ -13,7 +13,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.databinding.FullScreenImageDialougBinding
 
-class FullScreenImageDialoug(var mContext: Context, val documentPath: String?,) : Dialog(mContext, R.style.ThemeDialog)  {
+class FullScreenImageDialoug(private var mContext: Context, private val documentPath: String?,) : Dialog(mContext, R.style.ThemeDialog)  {
 
 
     private lateinit var binding: FullScreenImageDialougBinding

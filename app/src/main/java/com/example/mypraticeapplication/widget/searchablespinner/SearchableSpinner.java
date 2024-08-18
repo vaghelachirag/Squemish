@@ -23,7 +23,7 @@ import java.util.List;
 public class SearchableSpinner extends AppCompatSpinner implements View.OnTouchListener, SearchableListDialog.SearchableItem {
 
     public static final int NO_ITEM_SELECTED = -1;
-    private Context _context;
+    private final Context _context;
     private List _items;
     private SearchableListDialog _searchableListDialog;
 

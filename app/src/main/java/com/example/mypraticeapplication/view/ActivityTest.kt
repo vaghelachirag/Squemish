@@ -1,18 +1,15 @@
 package com.example.mypraticeapplication.view
-import android.R
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.transition.Visibility
 import com.example.mypraticeapplication.databinding.FragmentRcuVerificationBinding
 import com.example.mypraticeapplication.view.base.BaseActivity
 import com.example.mypraticeapplication.viewmodel.verificationDetail.RCUVerificationViewModel
 
 
-@Suppress("CAST_NEVER_SUCCEEDS")
 class ActivityTest: BaseActivity()  {
 
     private lateinit var binding: FragmentRcuVerificationBinding

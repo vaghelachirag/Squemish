@@ -67,7 +67,7 @@
             app:layout_constraintTop_toBottomOf="@+id/layoutCamera" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCategories"
+            android:id="@+id/rvPictures"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/_16sdp"
@@ -75,7 +75,7 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnSave"
+            app:spanCount="5"
             tools:listitem="@layout/item_pictures" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

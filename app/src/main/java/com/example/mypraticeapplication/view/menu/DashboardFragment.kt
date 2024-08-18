@@ -7,8 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.databinding.DashboardFragmentBinding
 import com.example.mypraticeapplication.model.pendingRequest.GetPendingRequestData
 import com.example.mypraticeapplication.uttils.AppConstants

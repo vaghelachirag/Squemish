@@ -32,7 +32,6 @@ class FragmentPostNeighbourVerification  : BaseFragment(), FragmentLifecycleInte
     companion object {
         fun newInstance(selectedData: GetVerificationDetailData?): FragmentPostNeighbourVerification {
             val bundle = Bundle()
-            //  bundle.putSerializable(DATA, selectedData)
             val fragmentPostNeighbourVerification = FragmentPostNeighbourVerification()
             fragmentPostNeighbourVerification.arguments = bundle
             return fragmentPostNeighbourVerification
@@ -60,7 +59,7 @@ class FragmentPostNeighbourVerification  : BaseFragment(), FragmentLifecycleInte
         postNeighbourVerificationViewModel.isNeighbourReconised.observeForever {
             if (it){
                 binding.inpReason.visibility = View.GONE
-                binding.edtReason.setText("")
+                binding.edtReason.setText(buildString {})
             }
             else{
                 binding.inpReason.visibility = View.VISIBLE

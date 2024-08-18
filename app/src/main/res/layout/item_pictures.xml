@@ -9,7 +9,7 @@
 
         <variable
             name="itemData"
-            type="com.example.mypraticeapplication.model.picture.PicturesModel" />
+            type="com.example.mypraticeapplication.model.getverificationDetailResponse.GetFiVerificationDocument" />
 
         <variable
             name="holder"
@@ -40,7 +40,6 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{(view) -> holder.onClickDelete(view,position, itemData,viewmodel)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_delete" />

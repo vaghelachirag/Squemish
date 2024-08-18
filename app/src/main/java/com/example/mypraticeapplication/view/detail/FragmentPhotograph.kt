@@ -15,7 +15,6 @@ import androidx.core.content.FileProvider
 import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.databinding.FragmentPhotographBinding
 import com.example.mypraticeapplication.interfaces.FragmentLifecycleInterface
-import com.example.mypraticeapplication.model.getverificationDetailResponse.GetVerificationDetailData
 import com.example.mypraticeapplication.uttils.ImagePickerDialog
 import com.example.mypraticeapplication.uttils.Utility
 import com.example.mypraticeapplication.uttils.onItemClick
@@ -46,9 +45,8 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
     val galleryCode: Int = 0x51
 
     companion object {
-        fun newInstance(selectedData: GetVerificationDetailData?): FragmentPhotograph {
+        fun newInstance(): FragmentPhotograph {
             val bundle = Bundle()
-            //  bundle.putSerializable(DATA, selectedData)
             val fragmentPhotograph = FragmentPhotograph()
             fragmentPhotograph.arguments = bundle
             return fragmentPhotograph
@@ -134,18 +132,12 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
 
     // Display Camera Pic
     fun displayCamera() {
-        val destPath: String? = Objects.requireNonNull(
-            Objects.requireNonNull(requireActivity()).getExternalFilesDir(null)!!
-        ).absolutePath
+        val destPath: String? = Objects.requireNonNull(Objects.requireNonNull(requireActivity()).getExternalFilesDir(null)!!).absolutePath
         val imagesFolder = File(destPath, this.resources.getString(R.string.app_name))
         try {
             imagesFolder.mkdirs()
             imgFile = File(imagesFolder, Date().time.toString() + ".jpg")
-            imagePath = FileProvider.getUriForFile(
-                requireActivity(),
-                BuildConfig.APPLICATION_ID + ".fileProvider",
-                imgFile!!
-            )
+            imagePath = FileProvider.getUriForFile(requireActivity(), BuildConfig.APPLICATION_ID + ".fileProvider", imgFile!!)
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imagePath)
             startActivityForResult(intent, cameraCode)
@@ -159,7 +151,7 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
             val filePath: String = imgFile!!.path
             val bitmap = BitmapFactory.decodeFile(filePath)
             Log.e("ImageBitmap",bitmap.toString())
-            photoVerificationViewModel.saveSurveyPicture(bitmap!!, imgFile!!.absolutePath,imgFile!!)
+            photoVerificationViewModel.saveSurveyPicture(imgFile!!)
         }
 
     }

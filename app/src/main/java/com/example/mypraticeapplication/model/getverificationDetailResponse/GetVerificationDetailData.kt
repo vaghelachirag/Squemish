@@ -394,7 +394,7 @@ class GetVerificationDetailData {
 
     @SerializedName("firequestVerificationDocuments")
     @Expose
-    private var firequestVerificationDocuments: List<Any>? = null
+    private var firequestVerificationDocuments: List<GetFiVerificationDocument>? = null
 
     @SerializedName("allocators")
     @Expose
@@ -1228,11 +1228,11 @@ class GetVerificationDetailData {
         this.firequestPropertyVerification = firequestPropertyVerification
     }
 
-    fun getFirequestVerificationDocuments(): List<Any>? {
+    fun getFirequestVerificationDocuments(): List<GetFiVerificationDocument>? {
         return firequestVerificationDocuments
     }
 
-    fun setFirequestVerificationDocuments(firequestVerificationDocuments: List<Any>?) {
+    fun setFirequestVerificationDocuments(firequestVerificationDocuments: List<GetFiVerificationDocument>?) {
         this.firequestVerificationDocuments = firequestVerificationDocuments
     }
 

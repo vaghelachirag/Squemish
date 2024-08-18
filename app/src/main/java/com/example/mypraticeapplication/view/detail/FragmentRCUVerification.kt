@@ -199,15 +199,15 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
 
     }
 
+
     @Deprecated("Deprecated in Java")
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == locationPermissionCode) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-               // Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
-            }
-            else {
-              //  Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+            when {
+                grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED -> {
+                    //  Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
@@ -218,11 +218,9 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
     }
 
     override fun onPauseFragment() {
-
     }
 
     override fun onResumeFragment(s: String?) {
-
     }
 
 }

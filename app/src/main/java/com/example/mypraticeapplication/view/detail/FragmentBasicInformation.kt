@@ -43,7 +43,7 @@ class FragmentBasicInformation  : BaseFragment(), FragmentLifecycleInterface {
         _binding = FragmentBasicInformationBinding.inflate(inflater, container, false)
         binding.viewModel = basicInformationModel
         binding.lifecycleOwner = this
-        context?.let { basicInformationModel.init(it) }
+        context?.let { basicInformationModel.init() }
         setView()
         setAction()
 
