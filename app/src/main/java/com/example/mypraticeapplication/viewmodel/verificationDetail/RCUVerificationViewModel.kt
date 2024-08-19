@@ -426,12 +426,8 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         selectedHouseSizePosition.postValue(getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseSizeUnit().toString()),houseSizeUnitList))
         selectedInvolvedNegativeProfilePosition.postValue(getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsNegativeProfile().toString()),negativeProfileList))
         selectedYearsPosition.postValue(getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getStayingTimeUnit().toString()),stayingAddressUnitList))
-     /*   selectedMaritalStatusPosition.value = getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMetMeritalStatus().toString()),materialStatusApplicantList)
-        selectedHouseLocalityItemPosition = getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseLocality().toString()),houseLocalityList)
-        selectedHouseOwnershipPosition.value = getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseOwnerShip().toString()),houseOwnershipList)
-        selectedYearsPosition.value = getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getStayingTimeUnit().toString()),houseOwnershipList)
-        selectedHouseLocalityItemPosition = getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getAccommodationType().toString()),accommodationList)*/
-    }
+
+      }
 
     val onAddressConfirmed = RadioGroup.OnCheckedChangeListener { _, checkedId ->
         if (checkedId == R.id.radio_AddressConfirmedYes) {

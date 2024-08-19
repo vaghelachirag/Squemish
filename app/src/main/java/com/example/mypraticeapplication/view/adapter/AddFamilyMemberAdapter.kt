@@ -49,6 +49,9 @@ class AddFamilyMemberAdapter(val context: Context, private val list: ArrayList<S
         }
 
 
+        holder.binding.edtMemberCount.setText(list[position].getMemberCount().toString())
+        holder.binding.edtEaringMemberCount.setText(list[position].getEarningMemberCount().toString())
+
         holder.binding.edtMemberCount.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
