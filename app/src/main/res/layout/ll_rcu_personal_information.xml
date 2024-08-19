@@ -86,7 +86,7 @@
                 android:entries="@array/neighbourrecognised_array"
                 app:setOnItemSelectedListener="@{personalInforamtion.clicksAccommodationTypeListener}"
                 android:imeOptions="actionNext"
-                android:selectedItemPosition="@{personalInforamtion.selectedHouseLocalityItemPosition}"
+                android:selectedItemPosition="@{personalInforamtion.selectedAccommodationTypePosition}"
                 android:textSize="@dimen/verificationDetailTextSize"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

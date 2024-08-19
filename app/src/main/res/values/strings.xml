@@ -207,8 +207,8 @@
     <string-array name="material_status">
         <item>Select</item>
         <item>Married</item>
-        <item>UnMarried</item>
-        <item>Divorce</item>
+        <item>Unmarried</item>
+        <item>Divorcee</item>
     </string-array>
 
 
