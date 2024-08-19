@@ -73,7 +73,7 @@
                             android:imeOptions="actionNext"
                             android:inputType="text"
                             android:text="@={viewModel.neighbour1Name}"
-                            android:textColor="@color/gray_323232"
+                            android:textColor="@color/black"
                             android:textColorHint="@color/gray_323232"
                             android:textSize="@dimen/verificationDetailTextSize"
                             app:custom_font="@string/app_font_regular" />
@@ -96,7 +96,7 @@
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:text="@={viewModel.neighbour1Mobile}"
-                            android:textColor="@color/gray_323232"
+                            android:textColor="@color/black"
                             android:textColorHint="@color/gray_323232"
                             android:textSize="@dimen/verificationDetailTextSize"
                             app:custom_font="@string/app_font_regular" />
@@ -121,7 +121,7 @@
                             android:imeOptions="actionNext"
                             android:inputType="text"
                             android:text="@={viewModel.neighbour1Remark}"
-                            android:textColor="@color/gray_323232"
+                            android:textColor="@color/black"
                             android:textColorHint="@color/gray_323232"
                             android:textSize="@dimen/verificationDetailTextSize"
                             app:custom_font="@string/app_font_regular" />
@@ -158,7 +158,7 @@
                             android:imeOptions="actionNext"
                             android:inputType="text"
                             android:text="@={viewModel.neighbour2Name}"
-                            android:textColor="@color/gray_323232"
+                            android:textColor="@color/black"
                             android:textColorHint="@color/gray_323232"
                             android:textSize="@dimen/verificationDetailTextSize"
                             app:custom_font="@string/app_font_regular" />
@@ -184,7 +184,7 @@
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:text="@={viewModel.neighbour2Mobile}"
-                            android:textColor="@color/gray_323232"
+                            android:textColor="@color/black"
                             android:textColorHint="@color/gray_323232"
                             android:textSize="@dimen/verificationDetailTextSize"
                             app:custom_font="@string/app_font_regular" />
@@ -211,7 +211,7 @@
                             android:imeOptions="actionDone"
                             android:inputType="text"
                             android:text="@={viewModel.neighbour2Remark}"
-                            android:textColor="@color/gray_323232"
+                            android:textColor="@color/black"
                             android:textColorHint="@color/gray_323232"
                             android:textSize="@dimen/verificationDetailTextSize"
                             app:custom_font="@string/app_font_regular" />
@@ -263,7 +263,7 @@
                             android:imeOptions="actionDone"
                             android:inputType="text"
                             android:text="@={viewModel.reason}"
-                            android:textColor="@color/gray_323232"
+                            android:textColor="@color/black"
                             android:textColorHint="@color/gray_323232"
                             android:textSize="@dimen/verificationDetailTextSize"
                             app:custom_font="@string/app_font_regular" />

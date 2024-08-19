@@ -118,7 +118,10 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
     private fun openImagePickerDialog() {
         ImagePickerDialog(requireActivity(), object : onItemClick {
             override fun onCameraClicked() {
-                displayCamera()
+              //  displayCamera()
+                val pickPhoto =
+                    Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                startActivityForResult(pickPhoto, galleryCode)
             }
 
             override fun onGalleryClicked() {
@@ -137,7 +140,7 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
         try {
             imagesFolder.mkdirs()
             imgFile = File(imagesFolder, Date().time.toString() + ".jpg")
-            imagePath = FileProvider.getUriForFile(requireActivity(), BuildConfig.APPLICATION_ID + ".fileProvider", imgFile!!)
+            imagePath = FileProvider.getUriForFile(requireActivity(), com.example.mypraticeapplication.BuildConfig.APPLICATION_ID + ".fileProvider", imgFile!!)
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imagePath)
             startActivityForResult(intent, cameraCode)

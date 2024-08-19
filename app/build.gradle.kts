@@ -8,6 +8,10 @@ android {
     namespace = "com.example.mypraticeapplication"
     compileSdk = 34
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
         applicationId = "com.example.mypraticeapplication"
         minSdk = 26

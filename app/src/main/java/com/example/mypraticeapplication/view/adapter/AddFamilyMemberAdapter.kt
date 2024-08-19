@@ -18,6 +18,7 @@ import com.example.mypraticeapplication.model.getverificationDetailResponse.AddF
 import com.example.mypraticeapplication.model.saveresidenceverification.SaveResidanceApplicantFamilyDetail
 import com.example.mypraticeapplication.uttils.AppConstants
 import com.example.mypraticeapplication.uttils.Utility
+import com.example.mypraticeapplication.view.detail.ActivityDetail
 import com.example.mypraticeapplication.viewmodel.verificationDetail.RCUVerificationViewModel
 
 class AddFamilyMemberAdapter(val context: Context, private val list: ArrayList<SaveResidanceApplicantFamilyDetail>, private val relationWithApplicantList: List<String>?, private val viewModel: RCUVerificationViewModel, private var listener: OnItemClickListener) :  RecyclerView.Adapter<AddFamilyMemberViewHolder>() {
@@ -51,6 +52,13 @@ class AddFamilyMemberAdapter(val context: Context, private val list: ArrayList<S
 
         holder.binding.edtMemberCount.setText(list[position].getMemberCount().toString())
         holder.binding.edtEaringMemberCount.setText(list[position].getEarningMemberCount().toString())
+
+        val selectedPosition = Utility.getPositionFromArraylist(Utility.getNullToBlankString(list[position].getRelation()!!),relationWithApplicantList)
+        if (selectedPosition != -1){
+            holder.binding.spnRelation.setSelection(selectedPosition)
+        }
+        Log.e("Relation",Utility.getPositionFromArraylist(Utility.getNullToBlankString(list[position].getRelation()!!),relationWithApplicantList).toString())
+
 
         holder.binding.edtMemberCount.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {

@@ -22,6 +22,7 @@ import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.provider.Settings
 import android.util.Base64
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.view.View.GONE
@@ -467,6 +468,16 @@ class Utility {
                 }
             } else {
                 null
+            }
+        }
+
+         fun getPositionFromArraylist(selectedData: String, list: List<String>?): Int {
+            if (!list.isNullOrEmpty()){
+                Log.e("Position", list.indexOf(selectedData).toString())
+                return  list.indexOf(selectedData)
+            }
+            else{
+                return 0
             }
         }
 

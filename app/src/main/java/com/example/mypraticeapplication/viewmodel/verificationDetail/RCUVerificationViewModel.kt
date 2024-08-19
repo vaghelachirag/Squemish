@@ -355,7 +355,6 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             houseOwnershipList = masterDataDao!!.getDataByKeyName(AppConstants.houseOwnershipType)
 
 
-
              val materialStatusList = context.resources.getStringArray(R.array.material_status)
              materialStatusApplicantList = materialStatusList.asList()
 
@@ -418,14 +417,14 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     }
 
     private fun setSelectedSpinnerValue() {
-        selectedRelationWithApplicantPosition.postValue(getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMetRelation().toString()),relationWithApplicantList))
-        selectedMaritalStatusPosition.postValue(getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMetMeritalStatus().toString()),materialStatusApplicantList))
-        selectedHouseOwnershipPosition.postValue(getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseOwnerShip().toString()),houseOwnershipList))
-        selectedHouseLocalityItemPosition = getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseLocality().toString()),houseLocalityList)
-        selectedAccommodationTypePosition.postValue(getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getAccommodationType().toString()),accommodationList))
-        selectedHouseSizePosition.postValue(getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseSizeUnit().toString()),houseSizeUnitList))
-        selectedInvolvedNegativeProfilePosition.postValue(getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsNegativeProfile().toString()),negativeProfileList))
-        selectedYearsPosition.postValue(getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getStayingTimeUnit().toString()),stayingAddressUnitList))
+        selectedRelationWithApplicantPosition.postValue(Utility.getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMetRelation().toString()),relationWithApplicantList))
+        selectedMaritalStatusPosition.postValue(Utility.getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMetMeritalStatus().toString()),materialStatusApplicantList))
+        selectedHouseOwnershipPosition.postValue(Utility.getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseOwnerShip().toString()),houseOwnershipList))
+        selectedHouseLocalityItemPosition = Utility.getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseLocality().toString()),houseLocalityList)
+        selectedAccommodationTypePosition.postValue(Utility.getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getAccommodationType().toString()),accommodationList))
+        selectedHouseSizePosition.postValue(Utility.getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseSizeUnit().toString()),houseSizeUnitList))
+        selectedInvolvedNegativeProfilePosition.postValue(Utility.getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsNegativeProfile().toString()),negativeProfileList))
+        selectedYearsPosition.postValue(Utility.getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getStayingTimeUnit().toString()),stayingAddressUnitList))
 
       }
 
@@ -679,15 +678,5 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
          //   Utils().showToast(context,context.getString(R.string.nointernetconnection).toString())
         }
 
-    }
-
-    private fun getPositionFromArraylist(selectedData: String, list: List<String>?): Int {
-        if (!list.isNullOrEmpty()){
-            Log.e("Position", list.indexOf(selectedData).toString())
-            return  list.indexOf(selectedData)
-        }
-        else{
-            return 0
-        }
     }
 }
