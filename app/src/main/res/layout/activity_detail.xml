@@ -25,6 +25,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:tabIndicatorColor="@color/main_bg"
             app:tabMode="scrollable"
+            android:background="@color/white"
             android:visibility="visible"
             app:layout_constraintTop_toBottomOf="@id/ll_Header"
             app:tabSelectedTextColor="@color/main_bg"
