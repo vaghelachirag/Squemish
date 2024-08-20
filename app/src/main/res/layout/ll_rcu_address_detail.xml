@@ -214,32 +214,40 @@
                     app:custom_font="@string/app_font_regular" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.example.mypraticeapplication.widget.SmallText
-                android:id="@+id/applicant_address_VisitHouse_label"
+            <LinearLayout
+                android:id="@+id/ll_HouseIsOpen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/applicant_address_VisitHouse_label"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp" />
+                android:orientation="vertical">
 
-            <RadioGroup
-                android:id="@+id/rb_applicant_address_VisitHouse_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onCheckedChanged="@{addressconfirmed.onAddressConfirmed}"
-                android:orientation="horizontal">
-                <RadioButton android:id="@+id/radio_DurningVisitYes"
-                    android:layout_width="wrap_content"
+                <com.example.mypraticeapplication.widget.SmallText
+                    android:id="@+id/applicant_address_VisitHouse_label"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:theme="@style/RadioButton"
-                    android:text="@string/radio_Yes"/>
-                <RadioButton android:id="@+id/radio_DurningVisitNo"
-                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/applicant_address_VisitHouse_label"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
+
+                <RadioGroup
+                    android:id="@+id/rb_applicant_address_VisitHouse_label"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:theme="@style/RadioButton"
-                    android:text="@string/radio_No"/>
-            </RadioGroup>
+                    android:onCheckedChanged="@{addressconfirmed.onAddressConfirmed}"
+                    android:orientation="horizontal">
+                    <RadioButton android:id="@+id/radio_DurningVisitYes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/RadioButton"
+                        android:text="@string/radio_Yes"/>
+                    <RadioButton android:id="@+id/radio_DurningVisitNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/RadioButton"
+                        android:text="@string/radio_No"/>
+                </RadioGroup>
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 

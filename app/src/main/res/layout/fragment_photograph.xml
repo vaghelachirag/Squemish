@@ -66,6 +66,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layoutCamera" />
 
+        <ImageView
+            android:id="@+id/ivImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/btnSave"
+            android:src="@mipmap/ic_launcher">
+
+        </ImageView>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPictures"
             android:layout_width="match_parent"
@@ -74,8 +82,8 @@
             android:layout_marginBottom="@dimen/_16sdp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnSave"
-            app:spanCount="5"
+            app:layout_constraintTop_toBottomOf="@+id/ivImage"
+            app:spanCount="2"
             tools:listitem="@layout/item_pictures" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

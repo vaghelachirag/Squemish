@@ -70,10 +70,18 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
             if (it == true){
                 binding.llAddressDetail.rbAddressBelongYes.isChecked = true
                 binding.llAddressDetail.inpAddressBelongRemark.visibility = View.GONE
+                binding.llAddressDetail.llHouseIsOpen.visibility = View.VISIBLE
+                binding.llPersonalInformation.llPersonalInformationOne.llRelationWithApplicant.visibility = View.GONE
+                binding.llPersonalInformation.llPersonalInformationOne.root.visibility = View.VISIBLE
+                binding.llPersonalInformation.llHouseSize.visibility = View.VISIBLE
             }
             else{
                 binding.llAddressDetail.rbAddressBelongNo.isChecked = true
                 binding.llAddressDetail.inpAddressBelongRemark.visibility = View.VISIBLE
+                binding.llAddressDetail.llHouseIsOpen.visibility = View.GONE
+                binding.llPersonalInformation.llPersonalInformationOne.llRelationWithApplicant.visibility = View.VISIBLE
+                binding.llPersonalInformation.llPersonalInformationOne.root.visibility = View.VISIBLE
+                binding.llPersonalInformation.llHouseSize.visibility = View.VISIBLE
             }
         }
 

@@ -1,5 +1,6 @@
 package com.example.mypraticeapplication.view.adapter
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -13,6 +14,9 @@ import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.databinding.ItemPicturesBinding
 import com.example.mypraticeapplication.model.getverificationDetailResponse.GetFiVerificationDocument
 import com.example.mypraticeapplication.model.picture.PicturesModel
+import com.example.mypraticeapplication.uttils.AppConstants
+import com.example.mypraticeapplication.uttils.Utility
+import com.example.mypraticeapplication.view.dialougs.FullScreenImageDialoug
 import com.example.mypraticeapplication.viewmodel.verificationDetail.PictureViewModel
 
 
@@ -35,9 +39,8 @@ class PicturesAdapter(val context: Context, private val list: MutableList<GetFiV
     override fun onBindViewHolder(holder: PicturesViewHolder, position: Int) {
         holder.bind(list[position])
         holder.binding.ivPicture.setOnClickListener {
-            Log.e("Picture","Picture")
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(list[position].getDocumentPath()))
-            context.startActivity(browserIntent)
+            Log.e("ImagePath",AppConstants.baseURLImage + "/"+ list[position].getDocumentPath().toString())
+            FullScreenImageDialoug(context as Activity,AppConstants.baseURLImage + "/"+ list[position].getDocumentPath()).show()
         }
     }
 

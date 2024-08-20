@@ -68,7 +68,7 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
         _binding = FragmentPhotographBinding.inflate(inflater, container, false)
         binding.viewModel = photoVerificationViewModel
         binding.lifecycleOwner = this
-        photoVerificationViewModel.init(context)
+        photoVerificationViewModel.init(context as Activity)
 
         photoVerificationViewModel.isLoading.observe(requireActivity()) { isLoading ->
             if (isLoading && isAdded) showProgressbar()
@@ -138,10 +138,7 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
                 startActivityForResult(pickPhoto, galleryCode)
             }
         }).show()
-
     }
-
-
 
     // Display Camera Pic
     fun displayCamera() {
@@ -179,8 +176,9 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
             paint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.SRC_OVER))
             val source = Rect(0, 0, mutableBitmap.width, mutableBitmap.height)
             canvas.drawBitmap(mutableBitmap, null, source, null);
-            canvas.drawText(ActivityDetail.currentLat.toString() + ","+ActivityDetail.currentLong.toString(), 10F, 20F, paint);
-          //  binding..setImageBitmap(mutableBitmap);
+            canvas.drawText("Test.....", 10F, 20F, paint);
+            Log.e("Location",ActivityDetail.currentLat.toString())
+            binding.ivImage.setImageBitmap(mutableBitmap);
             saveToInternalStorage(mutableBitmap)
         }
 
@@ -196,8 +194,8 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
             imgFile = File(imagesFolder, Date().time.toString() + ".jpg")
             imagePath = FileProvider.getUriForFile(requireActivity(), com.example.mypraticeapplication.BuildConfig.APPLICATION_ID  + ".fileProvider", imgFile!!)
             fos = FileOutputStream(imgFile!!)
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos)
-            photoVerificationViewModel.saveSurveyPicture(imgFile!!)
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 50, fos)
+           photoVerificationViewModel.saveSurveyPicture(imgFile!!)
         } catch (e: Exception) {
             e.printStackTrace()
         }
