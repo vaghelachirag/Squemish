@@ -26,6 +26,9 @@ public interface MasterDataDao {
     @Query("Select sd.displayText from master_data_table AS sd WHERE KeyName = :keyName  ORDER BY SrNo DESC")
     List<String>  getDataByKeyName(String keyName);
 
+    @Query("Select * from master_data_table")
+    List<GetMasterApiData>  getMasterDataList();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<GetMasterApiData> masterList);
 }

@@ -2,8 +2,17 @@ package com.example.mypraticeapplication.view.detail
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffXfermode
+import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -20,14 +29,16 @@ import com.example.mypraticeapplication.uttils.Utility
 import com.example.mypraticeapplication.uttils.onItemClick
 import com.example.mypraticeapplication.view.base.BaseFragment
 import com.example.mypraticeapplication.viewmodel.verificationDetail.PictureViewModel
-import com.karumi.dexter.BuildConfig
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.util.Date
 import java.util.Objects
+
 
 class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
 
@@ -37,7 +48,6 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
     private val binding get() = _binding!!
     var data : String = ""
     private val photoVerificationViewModel by lazy { PictureViewModel( context as Activity,binding) }
-
 
     private var imgFile: File? = null
     private var imagePath: Uri? = null
@@ -68,6 +78,7 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
         binding.layoutCamera.setOnClickListener {
             checkImagePickerPermission()
         }
+
         return binding.root
     }
 
@@ -118,10 +129,7 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
     private fun openImagePickerDialog() {
         ImagePickerDialog(requireActivity(), object : onItemClick {
             override fun onCameraClicked() {
-              //  displayCamera()
-                val pickPhoto =
-                    Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-                startActivityForResult(pickPhoto, galleryCode)
+                displayCamera()
             }
 
             override fun onGalleryClicked() {
@@ -133,6 +141,8 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
 
     }
 
+
+
     // Display Camera Pic
     fun displayCamera() {
         val destPath: String? = Objects.requireNonNull(Objects.requireNonNull(requireActivity()).getExternalFilesDir(null)!!).absolutePath
@@ -140,7 +150,11 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
         try {
             imagesFolder.mkdirs()
             imgFile = File(imagesFolder, Date().time.toString() + ".jpg")
-            imagePath = FileProvider.getUriForFile(requireActivity(), com.example.mypraticeapplication.BuildConfig.APPLICATION_ID + ".fileProvider", imgFile!!)
+            imagePath = FileProvider.getUriForFile(
+                requireActivity(),
+                com.example.mypraticeapplication.BuildConfig.APPLICATION_ID  + ".fileProvider",
+                imgFile!!
+            )
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imagePath)
             startActivityForResult(intent, cameraCode)
@@ -154,9 +168,39 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
             val filePath: String = imgFile!!.path
             val bitmap = BitmapFactory.decodeFile(filePath)
             Log.e("ImageBitmap",bitmap.toString())
-            photoVerificationViewModel.saveSurveyPicture(imgFile!!)
+
+            val workingBitmap: Bitmap = Bitmap.createBitmap(bitmap)
+            val mutableBitmap = workingBitmap.copy(Bitmap.Config.ARGB_8888, true)
+            val canvas = Canvas(mutableBitmap)
+
+            val paint = Paint()
+            paint.setColor(Color.RED) // Text Color
+            paint.textSize = 25f // Text Size
+            paint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.SRC_OVER))
+            val source = Rect(0, 0, mutableBitmap.width, mutableBitmap.height)
+            canvas.drawBitmap(mutableBitmap, null, source, null);
+            canvas.drawText(ActivityDetail.currentLat.toString() + ","+ActivityDetail.currentLong.toString(), 10F, 20F, paint);
+          //  binding..setImageBitmap(mutableBitmap);
+            saveToInternalStorage(mutableBitmap)
         }
 
+    }
+
+    private fun saveToInternalStorage(bitmapImage: Bitmap) {
+
+        val destPath: String? = Objects.requireNonNull(Objects.requireNonNull(requireActivity()).getExternalFilesDir(null)!!).absolutePath
+        val imagesFolder = File(destPath, this.resources.getString(R.string.app_name))
+        var fos: FileOutputStream? = null
+        try {
+            imagesFolder.mkdirs()
+            imgFile = File(imagesFolder, Date().time.toString() + ".jpg")
+            imagePath = FileProvider.getUriForFile(requireActivity(), com.example.mypraticeapplication.BuildConfig.APPLICATION_ID  + ".fileProvider", imgFile!!)
+            fos = FileOutputStream(imgFile!!)
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos)
+            photoVerificationViewModel.saveSurveyPicture(imgFile!!)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

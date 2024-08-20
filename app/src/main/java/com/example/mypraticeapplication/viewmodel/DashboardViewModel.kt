@@ -76,9 +76,16 @@ class DashboardViewModel(val context: Context, val dashboardFragment: DashboardF
                           if(t.getData() != null){
                              verificationList = t.getData()!!
                               totalVerification.value = verificationList.size
-                             setVerificationAdapter()
+                              setVerificationAdapter()
                              if (session.getIsFirstTimeKey()){
-                                 getMasterDataApi()
+                                 CoroutineScope(Dispatchers.IO).launch {
+                                     if (masterDataDao!!.getMasterDataList().size > 0){
+                                         Log.e("Master",masterDataDao!!.getMasterDataList().size.toString())
+                                      }
+                                     else{
+                                         getMasterDataApi()
+                                     }
+                                 }
                              }
                           }
                         }else{

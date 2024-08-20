@@ -22,8 +22,6 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
     var data : String = ""
     private val rcuVerificationViewModel by lazy { RCUVerificationViewModel( context as Activity,binding) }
 
-    private val locationPermissionCode = 2
-
 
     companion object {
         fun newInstance(selectedData: GetVerificationDetailData?): FragmentRCUVerification {
@@ -216,19 +214,6 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
         }
 
 
-    }
-
-
-    @Deprecated("Deprecated in Java")
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == locationPermissionCode) {
-            when {
-                grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED -> {
-                    //  Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
     }
 
     override fun onDestroyView() {

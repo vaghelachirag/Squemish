@@ -1,20 +1,12 @@
 package com.example.mypraticeapplication.viewmodel.verificationDetail
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
-import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationListener
-import android.location.LocationManager
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.RadioGroup
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,11 +33,9 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.Arrays
 
 
-class RCUVerificationViewModel(private val context: Context, private  val binding: FragmentRcuVerificationBinding) : BaseViewModel(),
-    LocationListener {
+class RCUVerificationViewModel(private val context: Context, private  val binding: FragmentRcuVerificationBinding) : BaseViewModel(){
 
 
     // Address Detail Params
@@ -152,22 +142,17 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     private var addFamilyMemberAdapter: AddFamilyMemberAdapter? = null
 
 
-    // Location
-    private lateinit var locationManager: LocationManager
-    private val locationPermissionCode = 2
-
     fun init(context: Context?) {
-        isAddressConfirmed.value = true
-        // Room Database
-     //   getMasterDataApi()
         masterDataDao = InitDb.appDatabase.getMasterData()
         getDataFromMasterData()
-        getLocation()
-        setSelectedData()
+        if (ActivityDetail!!.selectedData !=null && ActivityDetail.selectedData!!.getFiRequestResidenceVerification() !=null){
+           setSelectedData()
+        }
     }
 
     @SuppressLint("SetTextI18n")
     private fun setSelectedData() {
+
         isAddressConfirmed.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getAddressConfirmed()
         isAddressBelong.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsAddressBelongsApplicant()
         isHouseOpen.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsHouseOpen()
@@ -206,130 +191,170 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         edtPoliticalConnectionRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPoliticalRemarks().toString()))
         edtBankName.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getBankName().toString()))
 
-        if(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getApplicantFamilyDetails() != null){
-            addFamilyMemberList =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getApplicantFamilyDetails()!!
-            setCustomLayoutAddAdapter()
-        }else{
-            addFamilyMemberData()
-        }
        // Log.e("Selected", ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMet().toString())
     }
 
-    private fun getLocation() {
-        locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        if ((ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
-            ActivityCompat.requestPermissions(context as Activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionCode)
-        }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
-    }
-
-    override fun onLocationChanged(location: Location) {
-        Log.e("Location","Latitude: " + location.latitude + " , Longitude: " + location.longitude)
-        edtLatitude.set(location.latitude.toString())
-        edtLongitude.set(location.longitude.toString())
-
-        edtLatitude.set(location.latitude.toString())
-        edtLongitude.set(location.longitude.toString())
-    }
 
     fun onSaveClicked(){
-     Log.e("OnSave","OnSave")
-        val saveVerificationDataDetail: SaveVerificationDataDetail = SaveVerificationDataDetail()
-        saveVerificationDataDetail.setFirequestId(AppConstants.verificationId)
-        saveVerificationDataDetail.setVerificationType("RV")
-        val saveFiRequestResidenceVerification: SaveFirequestResidenceVerification = SaveFirequestResidenceVerification()
-        saveFiRequestResidenceVerification.setFirequestId(AppConstants.verificationId)
-        saveVerificationDataDetail.setFirequestResidenceVerification(saveFiRequestResidenceVerification)
-      //  saveFiRequestResidenceVerification.setVisitDate("2024-08-14T22:32:20.503")
-        saveFiRequestResidenceVerification.setAddressConfirmed(isAddressConfirmed.value)
-        saveFiRequestResidenceVerification.setIsAddressBelongsApplicant(isAddressBelong.value)
-        saveFiRequestResidenceVerification.setIsHouseOpen(isHouseOpen.value)
-        saveFiRequestResidenceVerification.setPersonMet(edPersonMet.get())
-        saveFiRequestResidenceVerification.setPersonMetRelation(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantRelationApplicant.selectedItem.toString())
-        saveFiRequestResidenceVerification.setPersonMobileNo(edPersonMobileNumber.get())
-        saveFiRequestResidenceVerification.setStayingTime(Utility.getParseInteger(edtStayingAddress.get().toString()))
-        saveFiRequestResidenceVerification.setElectricityBillOwnerName(edtElectricityBillName.get())
-        saveFiRequestResidenceVerification.setHouseOwnerShip(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantHouseOwnershipLabel.selectedItem.toString())
-        saveFiRequestResidenceVerification.setHouseLocality(binding.llPersonalInformation.spnHouseLocality.selectedItem.toString())
-        saveFiRequestResidenceVerification.setIsMedicalHistory(isMajorMedicalHistory.value)
-        saveFiRequestResidenceVerification.setMedicalHistoryRemarks(edtMedicalHistoryRemark.get())
-        saveFiRequestResidenceVerification.setIsPoliticalConnection(isAnyPoliticalIssue.value)
-        saveFiRequestResidenceVerification.setPoliticalRemarks(edtPoliticalConnectionRemark.get())
-        saveFiRequestResidenceVerification.setIsAddressBelongsApplicant(isAddressBelong.value)
-        saveFiRequestResidenceVerification.setAddressBelongsApplicantRemark(edtAddressBelongRemark.get())
-        saveFiRequestResidenceVerification.setPersonMetAge(Utility.getParseInteger(edAge.get()))
-        saveFiRequestResidenceVerification.setPersonMetMeritalStatus(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantMaterialStatus.selectedItem.toString())
-        saveFiRequestResidenceVerification.setTotalFamilymembers(Utility.getParseInteger(edtTotalEarningMember.get()))
-        saveFiRequestResidenceVerification.setTotalEarningMembers(Utility.getParseInteger(edtTotalEarningMember.get()))
-        saveFiRequestResidenceVerification.setKno(edtKNo.get())
-        saveFiRequestResidenceVerification.setLastMonthUnits(Utility.getParseInteger(edtUnitConsumedLastMonth.get()))
-        saveFiRequestResidenceVerification.setAccommodationType(binding.llPersonalInformation.spnAccommodationType.selectedItem.toString())
-        saveFiRequestResidenceVerification.setHouseSize(Utility.getParseInteger(edtHouseSize.get()))
-        saveFiRequestResidenceVerification.setHouseSizeUnit(binding.llPersonalInformation.spnapplicantHouseSizeLabel.selectedItem.toString())
-        saveFiRequestResidenceVerification.setIsAnyOtherLoan(isAnyLoanRunning.value)
-        saveFiRequestResidenceVerification.setBankName(edtBankName.get())
-        saveFiRequestResidenceVerification.setLoanAmount(Utility.getParseInteger(edtLoanAmount.get()))
-        saveFiRequestResidenceVerification.setRunningSince(Utility.getParseInteger(edtRunningSince.get()))
-        saveFiRequestResidenceVerification.setIsAreaNegative(isAreaNegative.value)
-        saveFiRequestResidenceVerification.setIsNegativeProfile(binding.llApplicationBackground.spnapplicantIsInvolvedinNegativeProfileLabel.selectedItem.toString())
-        saveFiRequestResidenceVerification.setOtherObservations(edtOtherObservationsRemark.get())
-        saveFiRequestResidenceVerification.setIsCastCommunity(isCastCommunityDominatedArea.value)
-        saveFiRequestResidenceVerification.setIsCastCommunityRemark(edtIsCastCommunityDominatedArea.get())
-        saveFiRequestResidenceVerification.setLatitude(edtLatitude.get())
-        saveFiRequestResidenceVerification.setLongitude(edtLongitude.get())
-        saveFiRequestResidenceVerification.setIsNameboardSeen(isAddressConfirmed.value)
-        saveFiRequestResidenceVerification.setIsNameboardMismatch(isNameboardmismatched.value)
-        saveFiRequestResidenceVerification.setNameboardMismatchReason(edt_Reason.get())
-        saveFiRequestResidenceVerification.setStayingTimeUnit(binding.llPersonalInformation.llPersonalInformationOne.spncurrentaddress.selectedItem.toString())
-        saveFiRequestResidenceVerification.setIsAreaNegativeRemark(edtIsAreaNegativeRemark.get())
 
-        saveFiRequestResidenceVerification.setPermanentAddress(edtPermanentAddress.get())
-        saveFiRequestResidenceVerification.setRent(Utility.getParseInteger(edtMonthlyRentAmount.get()))
-        saveFiRequestResidenceVerification.setHouseOwnerName(edtLandlordName.get())
-        saveFiRequestResidenceVerification.setHouseOwnerMobileNo(edtLandlordMobileNo.get())
+        if (isAddressConfirmed.value == null){
+            Utils().showSnackBar(context,"Please Select Address Confirmed",binding.constraintLayout)
+        }else if (isAddressBelong.value == null){
+            Utils().showSnackBar(context,"Please Select Address Belong",binding.constraintLayout)
+        }
+        else if (isHouseOpen.value == null){
+            Utils().showSnackBar(context,"Please Select House is Open",binding.constraintLayout)
+        }
+        else {
 
-        saveFiRequestResidenceVerification.setTotalFamilymembers(Utility.getParseInteger(edtTotalFamilyMembers.get()))
-        saveFiRequestResidenceVerification.setTotalEarningMembers(Utility.getParseInteger(edtTotalEarningMember.get()))
+            val saveVerificationDataDetail: SaveVerificationDataDetail =
+                SaveVerificationDataDetail()
+            saveVerificationDataDetail.setFirequestId(AppConstants.verificationId)
+            saveVerificationDataDetail.setVerificationType("RV")
+            val saveFiRequestResidenceVerification: SaveFirequestResidenceVerification =
+                SaveFirequestResidenceVerification()
+            saveFiRequestResidenceVerification.setFirequestId(AppConstants.verificationId)
+            saveVerificationDataDetail.setFirequestResidenceVerification(
+                saveFiRequestResidenceVerification
+            )
+            //  saveFiRequestResidenceVerification.setVisitDate("2024-08-14T22:32:20.503")
+            saveFiRequestResidenceVerification.setAddressConfirmed(isAddressConfirmed.value)
+            saveFiRequestResidenceVerification.setIsAddressBelongsApplicant(isAddressBelong.value)
+            saveFiRequestResidenceVerification.setIsHouseOpen(isHouseOpen.value)
+            saveFiRequestResidenceVerification.setPersonMet(edPersonMet.get())
+            saveFiRequestResidenceVerification.setPersonMetRelation(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantRelationApplicant.selectedItem.toString())
+            saveFiRequestResidenceVerification.setPersonMobileNo(edPersonMobileNumber.get())
+            saveFiRequestResidenceVerification.setStayingTime(
+                Utility.getParseInteger(
+                    edtStayingAddress.get().toString()
+                )
+            )
+            saveFiRequestResidenceVerification.setElectricityBillOwnerName(edtElectricityBillName.get())
+            saveFiRequestResidenceVerification.setHouseOwnerShip(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantHouseOwnershipLabel.selectedItem.toString())
+            saveFiRequestResidenceVerification.setHouseLocality(binding.llPersonalInformation.spnHouseLocality.selectedItem.toString())
+            saveFiRequestResidenceVerification.setIsMedicalHistory(isMajorMedicalHistory.value)
+            saveFiRequestResidenceVerification.setMedicalHistoryRemarks(edtMedicalHistoryRemark.get())
+            saveFiRequestResidenceVerification.setIsPoliticalConnection(isAnyPoliticalIssue.value)
+            saveFiRequestResidenceVerification.setPoliticalRemarks(edtPoliticalConnectionRemark.get())
+            saveFiRequestResidenceVerification.setIsAddressBelongsApplicant(isAddressBelong.value)
+            saveFiRequestResidenceVerification.setAddressBelongsApplicantRemark(
+                edtAddressBelongRemark.get()
+            )
+            saveFiRequestResidenceVerification.setPersonMetAge(Utility.getParseInteger(edAge.get()))
+            saveFiRequestResidenceVerification.setPersonMetMeritalStatus(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantMaterialStatus.selectedItem.toString())
+            saveFiRequestResidenceVerification.setTotalFamilymembers(
+                Utility.getParseInteger(
+                    edtTotalEarningMember.get()
+                )
+            )
+            saveFiRequestResidenceVerification.setTotalEarningMembers(
+                Utility.getParseInteger(
+                    edtTotalEarningMember.get()
+                )
+            )
+            saveFiRequestResidenceVerification.setKno(edtKNo.get())
+            saveFiRequestResidenceVerification.setLastMonthUnits(
+                Utility.getParseInteger(
+                    edtUnitConsumedLastMonth.get()
+                )
+            )
+            saveFiRequestResidenceVerification.setAccommodationType(binding.llPersonalInformation.spnAccommodationType.selectedItem.toString())
+            saveFiRequestResidenceVerification.setHouseSize(Utility.getParseInteger(edtHouseSize.get()))
+            saveFiRequestResidenceVerification.setHouseSizeUnit(binding.llPersonalInformation.spnapplicantHouseSizeLabel.selectedItem.toString())
+            saveFiRequestResidenceVerification.setIsAnyOtherLoan(isAnyLoanRunning.value)
+            saveFiRequestResidenceVerification.setBankName(edtBankName.get())
+            saveFiRequestResidenceVerification.setLoanAmount(Utility.getParseInteger(edtLoanAmount.get()))
+            saveFiRequestResidenceVerification.setRunningSince(
+                Utility.getParseInteger(
+                    edtRunningSince.get()
+                )
+            )
+            saveFiRequestResidenceVerification.setIsAreaNegative(isAreaNegative.value)
+            saveFiRequestResidenceVerification.setIsNegativeProfile(binding.llApplicationBackground.spnapplicantIsInvolvedinNegativeProfileLabel.selectedItem.toString())
+            saveFiRequestResidenceVerification.setOtherObservations(edtOtherObservationsRemark.get())
+            saveFiRequestResidenceVerification.setIsCastCommunity(isCastCommunityDominatedArea.value)
+            saveFiRequestResidenceVerification.setIsCastCommunityRemark(
+                edtIsCastCommunityDominatedArea.get()
+            )
+            saveFiRequestResidenceVerification.setLatitude(edtLatitude.get())
+            saveFiRequestResidenceVerification.setLongitude(edtLongitude.get())
+            saveFiRequestResidenceVerification.setIsNameboardSeen(isAddressConfirmed.value)
+            saveFiRequestResidenceVerification.setIsNameboardMismatch(isNameboardmismatched.value)
+            saveFiRequestResidenceVerification.setNameboardMismatchReason(edt_Reason.get())
+            saveFiRequestResidenceVerification.setStayingTimeUnit(binding.llPersonalInformation.llPersonalInformationOne.spncurrentaddress.selectedItem.toString())
+            saveFiRequestResidenceVerification.setIsAreaNegativeRemark(edtIsAreaNegativeRemark.get())
 
-        saveFiRequestResidenceVerification.setApplicantFamilyDetails(addFamilyMemberList)
+            saveFiRequestResidenceVerification.setPermanentAddress(edtPermanentAddress.get())
+            saveFiRequestResidenceVerification.setRent(Utility.getParseInteger(edtMonthlyRentAmount.get()))
+            saveFiRequestResidenceVerification.setHouseOwnerName(edtLandlordName.get())
+            saveFiRequestResidenceVerification.setHouseOwnerMobileNo(edtLandlordMobileNo.get())
 
-        Log.e("PersonAge",edAge.get().toString() + " "+Utility.getParseInteger(edAge.get().toString() ))
-        val gson = Gson()
-        val json = gson.toJson(saveVerificationDataDetail)
-        Log.e("Json",json)
+            saveFiRequestResidenceVerification.setTotalFamilymembers(
+                Utility.getParseInteger(
+                    edtTotalFamilyMembers.get()
+                )
+            )
+            saveFiRequestResidenceVerification.setTotalEarningMembers(
+                Utility.getParseInteger(
+                    edtTotalEarningMember.get()
+                )
+            )
 
-        if (Utility.isNetworkConnected(context)){
-            isLoading.postValue(true)
-            Networking.with(context)
-                .getServices()
-                .getSaveFiResidenceResponse(saveVerificationDataDetail)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : CallbackObserver<GetSaveResidenceVerificationResponse>() {
-                    override fun onSuccess(response: GetSaveResidenceVerificationResponse) {
-                        isLoading.postValue(false)
-                    }
+            saveFiRequestResidenceVerification.setApplicantFamilyDetails(addFamilyMemberList)
 
-                    override fun onFailed(code: Int, message: String) {
-                        isLoading.postValue(false)
-                    }
+            Log.e(
+                "PersonAge",
+                edAge.get().toString() + " " + Utility.getParseInteger(edAge.get().toString())
+            )
+            val gson = Gson()
+            val json = gson.toJson(saveVerificationDataDetail)
+            Log.e("Json", json)
 
-                    override fun onNext(t: GetSaveResidenceVerificationResponse) {
-                        Log.e("Status",t.getStatusCode().toString())
-                        isLoading.postValue(false)
-                        if(t.getStatusCode() == 200){
-                         //   Utils().showToast(context,t.getMessage().toString())
-                            Utils().showSnackBar(context,t.getMessage().toString(),binding.constraintLayout)
-                        }else{
-                            Utils().showSnackBar(context,t.getMessage().toString(),binding.constraintLayout)
-                           // Utils().showToast(context,t.getMessage().toString())
+            if (Utility.isNetworkConnected(context)) {
+                isLoading.postValue(true)
+                Networking.with(context)
+                    .getServices()
+                    .getSaveFiResidenceResponse(saveVerificationDataDetail)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(object : CallbackObserver<GetSaveResidenceVerificationResponse>() {
+                        override fun onSuccess(response: GetSaveResidenceVerificationResponse) {
+                            isLoading.postValue(false)
                         }
-                        Log.e("StatusCode",t.getStatus().toString())
-                    }
-                })
-        }else{
-           // Utils().showToast(context,context.getString(R.string.nointernetconnection).toString())
-            Utils().showSnackBar(context,context.getString(R.string.nointernetconnection).toString(),binding.constraintLayout)
+
+                        override fun onFailed(code: Int, message: String) {
+                            isLoading.postValue(false)
+                        }
+
+                        override fun onNext(t: GetSaveResidenceVerificationResponse) {
+                            Log.e("Status", t.getStatusCode().toString())
+                            isLoading.postValue(false)
+                            if (t.getStatusCode() == 200) {
+                                //   Utils().showToast(context,t.getMessage().toString())
+                                Utils().showSnackBar(
+                                    context,
+                                    t.getMessage().toString(),
+                                    binding.constraintLayout
+                                )
+                            } else {
+                                Utils().showSnackBar(
+                                    context,
+                                    t.getMessage().toString(),
+                                    binding.constraintLayout
+                                )
+                                // Utils().showToast(context,t.getMessage().toString())
+                            }
+                            Log.e("StatusCode", t.getStatus().toString())
+                        }
+                    })
+            } else {
+                // Utils().showToast(context,context.getString(R.string.nointernetconnection).toString())
+                Utils().showSnackBar(
+                    context,
+                    context.getString(R.string.nointernetconnection).toString(),
+                    binding.constraintLayout
+                )
+            }
         }
 
     }
@@ -348,11 +373,14 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
 
     private fun getDataFromMasterData() {
         CoroutineScope(Dispatchers.IO).launch {
+
+
             houseLocalityList = masterDataDao!!.getDataByKeyName(AppConstants.houseOrPremiseLocalityType)
             accommodationList = masterDataDao!!.getDataByKeyName(AppConstants.accommodationType)
             negativeProfileList = masterDataDao!!.getDataByKeyName(AppConstants.profileType)
             relationWithApplicantList = masterDataDao!!.getDataByKeyName(AppConstants.relationType)
             houseOwnershipList = masterDataDao!!.getDataByKeyName(AppConstants.houseOwnershipType)
+
 
 
              val materialStatusList = context.resources.getStringArray(R.array.material_status)
@@ -412,7 +440,21 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             houseOwnershipApplicantSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
             binding.llPersonalInformation.llPersonalInformationOne.spnapplicantHouseOwnershipLabel.adapter = houseOwnershipApplicantSpinnerAdapter
 
-            setSelectedSpinnerValue()
+            if (ActivityDetail!!.selectedData !=null && ActivityDetail.selectedData!!.getFiRequestResidenceVerification() !=null){
+                setSelectedSpinnerValue()
+            }
+
+
+            if(ActivityDetail.selectedData!!.getFiRequestResidenceVerification() != null){
+                 if (ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getApplicantFamilyDetails() != null){
+                    addFamilyMemberList =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getApplicantFamilyDetails()!!
+                    setCustomLayoutAddAdapter()
+                }else{
+                    addFamilyMemberData()
+                }
+            }else{
+                addFamilyMemberData()
+            }
         }
     }
 
@@ -425,7 +467,6 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         selectedHouseSizePosition.postValue(Utility.getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseSizeUnit().toString()),houseSizeUnitList))
         selectedInvolvedNegativeProfilePosition.postValue(Utility.getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsNegativeProfile().toString()),negativeProfileList))
         selectedYearsPosition.postValue(Utility.getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getStayingTimeUnit().toString()),stayingAddressUnitList))
-
       }
 
     val onAddressConfirmed = RadioGroup.OnCheckedChangeListener { _, checkedId ->

@@ -23,7 +23,6 @@ import com.example.mypraticeapplication.uttils.AppConstants
 import com.example.mypraticeapplication.uttils.Utility
 import com.example.mypraticeapplication.uttils.Utils
 import com.example.mypraticeapplication.view.adapter.PicturesAdapter
-import com.example.mypraticeapplication.view.detail.ActivityDetail
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -46,7 +45,7 @@ class PictureViewModel(private val context: Context, private val  binding: Fragm
     @SuppressLint("NotifyDataSetChanged")
     fun init(context: Context?) {
         getPictureApi()
-        picturesAdapter = PicturesAdapter(picturesList, this)
+        picturesAdapter = PicturesAdapter(context!!,picturesList, this)
         picturesLiveList.observeForever {
             if (it != null) {
                 picturesList.clear()
@@ -157,7 +156,6 @@ class PictureViewModel(private val context: Context, private val  binding: Fragm
             .addFormDataPart("document", imgFile.name, imgFile.asRequestBody("image/*".toMediaTypeOrNull()))
             .build()
 
-
         when {
             !Utility.isNetworkConnected(context) -> {
 
@@ -195,7 +193,7 @@ class PictureViewModel(private val context: Context, private val  binding: Fragm
     }
 
     private fun setPictureAdapter() {
-        picturesAdapter = PicturesAdapter(picturesList, this)
+        picturesAdapter = PicturesAdapter(context,picturesList, this)
         binding.rvPictures.setLayoutManager(GridLayoutManager(context as Activity, 5))
         binding.rvPictures.setAdapter(picturesAdapter)
     }

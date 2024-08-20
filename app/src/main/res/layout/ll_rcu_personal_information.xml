@@ -94,66 +94,74 @@
                 app:layout_constraintTop_toBottomOf="@+id/txt_NeibourRecognised"
                 tools:ignore="MissingConstraints" />
 
-            <com.example.mypraticeapplication.widget.SmallText
-                android:id="@+id/applicant_StayingAtCurrentAddress_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/applicant_HouseSize_label"
-                android:textColor="@color/black"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:textSize="@dimen/_12sdp">
-            </com.example.mypraticeapplication.widget.SmallText>
 
             <LinearLayout
                 android:id="@+id/ll_HouseSize"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inapplicant_StayingAtCurrentAddress_label"
-                    android:layout_width="0dp"
+                <com.example.mypraticeapplication.widget.SmallText
+                    android:id="@+id/applicant_StayingAtCurrentAddress_label"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/TextInputLayout"
-                    android:textIsSelectable="true"
-                    android:inputType="none"
-                    app:hintTextColor="@color/main_bg"
-                    app:passwordToggleEnabled="false"
-                    android:layout_weight="1"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    tools:ignore="MissingClass,MissingConstraints">
+                    android:text="@string/applicant_HouseSize_label"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textSize="@dimen/_12sdp">
+                </com.example.mypraticeapplication.widget.SmallText>
 
-                    <com.example.mypraticeapplication.widget.TypefaceEditText
-                        android:id="@+id/edt_applicant_StayingAtCurrentAddress_label"
-                        android:layout_width="match_parent"
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inapplicant_StayingAtCurrentAddress_label"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        style="@style/TextInputLayout"
+                        android:textIsSelectable="true"
+                        android:inputType="none"
+                        app:hintTextColor="@color/main_bg"
+                        app:passwordToggleEnabled="false"
+                        android:layout_weight="1"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        tools:ignore="MissingClass,MissingConstraints">
+
+                        <com.example.mypraticeapplication.widget.TypefaceEditText
+                            android:id="@+id/edt_applicant_StayingAtCurrentAddress_label"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/edit_text_size"
+                            android:hint="@string/applicant_HouseSize_label"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberDecimal"
+                            android:text="@={personalInforamtion.edtHouseSize}"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/gray_323232"
+                            android:textSize="@dimen/verificationDetailTextSize"
+                            app:custom_font="@string/app_font_regular" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
+                        android:id="@+id/spnapplicant_HouseSize_label"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/edit_text_size"
-                        android:hint="@string/applicant_HouseSize_label"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_spinner"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:entries="@array/house_size"
+                        app:setOnItemSelectedListener="@{personalInforamtion.clicksHouseSizeListener}"
                         android:imeOptions="actionNext"
-                        android:inputType="numberDecimal"
-                        android:text="@={personalInforamtion.edtHouseSize}"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/gray_323232"
-                        android:textSize="@dimen/verificationDetailTextSize"
-                        app:custom_font="@string/app_font_regular" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:selectedItemPosition="@{personalInforamtion.selectedHouseSizePosition}"
+                        android:textSize="@dimen/_10sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:ignore="MissingConstraints,SpUsage"
+                        app:custom_font="@string/app_font_regular"/>
 
-                <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
-                    android:id="@+id/spnapplicant_HouseSize_label"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/edit_text_size"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_spinner"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    android:entries="@array/house_size"
-                    app:setOnItemSelectedListener="@{personalInforamtion.clicksHouseSizeListener}"
-                    android:imeOptions="actionNext"
-                    android:selectedItemPosition="@{personalInforamtion.selectedHouseSizePosition}"
-                    android:textSize="@dimen/_10sdp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:ignore="MissingConstraints,SpUsage"
-                    app:custom_font="@string/app_font_regular"/>
+                </LinearLayout>
 
             </LinearLayout>
 

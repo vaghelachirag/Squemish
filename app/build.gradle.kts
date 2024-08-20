@@ -5,6 +5,7 @@ plugins {
 }
 
 android {
+
     namespace = "com.example.mypraticeapplication"
     compileSdk = 34
 
