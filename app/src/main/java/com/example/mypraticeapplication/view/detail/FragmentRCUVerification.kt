@@ -71,17 +71,31 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
                 binding.llAddressDetail.rbAddressBelongYes.isChecked = true
                 binding.llAddressDetail.inpAddressBelongRemark.visibility = View.GONE
                 binding.llAddressDetail.llHouseIsOpen.visibility = View.VISIBLE
-                binding.llPersonalInformation.llPersonalInformationOne.llRelationWithApplicant.visibility = View.GONE
+                binding.llPersonalInformation.llPersonalInformationOne.llRelationWithApplicant.visibility = View.VISIBLE
                 binding.llPersonalInformation.llPersonalInformationOne.root.visibility = View.VISIBLE
                 binding.llPersonalInformation.llHouseSize.visibility = View.VISIBLE
+                binding.llPersonalInformation.llPersonalInformationOne.llFamilyMember.visibility = View.VISIBLE
+                binding.llPersonalInformation.llPersonalInformationOne.llFamilyMemberCount.visibility = View.VISIBLE
+                binding.llPersonalInformation.llPersonalInformationOne.llHouseOwnership.visibility = View.VISIBLE
+                binding.llPersonalInformation.llPersonalInformationOne.llStayingAddress.visibility = View.VISIBLE
+                binding.llPersonalInformation.llHouseSize.visibility = View.VISIBLE
+                binding.llPersonalInformation.llPersonalInformationOne.llRent.visibility = View.VISIBLE
+                binding.llPersonalInformation.llPersonalInformationOne.llAge.visibility = View.VISIBLE
             }
             else{
                 binding.llAddressDetail.rbAddressBelongNo.isChecked = true
                 binding.llAddressDetail.inpAddressBelongRemark.visibility = View.VISIBLE
                 binding.llAddressDetail.llHouseIsOpen.visibility = View.GONE
-                binding.llPersonalInformation.llPersonalInformationOne.llRelationWithApplicant.visibility = View.VISIBLE
+                binding.llPersonalInformation.llPersonalInformationOne.llRelationWithApplicant.visibility = View.GONE
                 binding.llPersonalInformation.llPersonalInformationOne.root.visibility = View.VISIBLE
                 binding.llPersonalInformation.llHouseSize.visibility = View.VISIBLE
+                binding.llPersonalInformation.llPersonalInformationOne.llFamilyMember.visibility = View.GONE
+                binding.llPersonalInformation.llPersonalInformationOne.llFamilyMemberCount.visibility = View.GONE
+                binding.llPersonalInformation.llPersonalInformationOne.llHouseOwnership.visibility = View.GONE
+                binding.llPersonalInformation.llPersonalInformationOne.llStayingAddress.visibility = View.GONE
+                binding.llPersonalInformation.llHouseSize.visibility = View.GONE
+                binding.llPersonalInformation.llPersonalInformationOne.llRent.visibility = View.GONE
+                binding.llPersonalInformation.llPersonalInformationOne.llAge.visibility = View.GONE
             }
         }
 
