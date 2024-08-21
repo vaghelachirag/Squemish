@@ -1,6 +1,7 @@
 package com.example.mypraticeapplication.view.detail
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
@@ -14,6 +15,9 @@ import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.Layout
+import android.text.StaticLayout
+import android.text.TextPaint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +38,6 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import java.io.File
 import java.io.FileOutputStream
-import java.io.IOException
 import java.util.Date
 import java.util.Objects
 
@@ -161,6 +164,7 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
 
 
     // For Upload Image
+    @SuppressLint("DefaultLocale")
     private fun uploadImage() {
         if (imgFile != null) {
             val filePath: String = imgFile!!.path
@@ -169,19 +173,56 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
 
             val workingBitmap: Bitmap = Bitmap.createBitmap(bitmap)
             val mutableBitmap = workingBitmap.copy(Bitmap.Config.ARGB_8888, true)
-            val canvas = Canvas(mutableBitmap)
 
-            val paint = Paint()
-            paint.setColor(Color.RED) // Text Color
-            paint.textSize = 100f// Text Size
-            paint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.SRC_OVER))
-            val source = Rect(0, 0, mutableBitmap.width, mutableBitmap.height)
-            canvas.drawBitmap(mutableBitmap, null, source, null);
-            canvas.drawText(ActivityDetail.currentLat.toString() + " "+ActivityDetail.currentLong.toString(), 50F, 150F, paint);
-            Log.e("Location",ActivityDetail.currentLat.toString())
-            binding.ivImage.setImageBitmap(mutableBitmap);
-            saveImage(mutableBitmap)
+            val builder = StringBuilder()
+            builder.append(Utility.getCurrentDate()).append("\n")
+            builder.append("Latitude: ").append(String.format("%.6f", ActivityDetail.currentLat)).append("\n")
+            builder.append("Longitude: ").append(String.format("%.6f", ActivityDetail.currentLong)).append("\n")
+            builder.append(ActivityDetail.useraddress)
+
+            val scale = resources.displayMetrics.density
+
         //   saveToInternalStorage(mutableBitmap)
+
+            val canvas1 = Canvas(mutableBitmap)
+            // new antialiased Paint
+            val paint1 = TextPaint(Paint.ANTI_ALIAS_FLAG)
+
+            // text color - #3D3D3D
+            paint1.color = Color.WHITE
+
+            // text size in pixels
+            paint1.textSize = 100F
+
+            // text shadow
+            paint1.setShadowLayer(1f, 0f, 0f, Color.WHITE)
+
+
+            // set text width to canvas width minus 16dp padding
+            val textWidth = canvas1.width - (16 * scale).toInt()
+
+
+            // init StaticLayout for text
+            val textLayout = StaticLayout(
+                builder.toString(), paint1, textWidth, Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, false
+            )
+
+
+            // get height of multiline text
+            val textHeight = textLayout.height
+
+
+            // get position of text's top left corner
+            val x = ((mutableBitmap.width - textWidth) - 10).toFloat()
+            val y = ((mutableBitmap.height - textHeight) - 20).toFloat()
+
+
+            // draw text to the Canvas center
+            canvas1.save()
+            canvas1.translate(x, y)
+            textLayout.draw(canvas1)
+            binding.ivImage.setImageBitmap(mutableBitmap)
+            saveImage(mutableBitmap)
         }
 
     }
@@ -195,8 +236,8 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
             imagePath = FileProvider.getUriForFile(requireActivity(), com.example.mypraticeapplication.BuildConfig.APPLICATION_ID  + ".fileProvider", imgFile!!)
 
             val fOut: FileOutputStream = FileOutputStream(imgFile)
-            var mutableBitmap = getResizedBitmap(mutableBitmap!!, 500);
-            mutableBitmap!!.compress(Bitmap.CompressFormat.PNG, 50, fOut)
+            val mutableBitmap = getResizedBitmap(mutableBitmap!!, 500);
+            mutableBitmap.compress(Bitmap.CompressFormat.PNG, 50, fOut)
             fOut.flush()
             fOut.close()
 

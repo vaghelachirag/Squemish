@@ -3,16 +3,23 @@ package com.example.mypraticeapplication.uttils
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.text.Html
+import android.text.Layout
+import android.text.StaticLayout
+import android.text.TextPaint
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.Window
 import android.view.WindowManager
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -26,6 +33,9 @@ import com.example.mypraticeapplication.databinding.ChangePasswordFragmentBindin
 import com.example.mypraticeapplication.viewmodel.ChangePasswordViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Date
 
 
 class Utils {
@@ -42,6 +52,65 @@ class Utils {
         toast.show()
     }
 
+
+    fun getCurrentDate(): String {
+        val today = Date()
+        val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        return format.format(today)
+    }
+
+    fun drawMultilineTextToBitmap(gContext: Context, imagePath: String?, text: String?): Bitmap {
+        // prepare canvas
+
+        val resources = gContext.resources
+        val scale = resources.displayMetrics.density
+        val image = File(imagePath)
+        val bmOptions = BitmapFactory.Options()
+        var bitmap = BitmapFactory.decodeFile(image.absolutePath, bmOptions)
+        bitmap = Bitmap.createScaledBitmap(bitmap, bitmap.width, bitmap.height, true)
+
+        var bitmapConfig = bitmap.config
+        // set default bitmap config if none
+        if (bitmapConfig == null) {
+            bitmapConfig = Bitmap.Config.ARGB_8888
+        }
+        // resource bitmaps are imutable,
+        // so we need to convert it to mutable one
+        bitmap = bitmap.copy(bitmapConfig, true)
+
+        val canvas = Canvas(bitmap)
+
+        // new antialiased Paint
+        val paint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        // text color - #3D3D3D
+        paint.color = Color.WHITE
+        // text size in pixels
+        paint.textSize = (12 * scale).toInt().toFloat()
+        // text shadow
+        paint.setShadowLayer(1f, 0f, 0f, Color.WHITE)
+
+        // set text width to canvas width minus 16dp padding
+        val textWidth = canvas.width - (16 * scale).toInt()
+
+        // init StaticLayout for text
+        val textLayout = StaticLayout(
+            text, paint, textWidth, Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, false
+        )
+
+        // get height of multiline text
+        val textHeight = textLayout.height
+
+        // get position of text's top left corner
+        val x = ((bitmap.width - textWidth) - 10).toFloat()
+        val y = ((bitmap.height - textHeight) - 20).toFloat()
+
+        // draw text to the Canvas center
+        canvas.save()
+        canvas.translate(x, y)
+        textLayout.draw(canvas)
+        canvas.restore()
+        return bitmap
+    }
 
     public fun showAlertDialog(context: Context,strTitle: String) {
 

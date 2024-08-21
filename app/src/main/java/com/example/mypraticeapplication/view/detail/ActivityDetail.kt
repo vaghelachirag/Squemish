@@ -12,17 +12,16 @@ import android.os.Bundle
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.location.LocationManagerCompat.getCurrentLocation
 import androidx.viewpager.widget.ViewPager
 import com.example.mypraticeapplication.databinding.ActivityDetailBinding
 import com.example.mypraticeapplication.interfaces.FragmentLifecycleInterface
 import com.example.mypraticeapplication.model.getverificationDetailResponse.GetVerificationDetailData
+import com.example.mypraticeapplication.uttils.Utility
 import com.example.mypraticeapplication.view.adapter.VerificationDetailViewPagerAdapter
-import com.example.mypraticeapplication.viewmodel.DetailViewModel
 import com.example.mypraticeapplication.view.base.BaseActivity
+import com.example.mypraticeapplication.viewmodel.DetailViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import java.text.DecimalFormat
 import java.util.Locale
 
 
@@ -81,6 +80,7 @@ class ActivityDetail  : BaseActivity()  {
                 currentLat = location.latitude
                 currentLong = location.longitude
                 addresses = geocoder!!.getFromLocation(location.latitude, location.longitude, 1);
+                useraddress = addresses!![0].getAddressLine(0)
                 Log.e("Address",addresses.toString())
                 //Toast.makeText(getApplicationContext(),location.toString(),Toast.LENGTH_SHORT).show();
             }
@@ -93,6 +93,7 @@ class ActivityDetail  : BaseActivity()  {
             }
             override fun onProviderDisabled(provider: String) {
                 Log.e("Location","Disable")
+                Utility.showLocationAlert(this@ActivityDetail)
             }
         }
 
@@ -106,6 +107,8 @@ class ActivityDetail  : BaseActivity()  {
                 } else {
                     currentLat = location.latitude
                     currentLong = location.longitude
+                    addresses = geocoder!!.getFromLocation(location.latitude, location.longitude, 1);
+                    useraddress = addresses!![0].getAddressLine(0)
                     Log.e("CurrentLocation",location.latitude.toString())
                 }
             }
@@ -128,6 +131,7 @@ class ActivityDetail  : BaseActivity()  {
         public  var selectedData: GetVerificationDetailData? = null
         public  var currentLat : Double = 0.0
         public  var currentLong : Double = 0.0
+        public  var useraddress : String = ""
     }
 
     override fun onResume() {

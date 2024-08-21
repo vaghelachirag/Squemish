@@ -194,7 +194,7 @@ class PictureViewModel(private val context: Context, private val  binding: Fragm
 
     private fun setPictureAdapter() {
         picturesAdapter = PicturesAdapter(context,picturesList, this)
-        binding.rvPictures.setLayoutManager(GridLayoutManager(context as Activity, 5))
+        binding.rvPictures.setLayoutManager(GridLayoutManager(context as Activity, 2))
         binding.rvPictures.setAdapter(picturesAdapter)
     }
 }

@@ -3,6 +3,7 @@ package com.example.mypraticeapplication.uttils
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
@@ -28,11 +29,13 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import com.example.mypraticeapplication.MainActivity
 import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.uttils.AppConstants.baseURL
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -121,6 +124,17 @@ class Utility {
             return "com.android.providers.downloads.documents" == uri.authority
         }
 
+         fun showLocationAlert(context: Context) {
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("Alert")
+            builder.setMessage("Please start GPS first")
+
+            builder.setPositiveButton(android.R.string.yes) { _, _ ->
+                (context as Activity).finish()
+            }
+
+            builder.show()
+        }
 
 
         fun getNullToBlankString(mainString: String) : String{
