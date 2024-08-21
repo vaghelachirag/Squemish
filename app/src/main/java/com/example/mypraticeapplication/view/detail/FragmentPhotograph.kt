@@ -2,8 +2,6 @@ package com.example.mypraticeapplication.view.detail
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context
-import android.content.ContextWrapper
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -21,6 +19,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.FileProvider
+import com.example.mypraticeapplication.BuildConfig
 import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.databinding.FragmentPhotographBinding
 import com.example.mypraticeapplication.interfaces.FragmentLifecycleInterface
@@ -149,7 +148,7 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
             imgFile = File(imagesFolder, Date().time.toString() + ".jpg")
             imagePath = FileProvider.getUriForFile(
                 requireActivity(),
-                com.example.mypraticeapplication.BuildConfig.APPLICATION_ID  + ".fileProvider",
+                BuildConfig.APPLICATION_ID  + ".fileProvider",
                 imgFile!!
             )
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -159,6 +158,8 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
             e.printStackTrace()
         }
     }
+
+
     // For Upload Image
     private fun uploadImage() {
         if (imgFile != null) {
@@ -172,34 +173,55 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
 
             val paint = Paint()
             paint.setColor(Color.RED) // Text Color
-            paint.textSize = 25f // Text Size
+            paint.textSize = 100f// Text Size
             paint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.SRC_OVER))
             val source = Rect(0, 0, mutableBitmap.width, mutableBitmap.height)
             canvas.drawBitmap(mutableBitmap, null, source, null);
-            canvas.drawText("Test.....", 10F, 20F, paint);
+            canvas.drawText(ActivityDetail.currentLat.toString() + " "+ActivityDetail.currentLong.toString(), 50F, 150F, paint);
             Log.e("Location",ActivityDetail.currentLat.toString())
             binding.ivImage.setImageBitmap(mutableBitmap);
-            saveToInternalStorage(mutableBitmap)
+            saveImage(mutableBitmap)
+        //   saveToInternalStorage(mutableBitmap)
         }
 
     }
 
-    private fun saveToInternalStorage(bitmapImage: Bitmap) {
-
+    private fun saveImage(mutableBitmap: Bitmap?) {
         val destPath: String? = Objects.requireNonNull(Objects.requireNonNull(requireActivity()).getExternalFilesDir(null)!!).absolutePath
         val imagesFolder = File(destPath, this.resources.getString(R.string.app_name))
-        var fos: FileOutputStream? = null
         try {
             imagesFolder.mkdirs()
-            imgFile = File(imagesFolder, Date().time.toString() + ".jpg")
+            imgFile = File(imagesFolder, "LocationImage" + ".jpg")
             imagePath = FileProvider.getUriForFile(requireActivity(), com.example.mypraticeapplication.BuildConfig.APPLICATION_ID  + ".fileProvider", imgFile!!)
-            fos = FileOutputStream(imgFile!!)
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 50, fos)
-           photoVerificationViewModel.saveSurveyPicture(imgFile!!)
+
+            val fOut: FileOutputStream = FileOutputStream(imgFile)
+            var mutableBitmap = getResizedBitmap(mutableBitmap!!, 500);
+            mutableBitmap!!.compress(Bitmap.CompressFormat.PNG, 50, fOut)
+            fOut.flush()
+            fOut.close()
+
+            photoVerificationViewModel.saveSurveyPicture(imgFile!!)
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
+
+
+
+    fun getResizedBitmap(image: Bitmap, maxSize: Int): Bitmap {
+        var width = image.getWidth()
+        var height = image.getHeight()
+        val bitmapRatio = width.toFloat() / height.toFloat()
+        if (bitmapRatio > 1) {
+            width = maxSize
+            height = (width / bitmapRatio).toInt()
+        } else {
+            height = maxSize
+            width = (height * bitmapRatio).toInt()
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true)
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

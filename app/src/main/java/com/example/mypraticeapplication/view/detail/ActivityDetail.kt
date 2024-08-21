@@ -20,6 +20,8 @@ import com.example.mypraticeapplication.model.getverificationDetailResponse.GetV
 import com.example.mypraticeapplication.view.adapter.VerificationDetailViewPagerAdapter
 import com.example.mypraticeapplication.viewmodel.DetailViewModel
 import com.example.mypraticeapplication.view.base.BaseActivity
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import java.text.DecimalFormat
 import java.util.Locale
 
@@ -37,6 +39,7 @@ class ActivityDetail  : BaseActivity()  {
     var geocoder: Geocoder? = null
     var addresses: List<Address>? = null
 
+    lateinit var mFusedLocationClient: FusedLocationProviderClient
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String?>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -50,14 +53,12 @@ class ActivityDetail  : BaseActivity()  {
         }
     }
 
-
-
-
     @SuppressLint("DiscouragedPrivateApi", "SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         geocoder = Geocoder(this, Locale.getDefault())
         locationManager = this.getSystemService(LOCATION_SERVICE) as LocationManager
@@ -69,7 +70,6 @@ class ActivityDetail  : BaseActivity()  {
         setActionBarHeader()
         setAction()
         getUserCurrentLocation()
-
         binding.viewPager.setSwipeable(false)
     }
 
@@ -99,6 +99,16 @@ class ActivityDetail  : BaseActivity()  {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
         } else {
+            mFusedLocationClient.lastLocation.addOnCompleteListener(this) { task ->
+                var location: Location? = task.result
+                if (location == null) {
+
+                } else {
+                    currentLat = location.latitude
+                    currentLong = location.longitude
+                    Log.e("CurrentLocation",location.latitude.toString())
+                }
+            }
             locationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 10f, locationListener!!)
         }
     }
@@ -113,7 +123,6 @@ class ActivityDetail  : BaseActivity()  {
     private fun setActionBarHeader() {
         binding.layoutDetail.tvTitle.text = "Verification Detail"
     }
-
 
     companion object {
         public  var selectedData: GetVerificationDetailData? = null

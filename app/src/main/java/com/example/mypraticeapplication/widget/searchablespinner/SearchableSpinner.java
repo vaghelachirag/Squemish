@@ -1,6 +1,5 @@
 package com.example.mypraticeapplication.widget.searchablespinner;
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -15,15 +14,15 @@ import android.widget.SpinnerAdapter;
 
 import androidx.appcompat.widget.AppCompatSpinner;
 
-import com.example.mypraticeapplication.R;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.mypraticeapplication.R;
 
 public class SearchableSpinner extends AppCompatSpinner implements View.OnTouchListener, SearchableListDialog.SearchableItem {
 
     public static final int NO_ITEM_SELECTED = -1;
-    private final Context _context;
+    private Context _context;
     private List _items;
     private SearchableListDialog _searchableListDialog;
 

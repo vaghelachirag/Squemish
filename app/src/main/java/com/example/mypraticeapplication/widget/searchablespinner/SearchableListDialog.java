@@ -13,10 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+
 
 import com.example.mypraticeapplication.R;
 
@@ -98,7 +100,7 @@ public class SearchableListDialog extends DialogFragment implements
         String strPositiveButton = _strPositiveButtonText == null ? "CLOSE" : _strPositiveButtonText;
         alertDialog.setPositiveButton(strPositiveButton, _onClickListener);
 
-        String strTitle = _strTitle == null ? "" : _strTitle;
+        String strTitle = _strTitle == null ? "Select Item" : _strTitle;
         alertDialog.setTitle(strTitle);
 
         final AlertDialog dialog = alertDialog.create();
@@ -142,6 +144,16 @@ public class SearchableListDialog extends DialogFragment implements
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context
                 .SEARCH_SERVICE);
 
+        _searchView = (SearchView) rootView.findViewById(R.id.search);
+        _searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName
+                ()));
+        _searchView.setIconifiedByDefault(false);
+        _searchView.setOnQueryTextListener(this);
+        _searchView.setOnCloseListener(this);
+        _searchView.clearFocus();
+        InputMethodManager mgr = (InputMethodManager) getActivity().getSystemService(Context
+                .INPUT_METHOD_SERVICE);
+        mgr.hideSoftInputFromWindow(_searchView.getWindowToken(), 0);
 
 
         List items = (List) getArguments().getSerializable(ITEMS);
