@@ -80,8 +80,10 @@ class ActivityDetail  : BaseActivity()  {
                 currentLat = location.latitude
                 currentLong = location.longitude
                 addresses = geocoder!!.getFromLocation(location.latitude, location.longitude, 1);
-                useraddress = addresses!![0].getAddressLine(0)
-                Log.e("Address",addresses.toString())
+                if(!addresses.isNullOrEmpty()){
+                    useraddress = addresses!![0].getAddressLine(0)
+                    Log.e("Address",addresses.toString())
+                }
                 //Toast.makeText(getApplicationContext(),location.toString(),Toast.LENGTH_SHORT).show();
             }
 
@@ -100,19 +102,25 @@ class ActivityDetail  : BaseActivity()  {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
         } else {
-            mFusedLocationClient.lastLocation.addOnCompleteListener(this) { task ->
-                var location: Location? = task.result
-                if (location == null) {
+            try {
+                mFusedLocationClient.lastLocation.addOnCompleteListener(this) { task ->
+                    val location: Location? = task.result
+                    if (location == null) {
 
-                } else {
-                    currentLat = location.latitude
-                    currentLong = location.longitude
-                    addresses = geocoder!!.getFromLocation(location.latitude, location.longitude, 1);
-                    useraddress = addresses!![0].getAddressLine(0)
-                    Log.e("CurrentLocation",location.latitude.toString())
+                    } else {
+                        currentLat = location.latitude
+                        currentLong = location.longitude
+                        addresses = geocoder!!.getFromLocation(location.latitude, location.longitude, 1);
+                        if (!addresses.isNullOrEmpty()){
+                            useraddress = addresses!![0].getAddressLine(0)
+                            Log.e("CurrentLocation",location.latitude.toString())
+                        }
+                    }
                 }
+                locationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 10f, locationListener!!)
+            }catch (_: Exception){
+
             }
-            locationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 10f, locationListener!!)
         }
     }
 

@@ -52,7 +52,8 @@ class ActivityTest: BaseActivity()  {
         }
 
 
-        binding.spFinalSubmission.adapter = houseLocalitySpinnerAdapter
+        binding.tvAddressConfirmed.setAdapter(houseLocalitySpinnerAdapter)
+      //  binding.spFinalSubmission.adapter = houseLocalitySpinnerAdapter
     }
 
 

@@ -4,26 +4,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/main_bg">
+    android:background="@color/white">
 
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary" />
+        android:background="@color/white" />
 
-
-    <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
-        android:id="@+id/spFinalSubmission"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ll_fi_2"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/edit_text_size"
-        android:background="@drawable/bg_spinner"
-        app:custom_font="@string/app_font_regular"
-        android:entries="@array/neighbourrecognised_array"
-        android:imeOptions="actionNext"
-        android:textSize="@dimen/verificationDetailTextSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
-        tools:ignore="MissingConstraints" />
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInputExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/address">
+
+            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/tv_address_confirmed"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:clickable="true"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
 </RelativeLayout>
