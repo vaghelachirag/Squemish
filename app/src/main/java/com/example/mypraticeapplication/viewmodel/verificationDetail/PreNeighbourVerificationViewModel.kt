@@ -2,6 +2,8 @@ package com.example.mypraticeapplication.viewmodel.verificationDetail
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -27,10 +29,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 
-class PreNeighbourVerificationViewModel(
-    private val context: Context,
-    val binding: FragmentPreNeighbourVerificationBinding
-) : BaseViewModel() {
+class PreNeighbourVerificationViewModel(private val context: Context, val binding: FragmentPreNeighbourVerificationBinding) : BaseViewModel() {
 
     // Login Params
     var neighbour1Name: ObservableField<String> = ObservableField()
@@ -50,11 +49,14 @@ class PreNeighbourVerificationViewModel(
     var selectedReasonPosition = MutableLiveData<Int>()
     var selectedItemPosition: Int = 0
 
-
-
+    private var neighbourRecognisedList: List<String>? = null
 
     @SuppressLint("SuspiciousIndentation")
     fun init(context: Context?) {
+
+        val materialStatusList =  context!!.resources.getStringArray(R.array.neighbourrecognised_array)
+        neighbourRecognisedList = materialStatusList.asList()
+
         isNeighbourReconised.value = false
         isNeighbourReconisedText.value = ""
         selectedReasonPosition.value = 0
@@ -109,6 +111,29 @@ class PreNeighbourVerificationViewModel(
                     .getIsNeighbourRecognised().toString() != "false"
 
             setSelectedNeighbourReconised(ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!.getIsNeighbourRecognised().toString())
+
+            binding.spnNeighbourReconised.setListAdapter(neighbourRecognisedList)
+
+            binding.spnNeighbourReconised.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    var position =  Utility.getPositionFromArraylist(Utility.getNullToBlankString(s.toString()),neighbourRecognisedList)
+                    selectedReasonPosition.value = position
+                    val neighourReconisedText = context.resources.getStringArray(R.array.neighbourrecognised_array)
+                    isNeighbourReconisedText.value = neighourReconisedText[position]
+                    if (position == 2 || position == 3) {
+                        isNeighbourReconised.value = false
+                    } else {
+                        isNeighbourReconised.value = true
+                    }
+                }
+
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+            })
+
         }
     }
 
@@ -226,12 +251,7 @@ class PreNeighbourVerificationViewModel(
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
 
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 selectedReasonPosition.value = position
                 val neighourReconisedText =
                     context.resources.getStringArray(R.array.neighbourrecognised_array)

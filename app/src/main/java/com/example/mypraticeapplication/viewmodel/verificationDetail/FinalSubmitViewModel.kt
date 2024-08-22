@@ -59,7 +59,7 @@ class FinalSubmitViewModel(private val context: Context,private  val binding: Fr
 
     private fun callFinalSubmitApi() {
         val saveFinalSubmit: SaveFinalSubmissionData = SaveFinalSubmissionData()
-        saveFinalSubmit.setFIStatus(binding.spFinalSubmission.selectedItem.toString())
+        saveFinalSubmit.setFIStatus(binding.spFinalSubmission.text.toString())
         saveFinalSubmit.setFIRequestId(AppConstants.verificationId)
         saveFinalSubmit.setRemarks(edtRemark.get())
 
@@ -83,17 +83,14 @@ class FinalSubmitViewModel(private val context: Context,private  val binding: Fr
                         Log.e("Status",t.getStatusCode().toString())
                         isLoading.postValue(false)
                         if(t.getStatusCode() == 200){
-                            //   Utils().showToast(context,t.getMessage().toString())
                             Utils().showSnackBar(context,t.getMessage().toString(),binding.constraintLayout)
                         }else{
                             Utils().showSnackBar(context,t.getMessage().toString(),binding.constraintLayout)
-                            // Utils().showToast(context,t.getMessage().toString())
                         }
                         Log.e("StatusCode",t.getStatus().toString())
                     }
                 })
         }else{
-            // Utils().showToast(context,context.getString(R.string.nointernetconnection).toString())
             Utils().showSnackBar(context,context.getString(R.string.nointernetconnection).toString(),binding.constraintLayout)
         }
     }
@@ -102,25 +99,12 @@ class FinalSubmitViewModel(private val context: Context,private  val binding: Fr
         CoroutineScope(Dispatchers.IO).launch {
             finalSubmissionList = masterDataDao!!.getDataByKeyName(AppConstants.finalSubmission)
 
-            finalSubmissionSpinnerAdapter =
-                ArrayAdapter<String?>(
-                    context,
-                    android.R.layout.simple_spinner_item,
-                    finalSubmissionList!!
-                )
+            finalSubmissionSpinnerAdapter = ArrayAdapter<String?>(context, android.R.layout.simple_spinner_item, finalSubmissionList!!)
             finalSubmissionSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
+            binding.spFinalSubmission.setListAdapter(finalSubmissionList)
 
-            binding.spFinalSubmission.adapter = finalSubmissionSpinnerAdapter
+         //   binding.spFinalSubmission.adapter = finalSubmissionSpinnerAdapter
         }
     }
 
-    //  For Click Listener Sequence
-    val clicksListener = object : AdapterView.OnItemSelectedListener {
-        override fun onNothingSelected(parent: AdapterView<*>?) {
-        }
-
-        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            selectedReasonPosition.value = position
-        }
-    }
 }

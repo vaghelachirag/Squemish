@@ -53,27 +53,30 @@
                         android:layout_marginTop="@dimen/corner_radius"
                         android:textSize="@dimen/_12sdp"
                         tools:ignore="MissingConstraints">
-
                     </com.example.mypraticeapplication.widget.HeaderText>
 
 
-
-                    <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
-                        android:id="@+id/spFinalSubmission"
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/TextInputExposedDropdownMenu"
+                        android:id="@+id/inspFinalSubmission"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/edit_text_size"
-                        android:background="@drawable/bg_spinner"
-                        app:custom_font="@string/app_font_regular"
-                        android:entries="@array/neighbourrecognised_array"
-                        app:setOnItemSelectedListener="@{viewModel.clicksListener}"
-                        android:imeOptions="actionNext"
-                        android:selectedItemPosition="@{viewModel.selectedItemPosition}"
-                        android:textSize="@dimen/verificationDetailTextSize"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@+id/txtStatus"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        tools:ignore="MissingConstraints" />
+                        android:hint="@string/status">
+
+                        <com.example.mypraticeapplication.widget.InstantAutoComplete
+                            android:id="@+id/spFinalSubmission"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/edit_text_size"
+                            android:clickable="true"
+                            android:cursorVisible="false"
+                            android:focusableInTouchMode="false"
+                            android:entries="@array/addresses_array"
+                            android:focusable="false"
+                            android:textSize="@dimen/verificationDetailTextSize"
+                            app:custom_font="@string/app_font_regular" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
 
@@ -85,7 +88,7 @@
                         android:textColor="@color/black"
                         android:layout_marginTop="@dimen/corner_radius"
                         android:textSize="@dimen/_12sdp"
-                        app:layout_constraintTop_toBottomOf="@+id/spFinalSubmission"
+                        app:layout_constraintTop_toBottomOf="@+id/inspFinalSubmission"
                         tools:ignore="MissingConstraints">
 
                     </com.example.mypraticeapplication.widget.HeaderText>
@@ -105,7 +108,7 @@
                         <com.example.mypraticeapplication.widget.TypefaceEditText
                             android:id="@+id/edt_Remark"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_120sdp"
+                            android:layout_height="@dimen/_100sdp"
                             android:hint="@string/remark"
                             android:imeOptions="actionDone"
                             android:inputType="text"

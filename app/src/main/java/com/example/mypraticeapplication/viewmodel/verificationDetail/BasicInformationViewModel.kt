@@ -29,10 +29,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class BasicInformationViewModel(
-    private val context: Context,
-    val binding: FragmentBasicInformationBinding
-) : BaseViewModel(){
+class BasicInformationViewModel(private val context: Context, val binding: FragmentBasicInformationBinding) : BaseViewModel(){
 
     // Login Params
     var refNo : ObservableField<String> = ObservableField()

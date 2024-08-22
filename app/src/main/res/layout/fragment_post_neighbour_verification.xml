@@ -222,35 +222,43 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:text="@string/neighbourreconised"
                     android:textSize="@dimen/_12sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/inpNeighbour2Remark"></com.example.mypraticeapplication.widget.HeaderText>
+                    app:layout_constraintTop_toBottomOf="@+id/inpNeighbour2Remark">
+                </com.example.mypraticeapplication.widget.HeaderText>
 
 
-                <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
-                    android:id="@+id/spnNeighbourReconised"
-                    style="@style/TextInputLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/edit_text_size"
-                    android:background="@drawable/bg_spinner"
-                    app:custom_font="@string/app_font_regular"
-                    android:entries="@array/neighbourrecognised_array"
-                    app:setOnItemSelectedListener="@{viewModel.clicksListener}"
-                    android:imeOptions="actionNext"
-                    android:textSize="@dimen/verificationDetailTextSize"
-                    android:selectedItemPosition="@{viewModel.selectedItemPosition}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_NeibourRecognised"
-                    tools:ignore="MissingConstraints" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/TextInputExposedDropdownMenu"
+                        android:id="@+id/inspnNeighbourReconised"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_NeibourRecognised"
+                        android:hint="@string/neighbourreconised">
 
-                <com.google.android.material.textfield.TextInputLayout
+                        <com.example.mypraticeapplication.widget.InstantAutoComplete
+                            android:id="@+id/spnNeighbourReconised"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/edit_text_size"
+                            android:clickable="true"
+                            android:cursorVisible="false"
+                            android:focusableInTouchMode="false"
+                            android:entries="@array/addresses_array"
+                            android:focusable="false"
+                            android:textSize="@dimen/verificationDetailTextSize"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/gray_323232"
+                            app:custom_font="@string/app_font_regular" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                   <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/inpReason"
                     style="@style/TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     app:hintTextColor="@color/main_bg"
-                    app:layout_constraintTop_toBottomOf="@+id/spnNeighbourReconised"
+                    app:layout_constraintTop_toBottomOf="@+id/inspnNeighbourReconised"
                     tools:ignore="MissingClass,MissingConstraints">
 
                     <com.example.mypraticeapplication.widget.TypefaceEditText

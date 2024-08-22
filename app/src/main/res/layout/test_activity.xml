@@ -25,18 +25,39 @@
             android:layout_height="wrap_content"
             android:hint="@string/address">
 
-            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            <com.example.mypraticeapplication.widget.InstantAutoComplete
                 android:id="@+id/tv_address_confirmed"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/edit_text_size"
                 android:clickable="true"
                 android:cursorVisible="false"
                 android:focusable="false"
-                android:focusableInTouchMode="false" />
+                android:textSize="@dimen/_10sdp"
+                android:focusableInTouchMode="false"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray_323232"
+                app:custom_font="@string/app_font_regular"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
+
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
+        android:id="@+id/spnNeighbourReconised"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edit_text_size"
+        app:custom_font="@string/app_font_regular"
+        android:entries="@array/neighbourrecognised_array"
+        android:imeOptions="actionNext"
+        app:hintText="Select Reason Item"
+        android:textSize="@dimen/verificationDetailTextSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_below="@+id/ll_fi_2"
+        android:layout_marginTop="@dimen/_5sdp"
+        tools:ignore="MissingConstraints" />
 
 
 </RelativeLayout>

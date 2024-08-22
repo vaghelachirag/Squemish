@@ -31,7 +31,7 @@
         android:theme="@style/Theme.MyPraticeApplication"
         tools:targetApi="31">
         <activity
-            android:name=".view.ActivityTest"
+            android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.MyPraticeApplication">

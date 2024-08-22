@@ -1,6 +1,8 @@
 package com.example.mypraticeapplication.viewmodel.verificationDetail
 
 import android.content.Context
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -20,10 +22,7 @@ import com.example.mypraticeapplication.view.detail.ActivityDetail
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class PostNeighbourVerificationViewModel(
-    private val context: Context,
-    private val  binding: FragmentPostNeighbourVerificationBinding
-) : BaseViewModel() {
+class PostNeighbourVerificationViewModel(private val context: Context, private val  binding: FragmentPostNeighbourVerificationBinding) : BaseViewModel() {
 
 
     // Login Params
@@ -42,7 +41,12 @@ class PostNeighbourVerificationViewModel(
     var selectedReasonPosition = MutableLiveData<Int>()
     var selectedItemPosition: Int = 0
 
+    private var neighbourRecognisedList: List<String>? = null
+
     fun init(context: Context?) {
+
+        val materialStatusList =  context!!.resources.getStringArray(R.array.neighbourrecognised_array)
+        neighbourRecognisedList = materialStatusList.asList()
 
         isNeighbourReconised.value = false
         isNeighbourReconisedText.value = ""
@@ -65,14 +69,34 @@ class PostNeighbourVerificationViewModel(
             }
         }
 
-        isNeighbourReconised.value =
-            ActivityDetail.selectedData!!.getFirequestPostNeighboutVerificationDto()!!
-                .getIsNeighbourRecognised().toString() != "false"
+        isNeighbourReconised.value = ActivityDetail.selectedData!!.getFirequestPostNeighboutVerificationDto()!!.getIsNeighbourRecognised().toString() != "false"
 
-        setSelectedNeighbourReconised(ActivityDetail.selectedData!!.getFirequestPostNeighboutVerificationDto()!!.getIsNeighbourRecognised().toString())
+        setSelectedNeighbourRecognized(ActivityDetail.selectedData!!.getFirequestPostNeighboutVerificationDto()!!.getIsNeighbourRecognised().toString())
+
+        binding.spnNeighbourReconised.setListAdapter(neighbourRecognisedList)
+
+        binding.spnNeighbourReconised.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                var position =  Utility.getPositionFromArraylist(Utility.getNullToBlankString(s.toString()),neighbourRecognisedList)
+                selectedReasonPosition.value = position
+                val neighourReconisedText = context.resources.getStringArray(R.array.neighbourrecognised_array)
+                isNeighbourReconisedText.value = neighourReconisedText[position]
+                if (position == 2 || position == 3) {
+                    isNeighbourReconised.value = false
+                } else {
+                    isNeighbourReconised.value = true
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
     }
 
-    private fun setSelectedNeighbourReconised(isText: String) {
+    private fun setSelectedNeighbourRecognized(isText: String) {
         val pos =
             context.resources.getStringArray(R.array.neighbourrecognised_array).indexOf(isText)
         if (pos >= 0) {
@@ -88,8 +112,8 @@ class PostNeighbourVerificationViewModel(
 
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
             selectedReasonPosition.value = position
-            val neighourReconisedText = context.resources.getStringArray(R.array.neighbourrecognised_array)
-            isNeighbourReconisedText.value = neighourReconisedText[position]
+            val neighbourRecognizedText = context.resources.getStringArray(R.array.neighbourrecognised_array)
+            isNeighbourReconisedText.value = neighbourRecognizedText[position]
             Log.e("Selected",isNeighbourReconisedText.value.toString())
             if (position == 2 || position == 3) {
                 isNeighbourReconised.value = false
