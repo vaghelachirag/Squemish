@@ -54,9 +54,7 @@ class AddFamilyMemberAdapter(val context: Context, private val list: ArrayList<S
         holder.binding.edtEaringMemberCount.setText(list[position].getEarningMemberCount().toString())
 
         val selectedPosition = Utility.getPositionFromArraylist(Utility.getNullToBlankString(list[position].getRelation()!!),relationWithApplicantList)
-        if (selectedPosition != -1){
-            holder.binding.spnRelation.setSelection(selectedPosition)
-        }
+
 
         holder.binding.edtMemberCount.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {

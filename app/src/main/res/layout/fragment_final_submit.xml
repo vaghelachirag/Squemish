@@ -52,6 +52,7 @@
                         android:textColor="@color/black"
                         android:layout_marginTop="@dimen/corner_radius"
                         android:textSize="@dimen/_12sdp"
+                        android:visibility="gone"
                         tools:ignore="MissingConstraints">
                     </com.example.mypraticeapplication.widget.HeaderText>
 
@@ -62,6 +63,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/main_bg"
+                        android:inputType="none"
                         app:layout_constraintTop_toBottomOf="@+id/txtStatus"
                         android:hint="@string/status">
 
@@ -71,10 +73,10 @@
                             android:layout_height="@dimen/edit_text_size"
                             android:clickable="true"
                             android:cursorVisible="false"
-                            android:inputType="none"
-                            android:focusableInTouchMode="false"
                             android:entries="@array/addresses_array"
                             android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:inputType="textPhonetic"
                             android:textSize="@dimen/verificationDetailTextSize"
                             app:custom_font="@string/app_font_regular" />
 
@@ -90,6 +92,7 @@
                         android:textColor="@color/black"
                         android:layout_marginTop="@dimen/corner_radius"
                         android:textSize="@dimen/_12sdp"
+                        android:visibility="gone"
                         app:layout_constraintTop_toBottomOf="@+id/inspFinalSubmission"
                         tools:ignore="MissingConstraints">
 

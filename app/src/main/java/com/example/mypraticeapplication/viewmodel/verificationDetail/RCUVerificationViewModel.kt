@@ -142,7 +142,10 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     private var addFamilyMemberAdapter: AddFamilyMemberAdapter? = null
 
 
+    var relationWithApplicant = MutableLiveData<String>()
+
     fun init(context: Context?) {
+        relationWithApplicant.value = ""
         masterDataDao = InitDb.appDatabase.getMasterData()
         getDataFromMasterData()
         if (ActivityDetail!!.selectedData !=null && ActivityDetail.selectedData!!.getFiRequestResidenceVerification() !=null){
@@ -191,6 +194,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         edtPoliticalConnectionRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPoliticalRemarks().toString()))
         edtBankName.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getBankName().toString()))
 
+        relationWithApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMetRelation()!!.toString())
        // Log.e("Selected", ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMet().toString())
     }
 
@@ -222,7 +226,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             saveFiRequestResidenceVerification.setIsAddressBelongsApplicant(isAddressBelong.value)
             saveFiRequestResidenceVerification.setIsHouseOpen(isHouseOpen.value)
             saveFiRequestResidenceVerification.setPersonMet(edPersonMet.get())
-            saveFiRequestResidenceVerification.setPersonMetRelation(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantRelationApplicant.text.toString())
+            saveFiRequestResidenceVerification.setPersonMetRelation(relationWithApplicant.value)
             saveFiRequestResidenceVerification.setPersonMobileNo(edPersonMobileNumber.get())
             saveFiRequestResidenceVerification.setStayingTime(
                 Utility.getParseInteger(
@@ -471,6 +475,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         selectedHouseSizePosition.postValue(Utility.getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseSizeUnit().toString()),houseSizeUnitList))
         selectedInvolvedNegativeProfilePosition.postValue(Utility.getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsNegativeProfile().toString()),negativeProfileList))
         selectedYearsPosition.postValue(Utility.getPositionFromArraylist(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getStayingTimeUnit().toString()),stayingAddressUnitList))
+
       }
 
     val onAddressConfirmed = RadioGroup.OnCheckedChangeListener { _, checkedId ->
