@@ -249,25 +249,35 @@
             android:text="@string/applicant_IsInvolvedinNegativeProfile_label"
             android:textColor="@color/black"
             android:layout_marginTop="@dimen/_10sdp"
+            android:visibility="gone"
             android:textSize="@dimen/_12sdp">
         </com.example.mypraticeapplication.widget.SmallText>
 
-        <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
-            android:id="@+id/spnapplicant_IsInvolvedinNegativeProfile_label"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInputExposedDropdownMenu"
+            android:id="@+id/inspnapplicant_IsInvolvedinNegativeProfile_label"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/edit_text_size"
-            android:background="@drawable/bg_spinner"
-            app:custom_font="@string/app_font_regular"
-            android:entries="@array/neighbourrecognised_array"
-            app:setOnItemSelectedListener="@{applicationbackground.clicksInvolvedNegativeProfileListener}"
-            android:imeOptions="actionNext"
-            android:selectedItemPosition="@{applicationbackground.selectedInvolvedNegativeProfilePosition}"
-            android:textSize="@dimen/verificationDetailTextSize"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/txt_NeibourRecognised"
-            tools:ignore="MissingConstraints" />
+            app:hintTextColor="@color/main_bg"
+            android:textColorHint="@color/main_bg"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:hint="@string/applicant_IsInvolvedinNegativeProfile_label">
+
+            <com.example.mypraticeapplication.widget.InstantAutoComplete
+                android:id="@+id/spnapplicant_IsInvolvedinNegativeProfile_label"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_size"
+                android:clickable="true"
+                android:cursorVisible="false"
+                android:focusableInTouchMode="false"
+                android:entries="@array/addresses_array"
+                android:focusable="false"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray_323232"
+                android:textSize="@dimen/verificationDetailTextSize"
+                app:custom_font="@string/app_font_regular" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.example.mypraticeapplication.widget.SmallText
             android:id="@+id/applicant_IsAreaNegative_label"

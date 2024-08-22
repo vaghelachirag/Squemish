@@ -53,23 +53,37 @@
         android:layout_marginTop="@dimen/_8sdp"
         app:layout_constraintTop_toBottomOf="@+id/btnRemoveDay">
 
-        <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
-            android:id="@+id/spnRelation"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInputExposedDropdownMenu"
+            android:id="@+id/inspnRelation"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/edit_text_size"
-            android:background="@drawable/bg_spinner"
-            app:custom_font="@string/app_font_regular"
-            android:entries="@array/neighbourrecognised_array"
-            android:imeOptions="actionNext"
-            android:textSize="@dimen/verificationDetailTextSize"
-            tools:ignore="MissingConstraints" />
+            android:layout_height="wrap_content"
+            app:hintTextColor="@color/main_bg"
+            android:textColorHint="@color/main_bg"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:hint="@string/applicant_Relation_Applicant_label">
+
+            <com.example.mypraticeapplication.widget.InstantAutoComplete
+                android:id="@+id/spnRelation"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_size"
+                android:clickable="true"
+                android:cursorVisible="false"
+                android:focusableInTouchMode="false"
+                android:entries="@array/addresses_array"
+                android:focusable="false"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray_323232"
+                android:textSize="@dimen/verificationDetailTextSize"
+                app:custom_font="@string/app_font_regular" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="2"
-            app:layout_constraintTop_toBottomOf="@+id/spnRelation"
+            app:layout_constraintTop_toBottomOf="@+id/inspnRelation"
             tools:ignore="MissingConstraints">
 
             <com.google.android.material.textfield.TextInputLayout

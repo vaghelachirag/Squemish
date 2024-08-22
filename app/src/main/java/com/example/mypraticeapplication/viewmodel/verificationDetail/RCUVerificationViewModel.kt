@@ -222,7 +222,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             saveFiRequestResidenceVerification.setIsAddressBelongsApplicant(isAddressBelong.value)
             saveFiRequestResidenceVerification.setIsHouseOpen(isHouseOpen.value)
             saveFiRequestResidenceVerification.setPersonMet(edPersonMet.get())
-            saveFiRequestResidenceVerification.setPersonMetRelation(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantRelationApplicant.selectedItem.toString())
+            saveFiRequestResidenceVerification.setPersonMetRelation(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantRelationApplicant.text.toString())
             saveFiRequestResidenceVerification.setPersonMobileNo(edPersonMobileNumber.get())
             saveFiRequestResidenceVerification.setStayingTime(
                 Utility.getParseInteger(
@@ -230,8 +230,8 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
                 )
             )
             saveFiRequestResidenceVerification.setElectricityBillOwnerName(edtElectricityBillName.get())
-            saveFiRequestResidenceVerification.setHouseOwnerShip(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantHouseOwnershipLabel.selectedItem.toString())
-            saveFiRequestResidenceVerification.setHouseLocality(binding.llPersonalInformation.spnHouseLocality.selectedItem.toString())
+            saveFiRequestResidenceVerification.setHouseOwnerShip(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantHouseOwnershipLabel.text.toString())
+            saveFiRequestResidenceVerification.setHouseLocality(binding.llPersonalInformation.spnHouseLocality.text.toString())
             saveFiRequestResidenceVerification.setIsMedicalHistory(isMajorMedicalHistory.value)
             saveFiRequestResidenceVerification.setMedicalHistoryRemarks(edtMedicalHistoryRemark.get())
             saveFiRequestResidenceVerification.setIsPoliticalConnection(isAnyPoliticalIssue.value)
@@ -241,7 +241,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
                 edtAddressBelongRemark.get()
             )
             saveFiRequestResidenceVerification.setPersonMetAge(Utility.getParseInteger(edAge.get()))
-            saveFiRequestResidenceVerification.setPersonMetMeritalStatus(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantMaterialStatus.selectedItem.toString())
+            saveFiRequestResidenceVerification.setPersonMetMeritalStatus(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantMaterialStatus.text.toString())
             saveFiRequestResidenceVerification.setTotalFamilymembers(
                 Utility.getParseInteger(
                     edtTotalEarningMember.get()
@@ -258,9 +258,9 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
                     edtUnitConsumedLastMonth.get()
                 )
             )
-            saveFiRequestResidenceVerification.setAccommodationType(binding.llPersonalInformation.spnAccommodationType.selectedItem.toString())
+            saveFiRequestResidenceVerification.setAccommodationType(binding.llPersonalInformation.spnAccommodationType.text.toString())
             saveFiRequestResidenceVerification.setHouseSize(Utility.getParseInteger(edtHouseSize.get()))
-            saveFiRequestResidenceVerification.setHouseSizeUnit(binding.llPersonalInformation.spnapplicantHouseSizeLabel.selectedItem.toString())
+            saveFiRequestResidenceVerification.setHouseSizeUnit(binding.llPersonalInformation.spnapplicantHouseSizeLabel.text.toString())
             saveFiRequestResidenceVerification.setIsAnyOtherLoan(isAnyLoanRunning.value)
             saveFiRequestResidenceVerification.setBankName(edtBankName.get())
             saveFiRequestResidenceVerification.setLoanAmount(Utility.getParseInteger(edtLoanAmount.get()))
@@ -270,7 +270,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
                 )
             )
             saveFiRequestResidenceVerification.setIsAreaNegative(isAreaNegative.value)
-            saveFiRequestResidenceVerification.setIsNegativeProfile(binding.llApplicationBackground.spnapplicantIsInvolvedinNegativeProfileLabel.selectedItem.toString())
+            saveFiRequestResidenceVerification.setIsNegativeProfile(binding.llApplicationBackground.spnapplicantIsInvolvedinNegativeProfileLabel.text.toString())
             saveFiRequestResidenceVerification.setOtherObservations(edtOtherObservationsRemark.get())
             saveFiRequestResidenceVerification.setIsCastCommunity(isCastCommunityDominatedArea.value)
             saveFiRequestResidenceVerification.setIsCastCommunityRemark(
@@ -281,7 +281,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             saveFiRequestResidenceVerification.setIsNameboardSeen(isAddressConfirmed.value)
             saveFiRequestResidenceVerification.setIsNameboardMismatch(isNameboardmismatched.value)
             saveFiRequestResidenceVerification.setNameboardMismatchReason(edt_Reason.get())
-            saveFiRequestResidenceVerification.setStayingTimeUnit(binding.llPersonalInformation.llPersonalInformationOne.spncurrentaddress.selectedItem.toString())
+            saveFiRequestResidenceVerification.setStayingTimeUnit(binding.llPersonalInformation.llPersonalInformationOne.spncurrentaddress.text.toString())
             saveFiRequestResidenceVerification.setIsAreaNegativeRemark(edtIsAreaNegativeRemark.get())
 
             saveFiRequestResidenceVerification.setPermanentAddress(edtPermanentAddress.get())
@@ -393,11 +393,16 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             val stayingUnitList = context.resources.getStringArray(R.array.house_locality_array)
             stayingAddressUnitList = stayingUnitList.asList()
 
+
+            binding.llPersonalInformation.spnapplicantHouseSizeLabel.setListAdapter(houseSizeUnitList!!)
+            binding.llPersonalInformation.llPersonalInformationOne.spnapplicantMaterialStatus.setListAdapter(materialStatusApplicantList!!)
+            binding.llPersonalInformation.llPersonalInformationOne.spncurrentaddress.setListAdapter(materialStatusApplicantList!!)
+
             houseLocalitySpinnerAdapter =
                 ArrayAdapter<String?>(context, android.R.layout.simple_spinner_item, houseLocalityList!!)
             houseLocalitySpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
 
-            binding.llPersonalInformation.spnHouseLocality.adapter = houseLocalitySpinnerAdapter
+            binding.llPersonalInformation.spnHouseLocality.setListAdapter(houseLocalityList!!)
 
 
             accommodationTypeSpinnerAdapter =
@@ -408,7 +413,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
                 )
             accommodationTypeSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
 
-            binding.llPersonalInformation.spnAccommodationType.adapter = accommodationTypeSpinnerAdapter
+            binding.llPersonalInformation.spnAccommodationType.setListAdapter(accommodationList!!)
 
             negativeProfileSpinnerAdapter =
                 ArrayAdapter<String?>(
@@ -418,7 +423,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
                 )
             negativeProfileSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
 
-            binding.llApplicationBackground.spnapplicantIsInvolvedinNegativeProfileLabel.adapter = negativeProfileSpinnerAdapter
+            binding.llApplicationBackground.spnapplicantIsInvolvedinNegativeProfileLabel.setListAdapter(negativeProfileList!!)
 
 
             relationWithApplicantSpinnerAdapter =
@@ -429,7 +434,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
                 )
             relationWithApplicantSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
 
-            binding.llPersonalInformation.llPersonalInformationOne.spnapplicantRelationApplicant.adapter = relationWithApplicantSpinnerAdapter
+            binding.llPersonalInformation.llPersonalInformationOne.spnapplicantRelationApplicant.setListAdapter(relationWithApplicantList)
 
             houseOwnershipApplicantSpinnerAdapter =
                 ArrayAdapter<String?>(
@@ -438,9 +443,8 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
                     houseOwnershipList!!
                 )
             houseOwnershipApplicantSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
-            binding.llPersonalInformation.llPersonalInformationOne.spnapplicantHouseOwnershipLabel.adapter = houseOwnershipApplicantSpinnerAdapter
-
-            if (ActivityDetail!!.selectedData !=null && ActivityDetail.selectedData!!.getFiRequestResidenceVerification() !=null){
+            binding.llPersonalInformation.llPersonalInformationOne.spnapplicantHouseOwnershipLabel.setListAdapter(houseOwnershipList!!)
+            if (ActivityDetail.selectedData !=null && ActivityDetail.selectedData!!.getFiRequestResidenceVerification() !=null){
                 setSelectedSpinnerValue()
             }
 

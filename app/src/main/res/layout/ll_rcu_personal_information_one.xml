@@ -60,24 +60,35 @@
                 android:text="@string/applicant_Relation_Applicant_label"
                 android:textColor="@color/black"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:visibility="gone"
                 android:textSize="@dimen/_12sdp">
             </com.example.mypraticeapplication.widget.SmallText>
 
-            <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
-                android:id="@+id/spnapplicant_Relation_Applicant"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputExposedDropdownMenu"
+                android:id="@+id/inspnapplicant_Relation_Applicant"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/edit_text_size"
-                android:layout_weight="1"
-                android:background="@drawable/bg_spinner"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:entries="@array/neighbourrecognised_array"
-                app:setOnItemSelectedListener="@{personinformation1.clicksRelationWithApplicantListener}"
-                android:imeOptions="actionNext"
-                android:selectedItemPosition="@{personinformation1.selectedRelationWithApplicantPosition}"
-                android:textSize="@dimen/_10sdp"
-                tools:ignore="MissingConstraints"
-                app:custom_font="@string/app_font_regular"/>
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/txt_NeibourRecognised"
+                app:hintTextColor="@color/main_bg"
+                android:textColorHint="@color/main_bg"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:hint="@string/applicant_Relation_Applicant_label">
 
+                <com.example.mypraticeapplication.widget.InstantAutoComplete
+                    android:id="@+id/spnapplicant_Relation_Applicant"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_text_size"
+                    android:clickable="true"
+                    android:cursorVisible="false"
+                    android:focusableInTouchMode="false"
+                    android:entries="@array/addresses_array"
+                    android:focusable="false"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray_323232"
+                    android:textSize="@dimen/verificationDetailTextSize"
+                    app:custom_font="@string/app_font_regular" />
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -137,21 +148,33 @@
                     app:custom_font="@string/app_font_regular" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
-                android:id="@+id/spnapplicant_MaterialStatus"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputExposedDropdownMenu"
+                android:id="@+id/inspnapplicant_MaterialStatus"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/edit_text_size"
-                android:background="@drawable/bg_spinner"
-                app:custom_font="@string/app_font_regular"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/txt_NeibourRecognised"
+                app:hintTextColor="@color/main_bg"
+                android:textColorHint="@color/main_bg"
                 android:layout_weight="1"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:entries="@array/material_status"
-                app:setOnItemSelectedListener="@{personinformation1.clicksMaterialStatusTypeListener}"
-                android:imeOptions="actionNext"
-                android:selectedItemPosition="@{personinformation1.selectedMaritalStatusPosition}"
-                android:textSize="@dimen/verificationDetailTextSize"
-                tools:ignore="MissingConstraints" />
+                android:layout_marginTop="@dimen/_5sdp"
+                android:hint="@string/applicant_MaritalStatus_label">
+
+                <com.example.mypraticeapplication.widget.InstantAutoComplete
+                    android:id="@+id/spnapplicant_MaterialStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_text_size"
+                    android:clickable="true"
+                    android:cursorVisible="false"
+                    android:focusableInTouchMode="false"
+                    android:entries="@array/addresses_array"
+                    android:focusable="false"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray_323232"
+                    android:textSize="@dimen/verificationDetailTextSize"
+                    app:custom_font="@string/app_font_regular" />
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
@@ -161,7 +184,7 @@
             android:layout_height="wrap_content"
             android:background="@color/color_light_grey"
             android:layout_margin="@dimen/_5sdp"
-            android:visibility="gone"
+            android:visibility="visible"
             android:orientation="vertical">
 
             <com.example.mypraticeapplication.widget.SmallText
@@ -264,31 +287,32 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             android:orientation="vertical">
-            <com.example.mypraticeapplication.widget.SmallText
-                android:id="@+id/applicant_HouseLocality_label"
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputExposedDropdownMenu"
+                android:id="@+id/inspnapplicant_HouseOwnership_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/applicant_HouseOwnership_label"
-                android:textColor="@color/black"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:textSize="@dimen/_12sdp">
-            </com.example.mypraticeapplication.widget.SmallText>
+                app:layout_constraintTop_toBottomOf="@+id/txt_NeibourRecognised"
+                app:hintTextColor="@color/main_bg"
+                android:textColorHint="@color/main_bg"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:hint="@string/applicant_HouseOwnership_label">
 
-            <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
-                android:id="@+id/spnapplicant_HouseOwnership_label"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/edit_text_size"
-                android:background="@drawable/bg_spinner"
-                app:custom_font="@string/app_font_regular"
-                android:layout_weight="1"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:entries="@array/neighbourrecognised_array"
-                app:setOnItemSelectedListener="@{personinformation1.clicksHouseOwnerShipTypeListener}"
-                android:imeOptions="actionNext"
-                android:selectedItemPosition="@{personinformation1.selectedHouseOwnershipPosition}"
-                android:textSize="@dimen/verificationDetailTextSize"
-                tools:ignore="MissingConstraints" />
+                <com.example.mypraticeapplication.widget.InstantAutoComplete
+                    android:id="@+id/spnapplicant_HouseOwnership_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_text_size"
+                    android:clickable="true"
+                    android:cursorVisible="false"
+                    android:focusableInTouchMode="false"
+                    android:entries="@array/addresses_array"
+                    android:focusable="false"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray_323232"
+                    android:textSize="@dimen/verificationDetailTextSize"
+                    app:custom_font="@string/app_font_regular" />
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
@@ -467,23 +491,33 @@
                         app:custom_font="@string/app_font_regular" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
-                    android:id="@+id/spncurrentaddress"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputExposedDropdownMenu"
+                    android:id="@+id/inspncurrentaddress"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/edit_text_size"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_NeibourRecognised"
+                    app:hintTextColor="@color/main_bg"
+                    android:textColorHint="@color/main_bg"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_spinner"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    android:entries="@array/house_locality_array"
-                    app:setOnItemSelectedListener="@{personinformation1.clicksYearsListener}"
-                    android:imeOptions="actionNext"
-                    android:selectedItemPosition="@{personinformation1.selectedYearsPosition}"
-                    android:textSize="@dimen/_10sdp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:ignore="MissingConstraints"
-                    app:custom_font="@string/app_font_regular"/>
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:hint="select">
+
+                    <com.example.mypraticeapplication.widget.InstantAutoComplete
+                        android:id="@+id/spncurrentaddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edit_text_size"
+                        android:clickable="true"
+                        android:cursorVisible="false"
+                        android:focusableInTouchMode="false"
+                        android:entries="@array/addresses_array"
+                        android:focusable="false"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/gray_323232"
+                        android:textSize="@dimen/verificationDetailTextSize"
+                        app:custom_font="@string/app_font_regular" />
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
             <com.google.android.material.textfield.TextInputLayout

@@ -46,7 +46,7 @@ class AddFamilyMemberAdapter(val context: Context, private val list: ArrayList<S
         if (!relationWithApplicantList.isNullOrEmpty()){
             relationWithApplicantSpinnerAdapter = ArrayAdapter<String?>(context, android.R.layout.simple_spinner_item, relationWithApplicantList)
             relationWithApplicantSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
-            holder.binding.spnRelation.adapter = relationWithApplicantSpinnerAdapter
+            holder.binding.spnRelation.setListAdapter(relationWithApplicantList)
         }
 
 

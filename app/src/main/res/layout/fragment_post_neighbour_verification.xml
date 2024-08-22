@@ -231,6 +231,7 @@
                         android:id="@+id/inspnNeighbourReconised"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColorHint="@color/main_bg"
                         app:layout_constraintTop_toBottomOf="@+id/txt_NeibourRecognised"
                         android:hint="@string/neighbourreconised">
 

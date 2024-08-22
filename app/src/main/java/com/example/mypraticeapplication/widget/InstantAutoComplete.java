@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 
+import com.example.mypraticeapplication.R;
 import com.example.mypraticeapplication.widget.searchablespinner.SearchableListDialog;
 
 import java.util.ArrayList;
@@ -38,11 +39,11 @@ public class InstantAutoComplete extends androidx.appcompat.widget.AppCompatAuto
         _searchableListDialog = SearchableListDialog.newInstance(_items);
         _searchableListDialog.setOnSearchableItemClickListener(this);
         setOnTouchListener(this);
-
         _arrayAdapter = (ArrayAdapter) getAdapter();
 
        setOnClickListener(this);
        setOnTouchListener(this);
+
     }
 
     public void setListAdapter(List<String> houseLocalityList){

@@ -61,6 +61,7 @@
                         android:id="@+id/inspFinalSubmission"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColorHint="@color/main_bg"
                         app:layout_constraintTop_toBottomOf="@+id/txtStatus"
                         android:hint="@string/status">
 
@@ -70,6 +71,7 @@
                             android:layout_height="@dimen/edit_text_size"
                             android:clickable="true"
                             android:cursorVisible="false"
+                            android:inputType="none"
                             android:focusableInTouchMode="false"
                             android:entries="@array/addresses_array"
                             android:focusable="false"
