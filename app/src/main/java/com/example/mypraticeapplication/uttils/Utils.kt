@@ -30,6 +30,9 @@ import com.example.mypraticeapplication.MainActivity
 import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.databinding.ActivityDashboardBinding
 import com.example.mypraticeapplication.databinding.ChangePasswordFragmentBinding
+import com.example.mypraticeapplication.model.getverificationDetailResponse.GetVerificationDetailData
+import com.example.mypraticeapplication.room.InitDb
+import com.example.mypraticeapplication.view.detail.ActivityDetail
 import com.example.mypraticeapplication.viewmodel.ChangePasswordViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
@@ -112,6 +115,19 @@ class Utils {
         return bitmap
     }
 
+    public  fun  setVerificationType(selectedData: GetVerificationDetailData?){
+        if (ActivityDetail.selectedData != null){
+            if (ActivityDetail.selectedData!!.getVerificationType() != null){
+                if (ActivityDetail.selectedData!!.getVerificationType() == "RV"){
+                    ActivityDetail.selectedData!!.isResidenceVerification = true
+                }
+                else{
+                    ActivityDetail.selectedData!!.isRCOVerification = true
+                }
+            }
+        }
+    }
+
     public fun showAlertDialog(context: Context,strTitle: String) {
 
         session = Session(context);
@@ -134,6 +150,7 @@ class Utils {
         buttonOk.setOnClickListener {
             dialog.dismiss()
             session!!.clearSession()
+            InitDb.appDatabase.clearAllTables()
             val intent = Intent(context, MainActivity::class.java)
             context.startActivity(intent)
         }

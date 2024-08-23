@@ -81,7 +81,7 @@ class SaveFirequestResidenceVerification {
 
     @SerializedName("isAddressBelongsApplicant")
     @Expose
-    private var isAddressBelongsApplicant: Boolean? = null
+    private var isAddressBelongsApplicant: Any? = null
 
     @SerializedName("addressBelongsApplicantRemark")
     @Expose
@@ -343,11 +343,11 @@ class SaveFirequestResidenceVerification {
         this.politicalRemarks = politicalRemarks
     }
 
-    fun getIsAddressBelongsApplicant(): Boolean? {
+    fun getIsAddressBelongsApplicant(): Any? {
         return isAddressBelongsApplicant
     }
 
-    fun setIsAddressBelongsApplicant(isAddressBelongsApplicant: Boolean?) {
+    fun setIsAddressBelongsApplicant(isAddressBelongsApplicant: Any?) {
         this.isAddressBelongsApplicant = isAddressBelongsApplicant
     }
 

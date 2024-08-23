@@ -63,48 +63,13 @@ class PreNeighbourVerificationViewModel(private val context: Context, val bindin
 
         if (ActivityDetail.selectedData != null) {
 
-            neighbour1Name.set(
-                Utility.getNullToBlankString(
-                    ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!
-                        .getNeighbour1Name().toString()
-                )
-            )
-            neighbour1Mobile.set(
-                Utility.getNullToBlankString(
-                    ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!
-                        .getNeighbour1Mobile().toString()
-                )
-            )
-            neighbour1Remark.set(
-                Utility.getNullToBlankString(
-                    ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!
-                        .getNeighbour1Remark().toString()
-                )
-            )
-            neighbour2Name.set(
-                Utility.getNullToBlankString(
-                    ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!
-                        .getNeighbour2Name().toString()
-                )
-            )
-            neighbour2Mobile.set(
-                Utility.getNullToBlankString(
-                    ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!
-                        .getNeighbour2Mobile().toString()
-                )
-            )
-            neighbour2Remark.set(
-                Utility.getNullToBlankString(
-                    ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!
-                        .getNeighbour2Remark().toString()
-                )
-            )
-            reason.set(
-                Utility.getNullToBlankString(
-                    ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!
-                        .getReason().toString()
-                )
-            )
+            neighbour1Name.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!.getNeighbour1Name().toString()))
+            neighbour1Mobile.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!.getNeighbour1Mobile().toString()))
+            neighbour1Remark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!.getNeighbour1Remark().toString()))
+            neighbour2Name.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!.getNeighbour2Name().toString()))
+            neighbour2Mobile.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!.getNeighbour2Mobile().toString()))
+            neighbour2Remark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!.getNeighbour2Remark().toString()))
+            reason.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!.getReason().toString()))
 
             isNeighbourReconised.value =
                 ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!

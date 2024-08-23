@@ -55,7 +55,6 @@ class DetailViewModel(private val context: Context) : BaseViewModel(){
                         }else{
                             Utils().showToast(context,t.getMessage().toString())
                         }
-                        Log.e("StatusCode",t.getStatus().toString())
                     }
                 })
         }else{

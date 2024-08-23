@@ -2,6 +2,8 @@ package com.example.mypraticeapplication.viewmodel.verificationDetail
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -78,7 +80,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
 
     // All Variable
     var isAddressConfirmed = MutableLiveData<Boolean>()
-    var isAddressBelong = MutableLiveData<Boolean>()
+    var isAddressBelong = MutableLiveData<Any>()
     var isHouseOpen = MutableLiveData<Boolean>()
     var isNameboardseenattheHouse = MutableLiveData<Boolean>()
     var isNameboardmismatched = MutableLiveData<Boolean>()
@@ -99,13 +101,6 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     private var stayingAddressUnitList: List<String>? = null
     private var houseOwnershipList: List<String>? = null
 
-    private var houseLocalitySpinnerAdapter: ArrayAdapter<String?>? = null
-    private var accommodationTypeSpinnerAdapter: ArrayAdapter<String?>? = null
-    private var negativeProfileSpinnerAdapter: ArrayAdapter<String?>? = null
-    private var relationWithApplicantSpinnerAdapter: ArrayAdapter<String?>? = null
-    private var materialStatusApplicantSpinnerAdapter: ArrayAdapter<String?>? = null
-    private var houseOwnershipApplicantSpinnerAdapter: ArrayAdapter<String?>? = null
-
 
     // Room Database
     private var masterDataDao: MasterDataDao? = null
@@ -115,7 +110,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     private var addFamilyMemberAdapter: AddFamilyMemberAdapter? = null
 
 
-    var relationWithApplicant = MutableLiveData<String>()
+     var relationWithApplicant = MutableLiveData<String>()
      var accommodationApplicant = MutableLiveData<String>()
      var negativeProfileApplicant = MutableLiveData<String>()
      var houseLocalityApplicant = MutableLiveData<String>()
@@ -140,59 +135,82 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         if (ActivityDetail.selectedData !=null && ActivityDetail.selectedData!!.getFiRequestResidenceVerification() !=null){
            setSelectedData()
         }
+
+
+        binding.llPersonalInformation.llPersonalInformationOne.spnapplicantHouseOwnershipLabel.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (!s.isNullOrBlank()){
+                   if (s.toString() == "Rented"){
+                       binding.llPersonalInformation.llPersonalInformationOne.llRent.visibility = View.VISIBLE
+                   }
+                    else{
+                       binding.llPersonalInformation.llPersonalInformationOne.llRent.visibility = View.GONE
+                    }
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
     }
 
     @SuppressLint("SetTextI18n")
     private fun setSelectedData() {
 
-        isAddressConfirmed.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getAddressConfirmed()
-        isAddressBelong.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsAddressBelongsApplicant()
-        isHouseOpen.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsHouseOpen()
-        isNameboardseenattheHouse.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsNameboardSeen()
-        isNameboardmismatched.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsNameboardMismatch()
-        isMajorMedicalHistory.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsMedicalHistory()
-        isAnyPoliticalIssue.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsPoliticalConnection()
-        isAnyLoanRunning.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsAnyOtherLoan()
-        isAreaNegative.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsAreaNegative()
-        isCastCommunityDominatedArea.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsCastCommunity()
+        try {
+            isAddressConfirmed.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getAddressConfirmed()
+            isAddressBelong.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsAddressBelongsApplicant()
+            isHouseOpen.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsHouseOpen()
+            isNameboardseenattheHouse.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsNameboardSeen()
+            isNameboardmismatched.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsNameboardMismatch()
+            isMajorMedicalHistory.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsMedicalHistory()
+            isAnyPoliticalIssue.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsPoliticalConnection()
+            isAnyLoanRunning.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsAnyOtherLoan()
+            isAreaNegative.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsAreaNegative()
+            isCastCommunityDominatedArea.value =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsCastCommunity()
 
 
-        edtLatitude.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getLatitude().toString()))
-        edtLongitude.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getLongitude().toString()))
-        edtOtherObservations.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getOtherObservations().toString()))
-        edtAddressBelongRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getAddressBelongsApplicantRemark().toString()))
-        edPersonMet.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMet().toString()))
-        edPersonMobileNumber.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMobileNo().toString()))
-        edtMedicalHistoryRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getMedicalHistoryRemarks().toString()))
-        edtPoliticalConnectionRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPoliticalRemarks().toString()))
-        edtBankName.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getBankName().toString()))
-        edtLoanAmount.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getLoanAmount().toString()))
-        edtRunningSince.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getRunningSince().toString()))
-        edtIsAreaNegativeRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getNegativeProfileRemark().toString()))
-        edtIsCastCommunityDominatedArea.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsCastCommunityRemark().toString()))
-        edtOtherObservationsRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getOtherObservations().toString()))
-        edAge.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMetAge().toString()))
-        edtTotalEarningMember.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getTotalEarningMembers().toString()))
-        edtTotalFamilyMembers.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getTotalFamilymembers().toString()))
-        edtStayingAddress.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getStayingTime().toString()))
-        edtElectricityBillName.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getElectricityBillOwnerName().toString()))
-        edtKNo.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getKno().toString()))
-        edtUnitConsumedLastMonth.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getLastMonthUnits().toString()))
-        edtHouseSize.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseSize().toString()))
-        edtMedicalHistoryRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getMedicalHistoryRemarks().toString()))
-        edtPoliticalConnectionRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPoliticalRemarks().toString()))
-        edtBankName.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getBankName().toString()))
+            edtLatitude.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getLatitude().toString()))
+            edtLongitude.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getLongitude().toString()))
+            edtOtherObservations.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getOtherObservations().toString()))
+            edtAddressBelongRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getAddressBelongsApplicantRemark().toString()))
+            edPersonMet.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMet().toString()))
+            edPersonMobileNumber.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMobileNo().toString()))
+            edtMedicalHistoryRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getMedicalHistoryRemarks().toString()))
+            edtPoliticalConnectionRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPoliticalRemarks().toString()))
+            edtBankName.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getBankName().toString()))
+            edtLoanAmount.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getLoanAmount().toString()))
+            edtRunningSince.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getRunningSince().toString()))
+            edtIsAreaNegativeRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getNegativeProfileRemark().toString()))
+            edtIsCastCommunityDominatedArea.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsCastCommunityRemark().toString()))
+            edtOtherObservationsRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getOtherObservations().toString()))
+            edAge.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMetAge().toString()))
+            edtTotalEarningMember.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getTotalEarningMembers().toString()))
+            edtTotalFamilyMembers.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getTotalFamilymembers().toString()))
+            edtStayingAddress.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getStayingTime().toString()))
+            edtElectricityBillName.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getElectricityBillOwnerName().toString()))
+            edtKNo.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getKno().toString()))
+            edtUnitConsumedLastMonth.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getLastMonthUnits().toString()))
+            edtHouseSize.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseSize().toString()))
+            edtMedicalHistoryRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getMedicalHistoryRemarks().toString()))
+            edtPoliticalConnectionRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPoliticalRemarks().toString()))
+            edtBankName.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getBankName().toString()))
 
 
-        relationWithApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMetRelation()!!.toString())
-        accommodationApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getAccommodationType()!!.toString())
-        negativeProfileApplicant.value =  Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsNegativeProfile().toString())
-        houseLocalityApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseOwnerShip().toString())
-        materialStatusApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMetMeritalStatus().toString())
-        houseSizeUnitApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseSizeUnit().toString())
-        stayingAddressApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getStayingTimeUnit().toString())
-        houseOwnershipApplicant.value =Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseOwnerShip().toString())
+            relationWithApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMetRelation()!!.toString())
+            accommodationApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getAccommodationType()!!.toString())
+            negativeProfileApplicant.value =  Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsNegativeProfile().toString())
+            houseLocalityApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseOwnerShip().toString())
+            materialStatusApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMetMeritalStatus().toString())
+            houseSizeUnitApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseSizeUnit().toString())
+            stayingAddressApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getStayingTimeUnit().toString())
+            houseOwnershipApplicant.value =Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseOwnerShip().toString())
 
+        }catch (e: Exception){
+        }
        // Log.e("Selected", ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMet().toString())
     }
 
@@ -208,149 +226,104 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             Utils().showSnackBar(context,"Please Select House is Open",binding.constraintLayout)
         }
         else {
-
-            val saveVerificationDataDetail: SaveVerificationDataDetail =
-                SaveVerificationDataDetail()
-            saveVerificationDataDetail.setFirequestId(AppConstants.verificationId)
-            saveVerificationDataDetail.setVerificationType("RV")
-            val saveFiRequestResidenceVerification: SaveFirequestResidenceVerification =
-                SaveFirequestResidenceVerification()
-            saveFiRequestResidenceVerification.setFirequestId(AppConstants.verificationId)
-            saveVerificationDataDetail.setFirequestResidenceVerification(
-                saveFiRequestResidenceVerification
-            )
-            //  saveFiRequestResidenceVerification.setVisitDate("2024-08-14T22:32:20.503")
-            saveFiRequestResidenceVerification.setAddressConfirmed(isAddressConfirmed.value)
-            saveFiRequestResidenceVerification.setIsAddressBelongsApplicant(isAddressBelong.value)
-            saveFiRequestResidenceVerification.setIsHouseOpen(isHouseOpen.value)
-            saveFiRequestResidenceVerification.setPersonMet(edPersonMet.get())
-            saveFiRequestResidenceVerification.setPersonMetRelation(relationWithApplicant.value)
-            saveFiRequestResidenceVerification.setPersonMobileNo(edPersonMobileNumber.get())
-            saveFiRequestResidenceVerification.setStayingTime(
-                Utility.getParseInteger(
-                    edtStayingAddress.get().toString()
-                )
-            )
-            saveFiRequestResidenceVerification.setElectricityBillOwnerName(edtElectricityBillName.get())
-            saveFiRequestResidenceVerification.setHouseOwnerShip(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantHouseOwnershipLabel.text.toString())
-            saveFiRequestResidenceVerification.setHouseLocality(binding.llPersonalInformation.spnHouseLocality.text.toString())
-            saveFiRequestResidenceVerification.setIsMedicalHistory(isMajorMedicalHistory.value)
-            saveFiRequestResidenceVerification.setMedicalHistoryRemarks(edtMedicalHistoryRemark.get())
-            saveFiRequestResidenceVerification.setIsPoliticalConnection(isAnyPoliticalIssue.value)
-            saveFiRequestResidenceVerification.setPoliticalRemarks(edtPoliticalConnectionRemark.get())
-            saveFiRequestResidenceVerification.setIsAddressBelongsApplicant(isAddressBelong.value)
-            saveFiRequestResidenceVerification.setAddressBelongsApplicantRemark(
-                edtAddressBelongRemark.get()
-            )
-            saveFiRequestResidenceVerification.setPersonMetAge(Utility.getParseInteger(edAge.get()))
-            saveFiRequestResidenceVerification.setPersonMetMeritalStatus(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantMaterialStatus.text.toString())
-            saveFiRequestResidenceVerification.setTotalFamilymembers(
-                Utility.getParseInteger(
-                    edtTotalEarningMember.get()
-                )
-            )
-            saveFiRequestResidenceVerification.setTotalEarningMembers(
-                Utility.getParseInteger(
-                    edtTotalEarningMember.get()
-                )
-            )
-            saveFiRequestResidenceVerification.setKno(edtKNo.get())
-            saveFiRequestResidenceVerification.setLastMonthUnits(
-                Utility.getParseInteger(
-                    edtUnitConsumedLastMonth.get()
-                )
-            )
-            saveFiRequestResidenceVerification.setAccommodationType(binding.llPersonalInformation.spnAccommodationType.text.toString())
-            saveFiRequestResidenceVerification.setHouseSize(Utility.getParseInteger(edtHouseSize.get()))
-            saveFiRequestResidenceVerification.setHouseSizeUnit(binding.llPersonalInformation.spnapplicantHouseSizeLabel.text.toString())
-            saveFiRequestResidenceVerification.setIsAnyOtherLoan(isAnyLoanRunning.value)
-            saveFiRequestResidenceVerification.setBankName(edtBankName.get())
-            saveFiRequestResidenceVerification.setLoanAmount(Utility.getParseInteger(edtLoanAmount.get()))
-            saveFiRequestResidenceVerification.setRunningSince(
-                Utility.getParseInteger(edtRunningSince.get())
-            )
-            saveFiRequestResidenceVerification.setIsAreaNegative(isAreaNegative.value)
-            saveFiRequestResidenceVerification.setIsNegativeProfile(binding.llApplicationBackground.spnapplicantIsInvolvedinNegativeProfileLabel.text.toString())
-            saveFiRequestResidenceVerification.setOtherObservations(edtOtherObservationsRemark.get())
-            saveFiRequestResidenceVerification.setIsCastCommunity(isCastCommunityDominatedArea.value)
-            saveFiRequestResidenceVerification.setIsCastCommunityRemark(edtIsCastCommunityDominatedArea.get())
-            saveFiRequestResidenceVerification.setLatitude(edtLatitude.get())
-            saveFiRequestResidenceVerification.setLongitude(edtLongitude.get())
-            saveFiRequestResidenceVerification.setIsNameboardSeen(isAddressConfirmed.value)
-            saveFiRequestResidenceVerification.setIsNameboardMismatch(isNameboardmismatched.value)
-            saveFiRequestResidenceVerification.setNameboardMismatchReason(edt_Reason.get())
-            saveFiRequestResidenceVerification.setStayingTimeUnit(binding.llPersonalInformation.llPersonalInformationOne.spncurrentaddress.text.toString())
-            saveFiRequestResidenceVerification.setIsAreaNegativeRemark(edtIsAreaNegativeRemark.get())
-
-            saveFiRequestResidenceVerification.setPermanentAddress(edtPermanentAddress.get())
-            saveFiRequestResidenceVerification.setRent(Utility.getParseInteger(edtMonthlyRentAmount.get()))
-            saveFiRequestResidenceVerification.setHouseOwnerName(edtLandlordName.get())
-            saveFiRequestResidenceVerification.setHouseOwnerMobileNo(edtLandlordMobileNo.get())
-
-            saveFiRequestResidenceVerification.setTotalFamilymembers(
-                Utility.getParseInteger(
-                    edtTotalFamilyMembers.get()
-                )
-            )
-            saveFiRequestResidenceVerification.setTotalEarningMembers(
-                Utility.getParseInteger(
-                    edtTotalEarningMember.get()
-                )
-            )
-
-            saveFiRequestResidenceVerification.setApplicantFamilyDetails(addFamilyMemberList)
-
-            val gson = Gson()
-            val json = gson.toJson(saveVerificationDataDetail)
-            Log.e("Json", json)
-
-            if (Utility.isNetworkConnected(context)) {
-                isLoading.postValue(true)
-                Networking.with(context)
-                    .getServices()
-                    .getSaveFiResidenceResponse(saveVerificationDataDetail)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : CallbackObserver<GetSaveResidenceVerificationResponse>() {
-                        override fun onSuccess(response: GetSaveResidenceVerificationResponse) {
-                            isLoading.postValue(false)
-                        }
-
-                        override fun onFailed(code: Int, message: String) {
-                            isLoading.postValue(false)
-                        }
-
-                        override fun onNext(t: GetSaveResidenceVerificationResponse) {
-                            Log.e("Status", t.getStatusCode().toString())
-                            isLoading.postValue(false)
-                            if (t.getStatusCode() == 200) {
-                                //   Utils().showToast(context,t.getMessage().toString())
-                                Utils().showSnackBar(
-                                    context,
-                                    t.getMessage().toString(),
-                                    binding.constraintLayout
-                                )
-                            } else {
-                                Utils().showSnackBar(
-                                    context,
-                                    t.getMessage().toString(),
-                                    binding.constraintLayout
-                                )
-                                // Utils().showToast(context,t.getMessage().toString())
-                            }
-                            Log.e("StatusCode", t.getStatus().toString())
-                        }
-                    })
-            } else {
-                // Utils().showToast(context,context.getString(R.string.nointernetconnection).toString())
-                Utils().showSnackBar(
-                    context,
-                    context.getString(R.string.nointernetconnection).toString(),
-                    binding.constraintLayout
-                )
-            }
+            callSaveResidenceApi()
         }
     }
+
+    private fun callSaveResidenceApi() {
+        val saveVerificationDataDetail: SaveVerificationDataDetail = SaveVerificationDataDetail()
+        saveVerificationDataDetail.setFirequestId(AppConstants.verificationId)
+        saveVerificationDataDetail.setVerificationType("RV")
+        val saveFiRequestResidenceVerification: SaveFirequestResidenceVerification = SaveFirequestResidenceVerification()
+        saveFiRequestResidenceVerification.setFirequestId(AppConstants.verificationId)
+        saveVerificationDataDetail.setFirequestResidenceVerification(saveFiRequestResidenceVerification)
+        //  saveFiRequestResidenceVerification.setVisitDate("2024-08-14T22:32:20.503")
+        saveFiRequestResidenceVerification.setAddressConfirmed(isAddressConfirmed.value)
+        saveFiRequestResidenceVerification.setIsAddressBelongsApplicant(isAddressBelong.value)
+        saveFiRequestResidenceVerification.setIsHouseOpen(isHouseOpen.value)
+        saveFiRequestResidenceVerification.setPersonMet(edPersonMet.get())
+        saveFiRequestResidenceVerification.setPersonMetRelation(relationWithApplicant.value)
+        saveFiRequestResidenceVerification.setPersonMobileNo(edPersonMobileNumber.get())
+        saveFiRequestResidenceVerification.setStayingTime(Utility.getParseInteger(edtStayingAddress.get().toString()))
+        saveFiRequestResidenceVerification.setElectricityBillOwnerName(edtElectricityBillName.get())
+        saveFiRequestResidenceVerification.setHouseOwnerShip(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantHouseOwnershipLabel.text.toString())
+        saveFiRequestResidenceVerification.setHouseLocality(binding.llPersonalInformation.spnHouseLocality.text.toString())
+        saveFiRequestResidenceVerification.setIsMedicalHistory(isMajorMedicalHistory.value)
+        saveFiRequestResidenceVerification.setMedicalHistoryRemarks(edtMedicalHistoryRemark.get())
+        saveFiRequestResidenceVerification.setIsPoliticalConnection(isAnyPoliticalIssue.value)
+        saveFiRequestResidenceVerification.setPoliticalRemarks(edtPoliticalConnectionRemark.get())
+        saveFiRequestResidenceVerification.setIsAddressBelongsApplicant(isAddressBelong.value)
+        saveFiRequestResidenceVerification.setAddressBelongsApplicantRemark(edtAddressBelongRemark.get())
+        saveFiRequestResidenceVerification.setPersonMetAge(Utility.getParseInteger(edAge.get()))
+        saveFiRequestResidenceVerification.setPersonMetMeritalStatus(binding.llPersonalInformation.llPersonalInformationOne.spnapplicantMaterialStatus.text.toString())
+        saveFiRequestResidenceVerification.setTotalFamilymembers(Utility.getParseInteger(edtTotalEarningMember.get()))
+        saveFiRequestResidenceVerification.setTotalEarningMembers(Utility.getParseInteger(edtTotalEarningMember.get()))
+        saveFiRequestResidenceVerification.setKno(edtKNo.get())
+        saveFiRequestResidenceVerification.setLastMonthUnits(Utility.getParseInteger(edtUnitConsumedLastMonth.get()))
+        saveFiRequestResidenceVerification.setAccommodationType(binding.llPersonalInformation.spnAccommodationType.text.toString())
+        saveFiRequestResidenceVerification.setHouseSize(Utility.getParseInteger(edtHouseSize.get()))
+        saveFiRequestResidenceVerification.setHouseSizeUnit(binding.llPersonalInformation.spnapplicantHouseSizeLabel.text.toString())
+        saveFiRequestResidenceVerification.setIsAnyOtherLoan(isAnyLoanRunning.value)
+        saveFiRequestResidenceVerification.setBankName(edtBankName.get())
+        saveFiRequestResidenceVerification.setLoanAmount(Utility.getParseInteger(edtLoanAmount.get()))
+        saveFiRequestResidenceVerification.setRunningSince(Utility.getParseInteger(edtRunningSince.get()))
+        saveFiRequestResidenceVerification.setIsAreaNegative(isAreaNegative.value)
+        saveFiRequestResidenceVerification.setIsNegativeProfile(binding.llApplicationBackground.spnapplicantIsInvolvedinNegativeProfileLabel.text.toString())
+        saveFiRequestResidenceVerification.setOtherObservations(edtOtherObservationsRemark.get())
+        saveFiRequestResidenceVerification.setIsCastCommunity(isCastCommunityDominatedArea.value)
+        saveFiRequestResidenceVerification.setIsCastCommunityRemark(edtIsCastCommunityDominatedArea.get())
+        saveFiRequestResidenceVerification.setLatitude(edtLatitude.get())
+        saveFiRequestResidenceVerification.setLongitude(edtLongitude.get())
+        saveFiRequestResidenceVerification.setIsNameboardSeen(isAddressConfirmed.value)
+        saveFiRequestResidenceVerification.setIsNameboardMismatch(isNameboardmismatched.value)
+        saveFiRequestResidenceVerification.setNameboardMismatchReason(edt_Reason.get())
+        saveFiRequestResidenceVerification.setStayingTimeUnit(binding.llPersonalInformation.llPersonalInformationOne.spncurrentaddress.text.toString())
+        saveFiRequestResidenceVerification.setIsAreaNegativeRemark(edtIsAreaNegativeRemark.get())
+
+        saveFiRequestResidenceVerification.setPermanentAddress(edtPermanentAddress.get())
+        saveFiRequestResidenceVerification.setRent(Utility.getParseInteger(edtMonthlyRentAmount.get()))
+        saveFiRequestResidenceVerification.setHouseOwnerName(edtLandlordName.get())
+        saveFiRequestResidenceVerification.setHouseOwnerMobileNo(edtLandlordMobileNo.get())
+
+        saveFiRequestResidenceVerification.setTotalFamilymembers(Utility.getParseInteger(edtTotalFamilyMembers.get()))
+        saveFiRequestResidenceVerification.setTotalEarningMembers(Utility.getParseInteger(edtTotalEarningMember.get()))
+
+        saveFiRequestResidenceVerification.setApplicantFamilyDetails(addFamilyMemberList)
+
+        val gson = Gson()
+        val json = gson.toJson(saveVerificationDataDetail)
+        Log.e("Json", json)
+
+        if (Utility.isNetworkConnected(context)) {
+            isLoading.postValue(true)
+            Networking.with(context)
+                .getServices()
+                .getSaveFiResidenceResponse(saveVerificationDataDetail)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : CallbackObserver<GetSaveResidenceVerificationResponse>() {
+                    override fun onSuccess(response: GetSaveResidenceVerificationResponse) {
+                        isLoading.postValue(false)
+                    }
+
+                    override fun onFailed(code: Int, message: String) {
+                        isLoading.postValue(false)
+                    }
+
+                    override fun onNext(t: GetSaveResidenceVerificationResponse) {
+                        isLoading.postValue(false)
+                        if (t.getStatusCode() == 200) {
+                            Utils().showSnackBar(context, t.getMessage().toString(), binding.constraintLayout)
+                        } else {
+                            Utils().showSnackBar(context, t.getMessage().toString(), binding.constraintLayout)
+                        }
+                    }
+                })
+        } else {
+            Utils().showSnackBar(context, context.getString(R.string.nointernetconnection).toString(), binding.constraintLayout)
+        }
+    }
+
     private fun addFamilyMemberData() {
         addFamilyMemberList  = ArrayList()
         val saveResidenceApplicantFamilyDetail  =  SaveResidanceApplicantFamilyDetail()
@@ -391,51 +364,11 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             binding.llPersonalInformation.llPersonalInformationOne.spnapplicantMaterialStatus.setListAdapter(materialStatusApplicantList!!)
             binding.llPersonalInformation.llPersonalInformationOne.spncurrentaddress.setListAdapter(materialStatusApplicantList!!)
 
-            houseLocalitySpinnerAdapter =
-                ArrayAdapter<String?>(context, android.R.layout.simple_spinner_item, houseLocalityList!!)
-            houseLocalitySpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
 
             binding.llPersonalInformation.spnHouseLocality.setListAdapter(houseLocalityList!!)
-
-
-            accommodationTypeSpinnerAdapter =
-                ArrayAdapter<String?>(
-                    context,
-                    android.R.layout.simple_spinner_item,
-                    accommodationList!!
-                )
-            accommodationTypeSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
-
             binding.llPersonalInformation.spnAccommodationType.setListAdapter(accommodationList!!)
-
-            negativeProfileSpinnerAdapter =
-                ArrayAdapter<String?>(
-                    context,
-                    android.R.layout.simple_spinner_item,
-                    negativeProfileList!!
-                )
-            negativeProfileSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
-
             binding.llApplicationBackground.spnapplicantIsInvolvedinNegativeProfileLabel.setListAdapter(negativeProfileList!!)
-
-
-            relationWithApplicantSpinnerAdapter =
-                ArrayAdapter<String?>(
-                    context,
-                    android.R.layout.simple_spinner_item,
-                    relationWithApplicantList!!
-                )
-            relationWithApplicantSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
-
             binding.llPersonalInformation.llPersonalInformationOne.spnapplicantRelationApplicant.setListAdapter(relationWithApplicantList)
-
-            houseOwnershipApplicantSpinnerAdapter =
-                ArrayAdapter<String?>(
-                    context,
-                    android.R.layout.simple_spinner_item,
-                    houseOwnershipList!!
-                )
-            houseOwnershipApplicantSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
             binding.llPersonalInformation.llPersonalInformationOne.spnapplicantHouseOwnershipLabel.setListAdapter(houseOwnershipList!!)
 
             if(ActivityDetail.selectedData!!.getFiRequestResidenceVerification() != null){
@@ -572,48 +505,5 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
 
         binding.llPersonalInformation.llPersonalInformationOne.addFamilyMemberRecyclerView.setLayoutManager(LinearLayoutManager(context))
         binding.llPersonalInformation.llPersonalInformationOne.addFamilyMemberRecyclerView.setAdapter(addFamilyMemberAdapter)
-    }
-
-    // Get Master Data Api
-    private fun getMasterDataApi() {
-        if (Utility.isNetworkConnected(context)){
-            isLoading.postValue(true)
-            Networking.with(context)
-                .getServices()
-                .getMasterApiData()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : CallbackObserver<GetMasterApiResponse>() {
-                    override fun onSuccess(response: GetMasterApiResponse) {
-                        isLoading.postValue(false)
-                    }
-
-                    override fun onFailed(code: Int, message: String) {
-                        isLoading.postValue(false)
-                    }
-
-                    override fun onNext(t: GetMasterApiResponse) {
-                        Log.e("Status",t.getStatusCode().toString())
-                        isLoading.postValue(false)
-                        if(t.getStatusCode() == 200){
-                            if(t.getData() != null){
-                                CoroutineScope(Dispatchers.IO).launch {
-                                    //getUserProfileData()
-                                    masterDataDao!!.insertAll(t.getData())
-                                }
-                            }
-                        }else{
-                            //Utils().showToast(context,t.getMessage().toString())
-                            Utils().showSnackBar(context,t.getMessage().toString(),binding.constraintLayout)
-                        }
-                        Log.e("StatusCode",t.getStatus().toString())
-                    }
-
-                })
-        }else{
-            Utils().showSnackBar(context,context.getString(R.string.nointernetconnection).toString(),binding.constraintLayout)
-         //   Utils().showToast(context,context.getString(R.string.nointernetconnection).toString())
-        }
-
     }
 }

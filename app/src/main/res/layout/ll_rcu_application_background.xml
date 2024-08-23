@@ -60,6 +60,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             app:hintTextColor="@color/main_bg"
             app:passwordToggleEnabled="false"
+            android:visibility="gone"
             tools:ignore="MissingClass,MissingConstraints">
 
             <com.example.mypraticeapplication.widget.TypefaceEditText
@@ -112,6 +113,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             app:hintTextColor="@color/main_bg"
             app:passwordToggleEnabled="false"
+            android:visibility="gone"
             tools:ignore="MissingClass,MissingConstraints">
 
             <com.example.mypraticeapplication.widget.TypefaceEditText
@@ -160,6 +162,7 @@
             android:id="@+id/ll_OtherLoan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:weightSum="3">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -316,6 +319,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             app:hintTextColor="@color/main_bg"
             app:passwordToggleEnabled="false"
+            android:visibility="gone"
             tools:ignore="MissingClass,MissingConstraints">
 
             <com.example.mypraticeapplication.widget.TypefaceEditText
@@ -368,6 +372,7 @@
             android:id="@+id/ll_IsCastCommunityDominatedArea"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:orientation="vertical">
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inpapplicant_IsCastCommunityDominatedArea_label"
@@ -377,6 +382,7 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 app:hintTextColor="@color/main_bg"
                 app:passwordToggleEnabled="false"
+
                 tools:ignore="MissingClass,MissingConstraints">
 
                 <com.example.mypraticeapplication.widget.TypefaceEditText

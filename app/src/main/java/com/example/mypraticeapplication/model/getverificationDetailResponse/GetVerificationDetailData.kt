@@ -460,6 +460,11 @@ class GetVerificationDetailData {
     @Expose
     private var firequestAdditionalDetailDto: GetFirequestAdditionalDetailDto? = null
 
+
+    // All Verification Type
+    var isResidenceVerification: Boolean = false
+    var isRCOVerification: Boolean = false
+
     fun getFirequestId(): Int? {
         return firequestId
     }

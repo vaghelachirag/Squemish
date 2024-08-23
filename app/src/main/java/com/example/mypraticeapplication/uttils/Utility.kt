@@ -63,7 +63,6 @@ class Utility {
             Pattern.CASE_INSENSITIVE
         )
 
-
         fun View.setAllEnabled(enabled: Boolean) {
             isEnabled = enabled
 

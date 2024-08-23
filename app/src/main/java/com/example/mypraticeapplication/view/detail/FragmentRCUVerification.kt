@@ -24,6 +24,7 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
 
 
     companion object {
+
         fun newInstance(selectedData: GetVerificationDetailData?): FragmentRCUVerification {
             val bundle = Bundle()
             //  bundle.putSerializable(DATA, selectedData)
@@ -63,10 +64,8 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
             setVisibility(it)
         }
 
-
         // Address Belong Confirmed
         rcuVerificationViewModel.isAddressBelong.observeForever {
-            Log.e("Confirmed",it.toString())
             if (it == true){
                 binding.llAddressDetail.rbAddressBelongYes.isChecked = true
                 binding.llAddressDetail.inpAddressBelongRemark.visibility = View.GONE
@@ -79,10 +78,10 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
                 binding.llPersonalInformation.llPersonalInformationOne.llHouseOwnership.visibility = View.VISIBLE
                 binding.llPersonalInformation.llPersonalInformationOne.llStayingAddress.visibility = View.VISIBLE
                 binding.llPersonalInformation.llHouseSize.visibility = View.VISIBLE
-                binding.llPersonalInformation.llPersonalInformationOne.llRent.visibility = View.VISIBLE
+                binding.llPersonalInformation.llPersonalInformationOne.llRent.visibility = View.GONE
                 binding.llPersonalInformation.llPersonalInformationOne.llAge.visibility = View.VISIBLE
             }
-            else{
+            if (it == false){
                 binding.llAddressDetail.rbAddressBelongNo.isChecked = true
                 binding.llAddressDetail.inpAddressBelongRemark.visibility = View.VISIBLE
                 binding.llAddressDetail.llHouseIsOpen.visibility = View.GONE
@@ -105,119 +104,136 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
                 binding.llPersonalInformation.rbIsNameboardseenattheHouseYes.isChecked = true
                 binding.llPersonalInformation.llNameboardMismatched.visibility = View.VISIBLE
             }
-            else{
+            else if (it == false){
                 binding.llPersonalInformation.rbIsNameboardseenattheHouseNo.isChecked = true
                 binding.llPersonalInformation.llNameboardMismatched.visibility = View.GONE
+            }
+            else{
+
             }
         }
 
         // Name Board Mismatched
         rcuVerificationViewModel.isNameboardmismatched.observeForever {
-            Log.e("Confirmed",it.toString())
             if (it == true){
                 binding.llPersonalInformation.rbApplicantIsNameboardseenattheHouseLabelYes.isChecked = true
                 binding.llPersonalInformation.inpApplicantReasonLabel.visibility = View.VISIBLE
-            }
-            else{
+            }else if (it == false){
                 binding.llPersonalInformation.rbApplicantIsNameboardseenattheHouseLabeleNo.isChecked = true
                 binding.llPersonalInformation.inpApplicantReasonLabel.visibility = View.GONE
+            }
+            else{
+
             }
         }
 
         // Major Medical History
         rcuVerificationViewModel.isMajorMedicalHistory.observeForever {
-            Log.e("Confirmed",it.toString())
             if (it == true){
                 binding.llApplicationBackground.rbIsapplicanthaveanymajormedicalhistoryYes.isChecked = true
                 binding.llApplicationBackground.inpMedicalHistoryRemark.visibility = View.VISIBLE
             }
-            else{
+            else if (it == false){
                 binding.llApplicationBackground.rbIsapplicanthaveanymajormedicalhistoryNo.isChecked = true
                 binding.llApplicationBackground.inpMedicalHistoryRemark.visibility = View.GONE
+            }
+            else{
+
             }
         }
 
 
         // Political Connection
         rcuVerificationViewModel.isAnyPoliticalIssue.observeForever {
-            Log.e("Confirmed",it.toString())
             if (it == true){
                 binding.llApplicationBackground.rbIsapplicanthaveanypoliticalconnectionYes.isChecked = true
                 binding.llApplicationBackground.inpIsapplicanthaveanypoliticalconnectionRemark.visibility = View.VISIBLE
             }
-            else{
+            else if (it == false){
                 binding.llApplicationBackground.rbIsapplicanthaveanypoliticalconnectionNo.isChecked = true
                 binding.llApplicationBackground.inpIsapplicanthaveanypoliticalconnectionRemark.visibility = View.GONE
+            }
+            else{
+
             }
         }
 
 
         // Political Connection
         rcuVerificationViewModel.isAnyLoanRunning.observeForever {
-            Log.e("Confirmed",it.toString())
             if (it == true){
                 binding.llApplicationBackground.rbApplicantIsanyotherloanrunningLabelYes.isChecked = true
                 binding.llApplicationBackground.llOtherLoan.visibility = View.VISIBLE
             }
-            else{
+            else if (it == false){
                 binding.llApplicationBackground.rbRbApplicantIsanyotherloanrunningLabelNo.isChecked = true
                 binding.llApplicationBackground.llOtherLoan.visibility = View.GONE
+            }
+            else{
+
             }
         }
 
         // Political Connection
         rcuVerificationViewModel.isAreaNegative.observeForever {
-            Log.e("Confirmed",it.toString())
             if (it == true){
                 binding.llApplicationBackground.rbApplicantIsAreaNegativeLabelYes.isChecked = true
                 binding.llApplicationBackground.inpapplicantIsAreaNegativeLabel.visibility = View.VISIBLE
             }
-            else{
+            else if (it == false){
                 binding.llApplicationBackground.rbApplicantIsAreaNegativeLabelNo.isChecked = true
                 binding.llApplicationBackground.inpapplicantIsAreaNegativeLabel.visibility = View.GONE
+            }
+            else{
+
             }
         }
 
         // Political Connection
         rcuVerificationViewModel.isCastCommunityDominatedArea.observeForever {
-            Log.e("Confirmed",it.toString())
             if (it == true){
                 binding.llApplicationBackground.rbApplicantIsCastCommunityDominatedAreaYes.isChecked = true
                 binding.llApplicationBackground.inpapplicantIsCastCommunityDominatedAreaLabel.visibility = View.VISIBLE
             }
-            else{
+            else if (it == false){
                 binding.llApplicationBackground.rbApplicantIsCastCommunityDominatedAreaNo.isChecked = true
                 binding.llApplicationBackground.inpapplicantIsCastCommunityDominatedAreaLabel.visibility = View.GONE
+            }
+            else{
+
             }
         }
 
         // Political Connection
         rcuVerificationViewModel.isHouseOpen.observeForever {
-            Log.e("Confirmed",it.toString())
             if (it == true){
                 binding.llAddressDetail.radioDurningVisitYes.isChecked = true
                 binding.llPersonalInformation.llPersonalInformationOne.root.visibility = View.VISIBLE
                 binding.llPersonalInformation.llHouseSize.visibility = View.VISIBLE
             }
-            else{
+            if (it == false) {
                 binding.llAddressDetail.radioDurningVisitNo.isChecked = true
                 binding.llPersonalInformation.llPersonalInformationOne.root.visibility = View.GONE
                 binding.llPersonalInformation.llHouseSize.visibility = View.GONE
+            }
+            if (it != true) {
+                // b is null or equals false
             }
         }
 
         // Political Connection
         rcuVerificationViewModel.isHouseRented.observeForever {
-            Log.e("Confirmed",it.toString())
             if (it == true){
                 binding.llPersonalInformation.llPersonalInformationOne.llRent.visibility = View.VISIBLE
             }
-            else{
+            else if (it == false){
                 binding.llPersonalInformation.llPersonalInformationOne.llRent.visibility = View.GONE
+            }
+            else{
+
             }
         }
     }
-
 
     private fun setVisibility(visibility: Boolean) {
         if (visibility){

@@ -17,8 +17,10 @@ import com.example.mypraticeapplication.databinding.ActivityDetailBinding
 import com.example.mypraticeapplication.interfaces.FragmentLifecycleInterface
 import com.example.mypraticeapplication.model.getverificationDetailResponse.GetVerificationDetailData
 import com.example.mypraticeapplication.uttils.Utility
+import com.example.mypraticeapplication.uttils.Utils
 import com.example.mypraticeapplication.view.adapter.VerificationDetailViewPagerAdapter
 import com.example.mypraticeapplication.view.base.BaseActivity
+import com.example.mypraticeapplication.view.detail.fiRequest.FragmentRCOVerification
 import com.example.mypraticeapplication.viewmodel.DetailViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -43,12 +45,7 @@ class ActivityDetail  : BaseActivity()  {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String?>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                locationManager!!.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER, 0, 0f,
-                    locationListener!!
-                )
-            }
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) { locationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, locationListener!!) }
         }
     }
 
@@ -166,6 +163,7 @@ class ActivityDetail  : BaseActivity()  {
         detailViewModel.getVerificationDetailData.observeForever {
             Log.e("Data","Data" + detailViewModel.getVerificationDetailData.value!!.getStatus().toString())
             selectedData = detailViewModel.getVerificationDetailData.value
+            Utils().setVerificationType(selectedData)
             setStatePageAdapter()
         }
 
@@ -182,7 +180,12 @@ class ActivityDetail  : BaseActivity()  {
         val viewPagerAdapter = VerificationDetailViewPagerAdapter(supportFragmentManager, 0)
         viewPagerAdapter.addFragment(FragmentBasicInformation.newInstance(selectedData), "Basic Information")
         viewPagerAdapter.addFragment(FragmentPreNeighbourVerification.newInstance(selectedData), "Pre-Neighbour Verification")
-        viewPagerAdapter.addFragment(FragmentRCUVerification.newInstance(selectedData), "RCU Verification")
+        if (selectedData!!.isResidenceVerification){
+            viewPagerAdapter.addFragment(FragmentRCUVerification.newInstance(selectedData), "RCU Verification")
+        }
+        if (selectedData!!.isRCOVerification){
+            viewPagerAdapter.addFragment(FragmentRCOVerification.newInstance(selectedData), "RCU Verification")
+        }
         viewPagerAdapter.addFragment(FragmentPhotograph.newInstance(), "Photograph")
         viewPagerAdapter.addFragment(FragmentPostNeighbourVerification.newInstance(selectedData), "Post-Neighbour Verification")
         viewPagerAdapter.addFragment(FragmentFinalSubmit.newInstance(selectedData), "Final Submit")

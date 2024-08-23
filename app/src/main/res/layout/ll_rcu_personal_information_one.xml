@@ -172,6 +172,7 @@
                     android:entries="@array/addresses_array"
                     android:focusable="false"
                     android:textColor="@color/black"
+                    android:text="@={personinformation1.materialStatusApplicant}"
                     android:textColorHint="@color/gray_323232"
                     android:textSize="@dimen/verificationDetailTextSize"
                     app:custom_font="@string/app_font_regular" />
@@ -185,7 +186,7 @@
             android:layout_height="wrap_content"
             android:background="@color/color_light_grey"
             android:layout_margin="@dimen/_5sdp"
-            android:visibility="visible"
+            android:visibility="gone"
             android:orientation="vertical">
 
             <com.example.mypraticeapplication.widget.SmallText
@@ -310,6 +311,7 @@
                     android:entries="@array/addresses_array"
                     android:focusable="false"
                     android:textColor="@color/black"
+                    android:text="@={personinformation1.houseOwnershipApplicant}"
                     android:textColorHint="@color/gray_323232"
                     android:textSize="@dimen/verificationDetailTextSize"
                     app:custom_font="@string/app_font_regular" />
@@ -515,6 +517,7 @@
                         android:entries="@array/addresses_array"
                         android:focusable="false"
                         android:textColor="@color/black"
+                        android:text="@={personinformation1.stayingAddressApplicant}"
                         android:textColorHint="@color/gray_323232"
                         android:textSize="@dimen/verificationDetailTextSize"
                         app:custom_font="@string/app_font_regular" />
