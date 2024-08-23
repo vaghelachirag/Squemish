@@ -273,6 +273,7 @@
                 android:focusableInTouchMode="false"
                 android:entries="@array/addresses_array"
                 android:focusable="false"
+                android:text="@={applicationbackground.negativeProfileApplicant}"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray_323232"
                 android:textSize="@dimen/verificationDetailTextSize"
