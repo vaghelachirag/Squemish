@@ -199,7 +199,6 @@
 
 
     <string-array name="house_locality_array">
-        <item>Select</item>
         <item>Years</item>
         <item>Months</item>
     </string-array>

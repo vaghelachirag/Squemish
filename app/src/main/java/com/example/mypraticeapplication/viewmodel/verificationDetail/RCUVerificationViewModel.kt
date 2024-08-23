@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.RadioGroup
+import androidx.annotation.Nullable
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -80,8 +81,8 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
 
     // All Variable
     var isAddressConfirmed = MutableLiveData<Boolean>()
-    var isAddressBelong = MutableLiveData<Any>()
-    var isHouseOpen = MutableLiveData<Boolean>()
+    var isAddressBelong = MutableLiveData<Any?>()
+    var isHouseOpen = MutableLiveData<Boolean?>()
     var isNameboardseenattheHouse = MutableLiveData<Boolean>()
     var isNameboardmismatched = MutableLiveData<Boolean>()
     var isMajorMedicalHistory = MutableLiveData<Boolean>()
@@ -135,7 +136,6 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         if (ActivityDetail.selectedData !=null && ActivityDetail.selectedData!!.getFiRequestResidenceVerification() !=null){
            setSelectedData()
         }
-
 
         binding.llPersonalInformation.llPersonalInformationOne.spnapplicantHouseOwnershipLabel.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -209,7 +209,11 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             stayingAddressApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getStayingTimeUnit().toString())
             houseOwnershipApplicant.value =Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseOwnerShip().toString())
 
-        }catch (e: Exception){
+
+            edtLatitude.set(ActivityDetail.currentLat.toString())
+            edtLongitude.set(ActivityDetail.currentLong.toString())
+
+        }catch (_: Exception){
         }
        // Log.e("Selected", ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMet().toString())
     }
@@ -218,15 +222,69 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     fun onSaveClicked(){
 
         if (isAddressConfirmed.value == null){
-            Utils().showSnackBar(context,"Please Select Address Confirmed",binding.constraintLayout)
-        }else if (isAddressBelong.value == null){
-            Utils().showSnackBar(context,"Please Select Address Belong",binding.constraintLayout)
+            Utils().showSnackBar(context,"Please select address confirmed",binding.constraintLayout)
+        }else if (isAddressBelong.value == null && isAddressConfirmed.value == true){
+            Utils().showSnackBar(context,"Please select address belong to applicant",binding.constraintLayout)
         }
-        else if (isHouseOpen.value == null){
-            Utils().showSnackBar(context,"Please Select House is Open",binding.constraintLayout)
+        else if (isHouseOpen.value == null && isAddressBelong.value == true){
+            Utils().showSnackBar(context,"Please select house is open or not",binding.constraintLayout)
+        }
+        else if (edPersonMet.get().isNullOrEmpty() && isHouseOpen.value == true){
+            Utils().showSnackBar(context,"Please enter Name of the Person Met",binding.constraintLayout)
+        }
+        else if (relationWithApplicant.value.isNullOrEmpty() && isHouseOpen.value == true){
+            Utils().showSnackBar(context,"Please select Relation with Applicant *",binding.constraintLayout)
+        }
+        else if (materialStatusApplicant.value.isNullOrEmpty() && isHouseOpen.value == true){
+            Utils().showSnackBar(context,"Please select Marital Status",binding.constraintLayout)
+        }
+        else if (houseLocalityApplicant.value.isNullOrEmpty() && isHouseOpen.value == true){
+            Utils().showSnackBar(context,"Please select House Locality",binding.constraintLayout)
+        }
+        else if (edtStayingAddress.get().isNullOrEmpty() && isHouseOpen.value == true){
+            Utils().showSnackBar(context,"Please enter Staying at current address (In Years)",binding.constraintLayout)
+        }
+        else if (stayingAddressApplicant.value.isNullOrEmpty() && isHouseOpen.value == true){
+            Utils().showSnackBar(context,"Please select Staying Unit at current address (In Years)",binding.constraintLayout)
+        }
+        else if (houseLocalityApplicant.value.isNullOrEmpty() && isHouseOpen.value == true){
+            Utils().showSnackBar(context,"Please select House Locality",binding.constraintLayout)
+        }
+        else if (accommodationApplicant.value.isNullOrEmpty() && isHouseOpen.value == true){
+            Utils().showSnackBar(context,"Please select Accommodation Type",binding.constraintLayout)
+        }
+        else if (isNameboardseenattheHouse.value == null && isHouseOpen.value == true){
+            Utils().showSnackBar(context,"Please select Is Nameboard seen at the House",binding.constraintLayout)
+        }
+        else if (isNameboardmismatched.value == null && isHouseOpen.value == true && isNameboardseenattheHouse.value == true){
+            Utils().showSnackBar(context,"Please select Is Nameboard mismatched",binding.constraintLayout)
+        }
+        else if (houseLocalityApplicant.value.isNullOrEmpty() && isAddressBelong.value == false){
+            Utils().showSnackBar(context,"Please select House Locality",binding.constraintLayout)
+        }
+        else if (accommodationApplicant.value.isNullOrEmpty() && isAddressBelong.value == false){
+            Utils().showSnackBar(context,"Please select Accommodation Type",binding.constraintLayout)
+        }
+        else if (isNameboardseenattheHouse.value == null && isAddressBelong.value == false){
+            Utils().showSnackBar(context,"Please select Is Nameboard seen at the House",binding.constraintLayout)
+        }
+        else if (isNameboardmismatched.value == null && isAddressBelong.value == false && isNameboardseenattheHouse.value == true){
+            Utils().showSnackBar(context,"Please select Is Nameboard mismatched",binding.constraintLayout)
+        }
+        else if (houseLocalityApplicant.value.isNullOrEmpty() && isHouseOpen.value == false){
+            Utils().showSnackBar(context,"Please select House Locality",binding.constraintLayout)
+        }
+        else if (accommodationApplicant.value.isNullOrEmpty() && isHouseOpen.value == false){
+            Utils().showSnackBar(context,"Please select Accommodation Type",binding.constraintLayout)
+        }
+        else if (isNameboardseenattheHouse.value == null && isHouseOpen.value == false){
+            Utils().showSnackBar(context,"Please select Is Nameboard seen at the House",binding.constraintLayout)
+        }
+        else if (isNameboardmismatched.value == null && isHouseOpen.value == false && isNameboardseenattheHouse.value == true){
+            Utils().showSnackBar(context,"Please select Is Nameboard mismatched",binding.constraintLayout)
         }
         else {
-            callSaveResidenceApi()
+          //  callSaveResidenceApi()
         }
     }
 
@@ -305,11 +363,9 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
                     override fun onSuccess(response: GetSaveResidenceVerificationResponse) {
                         isLoading.postValue(false)
                     }
-
                     override fun onFailed(code: Int, message: String) {
                         isLoading.postValue(false)
                     }
-
                     override fun onNext(t: GetSaveResidenceVerificationResponse) {
                         isLoading.postValue(false)
                         if (t.getStatusCode() == 200) {
@@ -340,7 +396,6 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     private fun getDataFromMasterData() {
         CoroutineScope(Dispatchers.IO).launch {
 
-
             houseLocalityList = masterDataDao!!.getDataByKeyName(AppConstants.houseOrPremiseLocalityType)
             accommodationList = masterDataDao!!.getDataByKeyName(AppConstants.accommodationType)
             negativeProfileList = masterDataDao!!.getDataByKeyName(AppConstants.profileType)
@@ -362,7 +417,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
 
             binding.llPersonalInformation.spnapplicantHouseSizeLabel.setListAdapter(houseSizeUnitList!!)
             binding.llPersonalInformation.llPersonalInformationOne.spnapplicantMaterialStatus.setListAdapter(materialStatusApplicantList!!)
-            binding.llPersonalInformation.llPersonalInformationOne.spncurrentaddress.setListAdapter(materialStatusApplicantList!!)
+            binding.llPersonalInformation.llPersonalInformationOne.spncurrentaddress.setListAdapter(stayingAddressUnitList!!)
 
 
             binding.llPersonalInformation.spnHouseLocality.setListAdapter(houseLocalityList!!)
@@ -372,7 +427,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             binding.llPersonalInformation.llPersonalInformationOne.spnapplicantHouseOwnershipLabel.setListAdapter(houseOwnershipList!!)
 
             if(ActivityDetail.selectedData!!.getFiRequestResidenceVerification() != null){
-                 if (ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getApplicantFamilyDetails() != null){
+                 if (ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getApplicantFamilyDetails() != null && ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getApplicantFamilyDetails()!!.size > 0){
                     addFamilyMemberList =  ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getApplicantFamilyDetails()!!
                     setCustomLayoutAddAdapter()
                 }else{
@@ -387,15 +442,25 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     val onAddressConfirmed = RadioGroup.OnCheckedChangeListener { _, checkedId ->
         if (checkedId == R.id.radio_AddressConfirmedYes) {
             isAddressConfirmed.value = true
+
         }
         if (checkedId == R.id.radio_AddressConfirmedNo) {
             isAddressConfirmed.value = false
+            isAddressBelong.postValue(null)
+            isHouseOpen.postValue(null)
+            binding.llAddressDetail.radioDurningVisitYes.isChecked = false
+            binding.llAddressDetail.radioDurningVisitNo.isChecked = false
+            binding.llAddressDetail.rbAddressBelongYes.isChecked = false
+            binding.llAddressDetail.rbAddressBelongNo.isChecked = false
         }
         if (checkedId == R.id.rb_AddressBelongYes) {
             isAddressBelong.value = true
         }
         if (checkedId == R.id.rb_AddressBelongNo) {
             isAddressBelong.value = false
+            isHouseOpen.postValue(null)
+            binding.llAddressDetail.radioDurningVisitYes.isChecked = false
+            binding.llAddressDetail.radioDurningVisitNo.isChecked = false
         }
 
         if (checkedId == R.id.rb_IsNameboardseenattheHouseYes) {

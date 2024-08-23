@@ -372,13 +372,14 @@
             android:id="@+id/ll_IsCastCommunityDominatedArea"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
             android:orientation="vertical">
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inpapplicant_IsCastCommunityDominatedArea_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/TextInputLayout"
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/_5sdp"
                 app:hintTextColor="@color/main_bg"
                 app:passwordToggleEnabled="false"

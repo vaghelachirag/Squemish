@@ -23,12 +23,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.FileProvider
+import androidx.core.view.forEach
 import com.example.mypraticeapplication.BuildConfig
 import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.databinding.FragmentPhotographBinding
 import com.example.mypraticeapplication.interfaces.FragmentLifecycleInterface
+import com.example.mypraticeapplication.uttils.AppConstants
 import com.example.mypraticeapplication.uttils.ImagePickerDialog
 import com.example.mypraticeapplication.uttils.Utility
+import com.example.mypraticeapplication.uttils.Utility.Companion.setAllEnabled
 import com.example.mypraticeapplication.uttils.onItemClick
 import com.example.mypraticeapplication.view.base.BaseFragment
 import com.example.mypraticeapplication.viewmodel.verificationDetail.PictureViewModel
@@ -72,6 +75,8 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
         binding.lifecycleOwner = this
         photoVerificationViewModel.init(context as Activity)
 
+        setView()
+
         photoVerificationViewModel.isLoading.observe(requireActivity()) { isLoading ->
             if (isLoading && isAdded) showProgressbar()
             else if (!isLoading && isAdded) hideProgressbar()
@@ -82,6 +87,17 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
         }
 
         return binding.root
+    }
+
+    private fun setView() {
+        if(ActivityDetail.selectedData!!.getStatus() != null){
+            if(ActivityDetail.selectedData!!.getStatus() == AppConstants.statusPending){
+                binding.constraintLayout.forEach { child -> child.setAllEnabled(false) }
+            }
+            else{
+                binding.constraintLayout.forEach { child -> child.setAllEnabled(true) }
+            }
+        }
     }
 
     @Deprecated("Deprecated in Java")

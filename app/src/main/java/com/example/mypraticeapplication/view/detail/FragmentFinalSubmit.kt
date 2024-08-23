@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.forEach
 import com.example.mypraticeapplication.databinding.FragmentFinalSubmitBinding
 import com.example.mypraticeapplication.interfaces.FragmentLifecycleInterface
 import com.example.mypraticeapplication.model.getverificationDetailResponse.GetVerificationDetailData
+import com.example.mypraticeapplication.uttils.AppConstants
+import com.example.mypraticeapplication.uttils.Utility.Companion.setAllEnabled
 import com.example.mypraticeapplication.view.base.BaseFragment
 import com.example.mypraticeapplication.viewmodel.verificationDetail.FinalSubmitViewModel
 
@@ -39,7 +42,19 @@ class FragmentFinalSubmit  : BaseFragment(), FragmentLifecycleInterface {
         binding.viewModel = finalSubmitViewModel
         binding.lifecycleOwner = this
         finalSubmitViewModel!!.init(context)
+        setView()
         return binding.root
+    }
+
+    private fun setView() {
+        if(ActivityDetail.selectedData!!.getStatus() != null){
+            if(ActivityDetail.selectedData!!.getStatus() == AppConstants.statusPending){
+                binding.constraintLayout.forEach { child -> child.setAllEnabled(false) }
+            }
+            else{
+                binding.constraintLayout.forEach { child -> child.setAllEnabled(true) }
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

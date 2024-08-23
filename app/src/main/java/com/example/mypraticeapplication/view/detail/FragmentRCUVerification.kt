@@ -61,13 +61,18 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
 
         // Address Confirmed
         rcuVerificationViewModel.isAddressConfirmed.observeForever {
-            setVisibility(it)
+            try {
+                setVisibility(it)
+            }catch (_: Exception){
+            }
         }
 
         // Address Belong Confirmed
         rcuVerificationViewModel.isAddressBelong.observeForever {
             if (it == true){
                 binding.llAddressDetail.rbAddressBelongYes.isChecked = true
+                binding.llAddressDetail.radioDurningVisitYes.isChecked = false
+                binding.llAddressDetail.radioDurningVisitNo.isChecked = false
                 binding.llAddressDetail.inpAddressBelongRemark.visibility = View.GONE
                 binding.llAddressDetail.llHouseIsOpen.visibility = View.VISIBLE
                 binding.llPersonalInformation.llPersonalInformationOne.llRelationWithApplicant.visibility = View.VISIBLE
@@ -80,6 +85,8 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
                 binding.llPersonalInformation.llHouseSize.visibility = View.VISIBLE
                 binding.llPersonalInformation.llPersonalInformationOne.llRent.visibility = View.GONE
                 binding.llPersonalInformation.llPersonalInformationOne.llAge.visibility = View.VISIBLE
+                binding.llPersonalInformation.llPersonalInformationOne.inpapplicantPersonMet.visibility =  View.VISIBLE
+                binding.llPersonalInformation.llPersonalInformationOne.inpapplicantPersonMobileNumber.visibility = View.VISIBLE
             }
             if (it == false){
                 binding.llAddressDetail.rbAddressBelongNo.isChecked = true
@@ -95,6 +102,8 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
                 binding.llPersonalInformation.llHouseSize.visibility = View.GONE
                 binding.llPersonalInformation.llPersonalInformationOne.llRent.visibility = View.GONE
                 binding.llPersonalInformation.llPersonalInformationOne.llAge.visibility = View.GONE
+                binding.llPersonalInformation.llPersonalInformationOne.inpapplicantPersonMet.visibility =  View.GONE
+                binding.llPersonalInformation.llPersonalInformationOne.inpapplicantPersonMobileNumber.visibility = View.GONE
             }
         }
 

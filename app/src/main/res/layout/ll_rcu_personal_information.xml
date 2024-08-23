@@ -34,7 +34,6 @@
             <include
                 android:id="@+id/ll_personal_informationOne"
                 layout="@layout/ll_rcu_personal_information_one"
-                android:visibility="visible"
                 bind:personinformation1="@{personalInforamtion}"/>
 
 
@@ -43,6 +42,7 @@
                 android:id="@+id/inspnHouseLocality"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="visible"
                 app:layout_constraintTop_toBottomOf="@+id/txt_NeibourRecognised"
                 app:hintTextColor="@color/main_bg"
                 android:textColorHint="@color/main_bg"
@@ -70,6 +70,7 @@
                 android:id="@+id/inspnAccommodationType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="visible"
                 app:layout_constraintTop_toBottomOf="@+id/txt_NeibourRecognised"
                 app:hintTextColor="@color/main_bg"
                 android:textColorHint="@color/main_bg"
@@ -97,6 +98,7 @@
                 android:id="@+id/ll_HouseSize"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:orientation="vertical">
 
                 <com.example.mypraticeapplication.widget.SmallText
@@ -206,6 +208,7 @@
                 android:id="@+id/ll_NameboardMismatched"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:orientation="vertical">
                 <com.example.mypraticeapplication.widget.SmallText
                     android:id="@+id/applicant_IsNameboardmismatched_label"
@@ -238,6 +241,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/TextInputLayout"
+                    android:visibility="gone"
                     android:layout_marginTop="@dimen/_5sdp"
                     app:hintTextColor="@color/main_bg"
                     app:passwordToggleEnabled="false"
