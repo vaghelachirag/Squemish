@@ -36,6 +36,9 @@ import com.example.mypraticeapplication.view.detail.ActivityDetail
 import com.example.mypraticeapplication.viewmodel.ChangePasswordViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -140,17 +143,19 @@ class Utils {
 
         dialog.window!!.setBackgroundDrawableResource(R.color.dialoug_main_bg);
 
-        var txtHeader  : TextView = dialog.findViewById(R.id.tvMessage)
+        val txtHeader  : TextView = dialog.findViewById(R.id.tvMessage)
         txtHeader.text = strTitle
 
         // Button
-        var buttonOk : MaterialButton = dialog.findViewById(R.id.btnOk)
-        var buttonCancel : MaterialButton = dialog.findViewById(R.id.btnCancel)
+        val buttonOk : MaterialButton = dialog.findViewById(R.id.btnOk)
+        val buttonCancel : MaterialButton = dialog.findViewById(R.id.btnCancel)
 
         buttonOk.setOnClickListener {
             dialog.dismiss()
             session!!.clearSession()
-            InitDb.appDatabase.clearAllTables()
+            CoroutineScope(Dispatchers.IO).launch {
+                InitDb.appDatabase.clearAllTables()
+            }
             val intent = Intent(context, MainActivity::class.java)
             context.startActivity(intent)
         }

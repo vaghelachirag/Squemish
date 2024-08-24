@@ -50,6 +50,7 @@ class PictureViewModel(private val context: Context, private val  binding: Fragm
             if (it != null) {
                 picturesList.clear()
                 picturesList.addAll(it)
+                picturesList.reverse()
                 picturesAdapter?.notifyDataSetChanged()
                 setPictureAdapter()
             }

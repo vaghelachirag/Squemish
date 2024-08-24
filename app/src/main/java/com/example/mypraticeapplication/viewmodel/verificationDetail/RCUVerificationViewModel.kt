@@ -155,6 +155,25 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
+
+        binding.llApplicationBackground.spnapplicantIsInvolvedinNegativeProfileLabel.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (!s.isNullOrBlank()){
+                    if (s.toString() == "Other"){
+                        binding.llApplicationBackground.inpapplicantIsAreaNegativeRemarkLabel.visibility = View.VISIBLE
+                    }
+                    else{
+                        binding.llApplicationBackground.inpapplicantIsAreaNegativeRemarkLabel.visibility = View.GONE
+                    }
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
     }
 
     @SuppressLint("SetTextI18n")
@@ -198,6 +217,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             edtMedicalHistoryRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getMedicalHistoryRemarks().toString()))
             edtPoliticalConnectionRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPoliticalRemarks().toString()))
             edtBankName.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getBankName().toString()))
+            edtIsAreaNegativeRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsAreaNegativeRemark().toString()))
 
 
             relationWithApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMetRelation()!!.toString())
@@ -208,7 +228,6 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             houseSizeUnitApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseSizeUnit().toString())
             stayingAddressApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getStayingTimeUnit().toString())
             houseOwnershipApplicant.value =Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseOwnerShip().toString())
-
 
             edtLatitude.set(ActivityDetail.currentLat.toString())
             edtLongitude.set(ActivityDetail.currentLong.toString())
@@ -284,7 +303,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             Utils().showSnackBar(context,"Please select Is Nameboard mismatched",binding.constraintLayout)
         }
         else {
-          //  callSaveResidenceApi()
+           callSaveResidenceApi()
         }
     }
 
@@ -448,10 +467,6 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             isAddressConfirmed.value = false
             isAddressBelong.postValue(null)
             isHouseOpen.postValue(null)
-            binding.llAddressDetail.radioDurningVisitYes.isChecked = false
-            binding.llAddressDetail.radioDurningVisitNo.isChecked = false
-            binding.llAddressDetail.rbAddressBelongYes.isChecked = false
-            binding.llAddressDetail.rbAddressBelongNo.isChecked = false
         }
         if (checkedId == R.id.rb_AddressBelongYes) {
             isAddressBelong.value = true

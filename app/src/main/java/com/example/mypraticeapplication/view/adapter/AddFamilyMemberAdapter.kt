@@ -49,7 +49,6 @@ class AddFamilyMemberAdapter(val context: Context, private val list: ArrayList<S
             holder.binding.spnRelation.setListAdapter(relationWithApplicantList)
         }
 
-        Log.e("Position",position.toString() + " " + list.size.toString())
         if (position < list.size) {
 
             holder.binding.edtMemberCount.setText(list[position].getMemberCount().toString())
@@ -61,12 +60,13 @@ class AddFamilyMemberAdapter(val context: Context, private val list: ArrayList<S
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     if (position >= list.size) {
-                      //  list[position].memberCount = Utility.getParseInteger(holder.binding.edtMemberCount.text.toString())
-                     //   viewModel.setTotalMemberMember()
+
                     }
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
+                    //list[position].memberCount = Utility.getParseInteger(holder.binding.edtMemberCount.text.toString())
+                  //  viewModel.setTotalMemberMember()
                 }
             })
             holder.binding.edtEaringMemberCount.addTextChangedListener(object : TextWatcher {
@@ -75,7 +75,7 @@ class AddFamilyMemberAdapter(val context: Context, private val list: ArrayList<S
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                   //  list[position].earningMemberCount = Utility.getParseInteger(holder.binding.edtEaringMemberCount.text.toString())
-                  //  viewModel.setTotalMemberMember()
+                   viewModel.setTotalMemberMember()
                 }
 
                 override fun afterTextChanged(p0: Editable?) {

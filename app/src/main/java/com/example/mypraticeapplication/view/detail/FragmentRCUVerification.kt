@@ -8,9 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.forEach
 import com.example.mypraticeapplication.databinding.FragmentRcuVerificationBinding
 import com.example.mypraticeapplication.interfaces.FragmentLifecycleInterface
 import com.example.mypraticeapplication.model.getverificationDetailResponse.GetVerificationDetailData
+import com.example.mypraticeapplication.uttils.AppConstants
+import com.example.mypraticeapplication.uttils.Utility.Companion.setAllEnabled
 import com.example.mypraticeapplication.view.base.BaseFragment
 import com.example.mypraticeapplication.viewmodel.verificationDetail.RCUVerificationViewModel
 
@@ -42,7 +45,7 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
 //        basicInformationModel.init(context, FragmentDetail.selectedData!!)
         rcuVerificationViewModel.init(context)
         setObserver()
-
+        setView()
 
         rcuVerificationViewModel.isLoading.observe(requireActivity()) { isLoading ->
             if (isLoading && isAdded) showProgressbar()
@@ -51,6 +54,19 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
 
         return binding.root
     }
+
+
+    private fun setView() {
+        if(ActivityDetail.selectedData!!.getStatus() != null){
+            if(ActivityDetail.selectedData!!.getStatus() == AppConstants.statusPending){
+                binding.llMain.forEach { child -> child.setAllEnabled(false) }
+            }
+            else{
+                binding.llMain.forEach { child -> child.setAllEnabled(true) }
+            }
+        }
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -227,6 +243,7 @@ class FragmentRCUVerification : BaseFragment(), FragmentLifecycleInterface {
             }
             if (it != true) {
                 // b is null or equals false
+                Log.e("False","False")
             }
         }
 

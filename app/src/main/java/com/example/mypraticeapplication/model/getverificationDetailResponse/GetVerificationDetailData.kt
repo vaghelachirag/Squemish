@@ -118,11 +118,11 @@ class GetVerificationDetailData {
 
     @SerializedName("applicantLatitude")
     @Expose
-    private var applicantLatitude: Any? = null
+    private var applicantLatitude: String? = null
 
     @SerializedName("applicantLongitude")
     @Expose
-    private var applicantLongitude: Any? = null
+    private var applicantLongitude: String? = null
 
     @SerializedName("applicantAadhar")
     @Expose
@@ -681,19 +681,19 @@ class GetVerificationDetailData {
         this.applicantTehsil = applicantTehsil
     }
 
-    fun getApplicantLatitude(): Any? {
+    fun getApplicantLatitude(): String? {
         return applicantLatitude
     }
 
-    fun setApplicantLatitude(applicantLatitude: Any?) {
+    fun setApplicantLatitude(applicantLatitude: String?) {
         this.applicantLatitude = applicantLatitude
     }
 
-    fun getApplicantLongitude(): Any? {
+    fun getApplicantLongitude(): String? {
         return applicantLongitude
     }
 
-    fun setApplicantLongitude(applicantLongitude: Any?) {
+    fun setApplicantLongitude(applicantLongitude: String?) {
         this.applicantLongitude = applicantLongitude
     }
 

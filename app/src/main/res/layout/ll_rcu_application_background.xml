@@ -283,6 +283,31 @@
                 app:custom_font="@string/app_font_regular" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inpapplicant_IsAreaNegative_Remark_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextInputLayout"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:hintTextColor="@color/main_bg"
+            app:passwordToggleEnabled="false"
+            android:visibility="gone"
+            tools:ignore="MissingClass,MissingConstraints">
+
+            <com.example.mypraticeapplication.widget.TypefaceEditText
+                android:id="@+id/edt_applicant_IsAreaNegative_Remark_label"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_size"
+                android:hint="@string/remark"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:text="@={applicationbackground.edtIsAreaNegativeRemark}"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray_323232"
+                android:textSize="@dimen/verificationDetailTextSize"
+                app:custom_font="@string/app_font_regular" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <com.example.mypraticeapplication.widget.SmallText
             android:id="@+id/applicant_IsAreaNegative_label"
             android:layout_width="match_parent"

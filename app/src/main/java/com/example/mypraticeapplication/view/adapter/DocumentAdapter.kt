@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat.startActivity
@@ -16,6 +17,7 @@ import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.databinding.ItemDocumentBinding
 import com.example.mypraticeapplication.interfaces.OnItemSelected
 import com.example.mypraticeapplication.model.getverificationDetailResponse.GetVerificationDocument
+import com.example.mypraticeapplication.uttils.AppConstants
 import com.example.mypraticeapplication.view.dialougs.FullScreenImageDialoug
 import com.example.mypraticeapplication.viewmodel.verificationDetail.BasicInformationViewModel
 
@@ -46,9 +48,9 @@ class DocumentAdapter(
         holder.bind(list[position])
 
         holder.binding.cardView.setOnClickListener {
+            var documentURL = AppConstants.baseURLImage + list[position].getDocumentPath()
             onItemSelected.onItemSelected(list[position], position)
-
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(list[position].getDocumentPath()))
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(documentURL))
             context.startActivity(browserIntent)
           //  showFullScreenImageDialog(list[position].getDocumentPath())
 
@@ -61,7 +63,7 @@ class DocumentAdapter(
                 .centerCrop()
                 .error(R.mipmap.ic_launcher_round)
 
-            Glide.with(context).load(list[position].getDocumentPath()).apply(options).into(holder.binding.ivDocument)
+            Glide.with(context).load( AppConstants.baseURLImage + list[position].getDocumentPath()).apply(options).into(holder.binding.ivDocument)
 
         }
 

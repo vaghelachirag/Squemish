@@ -2,7 +2,11 @@ package com.example.mypraticeapplication.viewmodel.verificationDetail
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
+import android.view.View
+import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.ObservableField
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mypraticeapplication.R
@@ -46,6 +50,7 @@ class BasicInformationViewModel(private val context: Context, val binding: Fragm
     var prepost : ObservableField<String> = ObservableField()
     var loanAmount : ObservableField<String> = ObservableField()
     var triggers : ObservableField<String> = ObservableField()
+    var backendName : ObservableField<String> = ObservableField()
 
     private var masterDataDao: MasterDataDao? = null
 
@@ -72,6 +77,7 @@ class BasicInformationViewModel(private val context: Context, val binding: Fragm
             prepost.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getPrePost().toString()))
             loanAmount.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getLoanAmount().toString()))
             triggers.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getTriggerRemarks().toString()))
+            backendName.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getBackendName().toString() + " " +Utility.getNullToBlankString(ActivityDetail.selectedData!!.getBackendMobileNo().toString())))
 
             if (ActivityDetail.selectedData !=null){
                 if (ActivityDetail.selectedData!!.getDocuments() != null){
@@ -83,6 +89,27 @@ class BasicInformationViewModel(private val context: Context, val binding: Fragm
         // Room Database
         masterDataDao = InitDb.appDatabase.getMasterData()
         getAcceptRejectList()
+        setAction()
+    }
+
+    private fun setAction() {
+        binding.llBackenNumber.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.setData(Uri.parse("tel:"+ActivityDetail.selectedData!!.getBackendMobileNo()))
+            context.startActivity(intent)
+        }
+
+        if (ActivityDetail.selectedData != null && ActivityDetail.selectedData!!.getApplicantLatitude().isNullOrEmpty()){
+            binding.ivMap.visibility = View.GONE
+        }
+        val destinationURI = "http://maps.google.com/maps?daddr="+ ActivityDetail.selectedData!!.getApplicantLatitude()+ ","+ActivityDetail.selectedData!!.getApplicantLongitude()
+        binding.ivMap.setOnClickListener {
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(destinationURI)
+            )
+            context.startActivity(intent)
+        }
     }
 
     private fun getAcceptRejectList() {

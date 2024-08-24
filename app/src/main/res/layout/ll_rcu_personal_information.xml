@@ -252,7 +252,7 @@
                         android:id="@+id/edt_Applicant_Reason_label"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/edit_text_size"
-                        android:hint="@string/applicant_relation_label"
+                        android:hint="@string/notRecoginsedReason"
                         android:imeOptions="actionNext"
                         android:inputType="text"
                         android:text="@={personalInforamtion.edt_Reason}"

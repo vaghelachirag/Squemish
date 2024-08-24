@@ -51,7 +51,6 @@ class FragmentBasicInformation  : BaseFragment(), FragmentLifecycleInterface {
             if (isLoading && isAdded) showProgressbar()
             else if (!isLoading && isAdded) hideProgressbar()
         }
-
         return binding.root
     }
 

@@ -45,15 +45,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:theme="@style/RadioButton"
-                android:scaleX="0.75"
-                android:scaleY="0.75"
                 android:text="@string/radio_Yes"/>
             <RadioButton android:id="@+id/radio_AddressConfirmedNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:theme="@style/RadioButton"
-                android:scaleX="0.75"
-                android:scaleY="0.75"
                 android:text="@string/radio_No"/>
         </RadioGroup>
 
@@ -187,15 +183,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:theme="@style/RadioButton"
-                    android:scaleX="0.75"
-                    android:scaleY="0.75"
                     android:text="@string/radio_Yes"/>
                 <RadioButton android:id="@+id/rb_AddressBelongNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:theme="@style/RadioButton"
-                    android:scaleX="0.75"
-                    android:scaleY="0.75"
                     android:text="@string/radio_No"/>
             </RadioGroup>
 
@@ -238,7 +230,8 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:text="@string/applicant_address_VisitHouse_label"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="@dimen/_12sdp"
+                    tools:ignore="SpUsage" />
 
                 <RadioGroup
                     android:id="@+id/rb_applicant_address_VisitHouse_label"
@@ -250,15 +243,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:theme="@style/RadioButton"
-                        android:scaleX="0.75"
-                        android:scaleY="0.75"
                         android:text="@string/radio_Yes"/>
                     <RadioButton android:id="@+id/radio_DurningVisitNo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:theme="@style/RadioButton"
-                        android:scaleX="0.75"
-                        android:scaleY="0.75"
                         android:text="@string/radio_No"/>
                 </RadioGroup>
             </LinearLayout>
