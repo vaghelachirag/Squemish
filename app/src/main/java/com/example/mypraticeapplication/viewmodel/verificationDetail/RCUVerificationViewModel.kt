@@ -148,7 +148,6 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
                     }
                 }
             }
-
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -167,7 +166,6 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
                     }
                 }
             }
-
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -407,6 +405,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         saveResidenceApplicantFamilyDetail.setMemberCount(1)
         saveResidenceApplicantFamilyDetail.setEarningMemberCount(1)
         saveResidenceApplicantFamilyDetail.setRelation("Select")
+        saveResidenceApplicantFamilyDetail.isStaticData = true
 
         addFamilyMemberList.add(saveResidenceApplicantFamilyDetail)
         setCustomLayoutAddAdapter()
@@ -414,14 +413,11 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
 
     private fun getDataFromMasterData() {
         CoroutineScope(Dispatchers.IO).launch {
-
             houseLocalityList = masterDataDao!!.getDataByKeyName(AppConstants.houseOrPremiseLocalityType)
             accommodationList = masterDataDao!!.getDataByKeyName(AppConstants.accommodationType)
             negativeProfileList = masterDataDao!!.getDataByKeyName(AppConstants.profileType)
             relationWithApplicantList = masterDataDao!!.getDataByKeyName(AppConstants.relationType)
             houseOwnershipList = masterDataDao!!.getDataByKeyName(AppConstants.houseOwnershipType)
-
-
 
              val materialStatusList = context.resources.getStringArray(R.array.material_status)
              materialStatusApplicantList = materialStatusList.asList()

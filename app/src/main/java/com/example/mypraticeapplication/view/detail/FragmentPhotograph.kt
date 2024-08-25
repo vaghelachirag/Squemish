@@ -230,7 +230,7 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
 
             // get position of text's top left corner
             val x = ((mutableBitmap.width - textWidth) - 10).toFloat()
-            val y = ((mutableBitmap.height - textHeight) - 20).toFloat()
+            val y = ((mutableBitmap.height - textHeight) - 40).toFloat()
 
 
             // draw text to the Canvas center

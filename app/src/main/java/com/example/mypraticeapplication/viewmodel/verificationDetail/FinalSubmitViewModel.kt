@@ -50,7 +50,7 @@ class FinalSubmitViewModel(private val context: Context,private  val binding: Fr
     }
 
     public fun onSaveClicked(){
-       if (edtRemark.get().toString() == "") {
+       if (edtRemark.get().isNullOrEmpty()) {
             Utils().showSnackBar(context, "Please Enter Remark", binding.constraintLayout)
         }else{
             callFinalSubmitApi()

@@ -59,14 +59,15 @@ class AddFamilyMemberAdapter(val context: Context, private val list: ArrayList<S
                 }
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    if (position >= list.size) {
 
-                    }
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
-                    //list[position].memberCount = Utility.getParseInteger(holder.binding.edtMemberCount.text.toString())
-                  //  viewModel.setTotalMemberMember()
+                    if (position > 1){
+                        list[position - 1].memberCount = 1
+                    }
+                /*   list[position - 1].memberCount = Utility.getParseInteger(holder.binding.edtMemberCount.text.toString())
+                    viewModel.setTotalMemberMember()*/
                 }
             })
             holder.binding.edtEaringMemberCount.addTextChangedListener(object : TextWatcher {
@@ -74,8 +75,16 @@ class AddFamilyMemberAdapter(val context: Context, private val list: ArrayList<S
                 }
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                  //  list[position].earningMemberCount = Utility.getParseInteger(holder.binding.edtEaringMemberCount.text.toString())
-                   viewModel.setTotalMemberMember()
+                    if (position > 1){
+                        list[position - 1].earningMemberCount = Utility.getParseInteger(holder.binding.edtEaringMemberCount.text.toString())
+                    }
+                    else{
+
+                    }
+                    viewModel.setTotalMemberMember()
+
+                 //   list[position].isStaticData = false
+                 //  viewModel.setTotalMemberMember()
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
@@ -101,13 +110,23 @@ class AddFamilyMemberAdapter(val context: Context, private val list: ArrayList<S
 
         holder.binding.btnAddDay.setOnClickListener {
             listener.onItemClick(position)
+            notifyItemChanged(position + 1)
             viewModel.setTotalMemberMember()
         }
 
         holder.binding.btnRemoveDay.setOnClickListener {
-            if (position > 0){
-                listener.onRemoveClick(position)
-                viewModel.setTotalMemberMember()
+            if (position == 1){
+                this.list.removeAt(position)
+                notifyItemRemoved(position)
+                notifyItemChanged(this.list.size - 1)
+            }
+            else{
+                if (this.list[position - 1].isStaticData == true) {
+                    this.list.removeAt(position - 1)
+                }
+                notifyItemRemoved(position)
+                // if (this.list.size > 0)
+                notifyItemChanged(this.list.size - 1)
             }
         }
 
@@ -115,6 +134,11 @@ class AddFamilyMemberAdapter(val context: Context, private val list: ArrayList<S
             holder.binding.btnAddDay.visibility = View.VISIBLE
         else
             holder.binding.btnAddDay.visibility = View.GONE
+
+        if (position == 0)
+            holder.binding.btnRemoveDay.visibility = View.GONE
+        else
+            holder.binding.btnRemoveDay.visibility = View.VISIBLE
     }
 
     fun addDay() {
@@ -124,6 +148,7 @@ class AddFamilyMemberAdapter(val context: Context, private val list: ArrayList<S
         saveResidenceApplicantFamilyDetail.setMemberCount(1)
         saveResidenceApplicantFamilyDetail.setEarningMemberCount(1)
         saveResidenceApplicantFamilyDetail.setRelation("Select")
+        saveResidenceApplicantFamilyDetail.isStaticData  = true
 
         list.add(saveResidenceApplicantFamilyDetail)
     }
@@ -132,7 +157,7 @@ class AddFamilyMemberAdapter(val context: Context, private val list: ArrayList<S
         this.list.removeAt(position)
         notifyItemRemoved(position)
         // if (this.list.size > 0)
-        notifyItemChanged(this.list.size - 1)
+     //   notifyItemChanged(this.list.size - 1)
     }
 
     fun changeValue(isFirstOption: Boolean) {

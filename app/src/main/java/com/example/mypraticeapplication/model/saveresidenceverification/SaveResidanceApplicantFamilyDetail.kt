@@ -68,4 +68,5 @@ class SaveResidanceApplicantFamilyDetail {
         this.earningMemberCount = earningMemberCount
     }
 
+    var isStaticData: Boolean? = false
 }

@@ -71,7 +71,7 @@ class Utility {
         fun getCurrentDate() : String{
             var currentDate : String = "";
             val formatter =
-                DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                DateTimeFormatter.ofPattern("dd-MM-yyyy")
             currentDate = LocalDateTime.now().format(formatter)
            return currentDate;
         }
