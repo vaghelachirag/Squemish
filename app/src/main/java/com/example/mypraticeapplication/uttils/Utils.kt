@@ -165,6 +165,7 @@ class Utils {
         dialog.show()
     }
 
+
     public fun showChangePasswordDialog(context: Context, binding: ActivityDashboardBinding){
         val changePasswordViewModel by lazy { ChangePasswordViewModel(context as Context,binding) }
 

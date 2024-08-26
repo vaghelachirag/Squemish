@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.databinding.FragmentBasicInformationBinding
 import com.example.mypraticeapplication.interfaces.FragmentLifecycleInterface
 import com.example.mypraticeapplication.model.getverificationDetailResponse.GetVerificationDetailData
@@ -46,6 +48,7 @@ class FragmentBasicInformation  : BaseFragment(), FragmentLifecycleInterface {
         context?.let { basicInformationModel.init() }
         setView()
         setAction()
+
 
         basicInformationModel.isLoading.observe(requireActivity()) { isLoading ->
             if (isLoading && isAdded) showProgressbar()

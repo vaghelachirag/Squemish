@@ -6,7 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat.startActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.ObservableField
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mypraticeapplication.R
@@ -101,9 +101,12 @@ class BasicInformationViewModel(private val context: Context, val binding: Fragm
 
         if (ActivityDetail.selectedData != null && ActivityDetail.selectedData!!.getApplicantLatitude().isNullOrEmpty()){
             binding.ivMap.visibility = View.GONE
+            binding.txtBasicAddress.setCompoundDrawablesWithIntrinsicBounds(null, null,
+                context.let { ContextCompat.getDrawable(it, R.drawable.map_pin) }, null)
         }
+
         val destinationURI = "http://maps.google.com/maps?daddr="+ ActivityDetail.selectedData!!.getApplicantLatitude()+ ","+ActivityDetail.selectedData!!.getApplicantLongitude()
-        binding.ivMap.setOnClickListener {
+        binding.txtBasicAddress.setOnClickListener {
             val intent = Intent(
                 Intent.ACTION_VIEW,
                 Uri.parse(destinationURI)

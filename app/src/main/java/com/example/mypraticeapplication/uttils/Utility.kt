@@ -29,13 +29,11 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import com.example.mypraticeapplication.MainActivity
 import com.example.mypraticeapplication.R
 import com.example.mypraticeapplication.uttils.AppConstants.baseURL
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -129,12 +127,30 @@ class Utility {
             builder.setMessage("Please start GPS first")
 
             builder.setPositiveButton(android.R.string.yes) { _, _ ->
+                context.startActivity( Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                 (context as Activity).finish()
             }
 
             builder.show()
         }
 
+        private fun turnGPSOn(context: Context) {
+            val provider = Settings.Secure.getString(
+                (context as Activity).contentResolver,
+                Settings.Secure.LOCATION_PROVIDERS_ALLOWED
+            )
+
+            if (!provider.contains("gps")) { //if gps is disabled
+                val poke = Intent()
+                poke.setClassName(
+                    "com.android.settings",
+                    "com.android.settings.widget.SettingsAppWidgetProvider"
+                )
+                poke.addCategory(Intent.CATEGORY_ALTERNATIVE)
+                poke.setData(Uri.parse("3"))
+                context.sendBroadcast(poke)
+            }
+        }
 
         fun getNullToBlankString(mainString: String) : String{
             var currentDate : String = "";

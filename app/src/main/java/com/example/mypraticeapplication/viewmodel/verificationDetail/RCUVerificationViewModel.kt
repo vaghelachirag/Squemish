@@ -38,7 +38,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class RCUVerificationViewModel(private val context: Context, private  val binding: FragmentRcuVerificationBinding) : BaseViewModel(){
+class RCUVerificationViewModel(@SuppressLint("StaticFieldLeak") private val context: Context, private  val binding: FragmentRcuVerificationBinding) : BaseViewModel(){
 
 
     // Address Detail Params
@@ -221,7 +221,7 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
             relationWithApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMetRelation()!!.toString())
             accommodationApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getAccommodationType()!!.toString())
             negativeProfileApplicant.value =  Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsNegativeProfile().toString())
-            houseLocalityApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseOwnerShip().toString())
+            houseLocalityApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseLocality().toString())
             materialStatusApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMetMeritalStatus().toString())
             houseSizeUnitApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseSizeUnit().toString())
             stayingAddressApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getStayingTimeUnit().toString())

@@ -64,6 +64,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:weightSum="2"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent">
 
                         <com.example.mypraticeapplication.widget.HeaderText
@@ -71,29 +72,28 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/refNo"
-                            android:gravity="center_vertical"
-                            android:visibility="visible"
-                            android:textColor="@color/gray_323232"
-                            android:drawableTint="@color/gray_323232"
                             android:drawablePadding="3sp"
+                            android:drawableTint="@color/gray_323232"
+                            android:gravity="center_vertical"
+                            android:text="@string/refNo"
+                            android:textColor="@color/gray_323232"
                             android:textSize="12sp"
-                            tools:ignore="MissingConstraints">
-                        </com.example.mypraticeapplication.widget.HeaderText>
+                            android:visibility="visible"
+                            tools:ignore="MissingConstraints"></com.example.mypraticeapplication.widget.HeaderText>
+
                         <com.example.mypraticeapplication.widget.SmallText
                             android:id="@+id/txtAddress"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="start"
-                            android:visibility="visible"
                             android:layout_gravity="start"
                             android:layout_weight="1"
-                            android:textColor="@color/gray_323232"
                             android:drawablePadding="3sp"
-                            android:textSize="@dimen/_12sdp"
+                            android:gravity="start"
                             android:text="@={viewModel.refNo}"
-                            tools:ignore="MissingConstraints,SmallSp">
-                        </com.example.mypraticeapplication.widget.SmallText>
+                            android:textColor="@color/gray_323232"
+                            android:textSize="@dimen/_12sdp"
+                            android:visibility="visible"
+                            tools:ignore="MissingConstraints,SmallSp"></com.example.mypraticeapplication.widget.SmallText>
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -358,6 +358,7 @@
                             tools:ignore="MissingConstraints">
                         </com.example.mypraticeapplication.widget.HeaderText>
                         <com.example.mypraticeapplication.widget.SmallText
+                            android:id="@+id/txtBasicAddress"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="start"
@@ -365,6 +366,7 @@
                             android:layout_gravity="start"
                             android:layout_weight="0.7"
                             android:text="@={viewModel.addressFor}"
+                            android:drawableTint="@color/main_bg"
                             android:textColor="@color/gray_323232"
                             android:drawablePadding="3sp"
                             android:textSize="@dimen/verificationDetailTextSize"
@@ -642,8 +644,9 @@
                             android:visibility="visible"
                             android:layout_gravity="start|center"
                             android:layout_weight="0.7"
-                            android:textColor="@color/gray_323232"
+                            android:textColor="@color/colorPrimary"
                             android:drawablePadding="3sp"
+                            android:drawableTint="@color/colorPrimary"
                             android:drawableStart="@android:drawable/ic_menu_call"
                             android:text="@={viewModel.backendName}"
                             android:textSize="@dimen/verificationDetailTextSize"
@@ -658,8 +661,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:src="@android:drawable/ic_dialog_map"
-                    app:tint="@color/gray_616161"
+                    android:src="@drawable/map_pin"
+                    app:tint="@color/main_bg"
+                    android:visibility="gone"
                     tools:ignore="RtlHardcoded">
 
                 </ImageView>
