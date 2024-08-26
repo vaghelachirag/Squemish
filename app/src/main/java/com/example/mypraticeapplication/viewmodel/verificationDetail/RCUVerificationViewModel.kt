@@ -561,17 +561,19 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     }
 
     private fun setCustomLayoutAddAdapter() {
-        addFamilyMemberAdapter = AddFamilyMemberAdapter(addFamilyMemberList,
+        addFamilyMemberAdapter = AddFamilyMemberAdapter(context,addFamilyMemberList,
             this,
+            relationWithApplicantList,
             object : AddFamilyMemberAdapter.ContactClickListener {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun removeContact(position: Int, id: Int?, context: Context) {
                     if (position >= 1){
                         addFamilyMemberList[position].memberCount = 1
-                        addFamilyMemberList[position].earningMemberCount = 1
+                        addFamilyMemberList[position].earningMemberCount = 0
                         addFamilyMemberList.removeAt(position)
                         addFamilyMemberAdapter?.updateList(addFamilyMemberList)
                         addFamilyMemberAdapter!!.notifyDataSetChanged()
+                        setTotalMemberMember()
                     }
                     Log.e("Remove","Remove")
                 }
@@ -591,12 +593,13 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
         saveResidenceApplicantFamilyDetail.setRecordId(0)
         saveResidenceApplicantFamilyDetail.setFirequestId(AppConstants.verificationId)
         saveResidenceApplicantFamilyDetail.setMemberCount(1)
-        saveResidenceApplicantFamilyDetail.setEarningMemberCount(1)
+        saveResidenceApplicantFamilyDetail.setEarningMemberCount(0)
         saveResidenceApplicantFamilyDetail.setRelation("Select")
         saveResidenceApplicantFamilyDetail.isStaticData  = true
         addFamilyMemberList.add(saveResidenceApplicantFamilyDetail)
 
         addFamilyMemberAdapter?.updateList(addFamilyMemberList)
         addFamilyMemberAdapter!!.notifyDataSetChanged()
+        setTotalMemberMember()
     }
 }

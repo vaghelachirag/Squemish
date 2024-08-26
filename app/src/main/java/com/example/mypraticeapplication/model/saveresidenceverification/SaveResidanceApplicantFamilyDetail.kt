@@ -18,7 +18,7 @@ class SaveResidanceApplicantFamilyDetail {
 
     @SerializedName("relation")
     @Expose
-    private var relation: String? = null
+    internal var relation: String? = null
 
     @SerializedName("memberCount")
     @Expose

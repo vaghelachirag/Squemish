@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -17,16 +18,37 @@ import com.example.mypraticeapplication.viewmodel.verificationDetail.RCUVerifica
 
 @Suppress("UNUSED_EXPRESSION")
 class AddFamilyMemberAdapter(
+    private val context: Context,
     private var additionalList: ArrayList<SaveResidanceApplicantFamilyDetail>,
     private val viewModel: RCUVerificationViewModel,
-    private val clickListener: ContactClickListener,
+    private val relationWithApplicantList: List<String>?,
+    private val clickListener: ContactClickListener
 
 ) :
     RecyclerView.Adapter<AddFamilyMemberAdapter.ViewHolder>() {
 
+    private var relationWithApplicantSpinnerAdapter: ArrayAdapter<String?>? = null
+
     class ViewHolder(val binding: ItemAddFamilymemberBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindItem(model: SaveResidanceApplicantFamilyDetail, viewModel: RCUVerificationViewModel) {
+
+
+            binding.spnRelation.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+                    //  list[position].earningMemberCount = Utility.getParseInteger(holder.binding.edtEaringMemberCount.text.toString())
+                    //  viewModel.setTotalMemberMember()
+                }
+
+                override fun afterTextChanged(p0: Editable?) {
+                    Log.e("Change",p0.toString())
+                    model.relation = p0.toString()
+                }
+            })
 
             binding.edtMemberCount.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -77,6 +99,12 @@ class AddFamilyMemberAdapter(
 
         holder.bindItem(additionalList[position],viewModel)
 
+        if (!relationWithApplicantList.isNullOrEmpty()){
+            relationWithApplicantSpinnerAdapter = ArrayAdapter<String?>(context, android.R.layout.simple_spinner_item, relationWithApplicantList)
+            relationWithApplicantSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
+            holder.binding.spnRelation.setListAdapter(relationWithApplicantList)
+        }
+
         holder.binding.btnAddDay.setOnClickListener {
             clickListener.addFamilyMember(position)
         }
@@ -84,9 +112,10 @@ class AddFamilyMemberAdapter(
             clickListener.removeContact(position, additionalList[position].getRecordId(), holder.binding.root.context)
         }
 
-        relationWithApplicantSpinnerAdapter = ArrayAdapter<String?>(context, android.R.layout.simple_spinner_item, relationWithApplicantList)
-        relationWithApplicantSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
-        holder.binding.spnRelation.setListAdapter(relationWithApplicantList)
+        if (position == additionalList.size - 1)
+            holder.binding.btnAddDay.visibility = View.VISIBLE
+        else
+            holder.binding.btnAddDay.visibility = View.GONE
 
     }
 
