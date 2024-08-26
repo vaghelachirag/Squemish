@@ -428,6 +428,8 @@ class RCUVerificationViewModel(@SuppressLint("StaticFieldLeak") private val cont
 
             val stayingUnitList = context.resources.getStringArray(R.array.house_locality_array)
             stayingAddressUnitList = stayingUnitList.asList()
+            binding.llPersonalInformation.llPersonalInformationOne.spncurrentaddress.setListAdapter(stayingAddressUnitList!!)
+
 
 
             binding.llPersonalInformation.spnapplicantHouseSizeLabel.setListAdapter(houseSizeUnitList!!)

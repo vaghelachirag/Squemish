@@ -56,6 +56,7 @@ class PreNeighbourVerificationViewModel(private val context: Context, val bindin
 
         val materialStatusList =  context!!.resources.getStringArray(R.array.neighbourrecognised_array)
         neighbourRecognisedList = materialStatusList.asList()
+        binding.spnNeighbourReconised.setListAdapter(neighbourRecognisedList)
 
         isNeighbourReconised.value = false
         isNeighbourReconisedText.value = ""
@@ -70,51 +71,28 @@ class PreNeighbourVerificationViewModel(private val context: Context, val bindin
             neighbour2Mobile.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!.getNeighbour2Mobile().toString()))
             neighbour2Remark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!.getNeighbour2Remark().toString()))
             reason.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!.getReason().toString()))
-
-            isNeighbourReconised.value =
-                ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!
-                    .getIsNeighbourRecognised().toString() != "false"
-
-            setSelectedNeighbourReconised(ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!.getIsNeighbourRecognised().toString())
-
-            binding.spnNeighbourReconised.setListAdapter(neighbourRecognisedList)
-
-            binding.spnNeighbourReconised.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    var position =  Utility.getPositionFromArraylist(Utility.getNullToBlankString(s.toString()),neighbourRecognisedList)
-                    selectedReasonPosition.value = position
-                    val neighourReconisedText = context.resources.getStringArray(R.array.neighbourrecognised_array)
-                    isNeighbourReconisedText.value = neighourReconisedText[position]
-                    if (position == 2 || position == 3) {
-                        isNeighbourReconised.value = false
-                    } else {
-                        isNeighbourReconised.value = true
-                    }
-                }
-
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                }
-            })
-
+            isNeighbourReconised.value = ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!.getIsNeighbourRecognised().toString() != "false"
         }
-    }
 
-    private fun setSelectedNeighbourReconised(isText: String) {
-        val pos =
-            context.resources.getStringArray(R.array.neighbourrecognised_array).indexOf(isText)
-        if (pos >= 0) {
-            selectedItemPosition = pos
-        }
+        binding.spnNeighbourReconised.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (!s.isNullOrBlank()){
+                    isNeighbourReconised.value = !(s.toString() == "No" || s.toString() == "Denied")
+                    isNeighbourReconisedText.value = s.toString()
+                }
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
+        binding.spnNeighbourReconised.setText(ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!.getIsNeighbourRecognised().toString())
     }
 
     // On Saved Clicked
     fun onSaveClicked() {
-        if (selectedReasonPosition.value == 0) {
-            Utils().showSnackBar(context, "Please Select Reason", binding.constraintLayout)
-        } else if (neighbour1Mobile.get().toString() == "") {
+        if (neighbour1Mobile.get().toString() == "") {
             Utils().showSnackBar(
                 context,
                 "Please Enter Neighbour1 Mobile Number",
@@ -138,7 +116,10 @@ class PreNeighbourVerificationViewModel(private val context: Context, val bindin
                 "Please Enter Valid Neighbour2 Mobile Number",
                 binding.constraintLayout
             )
-        } else {
+        } else if (binding.spnNeighbourReconised.text.isNullOrEmpty()) {
+            Utils().showSnackBar(context, "Please Select Reason", binding.constraintLayout)
+        }
+        else {
             val model = GetFiRequestPreNeighboutVerificationDto()
             model.setNeighbour1Name(neighbour1Name.get().toString())
             model.setNeighbour2Name(neighbour2Name.get().toString())
@@ -147,7 +128,7 @@ class PreNeighbourVerificationViewModel(private val context: Context, val bindin
             model.setNeighbour1Remark(neighbour1Remark.get().toString())
             model.setNeighbour2Remark(neighbour2Remark.get().toString())
             model.setReason(reason.get().toString())
-            model.setIsNeighbourRecognised(isNeighbourReconisedText.value.toString())
+            model.setIsNeighbourRecognised(isNeighbourReconisedText.value)
             preNeighbourMutableLiveData.value = model
             savePreNeighbourData(model)
         }
@@ -210,24 +191,4 @@ class PreNeighbourVerificationViewModel(private val context: Context, val bindin
                 )
             }
         }
-
-        //  For Click Listener Sequence
-        val clicksListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                selectedReasonPosition.value = position
-                val neighourReconisedText =
-                    context.resources.getStringArray(R.array.neighbourrecognised_array)
-                isNeighbourReconisedText.value = neighourReconisedText[position]
-                if (position == 2 || position == 3) {
-                    isNeighbourReconised.value = false
-                } else {
-                    isNeighbourReconised.value = true
-                }
-            }
-        }
-
-
     }
