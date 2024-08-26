@@ -561,25 +561,42 @@ class RCUVerificationViewModel(private val context: Context, private  val bindin
     }
 
     private fun setCustomLayoutAddAdapter() {
-        addFamilyMemberAdapter =  AddFamilyMemberAdapter(context,addFamilyMemberList,relationWithApplicantList,this,object : AddFamilyMemberAdapter.OnItemClickListener{
-
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onItemClick(position: Int) {
-                addFamilyMemberAdapter?.addDay()
-                addFamilyMemberAdapter?.notifyDataSetChanged()
-            }
-
-            override fun onRemoveClick(position: Int) {
-                if (addFamilyMemberList.size == 1) {
-                    addFamilyMemberAdapter?.changeValue(true)
-                } else {
-                    addFamilyMemberAdapter?.changeValue(false)
+        addFamilyMemberAdapter = AddFamilyMemberAdapter(addFamilyMemberList,
+            this,
+            object : AddFamilyMemberAdapter.ContactClickListener {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun removeContact(position: Int, id: Int?, context: Context) {
+                    if (position >= 1){
+                        addFamilyMemberList[position].memberCount = 1
+                        addFamilyMemberList[position].earningMemberCount = 1
+                        addFamilyMemberList.removeAt(position)
+                        addFamilyMemberAdapter?.updateList(addFamilyMemberList)
+                        addFamilyMemberAdapter!!.notifyDataSetChanged()
+                    }
+                    Log.e("Remove","Remove")
                 }
-                addFamilyMemberAdapter?.removeDay(position)
-            }
-        })
+
+                override fun addFamilyMember(position: Int) {
+                    updateAdditionalAdapter()
+                }
+            })
 
         binding.llPersonalInformation.llPersonalInformationOne.addFamilyMemberRecyclerView.setLayoutManager(LinearLayoutManager(context))
         binding.llPersonalInformation.llPersonalInformationOne.addFamilyMemberRecyclerView.setAdapter(addFamilyMemberAdapter)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateAdditionalAdapter() {
+        val saveResidenceApplicantFamilyDetail  =  SaveResidanceApplicantFamilyDetail()
+        saveResidenceApplicantFamilyDetail.setRecordId(0)
+        saveResidenceApplicantFamilyDetail.setFirequestId(AppConstants.verificationId)
+        saveResidenceApplicantFamilyDetail.setMemberCount(1)
+        saveResidenceApplicantFamilyDetail.setEarningMemberCount(1)
+        saveResidenceApplicantFamilyDetail.setRelation("Select")
+        saveResidenceApplicantFamilyDetail.isStaticData  = true
+        addFamilyMemberList.add(saveResidenceApplicantFamilyDetail)
+
+        addFamilyMemberAdapter?.updateList(addFamilyMemberList)
+        addFamilyMemberAdapter!!.notifyDataSetChanged()
     }
 }
