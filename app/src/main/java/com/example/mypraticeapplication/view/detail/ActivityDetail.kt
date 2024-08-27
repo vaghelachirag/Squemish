@@ -247,6 +247,9 @@ class ActivityDetail  : BaseActivity()  {
         if (selectedData!!.isRCOVerification){
             viewPagerAdapter.addFragment(FragmentRCOVerification.newInstance(selectedData), "RCU Verification")
         }
+        if (selectedData!!.isRCOVerification){
+            viewPagerAdapter.addFragment(FragmentRCOVerification.newInstance(selectedData), "RCU Verification")
+        }
         viewPagerAdapter.addFragment(FragmentPhotograph.newInstance(), "Photograph")
         viewPagerAdapter.addFragment(FragmentPostNeighbourVerification.newInstance(selectedData), "Post-Neighbour Verification")
         viewPagerAdapter.addFragment(FragmentFinalSubmit.newInstance(selectedData), "Final Submit")

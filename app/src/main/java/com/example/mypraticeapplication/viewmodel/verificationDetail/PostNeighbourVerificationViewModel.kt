@@ -4,8 +4,6 @@ import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.View
-import android.widget.AdapterView
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.example.mypraticeapplication.R
@@ -102,24 +100,6 @@ class PostNeighbourVerificationViewModel(private val context: Context, private v
         }
     }
 
-
-    //  For Click Listener Sequence
-    val clicksListener = object : AdapterView.OnItemSelectedListener {
-        override fun onNothingSelected(parent: AdapterView<*>?) {
-        }
-
-        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            selectedReasonPosition.value = position
-            val neighbourRecognizedText = context.resources.getStringArray(R.array.neighbourrecognised_array)
-            isNeighbourReconisedText.value = neighbourRecognizedText[position]
-            Log.e("Selected",isNeighbourReconisedText.value.toString())
-            if (position == 2 || position == 3) {
-                isNeighbourReconised.value = false
-            } else {
-                isNeighbourReconised.value = true
-            }
-        }
-    }
 
     // On Saved Clicked
     fun onSaveClicked() {

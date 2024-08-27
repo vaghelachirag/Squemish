@@ -149,7 +149,7 @@
 
 
 
-    <string name="refNo">Ref No/ Agency Control No :  </string>
+    <string name="refNo">Ref No :  </string>
     <string name="caseID">Case Id : </string>
     <string name="bankName">Bank/NBFC Name : </string>
     <string name="verificationFor">Verification for : </string>

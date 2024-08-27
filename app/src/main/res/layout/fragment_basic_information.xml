@@ -71,13 +71,13 @@
                             android:id="@+id/txtRefNoHeader"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_weight="1.3"
                             android:drawablePadding="3sp"
                             android:drawableTint="@color/gray_323232"
                             android:gravity="center_vertical"
                             android:text="@string/refNo"
                             android:textColor="@color/gray_323232"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/verificationDetailTextSize"
                             android:visibility="visible"
                             tools:ignore="MissingConstraints">
 
@@ -88,7 +88,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
-                            android:layout_weight="1"
+                            android:layout_weight="0.7"
                             android:drawablePadding="3sp"
                             android:gravity="start"
                             android:text="@={viewModel.refNo}"
@@ -96,6 +96,7 @@
                             android:textSize="@dimen/_12sdp"
                             android:visibility="visible"
                             tools:ignore="MissingConstraints,SmallSp"></com.example.mypraticeapplication.widget.SmallText>
+
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -220,23 +221,71 @@
                             android:textSize="@dimen/verificationDetailTextSize"
                             tools:ignore="MissingConstraints">
                         </com.example.mypraticeapplication.widget.HeaderText>
+
                         <com.example.mypraticeapplication.widget.SmallText
                             android:id="@+id/txtCaseId"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="start"
-                            android:visibility="visible"
                             android:layout_gravity="start"
                             android:layout_weight="0.7"
-                            android:textColor="@color/gray_323232"
                             android:drawablePadding="3sp"
-                            android:textSize="@dimen/verificationDetailTextSize"
+                            android:gravity="start"
                             android:text="@={viewModel.verificationFor}"
-                            tools:ignore="MissingConstraints,SmallSp">
-                        </com.example.mypraticeapplication.widget.SmallText>
+                            android:textColor="@color/gray_323232"
+                            android:textSize="@dimen/verificationDetailTextSize"
+                            android:visibility="visible"
+                            tools:ignore="MissingConstraints,SmallSp"></com.example.mypraticeapplication.widget.SmallText>
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:ignore="MissingConstraints"
+                    card_view:layout_constraintBottom_toBottomOf="@+id/ll_Product"
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingTop="@dimen/_5sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="2"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <com.example.mypraticeapplication.widget.HeaderText
+                            android:id="@+id/txtVerificationTypeHeader"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.3"
+                            android:text="@string/verificationType"
+                            android:gravity="center_vertical"
+                            android:visibility="visible"
+                            android:textColor="@color/gray_323232"
+                            android:drawableTint="@color/gray_323232"
+                            android:drawablePadding="3sp"
+                            android:textSize="@dimen/verificationDetailTextSize"
+                            tools:ignore="MissingConstraints">
+                        </com.example.mypraticeapplication.widget.HeaderText>
+
+                        <com.example.mypraticeapplication.widget.SmallText
+                            android:id="@+id/txtVerificationType"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_weight="0.7"
+                            android:drawablePadding="3sp"
+                            android:gravity="start"
+                            android:text="@={viewModel.verificationType}"
+                            android:textColor="@color/gray_323232"
+                            android:textSize="@dimen/verificationDetailTextSize"
+                            android:visibility="visible"
+                            tools:ignore="MissingConstraints,SmallSp" />
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

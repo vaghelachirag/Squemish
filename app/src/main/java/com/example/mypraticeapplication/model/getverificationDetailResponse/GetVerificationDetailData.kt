@@ -464,6 +464,7 @@ class GetVerificationDetailData {
     // All Verification Type
     var isResidenceVerification: Boolean = false
     var isRCOVerification: Boolean = false
+    var isDocumentVerification: Boolean = false
 
     fun getFirequestId(): Int? {
         return firequestId

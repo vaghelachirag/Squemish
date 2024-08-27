@@ -124,6 +124,12 @@ class Utils {
                 if (ActivityDetail.selectedData!!.getVerificationType() == "RV"){
                     ActivityDetail.selectedData!!.isResidenceVerification = true
                 }
+                if (ActivityDetail.selectedData!!.getVerificationType() == "RV"){
+                    ActivityDetail.selectedData!!.isResidenceVerification = true
+                }
+                if (ActivityDetail.selectedData!!.getVerificationType() == "DPV"){
+                    ActivityDetail.selectedData!!.isDocumentVerification = true
+                }
                 else{
                     ActivityDetail.selectedData!!.isRCOVerification = true
                 }
