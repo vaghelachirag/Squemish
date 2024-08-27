@@ -79,7 +79,9 @@
                             android:textColor="@color/gray_323232"
                             android:textSize="12sp"
                             android:visibility="visible"
-                            tools:ignore="MissingConstraints"></com.example.mypraticeapplication.widget.HeaderText>
+                            tools:ignore="MissingConstraints">
+
+                        </com.example.mypraticeapplication.widget.HeaderText>
 
                         <com.example.mypraticeapplication.widget.SmallText
                             android:id="@+id/txtAddress"
@@ -644,6 +646,7 @@
                             android:visibility="visible"
                             android:layout_gravity="start|center"
                             android:layout_weight="0.7"
+                            android:layout_marginRight="@dimen/_5sdp"
                             android:textColor="@color/colorPrimary"
                             android:drawablePadding="3sp"
                             android:drawableTint="@color/colorPrimary"

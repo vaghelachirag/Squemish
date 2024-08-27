@@ -232,6 +232,8 @@ class DashboardActivity : BaseActivity() {
             val bundle = Bundle()
             bundle.putString("webURL", menuData.getMenuId().toString())
 
+            if (title != null) binding.tvTitle.text = menuData.getName()
+
             binding.toolbarDashboard.setTitle(menuData.getName())
             navController.navigate(R.id.webViewFragment,bundle)
             supportActionBar?.setDisplayShowHomeEnabled(false);
@@ -240,9 +242,9 @@ class DashboardActivity : BaseActivity() {
 
             if (menuData.getMenuId() == AppConstants.home){
                 navController.navigate(R.id.dashboardFragment)
-                binding.toolbarDashboard.setTitle("Test")
                 supportActionBar?.setDisplayShowHomeEnabled(false);
                 binding.toolbarDashboard.setNavigationIcon(null);
+                if (title != null) binding.tvTitle.text = "Dashboard"
             }
             if (menuData.getMenuId() == AppConstants.changePassword){
               /*  navController.navigate(R.id.changePasswordFragment)

@@ -49,11 +49,15 @@ class AcceptRejectFIDialog(private var mContext: Context, private val acceptReas
         window!!.setAttributes(lp)
 
 
+        binding.spnAcceptRejectSelection.setListAdapter(acceptReasonList)
+/*
+
         acceptRejectListSpinnerAdapter =
             ArrayAdapter<String?>(context, android.R.layout.simple_spinner_item, acceptReasonList)
         acceptRejectListSpinnerAdapter?.setDropDownViewResource(R.layout.custom_spinner_item)
 
         binding.spnAcceptReject.adapter = acceptRejectListSpinnerAdapter
+*/
 
         setContentView(binding.root)
 
@@ -65,7 +69,7 @@ class AcceptRejectFIDialog(private var mContext: Context, private val acceptReas
             if (listener != null) {
                     listener?.onOkPressed(
                         this,
-                        binding.spnAcceptReject.selectedItem.toString(),
+                        binding.spnAcceptRejectSelection.text.toString(),
                         isAcceptReject
                     )
 

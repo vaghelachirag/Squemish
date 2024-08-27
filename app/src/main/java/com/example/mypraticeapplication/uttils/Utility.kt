@@ -11,7 +11,9 @@ import android.content.pm.PackageManager
 import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.graphics.drawable.Drawable
+import android.media.ExifInterface
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
@@ -590,6 +592,29 @@ class Utility {
             } else {
 //                Toast.displayError(context, "Phone No is not valid")
             }
+        }
+
+        public fun rotateImageAngle(orientation: Int): Float{
+            var float : Float = 0F
+            when (orientation) {
+
+                ExifInterface.ORIENTATION_ROTATE_90 -> float = 90F
+                ExifInterface.ORIENTATION_ROTATE_180 ->  float = 180F
+
+                ExifInterface.ORIENTATION_ROTATE_270 ->  float = 270F
+
+                ExifInterface.ORIENTATION_NORMAL -> float = 0F
+            }
+            return  float
+        }
+
+        fun rotateImage(source: Bitmap, angle: Float): Bitmap {
+            val matrix = Matrix()
+            matrix.postRotate(angle)
+            return Bitmap.createBitmap(
+                source, 0, 0, source.getWidth(), source.getHeight(),
+                matrix, true
+            )
         }
 
        private fun getFolderSize(file: File): Long {

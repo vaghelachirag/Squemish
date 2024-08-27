@@ -233,6 +233,7 @@
                 app:passwordToggleEnabled="false"
                 android:layout_weight="1"
                 android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/light_Gray"
                 tools:ignore="MissingClass,MissingConstraints">
 
                 <com.example.mypraticeapplication.widget.TypefaceEditText
@@ -262,6 +263,7 @@
                 app:passwordToggleEnabled="false"
                 android:layout_weight="1"
                 android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/light_Gray"
                 tools:ignore="MissingClass,MissingConstraints">
 
                 <com.example.mypraticeapplication.widget.TypefaceEditText

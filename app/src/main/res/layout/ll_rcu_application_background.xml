@@ -440,6 +440,7 @@
                     app:hintTextColor="@color/main_bg"
                     app:passwordToggleEnabled="false"
                     android:layout_weight="1"
+                    android:background="@color/light_Gray"
                     tools:ignore="MissingClass,MissingConstraints">
 
                     <com.example.mypraticeapplication.widget.TypefaceEditText
@@ -469,6 +470,7 @@
                     app:hintTextColor="@color/main_bg"
                     app:passwordToggleEnabled="false"
                     android:layout_weight="1"
+                    android:background="@color/light_Gray"
                     tools:ignore="MissingClass,MissingConstraints">
 
                     <com.example.mypraticeapplication.widget.TypefaceEditText

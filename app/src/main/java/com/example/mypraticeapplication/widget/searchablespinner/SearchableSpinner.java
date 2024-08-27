@@ -134,6 +134,11 @@ public class SearchableSpinner extends AppCompatSpinner implements View.OnTouchL
     }
 
     @Override
+    public void onClearText(Object item, int position) {
+
+    }
+
+    @Override
     public void onDialogDismiss() {
         isClickOnlyOnce = false;
     }

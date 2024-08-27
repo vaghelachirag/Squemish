@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,8 @@ public class SearchableListDialog extends DialogFragment implements
     private String _strTitle;
 
     private String _strPositiveButtonText;
+
+    private String _strNegativeButtonText;
 
     private DialogInterface.OnClickListener _onClickListener;
 
@@ -82,10 +85,6 @@ public class SearchableListDialog extends DialogFragment implements
         // Getting the layout inflater to inflate the view in an alert dialog.
         LayoutInflater inflater = LayoutInflater.from(getActivity());
 
-        // Crash on orientation change #7
-        // Change Start
-        // Description: As the instance was re initializing to null on rotating the device,
-        // getting the instance from the saved instance
         if (null != savedInstanceState) {
             _searchableItem = (SearchableItem) savedInstanceState.getSerializable("item");
         }
@@ -100,6 +99,15 @@ public class SearchableListDialog extends DialogFragment implements
         String strPositiveButton = _strPositiveButtonText == null ? "CLOSE" : _strPositiveButtonText;
         alertDialog.setPositiveButton(strPositiveButton, _onClickListener);
 
+        alertDialog.setNegativeButton("CLEAR", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //Just leave it empty here.
+                Log.e("Negative","Negative");
+                _searchableItem.onClearText("", 0);
+            }
+        });
+
         String strTitle = _strTitle == null ? "Select Item" : _strTitle;
         alertDialog.setTitle(strTitle);
 
@@ -109,9 +117,6 @@ public class SearchableListDialog extends DialogFragment implements
         return dialog;
     }
 
-    // Crash on orientation change #7
-    // Change Start
-    // Description: Saving the instance of searchable item instance.
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putSerializable("item", _searchableItem);
@@ -127,9 +132,19 @@ public class SearchableListDialog extends DialogFragment implements
         _strPositiveButtonText = strPositiveButtonText;
     }
 
+    public void setNegativeButton(String strNegativeButtonText) {
+        _strNegativeButtonText = strNegativeButtonText;
+
+    }
+
     public void setPositiveButton(String strPositiveButtonText, DialogInterface.OnClickListener onClickListener) {
         _strPositiveButtonText = strPositiveButtonText;
         _onClickListener = onClickListener;
+    }
+
+    public void setNegativeButton(String strPositiveButtonText, DialogInterface.OnClickListener onClickListener) {
+        _strPositiveButtonText = strPositiveButtonText;
+        _searchableItem.onClearText("", 0);
     }
 
     public void setOnSearchableItemClickListener(SearchableItem searchableItem) {
@@ -165,7 +180,6 @@ public class SearchableListDialog extends DialogFragment implements
                 items);
         //attach the adapter to the list
         _listViewItems.setAdapter(listAdapter);
-
         _listViewItems.setTextFilterEnabled(true);
 
         _listViewItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -220,6 +234,8 @@ public class SearchableListDialog extends DialogFragment implements
 
     public interface SearchableItem<T> extends Serializable {
         void onSearchableItemClicked(T item, int position);
+
+        void onClearText(T item, int position);
 
         void onDialogDismiss();
     }

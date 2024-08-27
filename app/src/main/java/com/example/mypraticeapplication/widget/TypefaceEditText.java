@@ -35,6 +35,8 @@ public class TypefaceEditText extends TextInputEditText {
 
     public TypefaceEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        Typeface face=Typeface.createFromAsset(context.getAssets(), "Poppins-Bold.ttf");
+        this.setTypeface(face);
         inIt(context, attrs);
     }
 
@@ -49,11 +51,13 @@ public class TypefaceEditText extends TextInputEditText {
         if (!isInEditMode()) {
             if (attrs != null) {
                 TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TypefaceEditText);
-                String fontName = a.getString(R.styleable.TypefaceEditText_custom_font);
+                /*String fontName = a.getString(R.styleable.TypefaceEditText_custom_font);
                 Typeface typeface = FontUtils.getInstance().getFont(context, fontName);
                 if (typeface != null) {
                     setTypeface(typeface);
-                }
+                }*/
+                Typeface face=Typeface.createFromAsset(context.getAssets(), "roboto_regular.ttf");
+                this.setTypeface(face);
             }
         }
     }

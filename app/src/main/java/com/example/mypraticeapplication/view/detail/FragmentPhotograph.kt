@@ -1,6 +1,7 @@
 package com.example.mypraticeapplication.view.detail
 
 import android.Manifest
+import android.R.attr
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
@@ -8,10 +9,9 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Matrix
 import android.graphics.Paint
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffXfermode
-import android.graphics.Rect
+import android.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -183,9 +183,18 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
     @SuppressLint("DefaultLocale")
     private fun uploadImage() {
         if (imgFile != null) {
-            val filePath: String = imgFile!!.path
-            val bitmap = BitmapFactory.decodeFile(filePath)
-            Log.e("ImageBitmap",bitmap.toString())
+            val filePath: String = imgFile!!.absolutePath
+            var bitmap = BitmapFactory.decodeFile(filePath)
+
+            val ei = ExifInterface(filePath)
+            val orientation: Int = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
+            Log.e("Rotation",orientation.toString())
+
+
+            var angle  =  Utility.rotateImageAngle(orientation)
+
+            bitmap = Utility.rotateImage(bitmap,angle)
+            binding.ivImage.setImageBitmap(bitmap)
 
             val workingBitmap: Bitmap = Bitmap.createBitmap(bitmap)
             val mutableBitmap = workingBitmap.copy(Bitmap.Config.ARGB_8888, true)
@@ -237,7 +246,7 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
             canvas1.save()
             canvas1.translate(x, y)
             textLayout.draw(canvas1)
-            binding.ivImage.setImageBitmap(mutableBitmap)
+          //  binding.ivImage.setImageBitmap(mutableBitmap)
             saveImage(mutableBitmap)
         }
 

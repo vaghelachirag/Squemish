@@ -79,6 +79,8 @@ class PreNeighbourVerificationViewModel(private val context: Context, val bindin
                 if (!s.isNullOrBlank()){
                     isNeighbourReconised.value = !(s.toString() == "No" || s.toString() == "Denied")
                     isNeighbourReconisedText.value = s.toString()
+                }else{
+                    isNeighbourReconised.value = false
                 }
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

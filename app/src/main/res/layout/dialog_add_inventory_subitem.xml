@@ -51,24 +51,36 @@
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_14sdp"
                                 android:paddingTop="@dimen/_10sdp"
+                                android:visibility="gone"
                                 tools:ignore="MissingConstraints"></com.example.mypraticeapplication.widget.HeaderText>
 
-                            <androidx.appcompat.widget.AppCompatSpinner
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/TextInputExposedDropdownMenu"
                                 android:id="@+id/spnAcceptReject"
                                 android:layout_width="match_parent"
-                                android:layout_height="@dimen/edit_text_size"
-                                android:background="@drawable/bg_spinner"
-                                android:entries="@array/addresses_array"
-                                android:layout_marginTop="@dimen/_30sdp"
-                                android:imeOptions="actionNext"
-                                android:layout_marginLeft="@dimen/_15sdp"
-                                android:layout_marginRight="@dimen/_15sdp"
-                                android:theme="@style/spinnerTheme"
-                                android:drawableRight="@drawable/ic_arrow_drop_down_48"
+                                android:layout_height="wrap_content"
+                                app:hintTextColor="@color/main_bg"
+                                android:layout_marginTop="44dp"
+                                android:textColorHint="@color/main_bg"
                                 app:layout_constraintTop_toBottomOf="@+id/txt_Header"
-                                android:textSize="@dimen/_12sdp"
-                                tools:ignore="MissingConstraints" />
+                                android:hint="Select Master Data">
 
+                                <com.example.mypraticeapplication.widget.InstantAutoComplete
+                                    android:id="@+id/spnAcceptRejectSelection"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/edit_text_size"
+                                    android:clickable="true"
+                                    android:cursorVisible="false"
+                                    android:focusableInTouchMode="false"
+                                    android:entries="@array/addresses_array"
+                                    android:focusable="false"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/gray_323232"
+                                    android:textSize="@dimen/verificationDetailTextSize"
+                                    app:custom_font="@string/app_font_regular" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/btnSave"
