@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -30,10 +31,12 @@ public class InstantAutoComplete extends androidx.appcompat.widget.AppCompatAuto
     public InstantAutoComplete(Context context) {
         super(context);
         this._context = context;
-        init();
+        init(context);
     }
 
-    private void init() {
+    private void init(Context context) {
+        Typeface face=Typeface.createFromAsset(context.getAssets(), "roboto_regular.ttf");
+        this.setTypeface(face);
        Log.e("Init","Init");
         _items = new ArrayList();
         _searchableListDialog = SearchableListDialog.newInstance(_items);
@@ -56,7 +59,7 @@ public class InstantAutoComplete extends androidx.appcompat.widget.AppCompatAuto
         this._context = arg0;
 
         Log.e("Auto","Auto" + arg1.getAttributeValue(1));
-        init();
+        init(_context);
     }
 
     public InstantAutoComplete(Context arg0, AttributeSet arg1, int arg2) {
@@ -107,6 +110,12 @@ public class InstantAutoComplete extends androidx.appcompat.widget.AppCompatAuto
     }
 
     @Override
+    public void onClearText(Object item, int position) {
+        setText("");
+    }
+
+
+    @Override
     public void onDialogDismiss() {
 
     }
@@ -122,7 +131,4 @@ public class InstantAutoComplete extends androidx.appcompat.widget.AppCompatAuto
 
         return null;
     }
-
-
-
 }

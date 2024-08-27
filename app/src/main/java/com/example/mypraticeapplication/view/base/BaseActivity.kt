@@ -35,6 +35,7 @@ open class BaseActivity : AppCompatActivity() {
             actionBar.setDisplayHomeAsUpEnabled(false)
             actionBar.setHomeAsUpIndicator(R.drawable.ic_nav_menup)
             if (title != null) binding.tvTitle.text = title
+
         }
 
     }

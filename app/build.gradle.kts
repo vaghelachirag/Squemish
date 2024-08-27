@@ -83,4 +83,8 @@ dependencies {
 
     implementation ("com.karumi:dexter:6.0.2")
 
+    // dp and sp size for multiple layout
+    implementation ("com.intuit.ssp:ssp-android:1.1.0")
+    implementation ("com.intuit.sdp:sdp-android:1.1.0")
+
 }

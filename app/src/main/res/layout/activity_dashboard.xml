@@ -40,7 +40,7 @@
                             android:src="@drawable/ic_nav_menup">
 
                         </ImageView>
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <com.example.mypraticeapplication.widget.HeaderText
                             android:id="@+id/tvTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

@@ -29,12 +29,12 @@
 
 
         <FrameLayout
-            android:layout_width="@dimen/_150sdp"
-            android:layout_height="@dimen/_150sdp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/ivPicture"
-                android:layout_width="@dimen/_150sdp"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/_150sdp"
                 android:padding="@dimen/_3sdp"
                 android:scaleType="centerCrop"

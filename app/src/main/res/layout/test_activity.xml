@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/TextInputExposedDropdownMenu"
@@ -43,12 +43,12 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-
     <com.example.mypraticeapplication.widget.searchablespinner.SearchableSpinner
         android:id="@+id/spnNeighbourReconised"
         android:layout_width="match_parent"
         android:layout_height="@dimen/edit_text_size"
         app:custom_font="@string/app_font_regular"
+        android:visibility="gone"
         android:entries="@array/neighbourrecognised_array"
         android:imeOptions="actionNext"
         app:hintText="Select Reason Item"
@@ -58,6 +58,35 @@
         android:layout_below="@+id/ll_fi_2"
         android:layout_marginTop="@dimen/_5sdp"
         tools:ignore="MissingConstraints" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inpNeighbour2Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextInputLayout"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:hintTextColor="@color/main_bg"
+        app:passwordToggleEnabled="false"
+        tools:ignore="MissingClass,MissingConstraints">
+
+        <com.example.mypraticeapplication.widget.TypefaceEditText
+            android:id="@+id/edt_Neighbour2Name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_size"
+            android:hint="@string/neighbour2Name"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:text="Test"
+            android:background="@color/light_Gray"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:enabled="false"
+            android:layout_margin="@dimen/_10sdp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray_323232"
+            android:textSize="@dimen/verificationDetailTextSize"
+            app:custom_font="@string/app_font_regular" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
 </RelativeLayout>

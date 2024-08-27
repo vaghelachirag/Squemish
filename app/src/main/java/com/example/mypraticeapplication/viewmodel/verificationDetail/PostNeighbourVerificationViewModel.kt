@@ -77,23 +77,21 @@ class PostNeighbourVerificationViewModel(private val context: Context, private v
 
         binding.spnNeighbourReconised.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                var position =  Utility.getPositionFromArraylist(Utility.getNullToBlankString(s.toString()),neighbourRecognisedList)
-                selectedReasonPosition.value = position
-                val neighourReconisedText = context.resources.getStringArray(R.array.neighbourrecognised_array)
-                isNeighbourReconisedText.value = neighourReconisedText[position]
-                if (position == 2 || position == 3) {
+                if (!s.isNullOrBlank()){
+                    isNeighbourReconised.value = !(s.toString() == "No" || s.toString() == "Denied")
+                    isNeighbourReconisedText.value = s.toString()
+                }else{
                     isNeighbourReconised.value = false
-                } else {
-                    isNeighbourReconised.value = true
                 }
             }
-
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
+
+        binding.spnNeighbourReconised.setText(ActivityDetail.selectedData!!.getFirequestPostNeighboutVerificationDto()!!.getIsNeighbourRecognised().toString())
     }
 
     private fun setSelectedNeighbourRecognized(isText: String) {

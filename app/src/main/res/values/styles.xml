@@ -87,6 +87,7 @@
         <item name="android:textAppearance">@style/ButtonTextAppearance</item>
         <item name="android:includeFontPadding">false</item>
         <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/roboto_regular</item>
     </style>
 
 
@@ -148,6 +149,13 @@
         <item name="android:clipToPadding">false</item>
     </style>
 
+    <style name="TabBar.TitleText" parent="TextAppearance.Design.Tab">
+        <!--set your custom font properties-->
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
     <style name="AlertDialogTheme">
         <item name="android:textColor">@color/black</item>
         <item name="android:colorAccent">@color/main_bg</item>
@@ -192,6 +200,7 @@
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/roboto_regular</item>
     </style>
 
     <style name="ProgressDialog" parent="Theme.AppCompat.Light.Dialog.Alert">

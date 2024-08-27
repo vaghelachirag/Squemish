@@ -255,8 +255,11 @@ class RCUVerificationViewModel(@SuppressLint("StaticFieldLeak") private val cont
         else if (materialStatusApplicant.value.isNullOrEmpty() && isHouseOpen.value == true){
             Utils().showSnackBar(context,"Please select Marital Status",binding.constraintLayout)
         }
-        else if (houseLocalityApplicant.value.isNullOrEmpty() && isHouseOpen.value == true){
-            Utils().showSnackBar(context,"Please select House Locality",binding.constraintLayout)
+        else if (materialStatusApplicant.value.isNullOrEmpty() && isHouseOpen.value == true){
+            Utils().showSnackBar(context,"Please select Marital Status",binding.constraintLayout)
+        }
+        else if (!checkFamilyMemberValidation() && isHouseOpen.value == true){
+            Utils().showSnackBar(context,"Please select Family member Relation",binding.constraintLayout)
         }
         else if (edtStayingAddress.get().isNullOrEmpty() && isHouseOpen.value == true){
             Utils().showSnackBar(context,"Please enter Staying at current address (In Years)",binding.constraintLayout)
@@ -303,6 +306,17 @@ class RCUVerificationViewModel(@SuppressLint("StaticFieldLeak") private val cont
         else {
            callSaveResidenceApi()
         }
+    }
+
+    private fun checkFamilyMemberValidation() : Boolean{
+         var isValidate : Boolean = true
+         for (i in addFamilyMemberList){
+             if (i.relation.isNullOrEmpty()){
+               isValidate = false
+               break
+             }
+         }
+        return  isValidate
     }
 
     private fun callSaveResidenceApi() {
@@ -403,8 +417,8 @@ class RCUVerificationViewModel(@SuppressLint("StaticFieldLeak") private val cont
         saveResidenceApplicantFamilyDetail.setRecordId(0)
         saveResidenceApplicantFamilyDetail.setFirequestId(AppConstants.verificationId)
         saveResidenceApplicantFamilyDetail.setMemberCount(1)
-        saveResidenceApplicantFamilyDetail.setEarningMemberCount(1)
-        saveResidenceApplicantFamilyDetail.setRelation("Select")
+        saveResidenceApplicantFamilyDetail.setEarningMemberCount(0)
+        saveResidenceApplicantFamilyDetail.setRelation("")
         saveResidenceApplicantFamilyDetail.isStaticData = true
 
         addFamilyMemberList.add(saveResidenceApplicantFamilyDetail)
@@ -596,7 +610,7 @@ class RCUVerificationViewModel(@SuppressLint("StaticFieldLeak") private val cont
         saveResidenceApplicantFamilyDetail.setFirequestId(AppConstants.verificationId)
         saveResidenceApplicantFamilyDetail.setMemberCount(1)
         saveResidenceApplicantFamilyDetail.setEarningMemberCount(0)
-        saveResidenceApplicantFamilyDetail.setRelation("Select")
+        saveResidenceApplicantFamilyDetail.setRelation("")
         saveResidenceApplicantFamilyDetail.isStaticData  = true
         addFamilyMemberList.add(saveResidenceApplicantFamilyDetail)
 
