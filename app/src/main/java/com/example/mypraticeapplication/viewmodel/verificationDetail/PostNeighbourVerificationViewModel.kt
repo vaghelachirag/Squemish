@@ -44,9 +44,9 @@ class PostNeighbourVerificationViewModel(private val context: Context, private v
     private var neighbourRecognisedList: List<String>? = null
 
     fun init(context: Context?) {
-
         val materialStatusList =  context!!.resources.getStringArray(R.array.neighbourrecognised_array)
         neighbourRecognisedList = materialStatusList.asList()
+        binding.spnNeighbourReconised.setListAdapter(neighbourRecognisedList)
 
         isNeighbourReconised.value = false
         isNeighbourReconisedText.value = ""
@@ -61,75 +61,29 @@ class PostNeighbourVerificationViewModel(private val context: Context, private v
             neighbour4Remark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFirequestPostNeighboutVerificationDto()!!.getNeighbour4Remark().toString()))
             reason.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFirequestPostNeighboutVerificationDto()!!.getReason().toString()))
 
-
-            if (ActivityDetail.selectedData!!.getFirequestPostNeighboutVerificationDto()!!.getIsNeighbourRecognised().toString() == "false"){
-                isNeighbourReconised.value = false
-            }else{
-                isNeighbourReconised.value = true
-            }
+            isNeighbourReconised.value = ActivityDetail.selectedData!!.getFirequestPreNeighboutVerificationDto()!!.getIsNeighbourRecognised().toString() != "false"
         }
 
-        isNeighbourReconised.value = ActivityDetail.selectedData!!.getFirequestPostNeighboutVerificationDto()!!.getIsNeighbourRecognised().toString() != "false"
-
-        setSelectedNeighbourRecognized(ActivityDetail.selectedData!!.getFirequestPostNeighboutVerificationDto()!!.getIsNeighbourRecognised().toString())
-
-        binding.spnNeighbourReconised.setListAdapter(neighbourRecognisedList)
-
-        binding.spnNeighbourReconised.addTextChangedListener(object : TextWatcher {
+       binding.spnNeighbourReconised.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                var position =  Utility.getPositionFromArraylist(Utility.getNullToBlankString(s.toString()),neighbourRecognisedList)
-                selectedReasonPosition.value = position
-                val neighourReconisedText = context.resources.getStringArray(R.array.neighbourrecognised_array)
-                isNeighbourReconisedText.value = neighourReconisedText[position]
-                if (position == 2 || position == 3) {
-                    isNeighbourReconised.value = false
-                } else {
-                    isNeighbourReconised.value = true
+                if (!s.isNullOrBlank()){
+                    isNeighbourReconised.value = !(s.toString() == "No" || s.toString() == "Denied")
+                    isNeighbourReconisedText.value = s.toString()
                 }
             }
-
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
-    }
+        binding.spnNeighbourReconised.setText(ActivityDetail.selectedData!!.getFirequestPostNeighboutVerificationDto()!!.getIsNeighbourRecognised().toString())
 
-    private fun setSelectedNeighbourRecognized(isText: String) {
-        val pos =
-            context.resources.getStringArray(R.array.neighbourrecognised_array).indexOf(isText)
-        if (pos >= 0) {
-            selectedItemPosition = pos
-        }
-    }
-
-
-    //  For Click Listener Sequence
-    val clicksListener = object : AdapterView.OnItemSelectedListener {
-        override fun onNothingSelected(parent: AdapterView<*>?) {
-        }
-
-        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            selectedReasonPosition.value = position
-            val neighbourRecognizedText = context.resources.getStringArray(R.array.neighbourrecognised_array)
-            isNeighbourReconisedText.value = neighbourRecognizedText[position]
-            Log.e("Selected",isNeighbourReconisedText.value.toString())
-            if (position == 2 || position == 3) {
-                isNeighbourReconised.value = false
-            } else {
-                isNeighbourReconised.value = true
-            }
-        }
     }
 
     // On Saved Clicked
     fun onSaveClicked() {
-        if (selectedReasonPosition.value  == 0){
-         //   Utils().showToast(context,"Please Select Reason")
-            Utils().showSnackBar(context,"Please Select Reason",binding.constraintLayout)
-        }
-        else if (neighbour3Mobile.get().toString() == ""){
+         if (neighbour3Mobile.get().toString() == ""){
             Utils().showSnackBar(context,"Please Enter Neighbour1 Mobile Number",binding.constraintLayout)
         } else if (neighbour3Mobile.get().toString().length < 10){
             Utils().showSnackBar(context,"Please Enter Valid Neighbour1 Mobile Number",binding.constraintLayout)
@@ -138,6 +92,9 @@ class PostNeighbourVerificationViewModel(private val context: Context, private v
             Utils().showSnackBar(context,"Please Enter Neighbour2 Mobile Number",binding.constraintLayout)
         } else if (neighbour4Mobile.get().toString().length < 10){
             Utils().showSnackBar(context,"Please Enter Valid Neighbour2 Mobile Number",binding.constraintLayout)
+        }
+        else if (binding.spnNeighbourReconised.text.isNullOrEmpty()) {
+            Utils().showSnackBar(context, "Please Select Reason", binding.constraintLayout)
         }
         else {
             val model = GetFirequestPostNeighboutVerificationDto()
