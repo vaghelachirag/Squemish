@@ -88,6 +88,14 @@
     <string name="radio_No">No</string>
 
 
+    <!-- RCU Document Verification!-->
+    <string name="applicant_is_office_open_label">Is Office Open at the time of visit ?<font color='#ff0000' ><b>*</b></font></string>
+    <string name="applicant_Designation_label">Designation of the person met<font color='#ff0000' ><b>*</b></font></string>
+    <string name="applicant_Document_signed_label">Whether document signed/Issued by the authorised Person<font color='#ff0000' ><b>*</b></font></string>
+    <string name="applicant_personallymetwithauthorised_label">Whether we personally met with authorised person ?<font color='#ff0000' ><b>*</b></font></string>
+    <string name="applicant_isAnyProof_label">Is any Proof/ Evidences shown ? <font color='#ff0000' ><b>*</b></font></string>
+
+
     <!--Login-->
     <string name="login_Txt">Login</string>
     <string name="email">Email Address</string>
@@ -148,7 +156,7 @@
 
 
 
-
+    <!--  Residence Verification-->
     <string name="refNo">Ref No :  </string>
     <string name="caseID">Case Id : </string>
     <string name="bankName">Bank/NBFC Name : </string>
@@ -227,5 +235,4 @@
     <!--    No Internet Connection Message -->
     <string name="nointernetconnection">Local network problem, please check your network</string>
 
-2
 </resources>
