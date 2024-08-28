@@ -135,10 +135,7 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
                     }*/
                 }
 
-                override fun onPermissionRationaleShouldBeShown(
-                    permissions: MutableList<com.karumi.dexter.listener.PermissionRequest>?,
-                    token: PermissionToken?
-                ) {
+                override fun onPermissionRationaleShouldBeShown(permissions: MutableList<com.karumi.dexter.listener.PermissionRequest>?, token: PermissionToken?) {
                     token!!.continuePermissionRequest()
                 }
             }).withErrorListener { }.onSameThread().check()
@@ -208,10 +205,9 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
 
             val scale = resources.displayMetrics.density
 
-        //   saveToInternalStorage(mutableBitmap)
+          //  saveToInternalStorage(mutableBitmap)
 
             val canvas1 = Canvas(mutableBitmap)
-            // new antialiased Paint
             val paint1 = TextPaint(Paint.ANTI_ALIAS_FLAG)
 
             // text color - #3D3D3D
@@ -227,21 +223,16 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
             // set text width to canvas width minus 16dp padding
             val textWidth = canvas1.width - (16 * scale).toInt()
 
-
             // init StaticLayout for text
-            val textLayout = StaticLayout(
-                builder.toString(), paint1, textWidth, Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, false
-            )
+            val textLayout = StaticLayout(builder.toString(), paint1, textWidth, Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, false)
 
 
             // get height of multiline text
             val textHeight = textLayout.height
 
-
             // get position of text's top left corner
             val x = ((mutableBitmap.width - textWidth) - 10).toFloat()
             val y = ((mutableBitmap.height - textHeight) - 40).toFloat()
-
 
             // draw text to the Canvas center
             canvas1.save()
@@ -272,8 +263,6 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
             e.printStackTrace()
         }
     }
-
-
 
     fun getResizedBitmap(image: Bitmap, maxSize: Int): Bitmap {
         var width = image.getWidth()

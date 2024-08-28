@@ -1,5 +1,6 @@
 package com.example.mypraticeapplication.model.getverificationDetailResponse
 
+import com.example.mypraticeapplication.model.saveDocumentProfileVerification.SaveDocumentProfileVerification
 import com.example.mypraticeapplication.model.saveresidenceverification.SaveFirequestResidenceVerification
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
@@ -370,7 +371,7 @@ class GetVerificationDetailData {
 
     @SerializedName("firequestDocumentProfileVerification")
     @Expose
-    private var firequestDocumentProfileVerification: Any? = null
+    private var firequestDocumentProfileVerification: SaveDocumentProfileVerification? = null
 
     @SerializedName("firequestInsuranceVerification")
     @Expose
@@ -1186,11 +1187,11 @@ class GetVerificationDetailData {
         this.firequestDocumentVerification = firequestDocumentVerification
     }
 
-    fun getFirequestDocumentProfileVerification(): Any? {
+    fun getFirequestDocumentProfileVerification(): SaveDocumentProfileVerification? {
         return firequestDocumentProfileVerification
     }
 
-    fun setFirequestDocumentProfileVerification(firequestDocumentProfileVerification: Any?) {
+    fun setFirequestDocumentProfileVerification(firequestDocumentProfileVerification: SaveDocumentProfileVerification?) {
         this.firequestDocumentProfileVerification = firequestDocumentProfileVerification
     }
 

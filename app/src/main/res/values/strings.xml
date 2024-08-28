@@ -92,9 +92,11 @@
     <string name="applicant_is_office_open_label">Is Office Open at the time of visit ?<font color='#ff0000' ><b>*</b></font></string>
     <string name="applicant_Designation_label">Designation of the person met<font color='#ff0000' ><b>*</b></font></string>
     <string name="applicant_Document_signed_label">Whether document signed/Issued by the authorised Person<font color='#ff0000' ><b>*</b></font></string>
-    <string name="applicant_personallymetwithauthorised_label">Whether we personally met with authorised person ?<font color='#ff0000' ><b>*</b></font></string>
+    <string name="applicant_personally_met_with_authorised_label">Whether we personally met with authorised person ?<font color='#ff0000' ><b>*</b></font></string>
+    <string name="applicant_authorised_name_label">Authorized Person Name</string>
+    <string name="applicant_authorised_person_designation_label">Authorized Person Designation</string>
     <string name="applicant_isAnyProof_label">Is any Proof/ Evidences shown ? <font color='#ff0000' ><b>*</b></font></string>
-
+    <string name="applicant_name_of_document_label">Name of Document</string>
 
     <!--Login-->
     <string name="login_Txt">Login</string>

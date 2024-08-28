@@ -9,6 +9,7 @@
             name="addressconfirmed"
             type="com.example.mypraticeapplication.viewmodel.verificationDetail.RCUVerificationViewModel"  />
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -116,6 +117,8 @@
                         android:imeOptions="actionNext"
                         android:inputType="text"
                         android:focusable="false"
+                        android:layout_gravity="top"
+                        android:gravity="top"
                         android:focusableInTouchMode="false"
                         android:text="@={addressconfirmed.edtLongitude}"
                         android:textColor="@color/black"

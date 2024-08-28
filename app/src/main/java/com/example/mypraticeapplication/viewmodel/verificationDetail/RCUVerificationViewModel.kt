@@ -133,6 +133,7 @@ class RCUVerificationViewModel(@SuppressLint("StaticFieldLeak") private val cont
 
         masterDataDao = InitDb.appDatabase.getMasterData()
         getDataFromMasterData()
+
         if (ActivityDetail.selectedData !=null && ActivityDetail.selectedData!!.getFiRequestResidenceVerification() !=null){
            setSelectedData()
         }
@@ -444,12 +445,9 @@ class RCUVerificationViewModel(@SuppressLint("StaticFieldLeak") private val cont
             stayingAddressUnitList = stayingUnitList.asList()
             binding.llPersonalInformation.llPersonalInformationOne.spncurrentaddress.setListAdapter(stayingAddressUnitList!!)
 
-
-
             binding.llPersonalInformation.spnapplicantHouseSizeLabel.setListAdapter(houseSizeUnitList!!)
             binding.llPersonalInformation.llPersonalInformationOne.spnapplicantMaterialStatus.setListAdapter(materialStatusApplicantList!!)
             binding.llPersonalInformation.llPersonalInformationOne.spncurrentaddress.setListAdapter(stayingAddressUnitList!!)
-
 
             binding.llPersonalInformation.spnHouseLocality.setListAdapter(houseLocalityList!!)
             binding.llPersonalInformation.spnAccommodationType.setListAdapter(accommodationList!!)

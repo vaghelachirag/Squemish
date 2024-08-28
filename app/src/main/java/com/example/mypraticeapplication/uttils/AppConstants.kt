@@ -58,5 +58,9 @@ object AppConstants {
     var changePassword = 15
     var logout = 17
 
+
+    var residenceVerificationType = "RV"
+    var documentProfileVerificationType = "DPV"
+
 }
 

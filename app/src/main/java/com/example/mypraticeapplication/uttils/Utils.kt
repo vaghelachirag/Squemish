@@ -121,13 +121,13 @@ class Utils {
     public  fun  setVerificationType(selectedData: GetVerificationDetailData?){
         if (ActivityDetail.selectedData != null){
             if (ActivityDetail.selectedData!!.getVerificationType() != null){
-                if (ActivityDetail.selectedData!!.getVerificationType() == "RV"){
+                if (ActivityDetail.selectedData!!.getVerificationType() == AppConstants.residenceVerificationType){
                     ActivityDetail.selectedData!!.isResidenceVerification = true
                 }
-                if (ActivityDetail.selectedData!!.getVerificationType() == "RV"){
+                if (ActivityDetail.selectedData!!.getVerificationType() ==  AppConstants.residenceVerificationType){
                     ActivityDetail.selectedData!!.isResidenceVerification = true
                 }
-                if (ActivityDetail.selectedData!!.getVerificationType() == "DPV"){
+                if (ActivityDetail.selectedData!!.getVerificationType() ==  AppConstants.documentProfileVerificationType){
                     ActivityDetail.selectedData!!.isDocumentVerification = true
                 }
                 else{

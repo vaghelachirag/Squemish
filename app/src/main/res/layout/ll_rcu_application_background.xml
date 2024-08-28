@@ -513,6 +513,8 @@
                         android:hint="@string/applicant_OtherObservations_label"
                         android:imeOptions="actionNext"
                         android:inputType="text"
+                        android:layout_gravity="top"
+                        android:gravity="top"
                         android:text="@={applicationbackground.edtOtherObservationsRemark}"
                         android:textColor="@color/black"
                         android:textColorHint="@color/gray_323232"
