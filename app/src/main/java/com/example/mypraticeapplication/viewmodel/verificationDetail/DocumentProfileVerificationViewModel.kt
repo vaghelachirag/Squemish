@@ -36,6 +36,7 @@ class DocumentProfileVerificationViewModel(private val context: Context, private
 
     // Personal Information One
     var edPersonMet: ObservableField<String> = ObservableField()
+    var edReason: ObservableField<String> = ObservableField()
     var edPersonMetDesignation: ObservableField<String> = ObservableField()
     var edAuthorizePersonName: ObservableField<String> = ObservableField()
     var edAuthorizePersonDesignation: ObservableField<String> = ObservableField()
@@ -59,21 +60,15 @@ class DocumentProfileVerificationViewModel(private val context: Context, private
     val onAddressConfirmed = RadioGroup.OnCheckedChangeListener { _, checkedId ->
         if (checkedId == R.id.radio_AddressConfirmedYes) {
             isAddressConfirmed.value = true
-            binding.llAddressDetail.llAddressConfirmed.visibility = View.GONE
         }
         if (checkedId == R.id.radio_AddressConfirmedNo) {
             isAddressConfirmed.value = false
-            binding.llAddressDetail.llAddressConfirmed.visibility = View.VISIBLE
         }
         if (checkedId == R.id.radio_OfficeOpenYes) {
             isOfficeOpen.value = true
-            binding.llAddressDetail.llAddressConfirmed.visibility = View.GONE
-            binding.llAddressDetail.llPersonMet.visibility = View.VISIBLE
         }
         if (checkedId == R.id.radio_OfficeOpenNo) {
             isOfficeOpen.value = false
-            binding.llAddressDetail.llAddressConfirmed.visibility = View.VISIBLE
-            binding.llAddressDetail.llPersonMet.visibility = View.GONE
         }
 
         if (checkedId == R.id.radio_applicant_Document_signedYes) {
@@ -114,6 +109,7 @@ class DocumentProfileVerificationViewModel(private val context: Context, private
             isAnyProof.value =  ActivityDetail.selectedData!!.getFirequestDocumentProfileVerification()!!.getIsProofShown()
             isPersonallyMet.value =  ActivityDetail.selectedData!!.getFirequestDocumentProfileVerification()!!.getIsMetAuthorisedPerson()
 
+            edReason.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFirequestDocumentProfileVerification()!!.getReason().toString()))
             edtLatitude.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFirequestDocumentProfileVerification()!!.getLatitude().toString()))
             edtLongitude.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFirequestDocumentProfileVerification()!!.getLongitude().toString()))
             edtOtherObservations.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFirequestDocumentProfileVerification()!!.getOtherObservations().toString()))
@@ -137,7 +133,7 @@ class DocumentProfileVerificationViewModel(private val context: Context, private
         saveVerificationDataDetail.setFirequestDocumentProfileVerification(saveFiRequestResidenceVerification)
         saveFiRequestResidenceVerification.setAddressConfirmed(isAddressConfirmed.value)
         saveFiRequestResidenceVerification.setIsOfficeOpen(isOfficeOpen.value)
-        saveFiRequestResidenceVerification.setReason("")
+        saveFiRequestResidenceVerification.setReason(edReason.get())
         saveFiRequestResidenceVerification.setPersonMet(edPersonMet.get())
         saveFiRequestResidenceVerification.setPersonMetDesignation(edPersonMetDesignation.get())
         saveFiRequestResidenceVerification.setIsDocumentSigned(isDocumentSigned.value)

@@ -49,9 +49,12 @@ class FragmentDocumentProfileVerification : BaseFragment(), FragmentLifecycleInt
         documentProfileVerification.isOfficeOpen.observeForever {
             if (it == true){
                 binding.llAddressDetail.radioOfficeOpenYes.isChecked = true
+                setHouseOpenVisibility(true)
             }
             if (it == false){
                 binding.llAddressDetail.radioOfficeOpenNo.isChecked = true
+                binding.llAddressDetail.inpapplicantReason.visibility =  View.GONE
+                setHouseOpenVisibility(false)
             }
         }
 
@@ -88,6 +91,7 @@ class FragmentDocumentProfileVerification : BaseFragment(), FragmentLifecycleInt
             }
         }
     }
+
     companion object {
 
         fun newInstance(selectedData: GetVerificationDetailData?): FragmentDocumentProfileVerification {
@@ -106,13 +110,55 @@ class FragmentDocumentProfileVerification : BaseFragment(), FragmentLifecycleInt
     override fun onResumeFragment(s: String?) {
 
     }
+    private fun setHouseOpenVisibility(visibility: Boolean) {
+        if (visibility){
+            binding.llAddressDetail.llPersonMet.visibility = View.VISIBLE
+            binding.llAddressDetail.llPersonallyMet.visibility = View.VISIBLE
+            binding.llAddressDetail.llDocumentSigned.visibility = View.VISIBLE
+            binding.llAddressDetail.llAuthorizePerson.visibility = View.VISIBLE
+            binding.llAddressDetail.llPersonMet.visibility = View.VISIBLE
+            binding.llAddressDetail.llAnyProofMet.visibility = View.VISIBLE
+            binding.llAddressDetail.inpapplicantNameOfDocumentLabel.visibility = View.VISIBLE
+            binding.llAddressDetail.llAddressConfirmed.visibility = View.VISIBLE
+            binding.llAddressDetail.inpapplicantReason.visibility =  View.GONE
+        }
+        else{
+            binding.llAddressDetail.llPersonMet.visibility = View.GONE
+            binding.llAddressDetail.llPersonallyMet.visibility = View.GONE
+            binding.llAddressDetail.llDocumentSigned.visibility = View.GONE
+            binding.llAddressDetail.llAuthorizePerson.visibility = View.GONE
+            binding.llAddressDetail.llAnyProofMet.visibility = View.GONE
+            binding.llAddressDetail.inpapplicantNameOfDocumentLabel.visibility = View.GONE
+            binding.llAddressDetail.llAddressConfirmed.visibility = View.VISIBLE
+            binding.llAddressDetail.inpapplicantReason.visibility =  View.GONE
+        }
+    }
 
     private fun setVisibility(visibility: Boolean) {
         if (visibility){
             binding.llAddressDetail.radioAddressConfirmedYes.isChecked = true
+            binding.llAddressDetail.llOfficeOpen.visibility = View.VISIBLE
+            binding.llAddressDetail.llPersonMet.visibility = View.VISIBLE
+            binding.llAddressDetail.llPersonallyMet.visibility = View.VISIBLE
+            binding.llAddressDetail.llDocumentSigned.visibility = View.VISIBLE
+            binding.llAddressDetail.llAuthorizePerson.visibility = View.VISIBLE
+            binding.llAddressDetail.llPersonMet.visibility = View.VISIBLE
+            binding.llAddressDetail.llAnyProofMet.visibility = View.VISIBLE
+            binding.llAddressDetail.inpapplicantNameOfDocumentLabel.visibility = View.VISIBLE
+            binding.llAddressDetail.llAddressConfirmed.visibility = View.VISIBLE
+            binding.llAddressDetail.inpapplicantReason.visibility = View.GONE
         }
         else{
             binding.llAddressDetail.radioAddressConfirmedNo.isChecked = true
+            binding.llAddressDetail.llOfficeOpen.visibility = View.GONE
+            binding.llAddressDetail.llPersonMet.visibility = View.GONE
+            binding.llAddressDetail.llPersonallyMet.visibility = View.GONE
+            binding.llAddressDetail.llDocumentSigned.visibility = View.GONE
+            binding.llAddressDetail.llAuthorizePerson.visibility = View.GONE
+            binding.llAddressDetail.llAnyProofMet.visibility = View.GONE
+            binding.llAddressDetail.inpapplicantNameOfDocumentLabel.visibility = View.GONE
+            binding.llAddressDetail.llAddressConfirmed.visibility = View.VISIBLE
+            binding.llAddressDetail.inpapplicantReason.visibility = View.VISIBLE
         }
 
     }
