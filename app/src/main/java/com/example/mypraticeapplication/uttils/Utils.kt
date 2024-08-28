@@ -131,7 +131,7 @@ class Utils {
                     ActivityDetail.selectedData!!.isDocumentVerification = true
                 }
                 else{
-                    ActivityDetail.selectedData!!.isRCOVerification = true
+                    ActivityDetail.selectedData!!.isRCOVerification = false
                 }
             }
         }

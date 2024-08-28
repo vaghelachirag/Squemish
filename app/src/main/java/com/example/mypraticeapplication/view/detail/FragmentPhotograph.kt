@@ -122,7 +122,8 @@ class FragmentPhotograph: BaseFragment(), FragmentLifecycleInterface {
             .withPermissions(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE)
             .withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
-                    openImagePickerDialog()
+                   // openImagePickerDialog()
+                    displayCamera()
 
                    /* if (report!!.areAllPermissionsGranted()) {
                         openImagePickerDialog()

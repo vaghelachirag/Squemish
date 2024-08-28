@@ -37,6 +37,7 @@ class BasicInformationViewModel(private val context: Context, val binding: Fragm
 
     // Login Params
     var refNo : ObservableField<String> = ObservableField()
+    var status : ObservableField<String> = ObservableField()
     var caseID : ObservableField<String> = ObservableField()
     var bankName : ObservableField<String> = ObservableField()
     var verificationFor : ObservableField<String> = ObservableField()
@@ -64,6 +65,7 @@ class BasicInformationViewModel(private val context: Context, val binding: Fragm
 
         if (ActivityDetail.selectedData != null){
             refNo.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getRefNo().toString()))
+            status.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getStatus().toString()))
             caseID.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getCaseId().toString()))
             bankName.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getBankAlias().toString()) +" "+  Utility.getNullToBlankString(ActivityDetail.selectedData!!.getBankName().toString()))
             verificationFor.set("Applicant")
