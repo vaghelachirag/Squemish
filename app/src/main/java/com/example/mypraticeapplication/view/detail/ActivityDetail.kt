@@ -22,6 +22,7 @@ import com.example.mypraticeapplication.uttils.Utility
 import com.example.mypraticeapplication.uttils.Utils
 import com.example.mypraticeapplication.view.adapter.VerificationDetailViewPagerAdapter
 import com.example.mypraticeapplication.view.base.BaseActivity
+import com.example.mypraticeapplication.view.detail.fiRequest.FragmentDocumentProfileVerification
 import com.example.mypraticeapplication.view.detail.fiRequest.FragmentRCOVerification
 import com.example.mypraticeapplication.viewmodel.DetailViewModel
 import com.google.android.gms.common.api.GoogleApiClient
@@ -33,6 +34,10 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsResult
 import com.google.android.gms.location.LocationSettingsStatusCodes
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import java.util.Locale
 
 
@@ -86,7 +91,19 @@ class ActivityDetail  : BaseActivity()  {
         if (googleApiClient != null) {
             googleApiClient!!.connect();
         }
-        requestGPSSettings()
+
+        Dexter.withActivity(this)
+            .withPermissions(Manifest.permission.ACCESS_FINE_LOCATION)
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
+                    requestGPSSettings()
+                }
+
+                override fun onPermissionRationaleShouldBeShown(permissions: MutableList<com.karumi.dexter.listener.PermissionRequest>?, token: PermissionToken?) {
+                    token!!.continuePermissionRequest()
+                }
+            }).withErrorListener { }.onSameThread().check()
+
     }
 
     private fun requestGPSSettings() {
@@ -248,7 +265,7 @@ class ActivityDetail  : BaseActivity()  {
             viewPagerAdapter.addFragment(FragmentRCOVerification.newInstance(selectedData), "RCU Verification")
         }
         if (selectedData!!.isDocumentVerification){
-            viewPagerAdapter.addFragment(FragmentRCOVerification.newInstance(selectedData), "RCU Verification")
+            viewPagerAdapter.addFragment(FragmentDocumentProfileVerification.newInstance(selectedData), "RCU Verification")
         }
         viewPagerAdapter.addFragment(FragmentPhotograph.newInstance(), "Photograph")
         viewPagerAdapter.addFragment(FragmentPostNeighbourVerification.newInstance(selectedData), "Post-Neighbour Verification")
