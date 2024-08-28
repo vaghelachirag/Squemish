@@ -119,6 +119,9 @@ class DocumentProfileVerificationViewModel(private val context: Context, private
             edAuthorizePersonDesignation.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFirequestDocumentProfileVerification()!!.getAuthorisedPersonDesignation().toString()))
             edDocument.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFirequestDocumentProfileVerification()!!.getDocumentName().toString()))
 
+            edtLatitude.set(ActivityDetail.currentLat.toString())
+            edtLongitude.set(ActivityDetail.currentLong.toString())
+
         }catch (_: Exception){
         }
         // Log.e("Selected", ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMet().toString())
@@ -142,6 +145,9 @@ class DocumentProfileVerificationViewModel(private val context: Context, private
         saveFiRequestResidenceVerification.setIsMetAuthorisedPerson(isPersonallyMet.value)
         saveFiRequestResidenceVerification.setIsProofShown(isAnyProof.value)
         saveFiRequestResidenceVerification.setDocumentName(edDocument.get())
+        saveFiRequestResidenceVerification.setLatitude(edtLatitude.get())
+        saveFiRequestResidenceVerification.setLongitude(edtLongitude.get())
+        saveFiRequestResidenceVerification.setOtherObservations(edtOtherObservations.get())
 
 
         val gson = Gson()
