@@ -96,7 +96,31 @@ class DocumentProfileVerificationViewModel(private val context: Context, private
     }
 
     fun onSaveClicked(){
-        callSaveDocumentProfileApi()
+
+        if (isAddressConfirmed.value == null){
+            Utils().showSnackBar(context,"Please select address confirmed",binding.constraintLayout)
+        }else if (isOfficeOpen.value == null && isAddressConfirmed.value == true){
+            Utils().showSnackBar(context,"Please select Office Open at the time of visit",binding.constraintLayout)
+        }
+        else if (isOfficeOpen.value == true && edPersonMet.get().isNullOrEmpty()){
+            Utils().showSnackBar(context,"Please enter Name of the Person Met",binding.constraintLayout)
+        }
+        else if (isOfficeOpen.value == true && edPersonMetDesignation.get().isNullOrEmpty()){
+            Utils().showSnackBar(context,"Please enter Designation of the person met",binding.constraintLayout)
+        }
+        else if (isOfficeOpen.value == true && isDocumentSigned.value == null){
+            Utils().showSnackBar(context,"Please select Whether document signed/Issued by the authorised Person",binding.constraintLayout)
+        }
+        else if (isOfficeOpen.value == true && isPersonallyMet.value == null){
+            Utils().showSnackBar(context,"Please select Whether we personally met with authorised person ",binding.constraintLayout)
+        }
+        else if (isOfficeOpen.value == true && isAnyProof.value == null){
+            Utils().showSnackBar(context,"Please select Is any Proof/ Evidences shown ",binding.constraintLayout)
+        }
+        else {
+            callSaveDocumentProfileApi()
+        }
+
     }
 
     @SuppressLint("SetTextI18n")
