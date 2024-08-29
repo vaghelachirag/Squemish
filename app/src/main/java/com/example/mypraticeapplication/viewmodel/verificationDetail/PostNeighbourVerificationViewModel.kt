@@ -103,7 +103,7 @@ class PostNeighbourVerificationViewModel(private val context: Context, private v
 
     // On Saved Clicked
     fun onSaveClicked() {
-       if (neighbour3Mobile.get().toString() == ""){
+       /*if (neighbour3Mobile.get().toString() == ""){
             Utils().showSnackBar(context,"Please Enter Neighbour1 Mobile Number",binding.constraintLayout)
         } else if (neighbour3Mobile.get().toString().length < 10){
             Utils().showSnackBar(context,"Please Enter Valid Neighbour1 Mobile Number",binding.constraintLayout)
@@ -112,7 +112,8 @@ class PostNeighbourVerificationViewModel(private val context: Context, private v
             Utils().showSnackBar(context,"Please Enter Neighbour2 Mobile Number",binding.constraintLayout)
         } else if (neighbour4Mobile.get().toString().length < 10){
             Utils().showSnackBar(context,"Please Enter Valid Neighbour2 Mobile Number",binding.constraintLayout)
-        }else if (binding.spnNeighbourReconised.text.isNullOrEmpty()) {
+        }else*/
+        if (binding.spnNeighbourReconised.text.isNullOrEmpty()) {
            Utils().showSnackBar(context, "Please Select Reason", binding.constraintLayout)
        }
         else {

@@ -257,7 +257,9 @@ class ActivityDetail  : BaseActivity()  {
         //  Log.e("GetVerification",detailViewModel.getVerificationDetailData.value!!.getStatus().toString())
         val viewPagerAdapter = VerificationDetailViewPagerAdapter(supportFragmentManager, 0)
         viewPagerAdapter.addFragment(FragmentBasicInformation.newInstance(selectedData), "Basic Information")
-        viewPagerAdapter.addFragment(FragmentPreNeighbourVerification.newInstance(selectedData), "Pre-Neighbour Verification")
+        if (!selectedData!!.isDocumentVerification){
+            viewPagerAdapter.addFragment(FragmentPreNeighbourVerification.newInstance(selectedData), "Pre-Neighbour Verification")
+        }
         if (selectedData!!.isResidenceVerification){
             viewPagerAdapter.addFragment(FragmentRCUVerification.newInstance(selectedData), "RCU Verification")
         }
@@ -268,7 +270,10 @@ class ActivityDetail  : BaseActivity()  {
             viewPagerAdapter.addFragment(FragmentDocumentProfileVerification.newInstance(selectedData), "RCU Verification")
         }
         viewPagerAdapter.addFragment(FragmentPhotograph.newInstance(), "Photograph")
-        viewPagerAdapter.addFragment(FragmentPostNeighbourVerification.newInstance(selectedData), "Post-Neighbour Verification")
+        if (!selectedData!!.isDocumentVerification){
+            viewPagerAdapter.addFragment(FragmentPostNeighbourVerification.newInstance(selectedData), "Post-Neighbour Verification")
+        }
+
         viewPagerAdapter.addFragment(FragmentFinalSubmit.newInstance(selectedData), "Final Submit")
 
         binding.viewPager.adapter = viewPagerAdapter

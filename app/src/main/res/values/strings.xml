@@ -152,6 +152,7 @@
 
 
     <string name="address">Address :  </string>
+    <string name="mobileNumber">Mobile Number :  </string>
     <string name="bank">Bank : </string>
     <string name="product">Product : </string>
     <string name="caseId">CaseId : </string>

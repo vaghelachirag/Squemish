@@ -301,7 +301,7 @@
                 android:hint="@string/remark"
                 android:imeOptions="actionNext"
                 android:inputType="text"
-                android:text="@={applicationbackground.edtIsAreaNegativeRemark}"
+                android:text="@={applicationbackground.edtIsInvoledNegativeProfileRemark}"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray_323232"
                 android:textSize="@dimen/verificationDetailTextSize"

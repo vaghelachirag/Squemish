@@ -75,6 +75,7 @@ class RCUVerificationViewModel(@SuppressLint("StaticFieldLeak") private val cont
     var edtBankName: ObservableField<String> = ObservableField()
     var edtLoanAmount: ObservableField<String> = ObservableField()
     var edtRunningSince: ObservableField<String> = ObservableField()
+    var edtIsInvoledNegativeProfileRemark : ObservableField<String> = ObservableField()
     var edtIsAreaNegativeRemark : ObservableField<String> = ObservableField()
     var edtIsCastCommunityDominatedArea: ObservableField<String> = ObservableField()
     var edtOtherObservationsRemark: ObservableField<String> = ObservableField()
@@ -130,6 +131,7 @@ class RCUVerificationViewModel(@SuppressLint("StaticFieldLeak") private val cont
         houseSizeUnitApplicant.value = ""
         stayingAddressApplicant.value = ""
         houseOwnershipApplicant.value = ""
+
 
         masterDataDao = InitDb.appDatabase.getMasterData()
         getDataFromMasterData()
@@ -217,7 +219,15 @@ class RCUVerificationViewModel(@SuppressLint("StaticFieldLeak") private val cont
             edtPoliticalConnectionRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPoliticalRemarks().toString()))
             edtBankName.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getBankName().toString()))
             edtIsAreaNegativeRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getIsAreaNegativeRemark().toString()))
+            edtIsInvoledNegativeProfileRemark.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getNegativeProfileRemark().toString()))
+            edt_Reason.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getNameboardMismatchReason().toString()))
 
+
+            edtPermanentAddress.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPermanentAddress().toString()))
+            edtMonthlyRentAmount.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getRent().toString()))
+            edtLandlordName.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseOwnerName().toString()))
+            edtLandlordMobileNo.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getHouseOwnerMobileNo().toString()))
+            
 
             relationWithApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getPersonMetRelation()!!.toString())
             accommodationApplicant.value = Utility.getNullToBlankString(ActivityDetail.selectedData!!.getFiRequestResidenceVerification()!!.getAccommodationType()!!.toString())
@@ -369,6 +379,8 @@ class RCUVerificationViewModel(@SuppressLint("StaticFieldLeak") private val cont
         saveFiRequestResidenceVerification.setNameboardMismatchReason(edt_Reason.get())
         saveFiRequestResidenceVerification.setStayingTimeUnit(binding.llPersonalInformation.llPersonalInformationOne.spncurrentaddress.text.toString())
         saveFiRequestResidenceVerification.setIsAreaNegativeRemark(edtIsAreaNegativeRemark.get())
+        saveFiRequestResidenceVerification.setNegativeProfileRemark(edtIsInvoledNegativeProfileRemark.get())
+
 
         saveFiRequestResidenceVerification.setPermanentAddress(edtPermanentAddress.get())
         saveFiRequestResidenceVerification.setRent(Utility.getParseInteger(edtMonthlyRentAmount.get()))
@@ -377,7 +389,6 @@ class RCUVerificationViewModel(@SuppressLint("StaticFieldLeak") private val cont
 
         saveFiRequestResidenceVerification.setTotalFamilymembers(Utility.getParseInteger(edtTotalFamilyMembers.get()))
         saveFiRequestResidenceVerification.setTotalEarningMembers(Utility.getParseInteger(edtTotalEarningMember.get()))
-
         saveFiRequestResidenceVerification.setApplicantFamilyDetails(addFamilyMemberList)
 
         val gson = Gson()

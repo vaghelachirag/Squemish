@@ -87,7 +87,6 @@
                         android:layout_marginRight="@dimen/_50sdp"
                         android:layout_marginBottom="@dimen/_30sdp"/>
 
-
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -94,7 +94,7 @@ class PreNeighbourVerificationViewModel(private val context: Context, val bindin
 
     // On Saved Clicked
     fun onSaveClicked() {
-        if (neighbour1Mobile.get().toString() == "") {
+       /* if (neighbour1Mobile.get().toString() == "") {
             Utils().showSnackBar(
                 context,
                 "Please Enter Neighbour1 Mobile Number",
@@ -118,7 +118,8 @@ class PreNeighbourVerificationViewModel(private val context: Context, val bindin
                 "Please Enter Valid Neighbour2 Mobile Number",
                 binding.constraintLayout
             )
-        } else if (binding.spnNeighbourReconised.text.isNullOrEmpty()) {
+        } else*/
+        if (binding.spnNeighbourReconised.text.isNullOrEmpty()) {
             Utils().showSnackBar(context, "Please Select Reason", binding.constraintLayout)
         }
         else {

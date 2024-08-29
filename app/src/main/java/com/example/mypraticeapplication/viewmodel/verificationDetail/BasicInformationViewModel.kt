@@ -45,6 +45,7 @@ class BasicInformationViewModel(private val context: Context, val binding: Fragm
     var applicant : ObservableField<String> = ObservableField()
     var coapplicant : ObservableField<String> = ObservableField()
     var addressFor : ObservableField<String> = ObservableField()
+    var applicantMobileNumber : ObservableField<String> = ObservableField()
     var applicantfathername : ObservableField<String> = ObservableField()
     var productsubproduct : ObservableField<String> = ObservableField()
     var officeName : ObservableField<String> = ObservableField()
@@ -68,11 +69,12 @@ class BasicInformationViewModel(private val context: Context, val binding: Fragm
             status.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getStatus().toString()))
             caseID.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getCaseId().toString()))
             bankName.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getBankAlias().toString()) +" "+  Utility.getNullToBlankString(ActivityDetail.selectedData!!.getBankName().toString()))
-            verificationFor.set("Applicant")
+            verificationFor.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getSecondaryType().toString()))
             verificationType.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getVerificationTypeName().toString()) + "/"+ Utility.getNullToBlankString(ActivityDetail.selectedData!!.getDocumentName().toString()) + "/"+Utility.getNullToBlankString(ActivityDetail.selectedData!!.getSubType().toString()) )
             applicant.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getApplicantName().toString()) + " / "+ Utility.getNullToBlankString(ActivityDetail.selectedData!!.getApplicantFatherName().toString()))
             coapplicant.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getOtherApplicantName().toString()))
             addressFor.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getApplicantAddress().toString()) +" "+ Utility.getNullToBlankString(ActivityDetail.selectedData!!.getApplicantPinCode().toString()) +" "+  Utility.getNullToBlankString(ActivityDetail.selectedData!!.getApplicantCity().toString() +" "+ ActivityDetail.selectedData!!.getApplicantState().toString()))
+            applicantMobileNumber.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getApplicantMobile().toString()))
             applicantfathername.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getApplicantName().toString()) + " / "+Utility.getNullToBlankString(ActivityDetail.selectedData!!.getApplicantFatherName().toString()))
             productsubproduct.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getLoanProductName().toString())  + " / "+ Utility.getNullToBlankString(ActivityDetail.selectedData!!.getSubLoanProduct().toString()))
             officeName.set(Utility.getNullToBlankString(ActivityDetail.selectedData!!.getBusinessName().toString()))
@@ -101,7 +103,7 @@ class BasicInformationViewModel(private val context: Context, val binding: Fragm
             context.startActivity(intent)
         }
 
-        if (ActivityDetail.selectedData != null && ActivityDetail.selectedData!!.getApplicantLatitude().isNullOrEmpty()){
+        if (ActivityDetail.selectedData != null && !ActivityDetail.selectedData!!.getApplicantLatitude().isNullOrEmpty()){
             binding.ivMap.visibility = View.GONE
             binding.txtBasicAddress.setCompoundDrawablesWithIntrinsicBounds(null, null,
                 context.let { ContextCompat.getDrawable(it, R.drawable.map_pin) }, null)
