@@ -98,6 +98,8 @@
     <string name="applicant_isAnyProof_label">Is any Proof/ Evidences shown ? <font color='#ff0000' ><b>*</b></font></string>
     <string name="applicant_name_of_document_label">Name of Document</string>
 
+    <!-- RCU Document Verification!-->
+
     <!--Login-->
     <string name="login_Txt">Login</string>
     <string name="email">Email Address</string>
