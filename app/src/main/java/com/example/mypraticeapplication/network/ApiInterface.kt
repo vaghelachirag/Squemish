@@ -91,4 +91,8 @@ interface ApiInterface {
 
     @GET("api/FiRequest/GetFIDocuments")
     fun getFiRequestPicture(@Query("FIRequestId") fiRequestId: String): Observable<GetFiResidencePictureResponse>
+
+
+    @GET("api/MobileAppMenu/GetWebViewUrl")
+    fun getRcuVerificationWebpage(@Query("MenuId") menuId: String,@Query("Latitude") latitude: String,@Query("Longitude") longitude: String,@Query("FIRequestId") fIRequestId: String): Observable<GetMenuURLResponse>
 }

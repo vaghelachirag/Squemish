@@ -1,26 +1,11 @@
 package com.example.mypraticeapplication.view
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.IntentSender.SendIntentException
 import android.os.Bundle
-import android.util.Log
-import android.widget.ArrayAdapter
-import android.widget.Toast
+import android.webkit.WebView
 import com.example.mypraticeapplication.R
-import com.example.mypraticeapplication.databinding.FragmentRcoVerificationBinding
 import com.example.mypraticeapplication.databinding.TestActivityBinding
 import com.example.mypraticeapplication.view.base.BaseActivity
-import com.example.mypraticeapplication.viewmodel.verificationDetail.DocumentProfileVerificationViewModel
-import com.example.mypraticeapplication.viewmodel.verificationDetail.RCOVerificationViewModel
-import com.google.android.gms.common.api.GoogleApiClient
-import com.google.android.gms.common.api.PendingResult
-import com.google.android.gms.common.api.Status
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.LocationSettingsRequest
-import com.google.android.gms.location.LocationSettingsResult
-import com.google.android.gms.location.LocationSettingsStatusCodes
 
 
 open class ActivityTest: BaseActivity()  {
@@ -30,7 +15,7 @@ open class ActivityTest: BaseActivity()  {
     var data : String = ""
  //   private val documentProfileVerificationViewModel by lazy { DocumentProfileVerificationViewModel( this,binding) }
 
-    @SuppressLint("DiscouragedPrivateApi", "SimpleDateFormat")
+    @SuppressLint("DiscouragedPrivateApi", "SimpleDateFormat", "SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = TestActivityBinding.inflate(layoutInflater)
@@ -38,6 +23,10 @@ open class ActivityTest: BaseActivity()  {
      //   binding.lifecycleOwner = this
         setContentView(binding.root)
 
+
+        val formWebView: WebView = findViewById(R.id.webview)
+        formWebView.settings.javaScriptEnabled = true
+        formWebView.loadUrl("https://squeamish.co.in/MobileApp/RCUVerification?UserId=74&BranchId=1&Token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJKV1RTZXJ2aWNlQWNjZXNzVG9rZW4iLCJqdGkiOiJiMjE0NDI5ZS1kYzE2LTRkNGUtODA2MS0wYTFlNWQ1NmIzOTIiLCJpYXQiOiIxNC0wOC0yMDI0IDE3OjI0OjA4IiwiVXNlckxvZ0lkIjoiMTEwNDYxIiwiVXNlcklkIjoiNzQiLCJFbXBsb3llZUlkIjoiMTM0IiwiQnVzaW5lc3NJZCI6IjIwIiwiZXhwIjoxNzU1MTkyMjQ4LCJpc3MiOiJKV1RBdXRoZW50aWNhdGlvblNlcnZlciIsImF1ZCI6IkpXVFNlcnZpY2VQb3N0bWFuQ2xpZW50In0.8DCP2BMD8B5wT6RdzBjGbXgTP2wLgzZi_IFEQJ5Tp0I&FIRequestId=185")
     }
 
 

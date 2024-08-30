@@ -260,15 +260,9 @@ class ActivityDetail  : BaseActivity()  {
         if (!selectedData!!.isDocumentVerification){
             viewPagerAdapter.addFragment(FragmentPreNeighbourVerification.newInstance(selectedData), "Pre-Neighbour Verification")
         }
-        if (selectedData!!.isResidenceVerification){
-            viewPagerAdapter.addFragment(FragmentRCUVerification.newInstance(selectedData), "RCU Verification")
-        }
-        if (selectedData!!.isRCOVerification){
-            viewPagerAdapter.addFragment(FragmentRCOVerification.newInstance(selectedData), "RCU Verification")
-        }
-        if (selectedData!!.isDocumentVerification){
-            viewPagerAdapter.addFragment(FragmentDocumentProfileVerification.newInstance(selectedData), "RCU Verification")
-        }
+
+        viewPagerAdapter.addFragment(FragmentRCOVerification.newInstance(selectedData), "RCU Verification")
+
         viewPagerAdapter.addFragment(FragmentPhotograph.newInstance(), "Photograph")
         if (!selectedData!!.isDocumentVerification){
             viewPagerAdapter.addFragment(FragmentPostNeighbourVerification.newInstance(selectedData), "Post-Neighbour Verification")
