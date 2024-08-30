@@ -98,7 +98,27 @@
     <string name="applicant_isAnyProof_label">Is any Proof/ Evidences shown ? <font color='#ff0000' ><b>*</b></font></string>
     <string name="applicant_name_of_document_label">Name of Document</string>
 
-    <!-- RCU Document Verification!-->
+
+
+    <!-- Asset Verification!-->
+    <string name="applicant_assest_address_confirmed_label">Address Confirm as given <font color='#ff0000' ><b>*</b></font></string>
+    <string name="applicant_assest_address_belongs_label">Is this address belongs to applicant ? <font color='#ff0000' ><b>*</b></font></string>
+    <string name="applicant_vehicle_verified_label">Vehicle /Equipment Physically Verfied</string>
+    <string name="applicant_assets_PersonMet_label">Name of the Person Met <font color='#ff0000' ><b>*</b></font></string>
+    <string name="applicant_assets_Relation_Applicant_label">Relation with Applicant <font color='#ff0000' ><b>*</b></font></string>
+    <string name="applicant_assets_MobileNoOfPersonMet_label">Mobile No of Person Met</string>
+    <string name="applicant_chasis_no_label">Chassis No / Serial No</string>
+    <string name="applicant_engine_no_label">Engine No</string>
+    <string name="applicant_pump_no_label">Pump No</string>
+    <string name="applicant_meter_reading_label">Meter Reading (Hours/KM)</string>
+    <string name="applicant_vehiclenumber_label">Vehicle Number</string>
+    <string name="applicant_make_manufacture_label">Make / Manufacturer<font color='#ff0000' ><b>*</b></font></string>
+    <string name="applicant_Model_label">Model</string>
+    <string name="applicant_copy_of_rc_label">Copy of RC / Invoice / Insurance Available</string>
+    <string name="applicant_third_party_use_label">Third Party Use</string>
+    <string name="applicant_end_use_of_vehicle_label">End Use of the Vehicle / Equipment</string>
+    <string name="applicant_when_assets_delivered_label">When Asset was delivered / Installed (Month/Year)</string>
+
 
     <!--Login-->
     <string name="login_Txt">Login</string>
