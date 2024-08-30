@@ -103,6 +103,12 @@ class BasicInformationViewModel(private val context: Context, val binding: Fragm
             context.startActivity(intent)
         }
 
+        binding.txtBasicMobileNumber.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.setData(Uri.parse("tel:"+ActivityDetail.selectedData!!.getApplicantMobile()))
+            context.startActivity(intent)
+        }
+
         if (ActivityDetail.selectedData != null && !ActivityDetail.selectedData!!.getApplicantLatitude().isNullOrEmpty()){
             binding.ivMap.visibility = View.GONE
             binding.txtBasicAddress.setCompoundDrawablesWithIntrinsicBounds(null, null,
@@ -111,11 +117,10 @@ class BasicInformationViewModel(private val context: Context, val binding: Fragm
 
         val destinationURI = "http://maps.google.com/maps?daddr="+ ActivityDetail.selectedData!!.getApplicantLatitude()+ ","+ActivityDetail.selectedData!!.getApplicantLongitude()
         binding.txtBasicAddress.setOnClickListener {
-            val intent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse(destinationURI)
-            )
+            if (ActivityDetail.selectedData != null && !ActivityDetail.selectedData!!.getApplicantLatitude().isNullOrEmpty()){
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(destinationURI))
             context.startActivity(intent)
+            }
         }
     }
 

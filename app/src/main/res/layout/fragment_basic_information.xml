@@ -482,7 +482,7 @@
                             android:layout_weight="0.7"
                             android:text="@={viewModel.applicantMobileNumber}"
                             android:drawableTint="@color/main_bg"
-                            android:textColor="@color/gray_323232"
+                            android:textColor="@color/colorPrimary"
                             android:drawablePadding="3sp"
                             android:textSize="@dimen/verificationDetailTextSize"
                             tools:ignore="MissingConstraints,SmallSp">
@@ -762,8 +762,6 @@
                             android:layout_marginRight="@dimen/_5sdp"
                             android:textColor="@color/colorPrimary"
                             android:drawablePadding="3sp"
-                            android:drawableTint="@color/colorPrimary"
-                            android:drawableStart="@android:drawable/ic_menu_call"
                             android:text="@={viewModel.backendName}"
                             android:textSize="@dimen/verificationDetailTextSize"
                             tools:ignore="MissingConstraints,SmallSp">
